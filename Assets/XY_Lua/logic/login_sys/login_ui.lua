@@ -45,11 +45,11 @@ end
       	login_sys.share_uid = t.uid
       end
    	end
-    local animations=child(this.transform,"tex_bg") 
-    if animations~=nil then
-        print()
-        componentGet(animations.gameObject,"SkeletonAnimation"):ChangeQueue(2999)
-    end
+    -- local animations=child(this.transform,"tex_bg") 
+    -- if animations~=nil then
+    --     print()
+    --     componentGet(animations.gameObject,"SkeletonAnimation"):ChangeQueue(2999)
+    -- end
  end
 
 function this.Start()
@@ -96,7 +96,7 @@ end--]]
  ]]
 function this.RegisterEvents()
 	local btnYouKe = child(this.transform, "btn_grid/btn_youke_login")
-	btnYouKe.gameObject:SetActive(LuaHelper.openGuestMode)
+	--btnYouKe.gameObject:SetActive(LuaHelper.openGuestMode)
 	if btnYouKe ~= nil then
 		addClickCallbackSelf(btnYouKe.gameObject, this.OnBtnYouKeClick, this)
 	end
@@ -132,7 +132,7 @@ function this.RegisterEvents()
 		addClickCallbackSelf(btnChessLicense.gameObject,this.OnBtnChessLicense,this)
 		end
 	
-    subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
+    --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
 end
 
