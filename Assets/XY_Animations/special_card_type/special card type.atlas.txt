@@ -1,0 +1,181 @@
+
+special card type.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1234
+  rotate: false
+  xy: 0, 0
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: -1
+23456
+  rotate: false
+  xy: 804, 233
+  size: 79, 79
+  orig: 79, 79
+  offset: 0, 0
+  index: -1
+chibang2
+  rotate: false
+  xy: 282, 310
+  size: 144, 194
+  orig: 144, 194
+  offset: 0, 0
+  index: -1
+ditaosantiao
+  rotate: true
+  xy: 890, 273
+  size: 231, 64
+  orig: 231, 64
+  offset: 0, 0
+  index: -1
+image2
+  rotate: false
+  xy: 0, 9
+  size: 143, 193
+  orig: 143, 193
+  offset: 0, 0
+  index: -1
+image3
+  rotate: false
+  xy: 271, 28
+  size: 101, 76
+  orig: 101, 76
+  offset: 0, 0
+  index: -1
+image3_2
+  rotate: false
+  xy: 271, 104
+  size: 101, 78
+  orig: 101, 78
+  offset: 0, 0
+  index: -1
+image4
+  rotate: false
+  xy: 0, 353
+  size: 282, 151
+  orig: 282, 151
+  offset: 0, 0
+  index: -1
+image4_2
+  rotate: false
+  xy: 0, 202
+  size: 282, 151
+  orig: 282, 151
+  offset: 0, 0
+  index: -1
+image5
+  rotate: true
+  xy: 883, 228
+  size: 45, 73
+  orig: 45, 73
+  offset: 0, 0
+  index: -1
+image5_2
+  rotate: true
+  xy: 397, 201
+  size: 45, 73
+  orig: 45, 73
+  offset: 0, 0
+  index: -1
+image6
+  rotate: true
+  xy: 143, 28
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+liuduiban
+  rotate: true
+  xy: 954, 330
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+liuliudashun
+  rotate: false
+  xy: 426, 440
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1
+quanda
+  rotate: false
+  xy: 282, 182
+  size: 115, 64
+  orig: 115, 64
+  offset: 0, 0
+  index: -1
+quanxiao
+  rotate: true
+  xy: 372, 67
+  size: 115, 64
+  orig: 115, 64
+  offset: 0, 0
+  index: -1
+sanhuangwudi
+  rotate: false
+  xy: 426, 376
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1
+santonghua
+  rotate: true
+  xy: 207, 28
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+santonghuashun
+  rotate: false
+  xy: 658, 440
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1
+sanzhadan
+  rotate: false
+  xy: 282, 246
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+shanshunzi
+  rotate: false
+  xy: 456, 248
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+shierhuangzu
+  rotate: false
+  xy: 426, 312
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1
+wuduichongsan
+  rotate: false
+  xy: 658, 376
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1
+yitiaolong
+  rotate: false
+  xy: 630, 248
+  size: 174, 64
+  orig: 174, 64
+  offset: 0, 0
+  index: -1
+zhizunqinglong
+  rotate: false
+  xy: 658, 312
+  size: 232, 64
+  orig: 232, 64
+  offset: 0, 0
+  index: -1

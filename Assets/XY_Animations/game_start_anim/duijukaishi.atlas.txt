@@ -1,0 +1,111 @@
+
+duijukaishi.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+heidi
+  rotate: false
+  xy: 806, 760
+  size: 18, 10
+  orig: 18, 10
+  offset: 0, 0
+  index: -1
+nan_1
+  rotate: false
+  xy: 417, 720
+  size: 389, 193
+  orig: 389, 193
+  offset: 0, 0
+  index: -1
+nan_2
+  rotate: false
+  xy: 0, 286
+  size: 389, 193
+  orig: 389, 193
+  offset: 0, 0
+  index: -1
+nv_1
+  rotate: false
+  xy: 0, 696
+  size: 417, 217
+  orig: 417, 217
+  offset: 0, 0
+  index: -1
+nv_2
+  rotate: false
+  xy: 0, 479
+  size: 417, 217
+  orig: 417, 217
+  offset: 0, 0
+  index: -1
+vs0001
+  rotate: false
+  xy: 0, 143
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0003
+  rotate: false
+  xy: 417, 577
+  size: 178, 143
+  orig: 178, 143
+  offset: 0, 0
+  index: -1
+vs0005
+  rotate: false
+  xy: 595, 577
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0007
+  rotate: false
+  xy: 0, 0
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0009
+  rotate: false
+  xy: 806, 770
+  size: 178, 143
+  orig: 178, 143
+  offset: 0, 0
+  index: -1
+vs0011
+  rotate: false
+  xy: 177, 143
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0013
+  rotate: false
+  xy: 177, 0
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0015
+  rotate: false
+  xy: 417, 434
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0017
+  rotate: false
+  xy: 594, 434
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1
+vs0019
+  rotate: false
+  xy: 389, 291
+  size: 177, 143
+  orig: 177, 143
+  offset: 0, 0
+  index: -1

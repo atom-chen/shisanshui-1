@@ -1,0 +1,104 @@
+
+head aperture.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gq0001
+  rotate: false
+  xy: 0, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0002
+  rotate: false
+  xy: 0, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0003
+  rotate: false
+  xy: 90, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0004
+  rotate: false
+  xy: 90, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0005
+  rotate: false
+  xy: 180, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0006
+  rotate: false
+  xy: 180, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0007
+  rotate: false
+  xy: 270, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0008
+  rotate: false
+  xy: 270, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0009
+  rotate: false
+  xy: 360, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0010
+  rotate: false
+  xy: 360, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0011
+  rotate: false
+  xy: 450, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0012
+  rotate: false
+  xy: 450, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0013
+  rotate: false
+  xy: 540, 90
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+gq0014
+  rotate: false
+  xy: 540, 0
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
