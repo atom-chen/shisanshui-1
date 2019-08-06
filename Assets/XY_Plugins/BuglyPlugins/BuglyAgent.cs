@@ -640,32 +640,32 @@ public sealed class BuglyAgent
     }
     
     // --- dllimport start ---
-    [DllImport("__Internal")]
-    private static extern void _BuglyInit(string appId, bool debug, int level);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglyInit(string appId, bool debug, int level);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglySetUserId(string userId);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglySetUserId(string userId);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglySetTag(int tag);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglySetTag(int tag);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglySetKeyValue(string key, string value);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglySetKeyValue(string key, string value);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglyReportException(int type, string name, string reason, string stackTrace, string extras, bool quit);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglyReportException(int type, string name, string reason, string stackTrace, string extras, bool quit);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglyDefaultConfig(string channel, string version, string user, string deviceId);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglyDefaultConfig(string channel, string version, string user, string deviceId);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglyLogMessage(int level, string tag, string log);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglyLogMessage(int level, string tag, string log);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglyConfigCrashReporterType(int type);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglyConfigCrashReporterType(int type);
     
-    [DllImport("__Internal")]
-    private static extern void _BuglySetExtraConfig(string key, string value);
+    //[DllImport("__Internal")]
+    //private static extern void _BuglySetExtraConfig(string key, string value);
     
     // dllimport end
     #endregion
