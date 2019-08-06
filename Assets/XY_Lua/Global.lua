@@ -33,6 +33,7 @@ MeshRenderer	= UnityEngine.MeshRenderer
 --ParticleAnimator= UnityEngine.ParticleAnimator
 --TouchPhase 		= UnityEngine.TouchPhase
 PlayerPrefs = UnityEngine.PlayerPrefs
+Debug = UnityEngine.Debug
 
 
 

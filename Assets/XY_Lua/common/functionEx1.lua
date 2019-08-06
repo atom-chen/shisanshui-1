@@ -354,7 +354,7 @@ end
 function log(fmt, ...)
     --if Setting.setting.isDebug == true then
         local msg = getLogStr(fmt, ...) or "nil"
-        UnityEngine.Debug.LogFormat('[INFO] {0} ',msg)
+        Debug.LogFormat('[INFO] {0} ',msg)
     --end
 end
 
