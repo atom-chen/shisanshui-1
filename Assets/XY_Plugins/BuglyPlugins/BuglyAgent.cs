@@ -548,13 +548,13 @@ public sealed class BuglyAgent
         _BuglySetExtraConfig("UnityVersion", Application.unityVersion);
     }
     
-    private static void SetUserInfo(string userInfo){
-        if(!string.IsNullOrEmpty(userInfo)) {
-            ConfigCrashReporterType();
+    //private static void SetUserInfo(string userInfo){
+    //    if(!string.IsNullOrEmpty(userInfo)) {
+    //        ConfigCrashReporterType();
             
-            _BuglySetUserId(userInfo);
-        }
-    }
+    //        _BuglySetUserId(userInfo);
+    //    }
+    //}
     
     private static void ReportException (int type, string name, string reason, string stackTrace, bool quitProgram)
     {
