@@ -118,7 +118,7 @@ function this.UnInit()
 end
 
 function this.HandleRecvData(cmdId, msg)
-  print("收到服务端协议cmdId======================================="..GetTblData(msg))
+  print("收到服务端协议cmdId======================================="..cmdId.." msg: "..GetTblData(msg))
 
   if msg._st ~=nil and msg._st == "err" then
     this.HandleSTError(cmdId, msg)

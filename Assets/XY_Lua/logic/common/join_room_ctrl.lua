@@ -39,6 +39,7 @@ function this.JoinRoomByRno(rno)
     http_request_interface.getRoomByRno(rno, function (code, m, str)
         local s = string.gsub(str, "\\/", "/")
         local dataTbl = ParseJsonStr(s)
+        --log(dataTbl)
 
         if dataTbl ~= nil then
             --设置uri
@@ -59,8 +60,11 @@ function this.JoinRoomByRno(rno)
                     return
                 end
 
-                --print("JoinRoomByRno end--------------------------------------")
-                if dataTbl.data.gid == ENUM_GAME_TYPE.TYPE_SHISHANSHUI then
+                --print("JoinRoomByRno end--------------------------------------" + dataTbl.data.gid)
+                --print("JoinRoomByRno end--------------------------------------" + ENUM_GAME_TYPE.TYPE_SHISHANSHUI)
+                --if dataTbl.data.gid == ENUM_GAME_TYPE.TYPE_SHISHANSHUI then
+
+                    print("连接游戏服-------------------------------------")
                     local k=dataTbl.data
                     k.nGhostAdd = dataTbl.data.cfg.joker
                     k.nColorAdd = dataTbl.data.cfg.addColor
@@ -80,14 +84,14 @@ function this.JoinRoomByRno(rno)
 					
                     card_data_manage.roomMasterUid = dataTbl.data.uid
                     shisanshui_request_interface.EnterGameReq(messagedefine.chessPath, k)
-                else
-                    local k=dataTbl.data.cfg
-                    k["gid"]=dataTbl.data.gid
-                    k["rid"]=dataTbl.data.rid
-                    k["uid"]=dataTbl.data.uid
-                    k["rno"]=dataTbl.data.rno                    
-                    fuzhoumj_room_ui.EnterGameReq(k)
-                end
+                -- else
+                --     local k=dataTbl.data.cfg
+                --     k["gid"]=dataTbl.data.gid
+                --     k["rid"]=dataTbl.data.rid
+                --     k["uid"]=dataTbl.data.uid
+                --     k["rno"]=dataTbl.data.rno                    
+                --     fuzhoumj_room_ui.EnterGameReq(k)
+                -- end
 
             end
         end        

@@ -167,7 +167,7 @@ end
 
 --{"share_uid":"分享用户ID","rtype":第三方注册类型(2微信 3QQ 4ucgame 5ysdk微信 6ysdkQQ 7笨手机 8富豪 9游客 10奇酷),"openid":微信code,"access_token":token,"logintime":登陆时间,"subrtype":"code 或者 openid"}
 function  this.otherLogin(rtype,openid,access_token,logintime,subrtype,share_uid,callback)
-    print("第三方注册登录")
+    log("第三方注册登录")
     local param={["rtype"]=rtype,["openid"]=openid,["access_token"]=access_token,["logintime"]=logintime,["subrtype"]=subrtype,["share_uid"] = share_uid} 
     local t=this.GetTable("GameMember.otherLogin",param) 
     local rt=json.encode(t) 

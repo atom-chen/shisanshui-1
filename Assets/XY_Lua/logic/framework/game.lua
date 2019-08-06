@@ -7,6 +7,7 @@
 
 require "logic/framework/luaclass"
 require "common/functions"
+require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
 

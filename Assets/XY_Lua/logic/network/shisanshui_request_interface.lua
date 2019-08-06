@@ -9,9 +9,11 @@ local this = shisanshui_request_interface
 function this.EnterGameReq(urlValue, gameData, dst)
   local urlStr = string.format(data_center.url, data_center.GetLoginRetInfo().uid, data_center.GetLoginRetInfo().session_key)
 
+  print(urlStr)
   SocketManager:createSocket("game", urlStr, "chess", 1, gameData._dst)
 
   SocketManager:onGameOpenCallBack(function (  )
+    print("连上服务器返回")
     print("onGameOpenCallBack-------- EnterGameReq")
     local pkgBuffer = shisanshui_request_protocol.EnterGameReq(urlValue, gameData, dst);
     network_mgr.sendPkgNoWaitForRsp(net_cmd.CMD_LOGIN_HALL, pkgBuffer)

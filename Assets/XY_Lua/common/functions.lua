@@ -1284,7 +1284,7 @@ function LogW(...)
 	local timePrefix = os.date("%Y-%m-%d %H:%M:%S",os.time())
 	local msg = timePrefix .. "  " .. GetTblData(...)
 	local logPath  -- log 需要写入的路径
-	print(msg)
+	log(msg)
 
 	if logPath then
 		local LogTxt = io.open(logPath, "a+")

@@ -110,11 +110,13 @@ end
 function SocketManager:onGameStatusCallback( _status )
 	LogW("onGameStatusCallback " ,_status)
 
+	print("连接游戏服务器状态".._status)
 	if _status == "reconnect" then
 		net_tip.Show("正在努力连接游戏服务器")
 	elseif _status == "connecting" then
 		--net_tip.Show("正在努力连接游戏服务器")
 	elseif _status == "connected" then
+			print("他妈的总算连上了")
 		-- EnterGameReq
 		if self.gameOpenCallBack then
 			self.gameOpenCallBack()
@@ -158,7 +160,7 @@ function SocketManager:onGameOpenCallBack( openCallBack )
 	self.gameOpenCallBack = openCallBack
 	LogW("onGameOpenCallBack----Enter",self.session)
 	-- if self.gameSocket and  self.session then
-	-- 	LogW("onGameOpenCallBack----Enter1------",self.session)
+	-- 	LogW("onGameOpenCallBack----Enter1------",seonHallStatusCallback  connectingf.session)
 	-- 	self.gameSocket:SetDst(self.session)
 	-- end
 	

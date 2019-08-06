@@ -95,42 +95,41 @@ end--]]
  * @Description: 注册UI事件
  ]]
 function this.RegisterEvents()
-	local btnYouKe = child(this.transform, "btn_grid/btn_youke_login")
+	local btnYouKe = child(this.transform, "loingPanel/btn_grid/btn_youke_login")
 	--btnYouKe.gameObject:SetActive(LuaHelper.openGuestMode)
 	if btnYouKe ~= nil then
 		addClickCallbackSelf(btnYouKe.gameObject, this.OnBtnYouKeClick, this)
 	end
 
-	local btnQQ = child(this.transform, "btn_grid/btn_qq_login")
+	local btnQQ = child(this.transform, "loingPanel/btn_grid/btn_qq_login")
 	if btnQQ ~= nil then
 		addClickCallbackSelf(btnQQ.gameObject, this.OnBtnQQClick, this)
 	end
 
-	local btnWeiXin = child(this.transform, "btn_grid/btn_weixin_login")
+	local btnWeiXin = child(this.transform, "loingPanel/btn_grid/btn_weixin_login")
 	if btnWeiXin ~= nil then
 		addClickCallbackSelf(btnWeiXin.gameObject, this.OnBtnWeiXinClick, this)
 	end
     
-    initToggleObj(this.transform,"checkBox",this.OnCheckStatusChange,this)    
+    initToggleObj(this.transform,"loingPanel/checkBox",this.OnCheckStatusChange,this)    
 	
-	local btnService = child(this.transform,"text/service")
+	local btnService = child(this.transform,"loingPanel/text/service")
 	if btnService ~= nil then 
 		addClickCallbackSelf(btnService.gameObject,this.OnBtnPrivacyOnClick,this)
 	end
-	local btnPrivacy = child(this.transform,"text/Privacy")
+	local btnPrivacy = child(this.transform,"loingPanel/text/Privacy")
 	if btnPrivacy ~= nil then 
 		addClickCallbackSelf(btnPrivacy.gameObject,this.OnBtnPrivacyOnClick,this)
 	end
-	local btnGameLicense = child(this.transform,"text/GameLicense")
+	local btnGameLicense = child(this.transform,"loingPanel/text/GameLicense")
 	if btnGameLicense ~= nil then
 		addClickCallbackSelf(btnGameLicense.gameObject,this.OnBtnGameLicense,this)
 	end
 	
-	local btnChessLicense = child(this.transform,"text/ChessLicense") 
-		if btnChessLicense ~= nil then
-			
+	local btnChessLicense = child(this.transform,"loingPanel/text/ChessLicense") 
+	if btnChessLicense ~= nil then
 		addClickCallbackSelf(btnChessLicense.gameObject,this.OnBtnChessLicense,this)
-		end
+	end
 	
     --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
