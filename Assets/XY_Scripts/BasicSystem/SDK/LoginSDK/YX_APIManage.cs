@@ -130,7 +130,7 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public void InitPlugins(bool isTest)
     {
 #if UNITY_IOS && !UNITY_EDITOR
-			IOSInterface.Init(isTest, this.gameObject.name, "");
+            IOSInterface.Init(this.gameObject.name, isTest, "");
 #elif UNITY_ANDROID && !UNITY_EDITOR
 			androidInterface.InitPlugins(isTest, this.gameObject.name);
 #endif
