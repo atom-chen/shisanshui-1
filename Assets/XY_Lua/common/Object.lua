@@ -32,9 +32,9 @@ function LuaObject.create()
 		return this.Class == Class
 	end
 
-	function this.print(msg)
+	function this.log(msg)
 		require("common/Utils")
-		print(this.name .. "::" .. msg)
+		log(this.name .. "::" .. msg)
 	end
 
 	return this

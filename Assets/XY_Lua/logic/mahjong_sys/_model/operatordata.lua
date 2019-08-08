@@ -27,9 +27,9 @@ end
 -- 获取需要横置的牌的下标
 function  operatordata:GetKeyCardIndex()
 	local keyIndex = 0
-	--print("this.operType----------------------------------"..tostring(this.operType))
+	--log("this.operType----------------------------------"..tostring(this.operType))
 	if(self.operCard~=0 and self.operType~=MahjongOperAllEnum.None) then
-		--print("operatordata.operType----------------------------------"..tostring(self.operType))
+		--log("operatordata.operType----------------------------------"..tostring(self.operType))
 		if(self.operType==MahjongOperAllEnum.TripletLeft) then
 			keyIndex = 1
 		else

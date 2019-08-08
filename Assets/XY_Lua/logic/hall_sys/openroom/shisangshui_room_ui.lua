@@ -37,7 +37,7 @@ end
 function this.Start()
 	this.registerevent()
 	gameDataInfo = room_data.GetSssRoomDataInfo()
-	print("-----13水创建房间")
+	log("-----13水创建房间")
 	this.TglSelect(0, addCardTbl)
 	this.AddCardTglClick(addCardTbl, {0, 1})
 	--this.AddCardTglClick(multplyTbl, {1})
@@ -229,25 +229,25 @@ end
 function this.Play4Click(obj)
 	gameDataInfo.play_num = PlayNum[1]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.play_num: "..gameDataInfo.play_num)
+	log("gameDataInfo.play_num: "..gameDataInfo.play_num)
 end
 
 function this.Play8Click()
 	gameDataInfo.play_num = PlayNum[2]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.play_num: "..gameDataInfo.play_num)
+	log("gameDataInfo.play_num: "..gameDataInfo.play_num)
 end
 
 function this.Play16Click()
 	gameDataInfo.play_num = PlayNum[3]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.play_num: "..gameDataInfo.play_num)
+	log("gameDataInfo.play_num: "..gameDataInfo.play_num)
 end
 
 function this.People2Click()
-	print("gameDataInfo.people_num: "..PeopleNum[1])
+	log("gameDataInfo.people_num: "..PeopleNum[1])
 	gameDataInfo.people_num = PeopleNum[1]
-	print("gameDataInfo.people_num: "..gameDataInfo.people_num)
+	log("gameDataInfo.people_num: "..gameDataInfo.people_num)
 	this.TglSelect(0, addCardTbl)
 	gameDataInfo.add_card = 0
 	room_data.SetSssRoomDataInfo(gameDataInfo)
@@ -255,7 +255,7 @@ function this.People2Click()
 end
 
 function this.People3Click()
-	print("gameDataInfo.people_num: "..gameDataInfo.people_num)
+	log("gameDataInfo.people_num: "..gameDataInfo.people_num)
 	this.TglSelect(0, addCardTbl)
 	this.AddCardTglClick(addCardTbl, {0})
 	gameDataInfo.people_num = PeopleNum[2]
@@ -264,7 +264,7 @@ function this.People3Click()
 end
 
 function this.People4Click()
-	print("gameDataInfo.people_num: "..gameDataInfo.people_num)
+	log("gameDataInfo.people_num: "..gameDataInfo.people_num)
 	if gameDataInfo.add_card == 2 then
 		this.TglSelect(0, addCardTbl)
 		gameDataInfo.add_card = 0
@@ -285,13 +285,13 @@ function this.People5Click()
 	gameDataInfo.add_card = 1
 	gameDataInfo.people_num = PeopleNum[4]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.people_num: "..gameDataInfo.people_num)
+	log("gameDataInfo.people_num: "..gameDataInfo.people_num)
 end
 
 function this.People6Click(gameobject)
 	this.TglSelect(2, addCardTbl)
 	this.AddCardTglClick(addCardTbl, {2})
-	print("gameDataInfo.people_num: "..gameDataInfo.people_num)
+	log("gameDataInfo.people_num: "..gameDataInfo.people_num)
 	gameDataInfo.add_card = 2
 	gameDataInfo.people_num = PeopleNum[5]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
@@ -300,19 +300,19 @@ end
 function this.Card0Click(gameobject)
 	gameDataInfo.add_card = AddCard[1]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.add_card: "..gameDataInfo.add_card)
+	log("gameDataInfo.add_card: "..gameDataInfo.add_card)
 end
 
 function this.Card1Click(gameobject)
 	gameDataInfo.add_card = AddCard[2]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.add_card: "..gameDataInfo.add_card)
+	log("gameDataInfo.add_card: "..gameDataInfo.add_card)
 end
 
 function this.Card2Click(gameobject)
 	gameDataInfo.add_card = AddCard[3]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.add_card: "..gameDataInfo.add_card)
+	log("gameDataInfo.add_card: "..gameDataInfo.add_card)
 end
 
 function this.GhostClick(obj)
@@ -323,43 +323,43 @@ function this.GhostClick(obj)
 		gameDataInfo.add_ghost = 0
 	end
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.add_ghost: "..gameDataInfo.add_ghost)
+	log("gameDataInfo.add_ghost: "..gameDataInfo.add_ghost)
 end
 
 function this.Multple1Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[1]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.Multple2Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[2]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.Multple3Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[3]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.Multple4Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[4]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.Multple5Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[5]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.Multple6Click(gameobject)
 	gameDataInfo.max_multiple = MaxMultiple[6]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
+	log("gameDataInfo.max_multiple: "..gameDataInfo.max_multiple)
 end
 
 function this.ZhuangClick(obj)
@@ -405,7 +405,7 @@ function this.ZhuangClick(obj)
 		this.AddCardTglClick(addChipTbl, {0, 1})
 	end
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.isZhuang: "..tostring(gameDataInfo.isZhuang))
+	log("gameDataInfo.isZhuang: "..tostring(gameDataInfo.isZhuang))
 end
 
 function this.TglGray(tran, isGray)
@@ -430,13 +430,13 @@ end
 function this.AddChip0Click(gameobject)
 	gameDataInfo.isChip = false
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.isChip: "..tostring(gameDataInfo.isChip))
+	log("gameDataInfo.isChip: "..tostring(gameDataInfo.isChip))
 end
 
 function this.AddChip1Click(gameobject)
 	gameDataInfo.isChip = true
 	room_data.SetSssRoomDataInfo(gameDataInfo)
-	print("gameDataInfo.isChip: "..tostring(gameDataInfo.isChip))
+	log("gameDataInfo.isChip: "..tostring(gameDataInfo.isChip))
 end
 ---------------------------点击事件END-------------------------
 

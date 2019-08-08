@@ -2,7 +2,7 @@ testCmd_ui = ui_base.New()
 local this = testCmd_ui
 
 function this.Show()
-	print("Show-------------------------------------")
+	log("Show-------------------------------------")
 
 	if this.gameObject==nil then
 		newNormalUI("Prefabs/UI/TestCmd/testCmd")
@@ -16,17 +16,17 @@ function this.Hide( )
 end
 
 function this.Start()
-	print("Start-------------------------------------")
+	log("Start-------------------------------------")
     this.RegisterEvents()
 end
 
 function this.Init()
-	print("Init-------------------------------------")
+	log("Init-------------------------------------")
 
 end
 
 function this.RegisterEvents(  )
-	print("RegisterEvents-------------------------------------")
+	log("RegisterEvents-------------------------------------")
 	this.scrollView=child(this.transform, "ScrollView");
     if this.scrollView~=nil then
         this.grid = child(this.scrollView,"Grid")
@@ -69,7 +69,7 @@ function this.OnDestroy()
 end
 
 function this.OnBtn1Click(  )
-	print("---------OnBtn1Click------")
+	log("---------OnBtn1Click------")
 	local str = [[
 			{"_cmd":"deal","_para":{"banker":4,"cardCount":{"p1":13,"p2":13,"p3":13,"p4":14},"cardLeft":83,"cards":[25,11,27,26,25,31,37,17,22,16,32,26,36],"dice":[1,6],"roundWind":0,"subRound":4},"_src":"p2","_st":"nti"}
 			]]
@@ -80,7 +80,7 @@ end
 
 
 function this.OnBtn2Click(  )
-	print("---------OnBtn2Click------")
+	log("---------OnBtn2Click------")
 	local str = [[
 		{"_cmd":"triplet","_para":{"cardTriplet":{"triplet":25,"useCards":[25,25]},"tripletWho":3},"_src":"p2","_st":"nti"} 
 			]]
@@ -90,7 +90,7 @@ function this.OnBtn2Click(  )
 end
 
 function this.OnBtn3Click(  )
-	print("---------OnBtn3Click------")
+	log("---------OnBtn3Click------")
 	local str = [[
 		{"_cmd":"quadruplet","_para":{"cardQuadruplet":{"quadruplet":25,"useCards":[25,25,25]},"quadrupletWho":3,"quadrupletType":1},"_src":"p2","_st":"nti"} 
 			]]
@@ -101,7 +101,7 @@ end
 
 
 function this.OnBtn4Click(  )
-	print("---------OnBtn4Click------")
+	log("---------OnBtn4Click------")
 	
 end
 

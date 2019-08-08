@@ -19,7 +19,7 @@ function this.Init(t_rid)
 	rid = t_rid
 	http_request_interface.getRoomByRid(rid,1,function(code,m,str)
 		local s=string.gsub(str,"\\/","/")
-		print("-------this.OnGetRoomReturnDate-------"..tostring(s))
+		log("-------this.OnGetRoomReturnDate-------"..tostring(s))
 	    local t=ParseJsonStr(s)
 	    if tonumber(t.ret)~=0 then
 	        return
@@ -54,7 +54,7 @@ function this.Start()
 	this:RegistUSRelation()
 	this.RegisterEvents1()	
 	
-	print("rid:"..rid)
+	log("rid:"..rid)
 	if reward_data == nil then
 		http_request_interface.getRoomByRid(rid,1,this.OnGetRoomReturnDate) 
 	else
@@ -63,7 +63,7 @@ function this.Start()
 end
 function this.OnGetRoomReturnDate(code,m,str)
 	local s=string.gsub(str,"\\/","/")
-	print("-------this.OnGetRoomReturnDate-------"..tostring(s))
+	log("-------this.OnGetRoomReturnDate-------"..tostring(s))
     local t=ParseJsonStr(s)
     if tonumber(t.ret)~=0 then
         return
@@ -71,9 +71,9 @@ function this.OnGetRoomReturnDate(code,m,str)
 	
 	local reward = t["data"].accountc.rewards
 	if reward == nil then
-		print("reward == nil")
+		log("reward == nil")
 	else
-		print("总结算")
+		log("总结算")
 		this.ReflushUI(reward)
 	end
 end
@@ -97,14 +97,14 @@ function this.RegisterEvents1()
 end
 
 function this.OnBtnEndClick()
-	print("OnBtnEndClick--------------------------------------")
+	log("OnBtnEndClick--------------------------------------")
 	this.Hide()
 	mahjong_play_sys.LeaveReq()
 end
 
 function this.OnBtnShareClick()
 	ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print("OnBtnShareClick")
+    log("OnBtnShareClick")
 
     local picName= "screenshot"..tostring(os.date("%Y%m%d%H%M%S", os.time()))..".png"
 	YX_MoblieAPI.Instance:GetCenterPicture(picName)
@@ -261,7 +261,7 @@ function this.setPlayGameInfo(parent,reward)
 	for k, v in pairs(tList) do
 		local good = child(parent.transform,"item"..tostring(i))     
 	   	if good==nil then 
-	   		print("--------------------:"..tostring(i))
+	   		log("--------------------:"..tostring(i))
 		    local o_good = child(parent.transform,"item"..tostring(1))
 		    good = GameObject.Instantiate(o_good.gameObject)
 		    good.transform.parent=o_good.transform.parent 

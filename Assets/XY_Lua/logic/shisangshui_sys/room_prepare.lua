@@ -21,7 +21,7 @@ function this.Awake()
 end
 
 function this.Show()
-	print("room_prepare")
+	log("room_prepare")
 	if this.gameObject==nil then
 		require ("logic/hall_sys/room_prepare")
 		this.gameObject=newNormalUI("Prefabs/UI/Room/room_prepare")

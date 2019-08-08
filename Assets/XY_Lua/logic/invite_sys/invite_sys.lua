@@ -17,7 +17,7 @@ function this.inviteFriend(_roomID, _gameName, _gameRule)
 	local filePath = ""
 	local url = string.format(inviteConfig.MWInviteURL,roomID,data_center.GetLoginRetInfo().uid)
 	local description = gameRule
-	print("inviteFriend------- url " .. url)
+	log("inviteFriend------- url " .. url)
 	YX_APIManage.Instance:WeiXinShare(shareType,contentType,title,filePath,url,description)
 
 end

@@ -25,14 +25,14 @@ function this.Awake()
 end
 
 function this.Show(result)
-	print("显示小结算界面")
+	log("显示小结算界面")
 	special_card_show.Hide()	----隐藏特殊牌型
 	timeSecond = Time.time + 2
 	fangzhuId = card_data_manage.roomMasterUid	------房主ID
-	print("房主ID：".. fangzhuId)
+	log("房主ID：".. fangzhuId)
 	local stRewards = result["rewards"]
 	if stRewards == nil then
-		print("stRewards == nil")
+		log("stRewards == nil")
 	end
 	if this.gameObject==nil then
 		require ("logic/shisangshui_sys/small_result/small_result")
@@ -43,7 +43,7 @@ function this.Show(result)
 	end
 	this.LoadAllResult(stRewards)
 	room_data.GetSssRoomDataInfo().cur_playNum = result["curr_ju"] +  1
-	print("+++++++++++++++++++++++++++当前局++++++++++++++++++++"..tostring(room_data.GetSssRoomDataInfo().cur_playNum))
+	log("+++++++++++++++++++++++++++当前局++++++++++++++++++++"..tostring(room_data.GetSssRoomDataInfo().cur_playNum))
 	if result["ju_num"] == result["curr_ju"] then
 		isEnterTotalResult = true
 		shisangshui_play_sys.Uninitialize()	
@@ -68,7 +68,7 @@ end
 
 function this.initinfor()
 	this.registerevent()
-	print("small_result initinfor")
+	log("small_result initinfor")
 	end
 	
 	
@@ -94,18 +94,18 @@ function this.LoadAllResult(result)
 		if result[i] ~= nil then
 				-------非主机的其他用户----------
 			if selfId ~= result[i]._uid then	
-				print("判断是否本机"..selfId.."???"..result[i]._uid)
+				log("判断是否本机"..selfId.."???"..result[i]._uid)
 				table.insert(tbSort,result[i])
 				--------主机用户放在首位---------
 			else	
-				print("判断:"..selfId .. "等于" .. result[i]._uid)
+				log("判断:"..selfId .. "等于" .. result[i]._uid)
 				local NameLbl = componentGet(child(this.transform,"Panel/Self/user/namelbl"), "UILabel") ----用户名设置
 				local IDLbl = componentGet(child(this.transform,"Panel/Self/user/IDlbl"), "UILabel")
 				
 				IDLbl.text="ID:"..result[i]._uid			
 				cardGrid = child(this.transform, "Panel/Self/user/cards")
 				if cardGrid == nil then
-					print("cardGrid == nil")
+					log("cardGrid == nil")
 					return
 				end
 				
@@ -118,24 +118,24 @@ function this.LoadAllResult(result)
 				end
 				
 				local tex_photo= componentGet(child(this.transform, "Panel/Self/user/picFrame"), "UITexture")
-                print("---------------------------------------------------------------------------") 
+                log("---------------------------------------------------------------------------") 
                 local number= room_usersdata_center.GetLogicSeatByStr(result[i]._chair)
 				local userData =room_usersdata_center.GetUserByLogicSeat(tonumber(number))
 				
                 hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
-                print("---------------------------------------------------------------------------")
+                log("---------------------------------------------------------------------------")
 				NameLbl.text = userData.name
 				
 				if result[i].nSpecialType~=nil then
 					local SpecialSprite=componentGet(child(this.transform, "Panel/Self/user/specialCard"), "UISprite")
 					if result[i].nSpecialType ~=0 then
-						print("特殊牌型索引"..result[i].nSpecialType)
+						log("特殊牌型索引"..result[i].nSpecialType)
 						SpecialSprite.spriteName = result[i].nSpecialType					
 					else
 						SpecialSprite.gameObject:SetActive(false)
 					end
 				else
-					print("result["..i.."].nSpecialType=nil")
+					log("result["..i.."].nSpecialType=nil")
 				end
 				local ScoreLbl = componentGet(child(this.transform, "Panel/Self/user/scorelbl"), "UILabel")
 				local negScoreLbl = componentGet(child(this.transform, "Panel/Self/user/negscorelbl"), "UILabel")
@@ -173,7 +173,7 @@ function this.ShowOthersResult(tbSort)
 				IDLbl.text="ID:"..tbSort[i]._uid				
 				cardGrid = child(this.transform, "Panel/resultList/userGrid/user"..i.."/cards")
 				if cardGrid == nil then
-					print("cardGrid == nil")
+					log("cardGrid == nil")
 					return
 				end
 				
@@ -185,23 +185,23 @@ function this.ShowOthersResult(tbSort)
 					end
 				end
 				local tex_photo= componentGet(child(this.transform, "Panel/resultList/userGrid/user"..i.."/picFrame"), "UITexture")
-                print("---------------------------------------------------------------------------") 
+                log("---------------------------------------------------------------------------") 
                 local number= room_usersdata_center.GetLogicSeatByStr(tbSort[i]._chair)   
 				local userData =room_usersdata_center.GetUserByLogicSeat(tonumber(number))
                 hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
                 NameLbl.text = userData.name
   
-                print("---------------------------------------------------------------------------")
+                log("---------------------------------------------------------------------------")
 				if tbSort[i].nSpecialType~=nil then
 					local SpecialSprite=componentGet(child(this.transform, "Panel/resultList/userGrid/user"..i.."/specialCard"), "UISprite")
 					if tbSort[i].nSpecialType ~=0 then
-						print("特殊牌型索引"..tbSort[i].nSpecialType)
+						log("特殊牌型索引"..tbSort[i].nSpecialType)
 						SpecialSprite.spriteName = tbSort[i].nSpecialType					
 					else
 						SpecialSprite.gameObject:SetActive(false)
 					end
 				else
-					print("tbSort["..i.."].nSpecialType=nil")
+					log("tbSort["..i.."].nSpecialType=nil")
 				end
 				local ScoreLbl = componentGet(child(this.transform, "Panel/resultList/userGrid/user"..i.."/scorelbl"), "UILabel")
 				local negScoreLbl = componentGet(child(this.transform, "Panel/resultList/userGrid/user"..i.."/negscorelbl"), "UILabel")
@@ -223,7 +223,7 @@ function this.ShowOthersResult(tbSort)
 					fangzhu.gameObject:SetActive(false)
 				end
 			else
-				print("------user"..i..".tbSort=nill------")
+				log("------user"..i..".tbSort=nill------")
 				local trans = child(this.transform, "Panel/resultList/userGrid/user"..i)
 				trans.gameObject:SetActive(false)
 			end
@@ -252,7 +252,7 @@ end
 --注册事件
 function this.registerevent()
 	--this.OpetionClickEvent()
-	print("注册事件")
+	log("注册事件")
 	timeLbl = componentGet(child(this.transform, "Panel/ready/readylbl"), "UILabel")
 	this.BtnClickEvent()
 end
@@ -268,20 +268,20 @@ end
 ---------------------------点击事件-------------------------
 function this.ReadyClick(obj)
 	this.Hide()
-	print("结算完成： "..tostring(isEnterTotalResult))
+	log("结算完成： "..tostring(isEnterTotalResult))
 	if isEnterTotalResult then
 		large_result.Show()
 	else
 		this.reset()
 	end
-	print("-----ReadyClick-----")
+	log("-----ReadyClick-----")
 end
 
 function this.reset()
 --	shisangshui_play_sys.ReSetAllStatus()--重置游戏桌的状态。
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_REWARDS) --确认完成结算完成消息
 	shisangshui_play_sys.ReadyGameReq()--发送准备好的状态进入下一局
---	print("重新进入下一局")
+--	log("重新进入下一局")
 
 end
 

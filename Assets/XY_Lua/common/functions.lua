@@ -136,14 +136,14 @@ local function MakePrefixStr(filterCode)
 end
 
 --跟踪日志--
--- function print(str, filterCode)
+-- function log(str, filterCode)
 -- 	if (BestLog.filterCode == filterCode or BestLog.filterCode == nil) then
 -- 		MakePrefixStr(filterCode)
 -- 		local strValue = str
 -- 		if (type(str) ~= "string") then
 -- 			strValue = tostring(str)
 -- 		end
--- 		print(prefixLog..strValue);  	
+-- 		log(prefixLog..strValue);  	
 --     end
 -- end
 
@@ -162,7 +162,7 @@ function Debug(str, filterCode)
 		if (type(str) ~= "string") then
 			strValue = tostring(str)
 		end
-		print(prefixLog..strValue);   	
+		log(prefixLog..strValue);   	
     end
 end
 
@@ -174,7 +174,7 @@ function Info(str, filterCode)
 		if (type(str) ~= "string") then
 			strValue = tostring(str)
 		end
-		print(prefixLog..strValue);   	
+		log(prefixLog..strValue);   	
     end
 end
 
@@ -422,7 +422,7 @@ end
  ]]
 function child(go ,str)
 	if go == nil then
-		print("go == nil")
+		log("go == nil")
 		return nil
 	end
 	return go:FindChild(str);
@@ -463,10 +463,10 @@ end
  ]]
 function componentGet(trans , typeName)		
 	if trans == nil then
-		print("componentGet trans is nil")
+		log("componentGet trans is nil")
 		return nil
 	end
-	--print(typeName)
+	--log(typeName)
 	return trans.gameObject:GetComponent(typeName);
 end
 
@@ -477,7 +477,7 @@ end
  ]]
 function subComponentGet(trans , childCompName, typeName)		
 	if trans == nil then
-		print("subComponentGet trans is nil")
+		log("subComponentGet trans is nil")
 		return nil
 	end
 	local transChild = child(trans, childCompName)
@@ -496,7 +496,7 @@ end
  ]]
 function subComponentGet_ext(trans , childCompName, typeName)		
 	if trans == nil then
-		print("subComponentGet_ext trans is nil")
+		log("subComponentGet_ext trans is nil")
 		return nil
 	end
 	local transChild = child_ext(trans, childCompName)
@@ -954,7 +954,7 @@ function TimeMillisecondToParams(msec)
 			time_array[TIME_NAME.SECOND] = time_array[TIME_NAME.SECOND] + 1
 		end
 	end
-	--print(time_array[TIME_NAME.DAY].."天 "..time_array[TIME_NAME.HOUR].."h "..time_array[TIME_NAME.MINUTE].."m "..time_array[TIME_NAME.SECOND].."s")
+	--log(time_array[TIME_NAME.DAY].."天 "..time_array[TIME_NAME.HOUR].."h "..time_array[TIME_NAME.MINUTE].."m "..time_array[TIME_NAME.SECOND].."s")
 	return time_array[TIME_NAME.DAY],time_array[TIME_NAME.HOUR],time_array[TIME_NAME.MINUTE],time_array[TIME_NAME.SECOND]
 end
 
@@ -1208,25 +1208,25 @@ function PrintTable(tbl, level, filteDefault)
     indent_str = indent_str.."  "
   end
 
-  print(indent_str .. "{")
+  log(indent_str .. "{")
   for k,v in pairs(tbl) do
     if filteDefault then
       if k ~= "_class_type" and k ~= "DeleteMe" then
         local item_str = string.format("%s%s = %s", indent_str .. " ",tostring(k), tostring(v))
-        print(item_str)
+        log(item_str)
         if type(v) == "table" then
           PrintTable(v, level + 1)
         end
       end
     else
       local item_str = string.format("%s%s = %s", indent_str .. " ",tostring(k), tostring(v))
-      print(item_str)
+      log(item_str)
       if type(v) == "table" then
         PrintTable(v, level + 1)
       end
     end
   end
-  print(indent_str .. "}")
+  log(indent_str .. "}")
 end
 
 

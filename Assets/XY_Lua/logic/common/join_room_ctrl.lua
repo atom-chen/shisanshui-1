@@ -24,7 +24,7 @@ function this.ReEnterRoomByQuery(_dsts)
             message_box:Close()
         end, function ()
             local tbl = {_dst = _dsts[1]}
-            print("tbl---------------------------------------"..GetTblData(tbl))
+            log("tbl---------------------------------------"..GetTblData(tbl))
             this.EnterGameHandle(tbl)
             message_box:Close()
         end}, {"fonts_02", "fonts_01"})
@@ -35,7 +35,7 @@ end
  * @Description: 加入房间处理  
  ]]
 function this.JoinRoomByRno(rno)
-    --print("JoinRoomByRno start--------------------------------------")
+    --log("JoinRoomByRno start--------------------------------------")
     http_request_interface.getRoomByRno(rno, function (code, m, str)
         local s = string.gsub(str, "\\/", "/")
         local dataTbl = ParseJsonStr(s)
@@ -60,11 +60,11 @@ function this.JoinRoomByRno(rno)
                     return
                 end
 
-                --print("JoinRoomByRno end--------------------------------------" + dataTbl.data.gid)
-                --print("JoinRoomByRno end--------------------------------------" + ENUM_GAME_TYPE.TYPE_SHISHANSHUI)
+                --log("JoinRoomByRno end--------------------------------------" + dataTbl.data.gid)
+                --log("JoinRoomByRno end--------------------------------------" + ENUM_GAME_TYPE.TYPE_SHISHANSHUI)
                 --if dataTbl.data.gid == ENUM_GAME_TYPE.TYPE_SHISHANSHUI then
 
-                    print("连接游戏服-------------------------------------")
+                    log("连接游戏服-------------------------------------")
                     local k=dataTbl.data
                     k.nGhostAdd = dataTbl.data.cfg.joker
                     k.nColorAdd = dataTbl.data.cfg.addColor
@@ -103,7 +103,7 @@ end
 function this.QueryState(callback)
   http_request_interface.QueryStatus({}, function (code, m, str)
      local s=string.gsub(str,"\\/","/")
-     print("QueryState:"..tostring(s))
+     log("QueryState:"..tostring(s))
      local t=ParseJsonStr(s)   
      if t._dsts ~= nil and #t._dsts > 0 then     
         local tbl = {_dst = t._dsts[1]}
@@ -120,7 +120,7 @@ end
  * @Description: 进入游戏处理  
  ]]
 function this.EnterGameHandle(data)
-    print("GetTblData----------------------------------"..GetTblData(data))
+    log("GetTblData----------------------------------"..GetTblData(data))
     mahjong_play_sys.EnterGameReq(data)
     player_data.SetReconnectEpara(data) 
     --join_room.EnterGameHandle(data)

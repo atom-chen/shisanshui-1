@@ -24,9 +24,9 @@ function this.Show()
 	
 	--his.LoadAllResult()
 	require "logic/hall_sys/openroom/room_data"
-	print("总结算")
+	log("总结算")
 	if room_data.GetRid() == nil then
-		print("---room_data.rid == nil-----")
+		log("---room_data.rid == nil-----")
     else
 		---根据房id查找房间信息 {"rid":房号}
 		http_request_interface.getRoomByRid(room_data.GetRid(),1,this.OnGetRoomReturnDate) 
@@ -50,7 +50,7 @@ function this.OnDestroy()
 end
 
 function this.initinfor()
-	print("Large_Result initinfor")
+	log("Large_Result initinfor")
 end
 	
 	
@@ -88,7 +88,7 @@ function this.LoadAllResult(result)
 	--for i = 1, 6 do
 		local i = room_usersdata_center.GetLogicSeatByStr(k)	
 		if v ~= nil then	
-			print("总结算数据单条"..tostring(i))
+			log("总结算数据单条"..tostring(i))
 			
 			local trans = child(this.transform, "Panel/userGrid/user"..i)
 			trans.gameObject:SetActive(true)
@@ -96,7 +96,7 @@ function this.LoadAllResult(result)
 			--[[ 名字等接微信
 			local tran = child(this.transform,"Panel/userGrid/user"..i.."/namelbl")
 			if tran~=nil then
-			print("tran")
+			log("tran")
 			end
 			local NameLbl = componentGet(tran, "UILabel")
 			NameLbl.text=result[i].name
@@ -112,11 +112,11 @@ function this.LoadAllResult(result)
 			local allshotLbl = componentGet(child(this.transform,"Panel/userGrid/user"..i.."/winState/count3"), "UILabel")
 			local specialLbl = componentGet(child(this.transform,"Panel/userGrid/user"..i.."/winState/count4"), "UILabel")
 			local tex_photo= componentGet(child(this.transform, "Panel/userGrid/user"..i.."/picFrame"), "UITexture")
-            print("---------------------------------------------------------------------------")    
-            print(room_usersdata_center.GetUserByLogicSeat(i).headurl.."room_usersdata_center.GetUserByLogicSeat(number).headurl")
-            print(i.."tex_photo.name")
+            log("---------------------------------------------------------------------------")    
+            log(room_usersdata_center.GetUserByLogicSeat(i).headurl.."room_usersdata_center.GetUserByLogicSeat(number).headurl")
+            log(i.."tex_photo.name")
             hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(i).headurl)
-            print("---------------------------------------------------------------------------")
+            log("---------------------------------------------------------------------------")
 			
 			IDLbl.text="ID:"..v.uid
 			NameLbl.text=v.nickname
@@ -155,7 +155,7 @@ function this.LoadAllResult(result)
 			end
 		end
 		--]]
-		print("large result user"..k.."=nil")
+		log("large result user"..k.."=nil")
 	end
 	this.ShowHighest(highestNum)
 	local grid = componentGet(child(this.transform,"Panel/userGrid"), "UIGrid")
@@ -165,7 +165,7 @@ end
 ---------http回调处理--------
 function this.OnGetRoomReturnDate(code,m,str)
 	local s=string.gsub(str,"\\/","/")
-	print("-------this.OnGetRoomReturnDate-------"..tostring(s))
+	log("-------this.OnGetRoomReturnDate-------"..tostring(s))
     local t=ParseJsonStr(s)
     if tonumber(t.ret)~=0 then
         return
@@ -174,9 +174,9 @@ function this.OnGetRoomReturnDate(code,m,str)
 	local ownerIndex=t["data"].accountc.banker
 	local reward = t["data"].accountc.rewards
 	if reward == nil then
-		print("reward == nil")
+		log("reward == nil")
 	else
-		print("总结算")
+		log("总结算")
 		this.LoadAllResult(reward)
 		this.ShowOwner(ownerIndex) ---房主
 	end
@@ -189,7 +189,7 @@ end
 
 function this.ShareClick(obj)
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print("share")
+    log("share")
     YX_MoblieAPI.Instance:GetCenterPicture("screenshot.png")
     YX_MoblieAPI.Instance.onfinishtx=function(tx) 
         local shareType = 0--0微信好友，1朋友圈，2微信收藏

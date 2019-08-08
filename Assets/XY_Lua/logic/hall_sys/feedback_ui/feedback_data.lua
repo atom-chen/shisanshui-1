@@ -66,7 +66,7 @@ end
 
 function this.getFeedBack(callback)
 	http_request_interface.getFeedBack({},function (code,m,str)
-		print(str)
+		log(str)
 		if code then		
 		end
 

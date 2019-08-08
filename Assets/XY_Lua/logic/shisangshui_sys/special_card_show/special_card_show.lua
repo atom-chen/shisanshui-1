@@ -52,7 +52,7 @@ end
 function this.Show(cards, nSpecialType, show_time)
 	ui_sound_mgr.PlaySoundClip("CardTpye_Girl/SpecialType/".. SpecialTypeMusicConfig[nSpecialType])
 	timeSecond = show_time
-	print("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
+	log("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
 	my_cards = cards
 	if this.gameObject==nil then
 		require ("logic/shisangshui_sys/special_card_show/special_card_show")
@@ -105,11 +105,11 @@ function this.LoadAllCard(cards, nSpecialType)
 ---[[
 	local cardGrid = child(this.transform, "cardGrid")
 	if cardGrid == nil then
-		print("cardGrid == nil")
+		log("cardGrid == nil")
 		return
 	end
 	if cards == nil then
-	print("cards: ")
+	log("cards: ")
 end
 	for i, v in pairs(cards) do
 		local cardObj = newNormalUI("Prefabs/Card/"..tostring(v), cardGrid)

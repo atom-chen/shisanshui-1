@@ -37,7 +37,7 @@ end
  * @Description: 进入状态
  ]]
 function gs_cg:EnterState( ... )
-	--print("gs_cg:EnterState", LOG.gs)
+	--log("gs_cg:EnterState", LOG.gs)
 	self.active = true
 end
 
@@ -45,7 +45,7 @@ end
  * @Description: 离开状态
  ]]
 function gs_cg:ExitState( ... )
-	--print("gs_cg:ExitState", LOG.gs)
+	--log("gs_cg:ExitState", LOG.gs)
 	self.active = false
 end
 
@@ -74,6 +74,6 @@ end
  * @Description: 处理网络链接关闭
  ]]
 function gs_cg:HandleOnNetworkClose()
-	print("gs_cg:HandleOnNetworkClose(), nothing to do", LOG.gs)
+	log("gs_cg:HandleOnNetworkClose(), nothing to do", LOG.gs)
 	-- override, nothing to do
 end

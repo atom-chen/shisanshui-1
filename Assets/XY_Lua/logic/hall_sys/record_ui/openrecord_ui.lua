@@ -90,7 +90,7 @@ function this.Refresh1()
     http_request_interface.getRoomSimpleList(nil,{0,1,3},page1, function (code, m, str)
            local s=string.gsub(str,"\\/","/")  
            local t=ParseJsonStr(s)  
-           print(str)
+           log(str)
            record1={}
            for k,v in pairs(t.data) do
               table.insert(record1,v)  
@@ -113,7 +113,7 @@ function this.UpdateRoomRecordSimpleData(data,code)
 	this.roomrecord =data    
     if data~=nil then 
 	    this.maxCount = table.getCount(this.roomrecord) 
-        print("maxcount"..this.maxCount)
+        log("maxcount"..this.maxCount)
 	    this.InitPanelRecord(this.maxCount,code)  
     end
     
@@ -141,7 +141,7 @@ function this.InitPanelRecord(count,code)
             end
 		    for i=0, count-1 do
 			    local go= this.InitItem(this.roomrecord[i+1],i,code)  
-                print("create1")
+                log("create1")
                 this.OnUpdateItem(go,nil,-i)
 		    end
         else
@@ -150,7 +150,7 @@ function this.InitPanelRecord(count,code)
             end
 		    for i=0, count-1 do
 			    local go= this.InitItem(this.roomrecord[i+1],i,code) 
-                print("create2")
+                log("create2")
                 this.OnUpdateItem(go,nil,-i)
 		    end
         end 
@@ -179,7 +179,7 @@ end
 
 
 function this.OnUpdateItem(go,index,realindex)
-    print(realindex.."realindex")
+    log(realindex.."realindex")
     local rindext=1-realindex 
     local t= this.roomrecord[rindext]
     go.name=rindext
@@ -215,7 +215,7 @@ function this.opendetail(data)
     http_request_interface.getRoomByRid(rid,1,function (code,m,str)
                local s=string.gsub(str,"\\/","/")  
                local t=ParseJsonStr(s)
-               print(str)
+               log(str)
                recorddetails_ui.Show(t) 
                waiting_ui.Hide()  
            end) 
@@ -251,7 +251,7 @@ this.roomstatus={
 "未开局",
 }
 function this.enter(obj1,obj2)   
-    print(obj2.name.."namedadwad1231312")
+    log(obj2.name.."namedadwad1231312")
     table.foreach(record1[tonumber(obj2.transform.parent.name)],print)
     join_room_ctrl.JoinRoomByRno(record1[tonumber(obj2.transform.parent.name)].rno)
 end

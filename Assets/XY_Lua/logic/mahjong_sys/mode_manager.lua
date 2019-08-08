@@ -39,12 +39,12 @@ function this.InitializeMode(ntf)
 	--levelModeType = map_controller.GetCurMapConfig().levelType
     levelModeType = ntf
 	local play_mode = playModeDict[levelModeType]
-	print("Play_mode"..tostring(Play_mode))
+	log("Play_mode"..tostring(Play_mode))
 	if (play_mode ~= nil) then
 		currentMode = play_mode.GetInstance()
 	end
 
-	print("-------------------------------InitializeMode")
+	log("-------------------------------InitializeMode")
 	currentMode:Initialize()
 end
 

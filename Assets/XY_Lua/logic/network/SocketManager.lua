@@ -14,7 +14,7 @@ function SocketManager:createSocket(sockeName, url, binderName, _svrID, _dst)
 	end
 	if sockeName == "hall" then
 		if not self.hallSocket then
-			print("SocketManager:createSocket----Hall")
+			log("SocketManager:createSocket----Hall")
 			self.hallSocket = require("logic.network.SocketClient"):create(sockeName,url,5,1000)
 			self.hallSocket:BindingServer(binderName, _svrID)
 			self.hallSocket:setRcvCallback(function ( _svrName, _svrID, _event  )
@@ -28,7 +28,7 @@ function SocketManager:createSocket(sockeName, url, binderName, _svrID, _dst)
 		end
 	elseif sockeName == "game" then
 		if not self.gameSocket then
-			print("SocketManager:createSocket----Game")
+			log("SocketManager:createSocket----Game")
 
 			self.gameSocket = require("logic.network.SocketClient"):create(sockeName,url,5,3)
 			self.gameSocket:BindingServer(binderName, _svrID, _dst)
@@ -110,13 +110,13 @@ end
 function SocketManager:onGameStatusCallback( _status )
 	LogW("onGameStatusCallback " ,_status)
 
-	print("连接游戏服务器状态".._status)
+	log("连接游戏服务器状态".._status)
 	if _status == "reconnect" then
 		net_tip.Show("正在努力连接游戏服务器")
 	elseif _status == "connecting" then
 		--net_tip.Show("正在努力连接游戏服务器")
 	elseif _status == "connected" then
-			print("他妈的总算连上了")
+			log("他妈的总算连上了")
 		-- EnterGameReq
 		if self.gameOpenCallBack then
 			self.gameOpenCallBack()

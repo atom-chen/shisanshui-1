@@ -31,7 +31,7 @@ local lb_input
 local input_msg
 
 function this.Show()
-	print("feedback.show-------------------------------------2")
+	log("feedback.show-------------------------------------2")
 	if this.gameObject==nil then
 		require ("logic/hall_sys/feedback_ui/feedback_ui")
 		this.gameObject = newNormalUI("Prefabs/UI/Feedback/feedback_ui")
@@ -43,7 +43,7 @@ function this.Show()
 end
 
 function this.InitData()
-	print("feedback_ui.InitData-------------------------------------2")
+	log("feedback_ui.InitData-------------------------------------2")
 	this.ReflushUI()
 end
 
@@ -57,7 +57,7 @@ function this.Awake( )
  end
 
 function this.Start()
-	print("Start-------------------------------------3")
+	log("Start-------------------------------------3")
 	this:RegistUSRelation()
 	this.Init()
 	this.RegisterEvents1()	
@@ -68,7 +68,7 @@ function this.Start()
 end
 
 function this.Init()
-	print("Init----------------------")
+	log("Init----------------------")
 	obj_noMsg = child(this.transform, "lb_noMsg")
 	obj_autoReply = child(this.transform, "autoReply")
 	scrollview_msg = componentGet(child(this.transform, "ScrollView"),"UIScrollView")
@@ -110,12 +110,12 @@ function this.RegisterEvents1()
 end
 
 function this.OnBtnCloseClick()
-	print("OnBtnCloseClick-------------------------------------6")
+	log("OnBtnCloseClick-------------------------------------6")
 	this.Hide()
 end
 
 function this.OnBtnSendClick()
-	print("OnBtnSendClick--------------------------------------")
+	log("OnBtnSendClick--------------------------------------")
 
 	local timePrefix = os.date("%Y/%m/%d %H:%M",os.time())
 	local msgType = 0
@@ -245,12 +245,12 @@ function this.SetDraft(strMsg,inputTran)
 end
 
 function this.OnBtnReSendEnterClick()
-	print("OnBtnReSendEnterClick--------------------------------------")
+	log("OnBtnReSendEnterClick--------------------------------------")
 	this.ReflushUI()
 end
 
 function this.OnBtnReSendCancelClick()
-	print("OnBtnReSendCancelClick--------------------------------------")
+	log("OnBtnReSendCancelClick--------------------------------------")
 
 end
 
@@ -430,8 +430,8 @@ function this.calStrNum(str)
 		else
 			num = num + 1
 		end
-		--print(v.."	"..tostring(num))
+		--log(v.."	"..tostring(num))
 	end
-	print("输入字符个数："..tostring(num))
+	log("输入字符个数："..tostring(num))
 	return num;
 end

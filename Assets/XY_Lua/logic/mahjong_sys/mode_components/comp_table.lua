@@ -48,7 +48,7 @@ function comp_table.create()
         this.compPlayerMgr = this.mode:GetComponent("comp_playerMgr")
         this.config = this.mode.config
 
-        print("----------------------enter comp_table")
+        log("----------------------enter comp_table")
         this:InitTable()
         this:GetWallPoints() 
 	end
@@ -308,7 +308,7 @@ function comp_table.create()
      ]]
     local InitShowLai_c = nil
     function this:ShowLai(dun, cardValue, isAnim,callback)
-        print("ShowLai !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
+        log("ShowLai !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
         local laiIndex = this.lastIndex+(dun-1)*2
         if(laiIndex>this.config.MahjongTotalCount) then
             laiIndex = laiIndex - this.config.MahjongTotalCount
@@ -424,7 +424,7 @@ function comp_table.create()
         this.sendIndex = dun * 2 + (viewSeat-1) * this.config.MahjongDunCount * 2 --发牌位置
         this.lastIndex = this.sendIndex + 2
 
-        print("-----------------ResetWall------------this.sendIndex "..tostring(this.sendIndex).." this.lastIndex "..tostring(this.lastIndex))
+        log("-----------------ResetWall------------this.sendIndex "..tostring(this.sendIndex).." this.lastIndex "..tostring(this.lastIndex))
     end
 
 
@@ -562,7 +562,7 @@ function comp_table.create()
         this:StopTime()
 	end
 
-	--print("----------------------init comp_table")
+	--log("----------------------init comp_table")
 	--InitTable()
     --GetWallPoints()	
 

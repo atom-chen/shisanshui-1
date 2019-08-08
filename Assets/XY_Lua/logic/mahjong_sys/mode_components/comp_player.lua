@@ -105,9 +105,9 @@ function comp_player.create()
 
         mj.mjObj.transform:SetParent( this.handCardPoint, false)
         local x = #this.handCardList * mahjongConst.MahjongOffset_x + this:GetOperTotalWidth()
-        --print("this.handCardCount------"..this.handCardCount)
+        --log("this.handCardCount------"..this.handCardCount)
         if isDeal == false and IsRoundSendCard(this.handCardCount) then
-            --print("IsRoundSendCard(this.handCardCount)------"..tostring(IsRoundSendCard(this.handCardCount)))
+            --log("IsRoundSendCard(this.handCardCount)------"..tostring(IsRoundSendCard(this.handCardCount)))
             x = x +mahjongConst.MahjongOffset_x/2
         end
         mj.mjObj.transform:DOLocalMove(Vector3(x, 0, 0), 0.05,false)
@@ -437,7 +437,7 @@ function comp_player.create()
         if mj == curClickMJItem then
             if canOutCard then
                 local paiVal = mj.paiValue
-                print("-----------ClickCardEvent paiVal"..paiVal)
+                log("-----------ClickCardEvent paiVal"..paiVal)
                 mahjong_play_sys.OutCardReq(paiVal)
             end
         else
@@ -466,7 +466,7 @@ function comp_player.create()
         end
         if canOutCard then
             local paiVal = mj.paiValue
-            print("-----------DragCardEvent paiVal"..paiVal)
+            log("-----------DragCardEvent paiVal"..paiVal)
             curClickMJItem = mj
             mahjong_play_sys.OutCardReq(paiVal)
         end
@@ -523,8 +523,8 @@ function comp_player.create()
      ]]
     function this:DoOutCard(item, callback)
         DoOutCard_c = coroutine.start(function ()
-            --print("DoOutCard viewSeat"..this.viewSeat.." mjvalue "..item.paiValue)
-            --print("DoOutCard viewSeat"..this.viewSeat.." mjname "..item.mjObj.name)
+            --log("DoOutCard viewSeat"..this.viewSeat.." mjvalue "..item.paiValue)
+            --log("DoOutCard viewSeat"..this.viewSeat.." mjname "..item.mjObj.name)
             local mj = item
             mj.mjObj.transform:SetParent(this.outCardPoint, false)
             if this.viewSeat == 1 then
@@ -580,7 +580,7 @@ function comp_player.create()
         --操作牌
         for i=1,#operCardList do
             local oper = operCardList[i]
-            --print("#oper.itemList--------------------"..#oper.itemList)
+            --log("#oper.itemList--------------------"..#oper.itemList)
             for j=1,#oper.itemList do
                 if oper.itemList[j].paiValue == value then
                     table.insert(t,oper.itemList[j])
@@ -608,8 +608,8 @@ function comp_player.create()
      * @Description: 执行操作牌  
      ]]
     function this:OperateCard( operData,mj )
-        --print("!!!!!!!!---------OperateCard----------operData.operType "..operData.operType)
-        --print("!!!!!!!!---------OperateCard----------operData.operCard "..tostring(operData.operCard))
+        --log("!!!!!!!!---------OperateCard----------operData.operType "..operData.operType)
+        --log("!!!!!!!!---------OperateCard----------operData.operCard "..tostring(operData.operCard))
         if(operData.operType == MahjongOperAllEnum.TripletLeft or
            operData.operType == MahjongOperAllEnum.TripletCenter or
            operData.operType == MahjongOperAllEnum.TripletRight or
@@ -643,7 +643,7 @@ function comp_player.create()
             xOffset = xOffset + operCardList[i]:GetWidth() + mahjongConst.MahjongOperCardInterval
         end
         local oper = comp_operatorcard.create()
-        print("operCardPoint----------------------------------------"..tostring(operCardPoint.name))
+        log("operCardPoint----------------------------------------"..tostring(operCardPoint.name))
         oper.operObj.transform.parent = operCardPoint
         oper.operObj.transform.localPosition = Vector3(xOffset, 0, 0)
         oper.operObj.transform.localRotation = Vector3.zero
@@ -666,7 +666,7 @@ function comp_player.create()
         for i=1,#searchCard do
             this.handCardCount = this.handCardCount - 1
             if this.viewSeat == 1 then
-                print("this:GetOperCardList( operData,mj )")
+                log("this:GetOperCardList( operData,mj )")
                 index = 1
                 while(index<=#this.handCardList) do
                     if(this.handCardList[index].paiValue == searchCard[i]) then
@@ -700,7 +700,7 @@ function comp_player.create()
      * @Description: 给操作组添加牌  
      ]]
     function this:AddOperCard( operData )
-        --print("!!!!!!!!---------AddOperCard----------operData.operCard "..operData.operCard.." operCardList[i].keyItem.paiValue "..operCardList[i].keyItem.paiValue)
+        --log("!!!!!!!!---------AddOperCard----------operData.operCard "..operData.operCard.." operCardList[i].keyItem.paiValue "..operCardList[i].keyItem.paiValue)
         for i=1,#operCardList do
             if(operCardList[i].keyItem~=nil and operData.operCard == operCardList[i].keyItem.paiValue) then
                 local mj = nil
@@ -724,7 +724,7 @@ function comp_player.create()
                 end
                 operCardList[i]:AddShow(operData,mj,true)
             else
-                --print("!!!!!!!!---------AddOperCard----------operData.operCard "..operData.operCard.." operCardList[i].keyItem.paiValue "..operCardList[i].keyItem.paiValue)
+                --log("!!!!!!!!---------AddOperCard----------operData.operCard "..operData.operCard.." operCardList[i].keyItem.paiValue "..operCardList[i].keyItem.paiValue)
             end
         end
     end
@@ -733,7 +733,7 @@ function comp_player.create()
      * @Description: 恢复出牌
      ]]
     function this:ResetOutCard(cardItems,cardsValue)
-        --print("------------ResetOutCard")
+        --log("------------ResetOutCard")
         for i=1,#cardItems do
             local mj = cardItems[i]
             mj:SetMesh(cardsValue[i])

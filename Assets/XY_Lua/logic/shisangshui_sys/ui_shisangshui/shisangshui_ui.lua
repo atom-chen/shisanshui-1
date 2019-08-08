@@ -40,7 +40,7 @@ local function Onbtn_exitClick()
 end
 
 local function Onbtn_moreClick()
-	print("Onbtn_moreClick")
+	log("Onbtn_moreClick")
 	this.SetMorePanle()
 end
 
@@ -51,7 +51,7 @@ end
 
 local function Onbtn_readyClick()	
 	ui_sound_mgr.PlaySoundClip("common/audio_ready")
-	print("Onbtn_readyClick")
+	log("Onbtn_readyClick")
 	shisangshui_play_sys.ReadyGameReq()
 	--[[
 	this.SetBeiShuBtnCount()
@@ -68,11 +68,11 @@ local function Onbtn_readyClick()
 end
 
 local function Onbtn_voiceClick()
-	print("Onbtn_voiceClick")
+	log("Onbtn_voiceClick")
 end
 
 local function Onbtn_inviteFriend()	--邀请好友
-	print("Onbtn_inviteFriend")
+	log("Onbtn_inviteFriend")
 	invite_sys.inviteFriend(room_data.GetSssRoomDataInfo().rno,"十三水",tostring(room_data.GetShareContent()))
 end
 
@@ -81,8 +81,8 @@ local function Onbtn_dimissRoom()	--解散房间
 end
 
 local function Onbtn_chatClick()
---	print("Onbtn_chatClick isShowCahtUI"..tostring(isShowCahtUI))
-		print("Onbtn_chatClick")
+--	log("Onbtn_chatClick isShowCahtUI"..tostring(isShowCahtUI))
+		log("Onbtn_chatClick")
 	this.SetChatTextInfo()
 	this.SetChatImgInfo()
 	this.SetChatPanle()
@@ -99,11 +99,11 @@ local function Onbtn_chatClick()
 end
 
 local function Onbtn_guoClick()
-	print("Onbtn_guoClick")
+	log("Onbtn_guoClick")
 end
 
 function OnBtn_SettingOnClick()
-	print("++++++++SettingOnClick")
+	log("++++++++SettingOnClick")
 	setting_ui.Show()
 end
 
@@ -119,7 +119,7 @@ function OnBtn_AchievementOnClick()
 	http_request_interface.getRoomByRid(roomdata_center.rid,1,function (code,m,str)
            local s=string.gsub(str,"\\/","/")  
            local t=ParseJsonStr(s)
-           print(str)
+           log(str)
            recorddetails_ui.Show(t)   
        end)
 end
@@ -234,7 +234,7 @@ local function InitWidgets()
 	end	
 
     --房号
-    print("----------------------------------------------------label_gameinfo")
+    log("----------------------------------------------------label_gameinfo")
 	widgetTbl.label_gameinfo = child(widgetTbl.panel, "Anchor_Bottom/gameInfo")
 	if widgetTbl.label_gameinfo~=nil then
        widgetTbl.label_gameinfo.gameObject:SetActive(false)
@@ -298,7 +298,7 @@ local function InitWidgets()
     this.playerList = {}
 	local roomData = room_data.GetSssRoomDataInfo()
 	local peopleNum = roomData.people_num
-	print("PeopleNum:"..tostring(peopleNum))
+	log("PeopleNum:"..tostring(peopleNum))
     for i=1,6 do
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
@@ -307,7 +307,7 @@ local function InitWidgets()
 			local position = viewSeateConfig["pos"..tostring(i)]
 			local posjson = string.gsub(position,"\\/","/")  
 			local seateJson = ParseJsonStr(posjson)
-			print("LocalPosition frome configTable:"..tostring(seateJson))
+			log("LocalPosition frome configTable:"..tostring(seateJson))
 			
 			local x = seateJson["x"]
 			local y = seateJson["y"]
@@ -457,7 +457,7 @@ end
 
 
 function this.SetChatPanle()
-	print("关闭聊天界面")
+	log("关闭聊天界面")
 	if widgetTbl.panel_chatPanel.gameObject.activeSelf == true then
 		widgetTbl.panel_chatPanel.gameObject:SetActive(false)
 	else
@@ -521,7 +521,7 @@ function this.SetLeftCard( num )
 	end
 
 	widgetTbl.leftCard_comp.text = tostring(room_data.GetSssRoomDataInfo().cur_playNum).."/"..tostring(room_data.GetSssRoomDataInfo().play_num).."局数"
-	print("当前局数:"..tostring(room_data.GetSssRoomDataInfo().cur_playNum))
+	log("当前局数:"..tostring(room_data.GetSssRoomDataInfo().cur_playNum))
 	
 end
 
@@ -613,7 +613,7 @@ end
 
 --è®¾ç½®çŽ©å®¶å‡†å¤‡çŠ¶æ€
 function this.SetPlayerReady( viewSeat,isReady )
-	print("viewSeat-------------------------------------"..tostring(viewSeat))
+	log("viewSeat-------------------------------------"..tostring(viewSeat))
 	if this.playerList[viewSeat] ~= nil then
 		this.playerList[viewSeat].SetReady(isReady)
 	end
@@ -635,9 +635,9 @@ function this.SetPlayerLightFrame(viewSeat)
 	local Player = this.playerList[viewSeat]
 	if Player ~= nil then
 		if this.playerList[viewSeat].transform == nil then 
-			print("+++++++++AnimationError!!!!!!!")
+			log("+++++++++AnimationError!!!!!!!")
 		end
-		print("当前桌面对应的座位号"..tostring(Player.viewSeat).."transformName"..tostring(Player.transform.name))
+		log("当前桌面对应的座位号"..tostring(Player.viewSeat).."transformName"..tostring(Player.transform.name))
 		this.lightFrameObj = animations_sys.PlayAnimationWithLoop(Player.transform,"shisanshui_icon_frame","flame",114,124)
 		componentGet(this.lightFrameObj.gameObject,"SkeletonAnimation"):ChangeQueue(3001)
 	end
@@ -792,14 +792,14 @@ end
 
 --´òÇ¹
 function this.GetShootTran( viewSeat )
-	print("Shoot-------------------------------------"..tostring(viewSeat))
+	log("Shoot-------------------------------------"..tostring(viewSeat))
 	if this.playerList[viewSeat] ~= nil then
 		return this.playerList[viewSeat].ShootTran()
 	end
 end
 
 function this.GetShootHoleTran(viewSeat, index)
-	print("Shoot-------------------------------------"..tostring(viewSeat))
+	log("Shoot-------------------------------------"..tostring(viewSeat))
 	if this.playerList[viewSeat] ~= nil then
 		return this.playerList[viewSeat].ShootHoleTran(index)
 	end
@@ -857,7 +857,7 @@ function this.Onbtn_chatTextClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print(chatTextTab[tIndex])
+	log(chatTextTab[tIndex])
 	shisangshui_play_sys.ChatReq(1,chatTextTab[tIndex],nil)
 end
 
@@ -865,7 +865,7 @@ function this.Onbtn_chatImgClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print("Image name:"..chatImgTab[tIndex])
+	log("Image name:"..chatImgTab[tIndex])
 	shisangshui_play_sys.ChatReq(2,chatImgTab[tIndex],nil)
 end
 
@@ -918,7 +918,7 @@ function this.SetBeiShuBtnCount()
 	if gridComp ~= nil then
 		gridComp:Reposition()
 	else
-		print("===选择倍数UIGrid为空！===")
+		log("===选择倍数UIGrid为空！===")
 	end
 end
 

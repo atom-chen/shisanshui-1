@@ -24,7 +24,7 @@ function comp_mjItemMgr.create()
     local config = nil
 	function this:Initialize()
 		this.base_init()
-        print("----------------------InitMJItems")
+        log("----------------------InitMJItems")
         this:InitMJItems()
 	end
 

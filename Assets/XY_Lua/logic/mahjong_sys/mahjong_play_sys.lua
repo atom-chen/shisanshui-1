@@ -128,7 +128,7 @@ function this.HandleLevelLoadComplete()
   map_controller.SetIsLoadingMap(false)
 
   this.Initialize()
-  print("gs_mgr.state_mahjong-------------------------------------")
+  log("gs_mgr.state_mahjong-------------------------------------")
   mode_manager.InitializeMode(3)
   mode_manager.StartCurrentMode() 
 

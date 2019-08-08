@@ -100,7 +100,7 @@ end
  * @Description: 响应Level加载完毕  
  ]]
 function this.onLevelWasLoaded()
-	print("onLevelWasLoaded~~~~~~~~~~="..tostring(currSceneID))
+	log("onLevelWasLoaded~~~~~~~~~~="..tostring(currSceneID))
 	UISys.Instance:DisableUICamera()	
 	createAllUI()       --创建所有UI
 	UISys.Instance:EnableUICamera()
@@ -173,7 +173,7 @@ end
 * @Description: 设置当前执行的系统
 ]]
 function this.SetCurSceneSys(newSys)
-	--print("curSceneSys:"..tostring(newSys))
+	--log("curSceneSys:"..tostring(newSys))
 	curSceneSys = newSys
 end
 
@@ -273,7 +273,7 @@ end
  ]]
 function destroyCurSystem()
 	-- 清理相关场景
-	--print("destroyCurSystem: "..tostring(currSceneType))
+	--log("destroyCurSystem: "..tostring(currSceneType))
 	this.ExitLevelSystem()
 end
 
@@ -312,7 +312,7 @@ end
  * @Description: 测试模式下直接进入场景
  ]]
  function this.EnterSceneForTest(sceneTypeString, levelID)
- 	print("EnterSceneForTest, levelID: "..levelID)
+ 	log("EnterSceneForTest, levelID: "..levelID)
  	currSceneType = sceneTypeString
 
  	currSceneID = levelID

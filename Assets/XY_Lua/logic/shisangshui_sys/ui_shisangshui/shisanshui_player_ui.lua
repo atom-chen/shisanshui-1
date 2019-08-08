@@ -126,7 +126,7 @@ function shisanshui_player_ui.New( transform )
 		end
 		if score == nil then score = 0 end
 		this.all_score =  tonumber(this.all_score) + tonumber(score)
-		print("+++++更新总积分+++"..tostring(this.all_score).."坐位号"..tostring(this.viewSeat))
+		log("+++++更新总积分+++"..tostring(this.all_score).."坐位号"..tostring(this.viewSeat))
 	--	this.scorelabel.text = score
 		this.scorelabel.text =  tostring(this.all_score)
 	end

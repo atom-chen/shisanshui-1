@@ -356,7 +356,7 @@ function mahjong_player_ui.New( transform )
 	end
 
 	function this.Onbtn_PlayerInfoClick()	
-		print(this.usersdata)
+		log(this.usersdata)
 		this.openuserinfo(this.usersdata.uid)
 
 		this.Onbtn_PlayerIconClick()
@@ -366,13 +366,13 @@ function mahjong_player_ui.New( transform )
 	    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	    waiting_ui.Show()
 	    local param={["uid"]=userid,["type"]=1}
-	    print(tostring(userid))
+	    log(tostring(userid))
 	    if userid == nil then
-	    	print("userid is null")
+	    	log("userid is null")
 	    	return
 	    end
 	    http_request_interface.getGameInfo(param,function (code,m,str) 
-	        print(str)
+	        log(str)
 			local s=string.gsub(str,"\\/","/")
 	        local t=ParseJsonStr(s)
 	        user_ui.Show()
@@ -383,23 +383,23 @@ function mahjong_player_ui.New( transform )
 	end
 
 	function this.Onbtn_PlayerInteraction1()
-		print("Onbtn_PlayerInteraction1")
+		log("Onbtn_PlayerInteraction1")
 		mahjong_play_sys.ChatReq(4,"1",this.logicSeat)
 	end
 	function this.Onbtn_PlayerInteraction2()
-		print("Onbtn_PlayerInteraction2")
+		log("Onbtn_PlayerInteraction2")
 		mahjong_play_sys.ChatReq(4,"2",this.logicSeat)
 	end
 	function this.Onbtn_PlayerInteraction3()
-		print("Onbtn_PlayerInteraction3")
+		log("Onbtn_PlayerInteraction3")
 		mahjong_play_sys.ChatReq(4,"3",this.logicSeat)
 	end
 	function this.Onbtn_PlayerInteraction4()
-		print("Onbtn_PlayerInteraction4")
+		log("Onbtn_PlayerInteraction4")
 		mahjong_play_sys.ChatReq(4,"4",this.logicSeat)
 	end
 	function this.Onbtn_PlayerInteraction5()
-		print("Onbtn_PlayerInteraction5")
+		log("Onbtn_PlayerInteraction5")
 		mahjong_play_sys.ChatReq(4,"5",this.logicSeat)
 	end
 

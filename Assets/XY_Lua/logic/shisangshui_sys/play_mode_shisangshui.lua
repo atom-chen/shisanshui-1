@@ -45,7 +45,7 @@ function play_mode_shisangshui.create(levelID)
 
 	this.base_init = this.Initialize
 	local function OnPlayerEnter(tbl)
-		print("有玩家进来了"..tostring(tbl))
+		log("有玩家进来了"..tostring(tbl))
 	
 	--	this.InitTable(function()end)
 	
@@ -75,32 +75,32 @@ function play_mode_shisangshui.create(levelID)
 	
 	
 	local function OnPlayerReady(tbl)
-		print("有人准备了")
+		log("有人准备了")
 	
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_READY)
 	end
 	
 	local function OnGameStart(tbl)
-		print("游戏开始")		
+		log("游戏开始")		
 	--	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_START)
 	end
 	
 	local function OnGameDeal(tbl)
-		print("发牌")
+		log("发牌")
 		
 		this.InitTable(function()
 			player_component.CardList = tbl["_para"]["stCards"]
 			recommendCards = tbl["_para"]["recommendCards"]
-			print("牌的数据"..tostring(player_component.CardList))
+			log("牌的数据"..tostring(player_component.CardList))
 		
 			local isSpecial = tbl["_para"]["nSpecialType"]
 
 			local score = tbl["_para"]["nSpecialScore"]
 			if isSpecial == 0 then
-				print("显示摆牌")
+				log("显示摆牌")
 				place_card.Show(player_component.CardList, recommendCards)
 			else
-				print("显示特殊牌型")
+				log("显示特殊牌型")
 				prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
 			end
 			
@@ -110,7 +110,7 @@ function play_mode_shisangshui.create(levelID)
 	end
 	
 	local function OnAskChoose(tbl)
-        print("摆牌")
+        log("摆牌")
         local timeo = tbl["timeo"]
 		local timeEnd = Time.time + timeo
         room_data.SetPlaceCardTime(timeEnd)
@@ -119,13 +119,13 @@ function play_mode_shisangshui.create(levelID)
 	end
 	
 	local function OnCompareStart(tbl)
-		print("比牌开始")
+		log("比牌开始")
 		place_card.Hide()
 		prepare_special.Hide()
 	end
 	
 	local function OnCompareResult(tbl)
-		print("比牌结果")
+		log("比牌结果")
 		local myLogicSeat = tbl["_src"]
 		local allCompareData = tbl["_para"]["stAllCompareData"]
 		card_data_manage.allShootChairId = tbl["_para"]["nAllShootChairID"] ----全垒打玩家椅子id, 0表示没有全垒打
@@ -138,14 +138,14 @@ function play_mode_shisangshui.create(levelID)
 			for i,v in ipairs(allCompareData) do
 				local charid = v["chairid"]
 				local viewSeatId = room_usersdata_center.GetViewSeatByLogicSeatNum(charid) --查找当前座位号
-				print("+++++++桌子的座位号+++++++++++"..tostring(viewSeatId))
+				log("+++++++桌子的座位号+++++++++++"..tostring(viewSeatId))
 				local Player = tableComponent.GetPlayer(viewSeatId)
 				Player.viewSeat = viewSeatId
 				Player.compareResult = v
 
 			end
 		else
-			print("比牌数据错误")
+			log("比牌数据错误")
 		end
 			local myPlayer = tableComponent.GetPlayer(myViewSeat)
 			card_data_manage.compareScores = tbl["_para"]["stCompareScores"]
@@ -157,27 +157,27 @@ function play_mode_shisangshui.create(levelID)
 	
 	local function OnCompareEnd(tbl)
 		
-		print("比牌结束")
+		log("比牌结束")
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_END)
 	end
 	
 	local function OnAutoPlay(tbl)
-		print("托管")
+		log("托管")
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.AUTOPLAY)
 	end
 	
 	local function OnGameRewards(tbl)
-	--	print("结算")
+	--	log("结算")
 --		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_REWARDS)
 	end
 	
 	local function OnSyncTable(tbl)
-		print("重连同步表")
+		log("重连同步表")
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_TABLE)
 	end
 
 	local function OnChooseOK(tbl)
-		print("摆牌完成")
+		log("摆牌完成")
 		--需要扣牌
 		tableComponent.ChooseOKCard(tbl)
 
@@ -185,18 +185,18 @@ function play_mode_shisangshui.create(levelID)
 	end
 
 	local function OnPointsRefresh(tbl)
-		print("数据刷新")
+		log("数据刷新")
 	--	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.Point_Refresh)
 	end
 	local function OnGameEnd(tbl)
-		print("游戏结束")
+		log("游戏结束")
 		this:ReSetAllStatus()
 	--	shisangshui_play_sys.ReadyGameReq()--发送准备好的状态进入下一局
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_END)
 	end
 	
 	local function OnUserLeave(tbl)
-		print("用户离开")
+		log("用户离开")
 		local viewSeat = gvbl(tbl._src)
 	if roomdata_center.isStart == true then
 		shisangshui_ui.SetPlayerMachine(viewSeat, true)
@@ -264,7 +264,7 @@ function play_mode_shisangshui.create(levelID)
 		local roomData = room_data.GetSssRoomDataInfo()
 		local peopleNum = roomData.people_num
 		local sceneRoot = shisanshui_table_config.tableEnum[peopleNum]
-		print("SceneRoot:"..tostring(sceneRoot).."peopleNum"..tostring(peopleNum))
+		log("SceneRoot:"..tostring(sceneRoot).."peopleNum"..tostring(peopleNum))
 		resCardTable = newNormalObjSync("Prefabs/Scene/shisangshui/"..tostring(sceneRoot))
    	--  	resCardTable = newNormalObjSync("Prefabs/Scene/shisangshui/SceneRoot5")
    		newobject(resCardTable)
@@ -275,7 +275,7 @@ function play_mode_shisangshui.create(levelID)
      * @Description: 组装所需要的组件
      ]]
     function ConstructComponents()
-        print("ConstructComponents---------------------------------------")
+        log("ConstructComponents---------------------------------------")
         -- 组装
      --   this:AddComponent(comp_clickevent.create())
      --   compResMgr = this:AddComponent(comp_resMgr.create())
@@ -287,7 +287,7 @@ function play_mode_shisangshui.create(levelID)
     -- 	resMgrComponet = this:AddComponent(resMgr_component.create())
     -- 	resMgrComponet.LoadCardMesh()
 		tableComponent.InitPlayerTransForm()
-		print("++++++++++++++++++Create Component")
+		log("++++++++++++++++++Create Component")
 
 	--	this.InitTable(function()
 	--		tableComponent.ReSetAll()
@@ -301,7 +301,7 @@ function play_mode_shisangshui.create(levelID)
     end
 
     function this:ReSetAllStatus()
-    	print("重置游戏")
+    	log("重置游戏")
     	tableComponent.ReSetAll()
     end
 

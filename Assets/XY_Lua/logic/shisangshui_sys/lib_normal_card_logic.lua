@@ -84,7 +84,7 @@ function LibNormalCardLogic:IsFlush(cards)
     end
     -- LOG_DEBUG("LibNormalCardLogic:IsFlush.., cards: %s\n", TableToString(cards))
 
-    print("cards[1]--------------------------------------------"..tostring(cards[1]))
+    log("cards[1]--------------------------------------------"..tostring(cards[1]))
     local color = GetCardColor(cards[1])
     for i=2, #cards do
         if color ~= GetCardColor(cards[i]) then
@@ -928,7 +928,7 @@ function LibNormalCardLogic: Get_All_Card_Type(cards)
 	for i = GStars_Normal_Type.PT_FIVE, 1, -1 do
 		local judge temp = card_max_tbl.i(cards)
 		if temp ~= nil then
-			print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+			log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 		end
 	end
 	if temp ~= nil then

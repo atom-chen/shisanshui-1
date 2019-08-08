@@ -124,10 +124,10 @@ function this.Init()
 end
 
 function this.OpenMZSM()
-    print(global_define.httpmzsm)
+    log(global_define.httpmzsm)
     SingleWeb.Instance:Init(global_define.httpmzsm)
     local top,bottom,w=this.CalSize()
-    print(top.."top"..bottom.."bottom"..w)
+    log(top.."top"..bottom.."bottom"..w)
     SingleWeb.Instance:setsize(top,bottom,w,w)
     SingleWeb.Instance:Show()
     require"logic/WebViewBg/webViewBG_ui"
@@ -135,7 +135,7 @@ function this.OpenMZSM()
     webViewBG_ui.UpdateTitle("mzsm")
 end
 function this.OpenFWTK()
-    print(global_define.httpfwtk)
+    log(global_define.httpfwtk)
     SingleWeb.Instance:Init(global_define.httpfwtk)
     local top,bottom,w=this.CalSize()
     SingleWeb.Instance:setsize(top,bottom,w,w)
@@ -146,7 +146,7 @@ function this.OpenFWTK()
 end
 
 function this.OpenYSZC()
-     print(global_define.httpyszc)
+     log(global_define.httpyszc)
  SingleWeb.Instance:Init(global_define.httpyszc)
  local top,bottom,w=this.CalSize()
  SingleWeb.Instance:setsize(top,bottom,w,w)

@@ -41,7 +41,7 @@ end
 
 function this.UpdateRoomRecordSimpleData(data)
 	open_roomRecordSimpleData = {}
-	print("UpdateRoomRecordSimpleData")
+	log("UpdateRoomRecordSimpleData")
 	for i,v in ipairs(data["data"]) do
 		if v ~= nil then 
 			PrintTable(v)
@@ -53,14 +53,14 @@ function this.UpdateRoomRecordSimpleData(data)
 end
 function this.UpdateRoomHistorySimpleData(data)
 	open_roomHistorySimpleData = {}
-	print("UpdateRoomHistorySimpleData")
+	log("UpdateRoomHistorySimpleData")
 	for i,v in ipairs(data["data"]) do
 		if v ~= nil then 
 			table.insert(open_roomHistorySimpleData,v)
 		end
 	end
 	maxCount = table.getn(open_roomHistorySimpleData)
-	print(maxCount.."===========")
+	log(maxCount.."===========")
 	this.InitPanelHistory(maxCount)
 	
 end
@@ -156,7 +156,7 @@ function this.InitPanelHistory(count)
 	if mWrapContentHis.transform.childCount >=6 then
 		return
 	end
-	print("InitPanelHistory")
+	log("InitPanelHistory")
 	if count >=0 and count <=6 then
 		mWrapContentHis.enabled = false
 		for i=0, count-1 do
@@ -176,7 +176,7 @@ function this.InitPanelRecord(count)
 	if mWrapContent.transform.childCount >=6 then
 		return
 	end
-	print("InitPanelRecord")
+	log("InitPanelRecord")
 	if count >=0 and count <=6 then
 		mWrapContent.enabled = false
 		for i=0, count-1 do
@@ -206,7 +206,7 @@ function this.InitItem(data,i,code)
 end
 
 function this.OnUpdateItem(go,index,realindex)
-	print(realindex)
+	log(realindex)
 	if	go ~=nil then
 
 		tmpIcon = subComponentGet(go.transform,"Icon","UISprite")

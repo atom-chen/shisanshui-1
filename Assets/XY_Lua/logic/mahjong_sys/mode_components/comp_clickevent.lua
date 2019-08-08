@@ -67,13 +67,13 @@ function comp_clickevent.create()
                   				mjComp.eventPai(mjComp)
                                           return
                   			else
-                  				print("Click not hand card")
+                  				log("Click not hand card")
                   			end
                   		else
                                     if tempObj.transform.parent.gameObject.name == "MJ(Clone)" then
                                           tempObj.transform.parent.gameObject:SetActive(false)
                                     end
-                  			print("!!!!!!!!!!!!!mjComp error")
+                  			log("!!!!!!!!!!!!!mjComp error")
                   		end
                   	end
                   end

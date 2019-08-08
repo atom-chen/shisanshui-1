@@ -34,7 +34,7 @@
  local arrowTimer
 
  function this.Awake() 
-  print("hall_ui Awake")  
+  log("hall_ui Awake")  
   this.registerevent()  
   this.InitInfo()
   this.checkIdCard()
@@ -48,11 +48,11 @@ end
 function this.checkInviteroom()
      local s= YX_APIManage.Instance:read("temp.txt")
   if s~=nil then
-    print(s)
-    print("hall_ui temp.txt str-----" .. s)
+    log(s)
+    log("hall_ui temp.txt str-----" .. s)
     local t=ParseJsonStr(s)
     if t.roomId then
-      print("hall_ui temp.txt t.roomId-----" .. t.roomId)
+      log("hall_ui temp.txt t.roomId-----" .. t.roomId)
       waiting_ui.Show()
       http_request_interface.getRoomByRno(tonumber(t.roomId),join_room_ui.OnGetINRoomReturnData)
     end
@@ -66,7 +66,7 @@ function this.checkIdCard()
         local s=string.gsub(str,"\\/","/")  
         local t=ParseJsonStr(s) 
         local btn_sort = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_renzheng")--认证
-       -- print(t.user.id_no.."dsada1d231232132112321431")
+       -- log(t.user.id_no.."dsada1d231232132112321431")
         if tonumber(t.ret)==0 then 
             if btn_sort~=nil then
                 btn_sort.gameObject:SetActive(false)
@@ -182,7 +182,7 @@ function this.ui_Middle()
     a:ChangeQueue(3001)
     a.playComPleteCallBack=function()
     a.AnimationName="" 
-            --print("````````````````0000000000")
+            --log("````````````````0000000000")
           end
         end
 
@@ -192,7 +192,7 @@ function this.ui_Middle()
           a:ChangeQueue(3003)
           a.playComPleteCallBack=function()
           a.AnimationName="" 
-            --print("````````````````0000000000")
+            --log("````````````````0000000000")
           end
         end
 
@@ -253,7 +253,7 @@ function this.ui_Bottom()
 
 --------------------------------------按钮相关逻辑-----------------------------------------
 function this.Onbtn_goldClick()
-  print("Onbtn_goldClick") 
+  log("Onbtn_goldClick") 
    --- notice_ui.Show("wadawd46ad56wa4dadwadaaaaaadawdadadadawdawadadawdawdwdaww",5)
    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
  end
@@ -318,7 +318,7 @@ function this.activity(obj1,obj2)
     waiting_ui.Show()
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
     http_request_interface.getProductCfg(0,function(code,m,str)
-      print(str)
+      log(str)
       local s=string.gsub(str,"\\/","/")  
       local t=ParseJsonStr(s) 
       shop_ui.productlist=t.productlist
@@ -341,12 +341,12 @@ function this.activity(obj1,obj2)
 
   function this.OpenRoomClick() 
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print('-------------OpenRoomClick-------')
+    log('-------------OpenRoomClick-------')
     if openroom_main_ui ~= nil then 
       --open_room_data.RequesetClientConfig()
       openroom_main_ui.Show()
     else
-      print('-------------shisangshui_room_ui_ui = nil-------')
+      log('-------------shisangshui_room_ui_ui = nil-------')
     end 
   end
 
@@ -362,7 +362,7 @@ function this.activity(obj1,obj2)
       componentGet(this.toggle_record,"UIToggle").value=true
       recorddata=t.data
       record_ui.UpdateRoomRecordSimpleData(t.data,1)
-      print(str)
+      log(str)
       if table.getCount(t.data)==0 then
        sp_nocord.gameObject:SetActive(true)
      else
@@ -374,7 +374,7 @@ function this.activity(obj1,obj2)
       local t=ParseJsonStr(s)
               --record_ui.UpdateRoomRecordSimpleData(t.data,2)
               openrecorddata=t.data
-              print(str)
+              log(str)
               local sp_nocord=child(this.transform,"Panel_Left/sp_left/sp_norecord") 
               end) 
   else
@@ -412,7 +412,7 @@ function this.announcement(obj1,obj2)
   ui_sound_mgr.PlaySoundClip("common/audio_button_click") 
   local sp_red=child(obj2.transform,"sp_redpoint")
   http_request_interface.getEmails(0,function (code,m,str)
-    print(str)
+    log(str)
     local s=string.gsub(str,"\\/","/")  
     local t=ParseJsonStr(s)
     announcement_ui.Show()
@@ -456,10 +456,10 @@ function  this.LoadWebPage()
   require"logic/common/global_define"
   local url=global_define.GetUrlData()
   if(url == nil) then
-    print("url wei nil")
+    log("url wei nil")
 
   else
-    print("url bu wei nil")
+    log("url bu wei nil")
   end
   SingleWeb.Instance:InitWebPage(url)
   local webPage=SingleWeb.Instance:GetDicObj(url)

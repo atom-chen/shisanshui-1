@@ -46,7 +46,7 @@ end
 
 function this.Hide()
     if this.gameObject==nil  then
-        print("Not Find user_ui")
+        log("Not Find user_ui")
         return
     else
         GameObject.Destroy(this.gameObject)
@@ -88,7 +88,7 @@ function this.clickdiamondbtn()
 end
 
 function this.clickgamebtn()
-    print("-----------------game")
+    log("-----------------game")
 end
 --[[
 {"ret":0,"data":{"uid":4554998,"win":14,"sum":16,"maxwin":1000,"maxcard":["11","11","11","6","2","2","3","3","4","4"],"maxcardtype":"1","wincon":14,"viplv":1,"vipNextlv":2,"nickname":"玩家88D7F67B","imageurl":"9"}}

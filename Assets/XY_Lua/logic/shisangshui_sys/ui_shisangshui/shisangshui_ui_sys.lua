@@ -23,7 +23,7 @@ local gmls = room_usersdata_center.GetMyLogicSeat
 local result_para_data = {}
 
 local function OnPlayerEnter( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	local viewSeat = gvbl(tbl["_src"])
 	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
 	local userdata = room_usersdata.New()
@@ -49,7 +49,7 @@ local function OnPlayerEnter( tbl )
 			userdata.vip  = 0
 
 			http_request_interface.getImage({tbl["_para"]["_uid"]},function(code2,m2,str2)
-				print(tostring(str2))
+				log(tostring(str2))
 				local s2=string.gsub(str2,"\\/","/")
 	        	local t2=ParseJsonStr(s2)
 
@@ -63,7 +63,7 @@ local function OnPlayerEnter( tbl )
 				
 				shisangshui_ui.SetPlayerInfo( viewSeat, userdata)
 				
-				print("有玩家进来了，加载完头像了")
+				log("有玩家进来了，加载完头像了")
 				--waiting_ui.Hide()
 				if callback~=nil then
 					callback()
@@ -76,7 +76,7 @@ local function OnPlayerEnter( tbl )
 --	room_usersdata_center.AddUser(room_usersdata_center.GetLogicSeatByStr(tbl["_src"]),userdata)
 	
 
-	print("----------------------------------------------------SetPlayerInfo")
+	log("----------------------------------------------------SetPlayerInfo")
 --	shisangshui_ui.SetPlayerInfo( viewSeat, userdata)
 	
 	shisangshui_ui.ShowDissolveRoom(false)
@@ -95,7 +95,7 @@ local function OnPlayerEnter( tbl )
 			shisangshui_ui.SetBanker(viewSeat)
 		end
 	end
-	print("OnPlayerEnter------------------"..tostring(tonumber(gmls)))
+	log("OnPlayerEnter------------------"..tostring(tonumber(gmls)))
 	
 end
 
@@ -109,7 +109,7 @@ local function OnPlayerReady( tbl )
 		shisangshui_ui.SetLeftCard()--显示房间局数
 	end
 	shisangshui_ui.SetPlayerReady(viewSeat, true)
-	print("玩家准备好"..tostring(logicSeat))
+	log("玩家准备好"..tostring(logicSeat))
 	
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_READY)
 end
@@ -140,7 +140,7 @@ local function OnCompareStart(tbl)
 	coroutine.start(function ()
 		 --播放比牌动画
    		shisangshui_ui.PlayerStartGameAnimation()
-    	print("开始播放比牌动画")
+    	log("开始播放比牌动画")
     	coroutine.wait(1)
    		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_START)
 	end)
@@ -149,13 +149,13 @@ end
 local function OnGameDeal( tbl )
 	shisangshui_ui.SetAllPlayerReady(false)
 	shisangshui_ui.IsShowBeiShuiBtn(false)
-	--print(GetTblData(tbl))
+	--log(GetTblData(tbl))
 	--shisangshui_ui.HideOperTips()
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
 end
 
 local function OnGameLaiZi( tbl )
-	--print(GetTblData(tbl))
+	--log(GetTblData(tbl))
 	ui_sound_mgr.PlaySoundClip("common/laizi")
 	shisangshui_ui.ShowHunPai(tbl["_para"]["laizi"][1])
 end
@@ -182,17 +182,17 @@ local function OnGameRewards( tbl )
 	
 	
 	
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	shisangshui_ui.DisablePlayerLightFrame()--关闭头像的光圈
 	--shisangshui_ui.HideOperTips()
-	print("结算。。。。t")
+	log("结算。。。。t")
 	if tbl ~= nil and tbl._para ~= nil then
 		result_para_data.data = tbl._para
 		small_result.Show(result_para_data.data)
 		result_para_data.state = 0
 	end
 	if tbl == nil or tbl._para == nil then
-		print("tbl == nil or tbl._para = nil")
+		log("tbl == nil or tbl._para = nil")
 	end
 	
 	if tbl ~= nil and tbl._para ~= nil then
@@ -201,10 +201,10 @@ local function OnGameRewards( tbl )
 			for i,reward in ipairs(rewards) do
 				local viewSeat = gvbl(reward["_chair"])
 				local score = reward["all_score"]
-				print("总分： "..tostring(score))
+				log("总分： "..tostring(score))
 				if score == nil then score = 0 end
 				shisangshui_ui.SetPlayerCoin(viewSeat, tonumber(score))
-				print("座位号:"..tostring(viewSeat).." 总积分:"..tostring(score))
+				log("座位号:"..tostring(viewSeat).." 总积分:"..tostring(score))
 			end
 			
 		end
@@ -222,22 +222,22 @@ end
 local function OnAskReady( tbl )
 	local timeo = tbl.timeo
 	local timeEnd = timeo
-	print("等待举手, 时间："..tostring(timeo).."  结束时间： "..tostring(timeEnd))
+	log("等待举手, 时间："..tostring(timeo).."  结束时间： "..tostring(timeEnd))
 	room_data.SetReadyTime(timeEnd)
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_ASK_READY)
 end
 
 local function OnSyncBegin( tbl )
-	print("重连同步开始")
-	print(GetTblData(tbl))
+	log("重连同步开始")
+	log(GetTblData(tbl))
 
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_BEGIN)
 end
 
 --重连同步
 local function OnSyncTable( tbl )
-	print("重连同步表")
-	print(GetTblData(tbl))
+	log("重连同步表")
+	log(GetTblData(tbl))
 
 	--[[
 		self.m_stageNext = {
@@ -309,7 +309,7 @@ local function OnSyncTable( tbl )
 		--摆牌阶段
 		if (game_state == "deal" or game_state == "choose") then
 			if stCards == nil then
-				print("重连牌为空")
+				log("重连牌为空")
 				return
 			end
 			--未摆牌
@@ -358,14 +358,14 @@ end
 
 
 local function OnSyncEnd( tbl )
-	print("重连同步结束")
-	print(GetTblData(tbl))
+	log("重连同步结束")
+	log(GetTblData(tbl))
 
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_END)
 end
 
 local function OnLeaveEnd( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl._src)
 	if roomdata_center.isStart == true then
@@ -378,7 +378,7 @@ local function OnLeaveEnd( tbl )
 end
 
 local function OnPlayerOffline( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	
 	local viewSeat = gvbl(tbl._src)
 --	shisangshui_ui.SetPlayerLineState(viewSeat, false)
@@ -396,7 +396,7 @@ end
 local function OnGroupCompareResult(scoreData)
 	local index = scoreData.index
 	local ntotalScore = scoreData.totallScore
-	print("+++++++++++++++++++OnGroupCompareResult+++++++++"..tostring(index))
+	log("+++++++++++++++++++OnGroupCompareResult+++++++++"..tostring(index))
 	local scoreStr = ""
 	local scoreExtStr = ""
 	local score = 0
@@ -424,7 +424,7 @@ local function OnGroupCompareResult(scoreData)
 			end
 		end
 		
-		print("++++++++++compareScores"..tostring(score).."+++++"..tostring(scoreExt))
+		log("++++++++++compareScores"..tostring(score).."+++++"..tostring(scoreExt))
 		shisangshui_ui.SetGruopScord(index, score ,scoreExt,allScore)
 	end
 	
@@ -439,13 +439,13 @@ end
 --显示每一墩牌的数据 
 local function OnShowPokerCard(tbl)
 	if tbl == nil then
-		print("OnShowPokerCard....tbl == nil")
+		log("OnShowPokerCard....tbl == nil")
 		return
 	end
 	local position = tbl.nguiPosition
 	this.ShowCommonCard(tbl.cardTable,tbl.type, position)
 --	shisangshui_ui.SetPlayerLightFrame(tbl.chairid)--暂时不显示框
-	print("显示每一墩牌的数据")
+	log("显示每一墩牌的数据")
 end
 
 
@@ -459,7 +459,7 @@ local function OnVoteDraw(tbl)
 end
 
 local function OnVoteStart(tbl)
-	print("OnVoteStart~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+	log("OnVoteStart~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	local viewSeat = gvbln(tbl["_para"].who)
 	local time = tbl._para.timeout
 	local name = room_usersdata_center.GetUserByViewSeat(viewSeat).name
@@ -485,16 +485,16 @@ end
 
 --更新玩家积分
 local function RoomSumScore(tbl)
-	print("更新玩家积分")
+	log("更新玩家积分")
 	local _para = tbl._para
 	
 	local viewSeat = gvbl(tbl["_src"])
 	local score = _para["nRoomSumScore"]
 	--local viewSeat = _para["_chair"]
-	print("总分： "..tostring(score))
+	log("总分： "..tostring(score))
 	if score == nil then score = 0 end
 	shisangshui_ui.SetPlayerCoin(viewSeat, tonumber(score))
-	print("座位号:"..tostring(viewSeat).." 总积分:"..tostring(score))
+	log("座位号:"..tostring(viewSeat).." 总积分:"..tostring(score))
 	
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.ROOM_SUM_SCORE)
 end
@@ -503,7 +503,7 @@ end
 
 local function OnPointsRefresh( tbl )
 	--[[
-	print("=======数据刷新----------"..tostring(tbl))
+	log("=======数据刷新----------"..tostring(tbl))
 	local viewSeat = gvbl(tbl["_src"])
 
 	shisangshui_ui.SetPlayerCoin(viewSeat, tbl["_para"][1].score)
@@ -517,7 +517,7 @@ end
 
 --聊天
 local function OnPlayerChat( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl._src)
 	local contentType = tbl["_para"]["contenttype"]
@@ -534,7 +534,7 @@ end
 
 --提示闲家选择倍数
 local function OnAskMult(tbl)
-	print("提示闲家选择倍数")
+	log("提示闲家选择倍数")
 	shisangshui_ui.SetBeiShuBtnCount()
 	local roomInfo = room_data.GetSssRoomDataInfo()
 	if roomInfo.isZhuang == true then
@@ -581,13 +581,13 @@ local function OnMult(tbl)
 		value = p6
 	end
 		shisangshui_ui.SetBeiShu(viewSeat,value)
-		print("个人选择倍数回调，座位"..tostring(viewSeat).."倍数"..tostring(value))
+		log("个人选择倍数回调，座位"..tostring(viewSeat).."倍数"..tostring(value))
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.FuZhouSSS_MULT)
 end
 
 --所有人倍数回调
 local function OnAllMult(tbl)
-	print("所有人倍数回调")
+	log("所有人倍数回调")
 	--[[
 		local para = tbl["_para"]
 		if para ~= nil then
@@ -607,7 +607,7 @@ local function OnSpecialCardType(tbl)
 end
 
 function this.Init()
-	print("-----------Start Regist Event UI ---------------!!!!!!!!!!")
+	log("-----------Start Regist Event UI ---------------!!!!!!!!!!")
 	Notifier.regist(cmdName.F1_ENTER_GAME, OnPlayerEnter)--玩家进入
 	Notifier.regist(cmdName.F1_GAME_READY,OnPlayerReady)--玩家准备
 	Notifier.regist(cmdName.F1_GAME_START,OnGameStart)--游戏开始
@@ -704,10 +704,10 @@ function this.UInit()
 end
 
 function this.GetHeadPic(textureComp, url )
-	print("GetHeadPic "..url)
+	log("GetHeadPic "..url)
 
 	DownloadCachesMgr.Instance:LoadImage(url,function( code,texture )
-		--print("!!!!!!!!!state:"..tostring(state))
+		--log("!!!!!!!!!state:"..tostring(state))
 		textureComp.mainTexture = texture 
 	end)
 end
@@ -716,7 +716,7 @@ end
 function ShootingPlayerList(player_list)
 --[[
 	coroutine.start(function()
-		print("打枪完成, 开始特殊牌型展示 ")
+		log("打枪完成, 开始特殊牌型展示 ")
 		
 		for i, v in ipairs(player_list) do
 			if v.compareResult["nSpecialType"] ~= 0 and v.compareResult["nSpecialType"] ~= nil then
@@ -725,7 +725,7 @@ function ShootingPlayerList(player_list)
 			end
 		end
 		
-		print("打枪完成, 开始我给垒打展示 ")
+		log("打枪完成, 开始我给垒打展示 ")
 		if card_data_manage.allShootChairId ~= 0 then
 			animations_sys.PlayAnimation(shisangshui_ui.transform,"daqiang_quanleida","homer",100,100,false)
 			coroutine.wait(2)
@@ -756,7 +756,7 @@ function ShootingPlayerList(player_list)
 		
 		shisangshui_play_sys.CompareFinish()--告诉服务器
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_RESULT)--比牌结束
-		print("====================开始结算=======================")
+		log("====================开始结算=======================")
 	end)	
 	]]
 end

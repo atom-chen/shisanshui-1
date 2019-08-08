@@ -360,8 +360,8 @@ function comp_player_fuzhou.create()
     --出牌动作
     function this:DoOutCard(item, callback)
         this.DoOutCard_c = coroutine.start(function ()
-            --print("DoOutCard viewSeat"..this.viewSeat.." mjvalue "..item.paiValue)
-            --print("DoOutCard viewSeat"..this.viewSeat.." mjname "..item.mjObj.name)
+            --log("DoOutCard viewSeat"..this.viewSeat.." mjvalue "..item.paiValue)
+            --log("DoOutCard viewSeat"..this.viewSeat.." mjname "..item.mjObj.name)
             local mj = item;
             mj.mjObj.transform:SetParent( this.outCardPoint, false)
             if this.viewSeat == 1 then

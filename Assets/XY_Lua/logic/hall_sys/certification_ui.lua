@@ -63,12 +63,12 @@ function this.RegisterEvents1()
 end
 
 function this.OnBtnCloseClick()
-	print("OnBtnCloseClick-------------------------------------6")
+	log("OnBtnCloseClick-------------------------------------6")
 	this.Hide()
 end
 
 function this.OnBtnSendClick()
-	print("OnBtnSendClick--------------------------------------")
+	log("OnBtnSendClick--------------------------------------")
 	
 	local tName = this.mNameInput.value
 	local tIdentity = this.mIdentity.value
@@ -82,7 +82,7 @@ function this.OnBtnSendClick()
 		fast_tip.Show("身份证号码输入有误，请重新输入")
 	else	
 		http_request_interface.idCardVerify(tName,tIdentity,function (code,m,str)
-			print(str)
+			log(str)
 			if code then		
 			end
 			local s=string.gsub(str,"\\/","/")

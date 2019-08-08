@@ -54,7 +54,7 @@ end
 
 -- 更多按钮
 local function Onbtn_moreClick()
-	print("Onbtn_moreClick")
+	log("Onbtn_moreClick")
 	this.SetMorePanle()
 end
 
@@ -84,12 +84,12 @@ end
 
 -- 语音按钮
 local function Onbtn_voiceClick()
-	print("Onbtn_voiceClick")
+	log("Onbtn_voiceClick")
 end
 
 -- 聊天按钮
 local function Onbtn_chatClick()
-	print("Onbtn_chatClick")
+	log("Onbtn_chatClick")
 	this.SetChatTextInfo()
 	this.SetChatImgInfo()
 	this.SetChatPanle()
@@ -97,7 +97,7 @@ end
 
 --玩法
 local function Onbtn_gameplayClick()
-	print("Onbtn_gameplayClick")
+	log("Onbtn_gameplayClick")
 	local tRuleName = "zhengzhoumj"
 	local tType = player_data.GetGameId()
 	if tType == 1 then
@@ -115,7 +115,7 @@ end
 
 --设置
 local function Onbtn_settingClick()
-	print("Onbtn_settingClick")
+	log("Onbtn_settingClick")
 	setting_ui.Show()
 end
 
@@ -126,17 +126,17 @@ local function Onbtn_resultClick()
 		http_request_interface.getRoomByRid(roomdata_center.rid,1,function (code,m,str)
            local s=string.gsub(str,"\\/","/")  
            local t=ParseJsonStr(s)
-           print("Onbtn_resultClick()--------"..str)
+           log("Onbtn_resultClick()--------"..str)
            recorddetails_ui.Show(t)   
        end)
 		return
 	end
-	print("Onbtn_resultClick")
+	log("Onbtn_resultClick")
 end
 
 --托管
 local function Onbtn_machineClick()
-	print("Onbtn_machineClick")
+	log("Onbtn_machineClick")
 	this.SetAutoPlayInfo()
 end
 
@@ -152,40 +152,40 @@ end
 
 --胡牌点击事件
 local function Onbtn_huClick()
-	print("Onbtn_huClick")
+	log("Onbtn_huClick")
 	local tbl = operatorcachedata.GetOpTipsTblByType(MahjongOperTipsEnum.Hu)
-	print("Onbtn_huClick-------"..tostring(tbl))
+	log("Onbtn_huClick-------"..tostring(tbl))
 	mahjong_play_sys.HuPaiReq(tbl.nCard)
 end
 
 --听牌点击事件
 local function Onbtn_tingClick()
-	print("Onbtn_tingClick")
+	log("Onbtn_tingClick")
 	mahjong_play_sys.TingReq()
 end
 
 --杠牌点击事件
 local function Onbtn_gangClick()
-	print("Onbtn_gangClick")
+	log("Onbtn_gangClick")
 	mahjong_play_sys.QuadrupletReq()
 end
 
 --碰牌点击事件
 local function Onbtn_pengClick()
-	print("Onbtn_pengClick")
+	log("Onbtn_pengClick")
 	mahjong_play_sys.TripletReq()
 end
 
 -- 抢点击事件
 local function Onbtn_qiangClick()
-	print("Onbtn_qiangClick")
+	log("Onbtn_qiangClick")
 	local tbl = operatorcachedata.GetOpTipsTblByType(MahjongOperTipsEnum.Qiang)
 	mahjong_play_sys.HuPaiReq(tbl.nCard)
 end
 
 --吃牌点击事件
 local function Onbtn_chiClick()
-	print("Onbtn_chiClick")
+	log("Onbtn_chiClick")
 
 
 	local cardCanCollect = operatorcachedata.GetOpTipsTblByType(MahjongOperTipsEnum.Collect)
@@ -204,7 +204,7 @@ end
 
 --过牌点击事件
 local function Onbtn_guoClick()
-	print("Onbtn_guoClick")
+	log("Onbtn_guoClick")
 	mahjong_play_sys.GiveUp()
 	mahjong_ui.HideOperTips()
 end
@@ -348,7 +348,7 @@ local function InitWidgets()
     --房间号
     widgetTbl.roomNumLabel = subComponentGet(widgetTbl.panel, "Anchor_TopLeft/roomNum", typeof(UILabel))
     --玩法房号
-    print("----------------------------------------------------label_gameinfo")
+    log("----------------------------------------------------label_gameinfo")
 	widgetTbl.label_gameinfo = child(widgetTbl.panel, "Anchor_Bottom/gameInfo")
 	if widgetTbl.label_gameinfo~=nil then
        widgetTbl.label_gameinfo.gameObject:SetActive(false)
@@ -694,14 +694,14 @@ function this.InitBatteryAndSignal()
     YX_APIManage.Instance.batteryCallBack = function(msg)
     	local msgTable = ParseJsonStr(msg)
     	local precent = tonumber(msgTable.percent)	
-    	print("battery:"..precent)	
+    	log("battery:"..precent)	
 		this.SetPowerState(precent)
     end
 
     YX_APIManage.Instance.signalCallBack = function(msg)
     	local msgTable = ParseJsonStr(msg)
     	local precent = tonumber(msgTable.percent)	
-    	print("signal:"..precent)		
+    	log("signal:"..precent)		
 		this.SetNetworkState(precent)
     end
 end
@@ -795,7 +795,7 @@ function this.Onbtn_chatTextClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print(chatTextTab[tIndex])
+	log(chatTextTab[tIndex])
 	mahjong_play_sys.ChatReq(1,chatTextTab[tIndex],nil)
 end
 
@@ -803,7 +803,7 @@ function this.Onbtn_chatImgClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print("Image name:"..chatImgTab[tIndex])
+	log("Image name:"..chatImgTab[tIndex])
 	mahjong_play_sys.ChatReq(2,chatImgTab[tIndex],nil)
 end
 
@@ -899,7 +899,7 @@ end
 
 --设置玩家准备状态
 function this.SetPlayerReady( viewSeat,isReady )
-	--print("viewSeat-------------------------------------"..tostring(viewSeat))
+	--log("viewSeat-------------------------------------"..tostring(viewSeat))
 	if this.playerList[viewSeat] ~= nil then
 		this.playerList[viewSeat].SetReady(isReady)
 	end
@@ -1125,7 +1125,7 @@ function this.SetRewards( tbl ,win_viewSeat,isBigReward,t_rid)
   else
     addClickCallbackSelf(widgetTbl.rewards_ready.gameObject, Onbtn_readyClick, this)
   end
-  print("SetRewards----------")
+  log("SetRewards----------")
 	widgetTbl.rewards_panel.gameObject:SetActive(true)
 
 

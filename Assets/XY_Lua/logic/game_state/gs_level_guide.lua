@@ -37,7 +37,7 @@ end
  * @Description: 进入状态
  ]]
 function gs_level_guide:EnterState( ... )
-	--print("gs_level_guide:EnterState", LOG.gs)
+	--log("gs_level_guide:EnterState", LOG.gs)
 	self.active = true
 end
 
@@ -45,7 +45,7 @@ end
  * @Description: 离开状态
  ]]
 function gs_level_guide:ExitState( ... )
-	--print("gs_level_guide:ExitState", LOG.gs)
+	--log("gs_level_guide:ExitState", LOG.gs)
 	self.active = false
 end
 
@@ -74,6 +74,6 @@ end
  * @Description: 处理网络链接关闭
  ]]
 function gs_level_guide:HandleOnNetworkClose()
-	--print("gs_level_guide:HandleOnNetworkClose(), nothing to do", LOG.gs)
+	--log("gs_level_guide:HandleOnNetworkClose(), nothing to do", LOG.gs)
 	-- override, nothing to do
 end

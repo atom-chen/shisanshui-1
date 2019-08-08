@@ -36,11 +36,11 @@ end
  * @Description: 启动事件
  ]]
  function this.Awake()
- 	print("login_ui Awake：打钱呢")
+ 	log("login_ui Awake：打钱呢")
  	log("login_ui Awake：打钱呢")
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
-      print("login_ui temp.txt str-----" .. s);
+      log("login_ui temp.txt str-----" .. s);
       local t=ParseJsonStr(s)
       if t.uid then
       	login_sys.share_uid = t.uid
@@ -48,7 +48,7 @@ end
    	end
     -- local animations=child(this.transform,"tex_bg") 
     -- if animations~=nil then
-    --     print()
+    --     log()
     --     componentGet(animations.gameObject,"SkeletonAnimation"):ChangeQueue(2999)
     -- end
  end
@@ -171,11 +171,11 @@ function this.OnCheckStatusChange()
 	if checkStatue == true then
 		
 		login_sys.isAgreeContract = true;
-		print("------------------------togglechgeistrue"..tostring(login_sys.isAgreeContract))		
+		log("------------------------togglechgeistrue"..tostring(login_sys.isAgreeContract))		
 
 		else
 			login_sys.isAgreeContract = false;
-			print("------------------------togglechgeisFlase"..tostring(login_sys.isAgreeContract))
+			log("------------------------togglechgeisFlase"..tostring(login_sys.isAgreeContract))
 		end
      ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 
@@ -184,14 +184,14 @@ end
 function this.OnBtnYouKeClick()
 	--界面处理 （To do）
 	if login_sys.isClicked == true then
-		print("is clicked,hold on!")
+		log("is clicked,hold on!")
 		return
 	else
 		--login_sys.isClicked = true
 	end
 	login_sys.OnPlatLoginOK()
 	--测试用，直接登录
-	-- print("-------------------------------------OnBtnYouKeClick")
+	-- log("-------------------------------------OnBtnYouKeClick")
 	-- if tostring(Application.platform) ==  "WindowsEditor"   then
 	-- 	login_sys.OnPlatLoginOK()
 	-- elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
@@ -202,13 +202,13 @@ end
 
 function this.OnBtnQQClick()
 	if login_sys.isClicked == true then
-		print("is clicked,hold on!")
+		log("is clicked,hold on!")
 		return
 	else
 		login_sys.isClicked = true
 	end
 	--测试用，直接登录
-	print("-------------------------------------OnBtnQQClick")
+	log("-------------------------------------OnBtnQQClick")
  
 	login_sys.QQLogin() 
     
@@ -217,24 +217,24 @@ end
 
 function this.OnBtnWeiXinClick()
 	-- if login_sys.isClicked == true then
-	-- 	print("is clicked,hold on!")
+	-- 	log("is clicked,hold on!")
 	-- 	return
 	-- else
 	-- 	login_sys.isClicked = true
 	-- end
 	-- --测试用，直接登录
-	-- print("-------------------------------------OnBtnWeiXinClick")
+	-- log("-------------------------------------OnBtnWeiXinClick")
 	-- login_sys.WeiXinLogin()
  --    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
  --界面处理 （To do）
 	if login_sys.isClicked == true then
-		print("is clicked,hold on!")
+		log("is clicked,hold on!")
 		return
 	else
 		--login_sys.isClicked = true
 	end
 	--测试用，直接登录
-	print("-------------------------------------OnBtnYouKeClick")
+	log("-------------------------------------OnBtnYouKeClick")
 	if tostring(Application.platform) ==  "WindowsEditor"   then
 		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then

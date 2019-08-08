@@ -118,7 +118,7 @@ function comp_operatorcard.create()
 		mj.mjObj.transform:SetParent(this.operObj.transform, false)
 
 		if isChangeToBright then
-			print("AddShow-----------this.operData "..tostring(this.operData))
+			log("AddShow-----------this.operData "..tostring(this.operData))
 			if this.operData.operType == MahjongOperAllEnum.TripletLeft or this.operData.operType == MahjongOperAllEnum.TripletCenter then
 				mj.mjObj.transform:DOLocalMove(
 				this.itemList[#this.itemList].mjObj.transform.localPosition + Vector3(mahjongConst.MahjongOffset_x, 0, 0), 

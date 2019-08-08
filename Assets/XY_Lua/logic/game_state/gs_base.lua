@@ -44,7 +44,7 @@ end
  * @Description: 处理网络链接关闭
  ]]
 function gs_base:HandleOnNetworkClose()
-	--print("gs_base:HandleOnNetworkClose()", LOG.gs)
+	--log("gs_base:HandleOnNetworkClose()", LOG.gs)
 	network_mgr.ShowReconnectMsgBox()
 end
 

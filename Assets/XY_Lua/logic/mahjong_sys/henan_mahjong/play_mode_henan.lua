@@ -112,7 +112,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGameDeal(tbl)
-        print(GetTblData(tbl))
+        log(GetTblData(tbl))
 
         local dice_big = tbl["_para"]["dice"][1]
         local dice_small = tbl["_para"]["dice"][2]
@@ -123,11 +123,11 @@ function play_mode_henan.create(levelID)
             dice_small = temp
         end
 
-        print("Dice========="..dice_big.." "..dice_small)
+        log("Dice========="..dice_big.." "..dice_small)
 
         --compTable:ShowDoce(tbl["_para"]["dice"][1],tbl["_para"]["dice"][2],function ()
         compDice.Play(tbl["_para"]["dice"][1],tbl["_para"]["dice"][2],function ()
-            print("roomdata_center.zhuang_viewSeat========="..roomdata_center.zhuang_viewSeat)
+            log("roomdata_center.zhuang_viewSeat========="..roomdata_center.zhuang_viewSeat)
 
             local viewSeat = roomdata_center.zhuang_viewSeat + dice_big + dice_small -1
             viewSeat = viewSeat % 4
@@ -151,13 +151,13 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGameLaiZi( tbl )
-        print(GetTblData(tbl))
+        log(GetTblData(tbl))
 
         roomdata_center.hun = tbl["_para"]["laizi"][1]
 
         local cardValue = tbl._para.cards[1]
         local dun = tbl._para.sits[1]/2
-        print("OnGameLaiZi !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
+        log("OnGameLaiZi !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
         compTable:ShowLai( dun,cardValue,true,function()
             compPlayerMgr:GetPlayer(1):ShowLaiInHand()
             compPlayerMgr:AllSortHandCard()
@@ -188,14 +188,14 @@ function play_mode_henan.create(levelID)
 
     local function OnPlayCard( tbl )
         --compTable:StopTime()
-        print(GetTblData(tbl))
+        log(GetTblData(tbl))
 
         local src = tbl["_src"]
         local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
 
         local value = tbl["_para"]["cards"][1]
 
-        --print("!!!!!!!!!!!!!!!viewSeat"..tostring(viewSeat))
+        --log("!!!!!!!!!!!!!!!viewSeat"..tostring(viewSeat))
         compPlayerMgr:GetPlayer(viewSeat):OutCard(value, function (pos)
             compResMgr:SetOutCardEfObj(pos)
         end)
@@ -211,7 +211,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGiveCard( tbl )
-        print(GetTblData(tbl))
+        log(GetTblData(tbl))
 
         local src = tbl["_src"]
         local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
@@ -231,7 +231,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnTriplet( tbl )
-        --print(GetTblData(tbl))
+        --log(GetTblData(tbl))
         compTable:StopTime()
 
         local operPlayViewSeat = gvbl(tbl._src)
@@ -266,7 +266,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnQuadruplet( tbl )
-        --print(GetTblData(tbl))
+        --log(GetTblData(tbl))
         compTable:StopTime()
 
         local operPlayViewSeat = gvbl(tbl._src)
@@ -506,7 +506,7 @@ function play_mode_henan.create(levelID)
      * @Description: 组装所需要的组件
      ]]
     function ConstructComponents()
-        print("ConstructComponents---------------------------------------")
+        log("ConstructComponents---------------------------------------")
         -- 组装
         this:AddComponent(comp_clickevent.create())
         compResMgr = this:AddComponent(comp_resMgr.create())

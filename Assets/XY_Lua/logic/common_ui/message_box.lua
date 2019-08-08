@@ -37,7 +37,7 @@ end
 
 function message_box:Close()
 	if this.gameObject~=nil then
-        print("nil------------------")
+        log("nil------------------")
         GameObject.Destroy(this.gameObject)
         this.gameObject=nil
     end
@@ -83,7 +83,7 @@ function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,
         btn.gameObject:SetActive(true)
         if btnname[k]~=nil then
             local btn_sp=child(btn.transform,"Sprite");
-            print(btn_sp.name)
+            log(btn_sp.name)
             componentGet(btn_sp.gameObject,"UISprite").spriteName=btnname[k]
             componentGet(btn_sp.gameObject,"UISprite"):MakePixelPerfect()
             if btnname[k]=="quding" then

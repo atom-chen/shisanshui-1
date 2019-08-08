@@ -23,7 +23,7 @@ function this.addlistener()
     this.SetChatTextInfo()
     this.SetChatImgInfo()
     local bg =child(this.transform,"panel/bg/Sprite")
-    print(bg.name)
+    log(bg.name)
     if bg~=nil then
         addClickCallbackSelf(bg.gameObject,this.Hide,this)
     end
@@ -79,7 +79,7 @@ function this.Onbtn_chatTextClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print(chatTextTab[tIndex])
+	log(chatTextTab[tIndex])
 	--mahjong_play_sys.ChatReq(1,chatTextTab[tIndex],nil)
 end
 
@@ -87,7 +87,7 @@ function this.Onbtn_chatImgClick(self, obj)
 	local tItemName = obj.gameObject.name
 	tItemName = string.sub(tItemName,string.len("item")+1)
 	local tIndex = tonumber(tItemName)
-	print("Image name:"..chatImgTab[tIndex])
+	log("Image name:"..chatImgTab[tIndex])
 	--mahjong_play_sys.ChatReq(2,chatImgTab[tIndex],nil)
 end
 
