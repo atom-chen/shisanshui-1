@@ -43,6 +43,7 @@
   hall_data.register()
   hall_data.Init() 
   this.LoadWebPage()
+  join_room_ui.Show()
 end
 
 function this.checkInviteroom()
@@ -158,49 +159,49 @@ function this.ui_Top()
 --Panel_Middle
 function this.ui_Middle()
 
-   local btn_join = child(this.transform, "Panel_Middle/btn_join")--房间1
-   if btn_join~=nil then 
-     addClickCallbackSelf(btn_join.gameObject, this.joinroom, this)
-   end
+  --  local btn_join = child(this.transform, "Panel_Middle/btn_join")--房间1
+  --  if btn_join~=nil then 
+  --    addClickCallbackSelf(btn_join.gameObject, this.joinroom, this)
+  --  end
 
-   local btn_open = child(this.transform, "Panel_Middle/btn_open")--房间2
-   if btn_open~=nil then
-     addClickCallbackSelf(btn_open.gameObject, this.OpenRoomClick, this)
-   end
+  --  local btn_open = child(this.transform, "Panel_Middle/btn_open")--房间2
+  --  if btn_open~=nil then
+  --    addClickCallbackSelf(btn_open.gameObject, this.OpenRoomClick, this)
+  --  end
    
-   local animation1=child(btn_join.transform,"tex_bg") 
-   if animation1~=nil then 
-    componentGet(animation1.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
-  end
-  local animation2=child(btn_open.transform,"tex_bg") 
-  if animation2~=nil then 
-    componentGet(animation2.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
-  end
-  local animation4=child(btn_join.transform,"hudie_2") 
-  if animation4~=nil then 
-    local a=componentGet(animation4.gameObject,"SkeletonAnimation")
-    a:ChangeQueue(3001)
-    a.playComPleteCallBack=function()
-    a.AnimationName="" 
-            --log("````````````````0000000000")
-          end
-        end
+  --  local animation1=child(btn_join.transform,"tex_bg") 
+  --  if animation1~=nil then 
+  --   componentGet(animation1.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
+  -- end
+  -- local animation2=child(btn_open.transform,"tex_bg") 
+  -- if animation2~=nil then 
+  --   componentGet(animation2.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
+  -- end
+  -- local animation4=child(btn_join.transform,"hudie_2") 
+  -- if animation4~=nil then 
+  --   local a=componentGet(animation4.gameObject,"SkeletonAnimation")
+  --   a:ChangeQueue(3001)
+  --   a.playComPleteCallBack=function()
+  --   a.AnimationName="" 
+  --           --log("````````````````0000000000")
+  --         end
+  --       end
 
-        local animation3=child(btn_join.transform,"hudie_1") 
-        if animation3~=nil then 
-          local a=componentGet(animation3.gameObject,"SkeletonAnimation")
-          a:ChangeQueue(3003)
-          a.playComPleteCallBack=function()
-          a.AnimationName="" 
-            --log("````````````````0000000000")
-          end
-        end
+  --       local animation3=child(btn_join.transform,"hudie_1") 
+  --       if animation3~=nil then 
+  --         local a=componentGet(animation3.gameObject,"SkeletonAnimation")
+  --         a:ChangeQueue(3003)
+  --         a.playComPleteCallBack=function()
+  --         a.AnimationName="" 
+  --           --log("````````````````0000000000")
+  --         end
+  --       end
 
-        hall_data.animationtable ={animation3,animation4}
+  --       hall_data.animationtable ={animation3,animation4}
 
-        arrowTimer = Timer
-        arrowTimer = Timer.New(hall_data.staranimation, 1, -1)
-        arrowTimer:Start() 
+  --       arrowTimer = Timer
+  --       arrowTimer = Timer.New(hall_data.staranimation, 1, -1)
+  --       arrowTimer:Start() 
 
 
    this.toggle_record = child(this.transform, "Panel_Left/sp_left/toggle_record")--历史记录

@@ -236,7 +236,12 @@ function this.OnBtnWeiXinClick()
 	--测试用，直接登录
 	log("-------------------------------------OnBtnYouKeClick")
 	if tostring(Application.platform) ==  "WindowsEditor"   then
-		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
+		log(this.account.value)
+		if this.account.value == "" then
+			login_sys.OnPlatLoginOK(nil, nil, "1234")
+		else
+			login_sys.OnPlatLoginOK(nil, nil, this.account.value)
+		end
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
 		--login_sys.WeiXinLogin()
 		login_sys.OnPlatLoginOK(nil, nil, this.account.value)

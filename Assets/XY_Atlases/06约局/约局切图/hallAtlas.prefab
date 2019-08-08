@@ -54,8 +54,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 4e3960efb804f6645bb55a0904128636, type: 2}
   mSprites:
   - name: or
-    x: 0
-    y: 636
+    x: 553
+    y: 1495
     width: 762
     height: 30
     borderLeft: 0
@@ -66,9 +66,126 @@ MonoBehaviour:
     paddingRight: 21
     paddingTop: 12
     paddingBottom: 8
-  - name: "\u6211\u8981\u5165\u5C40-btn"
+  - name: "\u4EBA\u6570-icon"
+    x: 1969
+    y: 1929
+    width: 30
+    height: 26
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 3
+    paddingBottom: 3
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-icon"
+    x: 1376
+    y: 1549
+    width: 120
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 12
+    paddingBottom: 11
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-\u5934\u50CF"
+    x: 1824
+    y: 1767
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-\u5934\u90E8\u80CC\u666F"
+    x: 823
+    y: 1868
+    width: 1000
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u4FF1\u4E50\u90E8\u6210\u5458-\u5934\u50CF"
+    x: 1769
+    y: 1627
+    width: 140
+    height: 139
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 1
+    paddingBottom: 0
+  - name: "\u5171\u7528-\u5173\u95EDx"
+    x: 1969
+    y: 1956
+    width: 44
+    height: 43
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 7
+    paddingTop: 8
+    paddingBottom: 7
+  - name: "\u5171\u7528-\u5F39\u6846\u80CC\u666F"
     x: 0
-    y: 667
+    y: 1526
+    width: 822
+    height: 522
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5171\u7528-\u8FDB\u5165\u7BAD\u5934"
+    x: 2027
+    y: 2011
+    width: 20
+    height: 37
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 6
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 5
+  - name: "\u521B\u5EFA\u8005-\u6807\u5FD7"
+    x: 0
+    y: 1056
+    width: 147
+    height: 60
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 4
+  - name: "\u6211\u8981\u5165\u5C40-btn"
+    x: 823
+    y: 1530
     width: 552
     height: 120
     borderLeft: 0
@@ -81,7 +198,20 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u6211\u8981\u7EA6\u5C40-btn"
     x: 0
-    y: 788
+    y: 1405
+    width: 552
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u6211\u8981\u7EC4\u5C40-btn"
+    x: 0
+    y: 1284
     width: 552
     height: 120
     borderLeft: 0
@@ -93,8 +223,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u63D0\u793A\u6846-bg"
-    x: 0
-    y: 909
+    x: 823
+    y: 1651
     width: 804
     height: 115
     borderLeft: 0
@@ -105,11 +235,89 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: "\u8F93\u5165\u6846-\u623F\u53F7"
+  - name: "\u6DFB\u52A0-\u4FF1\u4E50\u90E8\u6210\u5458"
+    x: 1628
+    y: 1627
+    width: 140
+    height: 139
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 1
+  - name: "\u73A9\u6CD5-\u6807\u9898"
     x: 0
-    y: 481
+    y: 1117
+    width: 401
+    height: 45
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 28
+    paddingTop: 4
+    paddingBottom: 3
+  - name: "\u80CC\u666F-style1"
+    x: 823
+    y: 1767
+    width: 1000
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u81EA\u9009\u89C4\u5219-btn"
+    x: 0
+    y: 1163
+    width: 552
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u8F93\u5165\u6846-\u623F\u53F7"
+    x: 1824
+    y: 1894
     width: 144
     height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u90AE\u4EF6-\u56FE\u6807"
+    x: 1969
+    y: 2000
+    width: 57
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 3
+    paddingTop: 2
+    paddingBottom: 2
+  - name: "\u90AE\u4EF6-\u65B0\u6D88\u606F-\u7EA2\u70B9"
+    x: 2014
+    y: 1971
+    width: 28
+    height: 28
     borderLeft: 0
     borderRight: 0
     borderTop: 0
