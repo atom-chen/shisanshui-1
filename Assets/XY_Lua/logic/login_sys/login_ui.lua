@@ -36,7 +36,8 @@ end
  * @Description: 启动事件
  ]]
  function this.Awake()
- 	print("login_ui Awake")
+ 	print("login_ui Awake：打钱呢")
+ 	log("login_ui Awake：打钱呢")
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       print("login_ui temp.txt str-----" .. s);
@@ -131,6 +132,8 @@ function this.RegisterEvents()
 		addClickCallbackSelf(btnChessLicense.gameObject,this.OnBtnChessLicense,this)
 	end
 	
+	this.account = subComponentGet(this.transform, "loingPanel/account", typeof(UIInput))
+	this.password = subComponentGet(this.transform, "loingPanel/password", typeof(UIInput))
     --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
 end
@@ -149,7 +152,10 @@ end
 function this.OnBtnGameLicense()
     waiting_ui.Show()
 	SingleWeb.Instance:Init("http://b.feiyubk.com/gamewap/qqhenan/view/xukexieyi.html")
-    SingleWeb.Instance.Complete=function ()waiting_ui.Hide()active.Show() end
+    SingleWeb.Instance.Complete=function ()
+	    waiting_ui.Hide()
+	    active.Show() 
+	end
 end
 
 function this.OnBtnChessLicense()
@@ -230,9 +236,10 @@ function this.OnBtnWeiXinClick()
 	--测试用，直接登录
 	print("-------------------------------------OnBtnYouKeClick")
 	if tostring(Application.platform) ==  "WindowsEditor"   then
-		login_sys.OnPlatLoginOK(nil, nil, "00000000000000000000000000000000000000000")
+		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-		login_sys.WeiXinLogin()
+		--login_sys.WeiXinLogin()
+		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	end
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end

@@ -119,6 +119,7 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 	print("this.share_uid=="..this.share_uid)
 	print(account)
     http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
+    --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
 		if code then
 			

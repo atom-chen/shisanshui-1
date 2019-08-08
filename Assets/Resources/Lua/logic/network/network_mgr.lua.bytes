@@ -19,6 +19,7 @@ end
 
 function this.sendPkgNoWaitForRsp( cmdID, pkgBuffer )
 -- LogW("sendPkgNoWaitForRsp------",cmdID,pkgBuffer )
+    print("发送游戏服消息ID："..cmdID.." msg:"..GetTblData(pkgBuffer))
     SocketManager:onGameSendData(pkgBuffer)
 end
 

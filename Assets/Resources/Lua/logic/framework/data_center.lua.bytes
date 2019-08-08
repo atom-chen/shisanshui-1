@@ -49,7 +49,7 @@ local HTTPNETTYPE =
 local srvUrlType = NetWorkManage.Instance.ServerUrlType
 
 if srvUrlType == HTTPNETTYPE.INTERNET_TEST then 		--外网测试
-	this.url = "ws://fjmj.dstars.cc:8001?uid=%s&token=%s"
+	this.url = "ws://huanyingwl.com:8001?uid=%s&token=%s"
 	this.shareUrl = "http://fjmj.dstars.cc"
 elseif srvUrlType == HTTPNETTYPE.LOCAL_FZMJ_TEST then 	--福州麻将内网
 	this.url = "ws://192.168.2.202:8001?uid=%s&token=%s"
@@ -70,7 +70,7 @@ end
 
 --php 服务器地址控制
 if srvUrlType == HTTPNETTYPE.INTERNET_TEST then
-	NetWorkManage.Instance.BaseUrl = "http://fjmj.dstars.cc/dstars/api/flashapi.php"
+	NetWorkManage.Instance.BaseUrl = "http://huanyingwl.com/dstars_4/api/flashapi.php"
 elseif srvUrlType == HTTPNETTYPE.LOCAL_FZMJ_TEST then --福州麻将内网
 	NetWorkManage.Instance.BaseUrl = "http://192.168.43.148/dstars_4/api/flashapi.php"
 elseif srvUrlType == HTTPNETTYPE.LOCAL_SSS_TEST then  --十三水内网

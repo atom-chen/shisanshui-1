@@ -89,7 +89,8 @@ public static class LuaBinder
 		Singleton_YX_MoblieAPIWrap.Register(L);
 		TrieNodeWrap.Register(L);
 		L.BeginModule("UnityEngine");
-		UnityEngine_ComponentWrap.Register(L);
+        UnityEngine_DebugWrap.Register(L);
+        UnityEngine_ComponentWrap.Register(L);
 		UnityEngine_BehaviourWrap.Register(L);
 		UnityEngine_MonoBehaviourWrap.Register(L);
 		UnityEngine_GameObjectWrap.Register(L);

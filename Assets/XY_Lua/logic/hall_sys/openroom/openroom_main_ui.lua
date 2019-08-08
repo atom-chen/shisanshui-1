@@ -95,8 +95,8 @@ function this.OnBtnCreateClick(obj)
 		print("people num : "..gameDataInfo.people_num)
 		
 		print("addghost : "..gameDataInfo.add_ghost)
-		config_rule.gid = 22
-		room_data.GetSssRoomDataInfo().gid = 22
+		config_rule.gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
+		room_data.GetSssRoomDataInfo().gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.RequestSssCreateRoom(config_rule)
     end
 

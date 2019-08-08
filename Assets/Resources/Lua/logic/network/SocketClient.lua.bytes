@@ -104,7 +104,7 @@ end
 
 
 function SocketClient:connect()
-	DEBUGLOG(self._chlName, ": " , "连接服务器..", self._addr)
+	print(self._chlName, ": " , "连接服务器..", self._addr)
 
 	if self._wsocket then
 		self:clearSocket(false)

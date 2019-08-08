@@ -45,11 +45,11 @@ end
       	login_sys.share_uid = t.uid
       end
    	end
-    local animations=child(this.transform,"tex_bg") 
-    if animations~=nil then
-        print()
-        componentGet(animations.gameObject,"SkeletonAnimation"):ChangeQueue(2999)
-    end
+    -- local animations=child(this.transform,"tex_bg") 
+    -- if animations~=nil then
+    --     print()
+    --     componentGet(animations.gameObject,"SkeletonAnimation"):ChangeQueue(2999)
+    -- end
  end
 
 function this.Start()
@@ -95,44 +95,45 @@ end--]]
  * @Description: 注册UI事件
  ]]
 function this.RegisterEvents()
-	local btnYouKe = child(this.transform, "btn_grid/btn_youke_login")
-	btnYouKe.gameObject:SetActive(LuaHelper.openGuestMode)
+	local btnYouKe = child(this.transform, "loingPanel/btn_grid/btn_youke_login")
+	--btnYouKe.gameObject:SetActive(LuaHelper.openGuestMode)
 	if btnYouKe ~= nil then
 		addClickCallbackSelf(btnYouKe.gameObject, this.OnBtnYouKeClick, this)
 	end
 
-	local btnQQ = child(this.transform, "btn_grid/btn_qq_login")
+	local btnQQ = child(this.transform, "loingPanel/btn_grid/btn_qq_login")
 	if btnQQ ~= nil then
 		addClickCallbackSelf(btnQQ.gameObject, this.OnBtnQQClick, this)
 	end
 
-	local btnWeiXin = child(this.transform, "btn_grid/btn_weixin_login")
+	local btnWeiXin = child(this.transform, "loingPanel/btn_grid/btn_weixin_login")
 	if btnWeiXin ~= nil then
 		addClickCallbackSelf(btnWeiXin.gameObject, this.OnBtnWeiXinClick, this)
 	end
     
-    initToggleObj(this.transform,"checkBox",this.OnCheckStatusChange,this)    
+    initToggleObj(this.transform,"loingPanel/checkBox",this.OnCheckStatusChange,this)    
 	
-	local btnService = child(this.transform,"text/service")
+	local btnService = child(this.transform,"loingPanel/text/service")
 	if btnService ~= nil then 
 		addClickCallbackSelf(btnService.gameObject,this.OnBtnPrivacyOnClick,this)
 	end
-	local btnPrivacy = child(this.transform,"text/Privacy")
+	local btnPrivacy = child(this.transform,"loingPanel/text/Privacy")
 	if btnPrivacy ~= nil then 
 		addClickCallbackSelf(btnPrivacy.gameObject,this.OnBtnPrivacyOnClick,this)
 	end
-	local btnGameLicense = child(this.transform,"text/GameLicense")
+	local btnGameLicense = child(this.transform,"loingPanel/text/GameLicense")
 	if btnGameLicense ~= nil then
 		addClickCallbackSelf(btnGameLicense.gameObject,this.OnBtnGameLicense,this)
 	end
 	
-	local btnChessLicense = child(this.transform,"text/ChessLicense") 
-		if btnChessLicense ~= nil then
-			
+	local btnChessLicense = child(this.transform,"loingPanel/text/ChessLicense") 
+	if btnChessLicense ~= nil then
 		addClickCallbackSelf(btnChessLicense.gameObject,this.OnBtnChessLicense,this)
-		end
+	end
 	
-    subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
+	this.account = subComponentGet(this.transform, "loingPanel/account", typeof(UIInput))
+	this.password = subComponentGet(this.transform, "loingPanel/password", typeof(UIInput))
+    --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
 end
 
@@ -150,7 +151,10 @@ end
 function this.OnBtnGameLicense()
     waiting_ui.Show()
 	SingleWeb.Instance:Init("http://b.feiyubk.com/gamewap/qqhenan/view/xukexieyi.html")
-    SingleWeb.Instance.Complete=function ()waiting_ui.Hide()active.Show() end
+    SingleWeb.Instance.Complete=function ()
+	    waiting_ui.Hide()
+	    active.Show() 
+	end
 end
 
 function this.OnBtnChessLicense()
@@ -231,9 +235,10 @@ function this.OnBtnWeiXinClick()
 	--测试用，直接登录
 	print("-------------------------------------OnBtnYouKeClick")
 	if tostring(Application.platform) ==  "WindowsEditor"   then
-		login_sys.OnPlatLoginOK(nil, nil, "00000000000000000000000000000000000000000")
+		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-		login_sys.WeiXinLogin()
+		--login_sys.WeiXinLogin()
+		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	end
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end
