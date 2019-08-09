@@ -1,9 +1,4 @@
---[[--
- * @Description: 玩家信息UI组件
- * @Author:      ShushingWong
- * @FileName:    mahjong_player_ui.lua
- * @DateTime:    2017-06-19 16:21:14
- ]]
+--require "logic/shisangshui_sys/ui_shisangshui/PlayerCard"
 
 shisanshui_player_ui = {}
 
@@ -18,18 +13,6 @@ function shisanshui_player_ui.New( transform )
 	this.viewSeat = -1
 	this.all_score = 0
  	local function FindChild()
-		-- --吓跑
-		-- this.pao = child(this.transform, "bg/pao")
-		-- if this.pao~=nil then
-		--    this.pao.gobj = this.pao.gameObject
-	 --       this.pao.gobj:SetActive(false)
-	 --    end
-	 --    this.paoLabel = child(this.transform,"bg/pao/Label")
-	 --    --VIP
-		-- this.vip = child(this.transform, "bg/head/vip")
-		-- if this.vip~=nil then
-	 --       this.vip.gameObject:SetActive(false)
-	 --    end
 	 	this.roomCardLabel = subComponentGet(this.transform, "bg/roomCard/roomCardNum", typeof(UILabel))
 	 	this.SetRoomCardNum(0)
 
@@ -116,6 +99,12 @@ function shisanshui_player_ui.New( transform )
 	    	this.chat_text.gameObject:SetActive(false)
 	    end
 	    this.chat_text_label = child(this.chat_text,"msg")
+
+		-- this.CardList = {}
+	 --    for i = 0, 13 do
+		-- 	local playerComponent = PlayerCard.New(playerTrans)
+		-- 	table.insert(this.CardList, playerComponent)
+		-- end
 	end
 
     --设置金币

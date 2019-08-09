@@ -1500,6 +1500,7 @@ GameObject:
   - 114: {fileID: 114000010596658386}
   - 114: {fileID: 114000013870171420}
   - 54: {fileID: 54000011580643444}
+  - 114: {fileID: 114000012536646844}
   m_Layer: 5
   m_Name: hall_ui
   m_TagString: Untagged
@@ -6488,6 +6489,18 @@ MonoBehaviour:
   hover: {x: 1.1, y: 1.1, z: 1.1}
   pressed: {x: 1.05, y: 1.05, z: 1.05}
   duration: 0.2
+--- !u!114 &114000012536646844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013807954626}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f223b7c3552034a9de0278e309046b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orient: 1
 --- !u!114 &114000012537622724
 MonoBehaviour:
   m_ObjectHideFlags: 1

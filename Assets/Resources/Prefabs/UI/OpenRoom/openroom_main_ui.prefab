@@ -2317,7 +2317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012870701244
 GameObject:
   m_ObjectHideFlags: 1
@@ -19836,7 +19836,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011761407900, guid: 46bf79fbf0e5faf41a3665d60da628f4, type: 2}
+  mAtlas: {fileID: 114000011358529478, guid: de28ea4bdab847f42b18697777bc5356, type: 2}
   mSpriteName: chuangjian-anjian
   mFillCenter: 1
 --- !u!114 &114000014193416392

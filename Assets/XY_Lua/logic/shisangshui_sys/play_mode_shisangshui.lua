@@ -46,29 +46,9 @@ function play_mode_shisangshui.create(levelID)
 	this.base_init = this.Initialize
 	local function OnPlayerEnter(tbl)
 		log("有玩家进来了"..tostring(tbl))
-	
-	--	this.InitTable(function()end)
-	
         local logicSeat = tbl["_src"]
         local viewSeat = gvbl(logicSeat)
         if viewSeat == 1 then
-        --[[    local logicSeat_number = room_usersdata_center.GetLogicSeatByStr(logicSeat)            
-            local mjDirObj = compTable:GetMJDirObj()
-            if mjDirObj ~= nil then
-                local dirTran = child(mjDirObj.transform, "dark_dir/direction_0"..tostring(logicSeat_number))
-                local dirLightTran = child(mjDirObj.transform, "light_dir/direction_"..tostring(logicSeat_number))
-                if dirTran ~= nil then
-                    dirTran.gameObject:SetActive(true)
-                end
-                if dirLightTran ~= nil then
-                    dirLightTran.gameObject:SetActive(true)
-                    for i=1,4 do
-                        local t = child(dirLightTran, "direction_0"..tostring(i))
-                        table.insert(lightDirTbl,t)
-                    end
-                end
-            end
-			]]
         end  
 		  Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_ENTER_GAME) 
     end
@@ -87,7 +67,6 @@ function play_mode_shisangshui.create(levelID)
 	
 	local function OnGameDeal(tbl)
 		log("发牌")
-		
 		this.InitTable(function()
 			player_component.CardList = tbl["_para"]["stCards"]
 			recommendCards = tbl["_para"]["recommendCards"]
@@ -103,10 +82,8 @@ function play_mode_shisangshui.create(levelID)
 				log("显示特殊牌型")
 				prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
 			end
-			
 			Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
 		end)
-		
 	end
 	
 	local function OnAskChoose(tbl)
@@ -252,7 +229,6 @@ function play_mode_shisangshui.create(levelID)
     end
 
 	function this.InitTable(callback)
-	
 		tableComponent.InitCard(callback)
 	end
 
@@ -266,7 +242,6 @@ function play_mode_shisangshui.create(levelID)
 		local sceneRoot = shisanshui_table_config.tableEnum[peopleNum]
 		log("SceneRoot:"..tostring(sceneRoot).."peopleNum"..tostring(peopleNum))
 		resCardTable = newNormalObjSync("Prefabs/Scene/shisangshui/"..tostring(sceneRoot))
-   	--  	resCardTable = newNormalObjSync("Prefabs/Scene/shisangshui/SceneRoot5")
    		newobject(resCardTable)
 	end
 
@@ -276,23 +251,10 @@ function play_mode_shisangshui.create(levelID)
      ]]
     function ConstructComponents()
         log("ConstructComponents---------------------------------------")
-        -- 组装
-     --   this:AddComponent(comp_clickevent.create())
-     --   compResMgr = this:AddComponent(comp_resMgr.create())
-     --  compMJItemMgr = this:AddComponent(comp_mjItemMgr.create())
-     --   compTable = this:AddComponent(comp_table.create())
-     --   compPlayerMgr = this:AddComponent(comp_playerMgr.create())
      	this.LoadCardTable()
      	tableComponent = this:AddComponent(table_component.create())
-    -- 	resMgrComponet = this:AddComponent(resMgr_component.create())
-    -- 	resMgrComponet.LoadCardMesh()
 		tableComponent.InitPlayerTransForm()
-		log("++++++++++++++++++Create Component")
-
-	--	this.InitTable(function()
-	--		tableComponent.ReSetAll()
-	--		end)
-        
+		log("++++++++++++++++++Create Component")        
     end
 
     function this:PreloadObjects()

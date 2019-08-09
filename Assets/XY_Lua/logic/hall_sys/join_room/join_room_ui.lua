@@ -50,12 +50,13 @@ function this.addlistener()
         EventDelegate.Add(rnoInput.onChange, EventDelegate.Callback(function() 
             local len = string.len(rnoInput.value)
             if len > 6 then
-                message_box.ShowGoldBox("请输入6位数字的房间号", nil, 2, {function ()
-                            message_box:Close()
-                        end, function ()
-                            message_box:Close()
-                        end}, {"fonts_02", "fonts_01"}
-                        )
+                fast_tip.Show("请输入6位数字的房间号")
+                -- message_box.ShowGoldBox("请输入6位数字的房间号", nil, 2, {function ()
+                --             message_box:Close()
+                --         end, function ()
+                --             message_box:Close()
+                --         end}, {"fonts_02", "fonts_01"}
+                --         )
                 rnoInput.value = ""
                 return
             end
@@ -65,12 +66,13 @@ function this.addlistener()
                 end
                 this.setnumberInput(rnoInput.value, len)
             else
-                message_box.ShowGoldBox("请输入6位数字的房间号", nil, 2, {function ()
-                            message_box:Close()
-                        end, function ()
-                            message_box:Close()
-                        end}, {"fonts_02", "fonts_01"}
-                        )
+                fast_tip.Show("请输入6位数字的房间号")
+                -- message_box.ShowGoldBox("请输入6位数字的房间号", nil, 2, {function ()
+                --             message_box:Close()
+                --         end, function ()
+                --             message_box:Close()
+                --         end}, {"fonts_02", "fonts_01"}
+                --         )
             end
             --callback(self) 
         end))

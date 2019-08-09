@@ -128,25 +128,6 @@ end
 function this.OnBtn_SendVoiceMessageOnClick()
 end
 
-local operNameTable = {
-	[1] = "hu",
-	[2] = "ting",
-	[3] = "gang",
-	[4] = "peng",
-	[5] = "chi",
-	[6] = "guo",
-}
-
-local operEventTable = {
-	[1] = Onbtn_huClick,
-	[2] = Onbtn_tingClick,
-	[3] = Onbtn_gangClick,
-	[4] = Onbtn_pengClick,
-	[5] = Onbtn_chiClick,
-	[6] = Onbtn_guoClick,
-}
-
-
 local widgetTbl = {}
 local compTbl = {}
 
@@ -927,4 +908,11 @@ function this.SetBeiShu(viewSeat, beishu)
 	if this.playerList[viewSeat] ~= nil then
 		this.playerList[viewSeat].SetBeiShu(beishu)
 	end 
+end
+
+--发牌
+function this.DealCard(data)
+	for i=1,6 do
+    	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/Cards")
+    end
 end
