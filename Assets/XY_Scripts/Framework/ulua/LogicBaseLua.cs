@@ -47,10 +47,16 @@ public class LogicBaseLua : MonoBehaviour
     private LuaFunction m_onCollisionStayFunc;
     private LuaFunction m_onCollisionExitFunc;
 
+    private LuaFunction m_onFingerHoverFunc;//手势识别，划过手势识别
+    private LuaFunction m_onFingerSwipeFunc;
+    private LuaFunction m_onFingerUpFunc;
+    private LuaFunction m_onFingerDownFunc;
+    private LuaFunction m_onFingerTapFunc;
+
     //private LuaFunction m_onDestroyFunc;
     //private LuaFunction m_onEnableFunc;
     //private LuaFunction m_onDisableFunc;
-        
+
     private string m_luaClassName = string.Empty;
 
     // variables for auto handle depth
@@ -96,7 +102,7 @@ public class LogicBaseLua : MonoBehaviour
 
     // 初始化
     protected virtual void InitDepth()
-    {
+    { 
         if (!hasLogicBaseLuaParent)
         {
             myTrans = transform;
@@ -162,6 +168,11 @@ public class LogicBaseLua : MonoBehaviour
         m_onCollisionEnterFunc = luaState.GetFunction(m_luaClassName + ".OnCollisionEnter", false);
         m_onCollisionStayFunc = luaState.GetFunction(m_luaClassName + ".OnCollisionStay", false);
         m_onCollisionExitFunc = luaState.GetFunction(m_luaClassName + ".OnCollisionExit", false);
+        m_onFingerHoverFunc = luaState.GetFunction(m_luaClassName + ".OnFingerHover", false);
+        m_onFingerSwipeFunc = luaState.GetFunction(m_luaClassName + ".OnSwipe", false);
+        m_onFingerUpFunc = luaState.GetFunction(m_luaClassName + ".OnFingerUp", false);
+        m_onFingerDownFunc = luaState.GetFunction(m_luaClassName + ".OnFingerDown", false);
+        m_onFingerTapFunc = luaState.GetFunction(m_luaClassName + ".OnTap", false);
     }
     private void UninitSingleLuaFuncHandler(LuaFunction luaFunc)
     {
@@ -180,13 +191,16 @@ public class LogicBaseLua : MonoBehaviour
         UninitSingleLuaFuncHandler(m_onCollisionEnterFunc);
         UninitSingleLuaFuncHandler(m_onCollisionStayFunc);
         UninitSingleLuaFuncHandler(m_onCollisionExitFunc);
+        UninitSingleLuaFuncHandler(m_onFingerHoverFunc);
     }
 
     void CallLuaFunction(string name)
     {
+        if (luaState == null)
+            return;
         LuaFunction func = luaState.GetFunction(name, false);
 
-        if (func != null)
+        if (func != null) 
         {
             func.BeginPCall();
             func.Push(self);
@@ -292,7 +306,7 @@ public class LogicBaseLua : MonoBehaviour
         {
             AddUpdate();
         }
-        //CallLuaFunction(m_luaClassName + ".OnEnable");
+        CallLuaFunction(m_luaClassName + ".OnEnable");
     }
 
     protected void OnDisable()
@@ -303,6 +317,10 @@ public class LogicBaseLua : MonoBehaviour
 
     void AddUpdate()
     {
+        if(LuaClient.Instance == null)
+        {
+            return;
+        }
         LuaLooper loop = LuaClient.Instance.GetLooper();
 
         if (update != null)
@@ -417,6 +435,81 @@ public class LogicBaseLua : MonoBehaviour
             m_onCollisionExitFunc.EndPCall();
         }
     }
+
+    //增加手势识别
+    void OnFingerHover(FingerHoverEvent e)
+    {
+       
+       
+        if(m_onFingerHoverFunc != null)
+        {
+            m_onFingerHoverFunc.BeginPCall();
+            m_onFingerHoverFunc.Push(self);
+            m_onFingerHoverFunc.Push(e);
+            m_onFingerHoverFunc.PCall();
+            m_onFingerHoverFunc.EndPCall();
+
+
+        }
+    }
+
+    void OnSwipe(SwipeGesture gesture)
+    {
+        string str = "方向:" + gesture.Direction + " 速度:" + gesture.Velocity + " 移动距离:" + gesture.Move.magnitude + "";
+        string direction = gesture.Direction.ToString();
+        GameObject obj = gesture.Selection;
+       
+        if(m_onFingerSwipeFunc != null)
+        {
+            m_onFingerSwipeFunc.BeginPCall();
+            m_onFingerSwipeFunc.Push(self);
+            m_onFingerSwipeFunc.Push(direction);
+            m_onFingerSwipeFunc.Push(obj);
+            m_onFingerSwipeFunc.PCall();
+            m_onFingerSwipeFunc.EndPCall();
+        }
+    }
+
+    void OnFingerUp(FingerUpEvent fingerUp)
+    {
+      
+        if (m_onFingerUpFunc != null)
+        {
+            m_onFingerUpFunc.BeginPCall();
+            m_onFingerUpFunc.Push(self);
+            m_onFingerUpFunc.Push(fingerUp);
+            m_onFingerUpFunc.PCall();
+            m_onFingerUpFunc.EndPCall();
+        }
+    }
+
+    void OnFingerDown(FingerDownEvent e)
+    {
+       
+        if (m_onFingerDownFunc != null)
+        {
+            m_onFingerDownFunc.BeginPCall();
+            m_onFingerDownFunc.Push(self);
+            m_onFingerDownFunc.Push(e);
+            m_onFingerDownFunc.PCall();
+            m_onFingerDownFunc.EndPCall();
+        }
+    }
+
+    void OnTap(TapGesture gesture)
+    {
+      
+        if(m_onFingerTapFunc != null)
+        {
+            m_onFingerTapFunc.BeginPCall();
+            m_onFingerTapFunc.Push(self);
+            m_onFingerTapFunc.Push(gesture);
+            m_onFingerTapFunc.PCall();
+            m_onFingerTapFunc.EndPCall();
+        }
+    }
+
+
     protected void SafeRelease(ref LuaFunction func)
     {
         if (func != null)
@@ -424,6 +517,7 @@ public class LogicBaseLua : MonoBehaviour
             func.Dispose();
             func = null;
         }
+
     }
 
     protected void SafeRelease(ref LuaTable table)
@@ -552,6 +646,8 @@ public class LogicBaseLua : MonoBehaviour
         noDepthList.Clear();
     }
 
+    UIEffect[] uieffArray = null;
+    MeshRenderer[] mrArray = null;
     public void FastHide()
     {
         isFastHide = true;
@@ -566,10 +662,16 @@ public class LogicBaseLua : MonoBehaviour
             }
         }
 
-        MeshRenderer[] mrArray = this.transform.GetComponentsInChildren<MeshRenderer>();
+        mrArray = this.transform.GetComponentsInChildren<MeshRenderer>();
         for(int i = 0; i<mrArray.Length; i++)
         {
             mrArray[i].enabled = false;
+        }
+
+        uieffArray = this.transform.GetComponentsInChildren<UIEffect>();
+        for (int i = 0; i < uieffArray.Length; i++)
+        {
+            uieffArray[i].gameObject.SetActive(false);
         }
     }
 
@@ -587,10 +689,25 @@ public class LogicBaseLua : MonoBehaviour
             }
         }
 
-        MeshRenderer[] mrArray = this.transform.GetComponentsInChildren<MeshRenderer>();
-        for (int i = 0; i < mrArray.Length; i++)
+        //MeshRenderer[] mrArray = this.transform.GetComponentsInChildren<MeshRenderer>();
+        if(mrArray != null)
         {
-            mrArray[i].enabled = true;
+            for (int i = 0; i < mrArray.Length; i++)
+            {
+                mrArray[i].enabled = true;
+            }
+        }
+
+        //UIEffect[] uieffArray = this.transform.GetComponentsInChildren<UIEffect>();
+        if (uieffArray != null)
+        {
+            for (int i = 0; i < uieffArray.Length; i++)
+            {
+                uieffArray[i].gameObject.SetActive(true);
+            }
         }
     }
+
+
+
 }
