@@ -32,10 +32,10 @@ io.output():setvbuf('no')
 
 function __G__TRACKBACK__(errorMessage)
 
-    print("----------------------------------------")
-    print("LUA ERROR: " .. tostring(errorMessage) .. "\n")
-    print(debug.printback("", 2))
-    print("----------------------------------------")
+    log("----------------------------------------")
+    log("LUA ERROR: " .. tostring(errorMessage) .. "\n")
+    log(debug.printback("", 2))
+    log("----------------------------------------")
 
 
 end
@@ -71,7 +71,7 @@ function echo(...)
         arr[#arr + 1] = tostring(a)
     end
     --LuaLog(table.concat(arr, "\t"))
-    print(table.concat(arr, "\t"))
+    log(table.concat(arr, "\t"))
 
    -- arr[#arr + 1] = tostring("\n")
     --echoToLogFile(table.concat(arr, "\t"))

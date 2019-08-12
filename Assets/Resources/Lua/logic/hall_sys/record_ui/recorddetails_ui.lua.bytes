@@ -20,7 +20,7 @@ function this.Show(data)
        this.data=data.data 
        this.InitPlayData()
        this.InitPointData()
-       print("----------------init")
+       log("----------------init")
     else
         this.data=nil
     end 
@@ -68,7 +68,7 @@ end
 
 function this.shareq(obj1,obj2)
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print("share") 
+    log("share") 
     YX_MoblieAPI.Instance:GetCenterPicture("screenshot.png")
     YX_MoblieAPI.Instance.onfinishtx=function(tx) 
         local shareType = 1--0微信好友，1朋友圈，2微信收藏
@@ -85,7 +85,7 @@ end
 
 function this.sharef(obj1,obj2)
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print("share")
+    log("share")
      
     YX_MoblieAPI.Instance:GetCenterPicture("screenshot.png")
     YX_MoblieAPI.Instance.onfinishtx=function(tx) 

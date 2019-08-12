@@ -95,7 +95,7 @@ local fzmjroomDataInfo =
 
 
 function this.InitData()
-	print("room_data.InitData-------------------------------------2")
+	log("room_data.InitData-------------------------------------2")
 	--读取十三水配置数据
 	this.ReadSssConfData()
 
@@ -108,11 +108,11 @@ end
  ]]
 function this.ReadSssConfData()
 	local sss_path = Application.persistentDataPath.."/games/gamerule/PuXian_ShiSangShui_Rule.json"
-	print(sss_path)
-	--print("读取十三水配置数据:" + sss_path)
+	log(sss_path)
+	--log("读取十三水配置数据:" + sss_path)
 	--local str = FileReader.ReadFile(global_define.sss_path)
 	local str = FileReader.ReadFile(sss_path)
-	print(str)
+	log(str)
  	local roomConfData = nil
  	if nil ~= str and "" ~= str then
 		roomConfData = ParseJsonStr(str)
@@ -143,7 +143,7 @@ end
  ]]
 function this.ReadFzmjConfData()
  	local str = FileReader.ReadFile(global_define.fzmj_path)
- 	--print("str========================="..tostring(str))
+ 	--log("str========================="..tostring(str))
  	local roomConfData = nil
  	if nil ~= str and "" ~= str then
 		roomConfData = ParseJsonStr(str)
@@ -198,12 +198,12 @@ function this.RequestSssCreateRoom(data)
 end
 
 function this.OnGetSssCreateRoomData(code, m, str)	
-	print("createroom from php: "..str)
+	log("createroom from php: "..str)
 	local s=string.gsub(str, "\\/", "/")
-	print(s)
+	log(s)
 	local t=ParseJsonStr(s)
 	
-	print("dataTbl.data------------------------------"..str)
+	log("dataTbl.data------------------------------"..str)
 
 	card_data_manage.roomMasterUid = room_data.GetUid()   ------创建房间获取房主uid
 	if t["data"]["rno"] ~= nil then
@@ -213,17 +213,17 @@ end
 
 --在open_room_data根据房号查找房间后调用 PHP返回的数据，然后进入C++服务器请求
 function this.OnGetJoinRoomData(data)
-	print("OnGetJoinRoomData===="..tostring(data))
+	log("OnGetJoinRoomData===="..tostring(data))
 	if data == nil then
 		return 
 	end
 
 	if data["ret"] == 100 then
-		print( "房间号不存在，请重新输入")
+		log( "房间号不存在，请重新输入")
 		this.ResetLabeltext()
 		this.ResetCurIndex()
 	elseif data["ret"] == 101 then
-		print( "房间已开局，请重新输入")
+		log( "房间已开局，请重新输入")
 	else
 		shisanshui_request_interface.EnterGameReq(data)
 	end
@@ -240,7 +240,7 @@ end
  * @Description: 福建麻将创建房间请求  
  ]]
 function this.RequestFzMJCreateRoom(data)
-	print("-------RequestOpenRoom------------- "..fzmjroomDataInfo.gid)
+	log("-------RequestOpenRoom------------- "..fzmjroomDataInfo.gid)
 	data["gid"] =fzmjroomDataInfo.gid
 
 	http_request_interface.createRoom(data, this.OnGetFzmjCreateRoomData)

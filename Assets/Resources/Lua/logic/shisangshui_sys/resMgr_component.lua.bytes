@@ -14,7 +14,7 @@ end
 function this.GetCardMesh(index)
 	local mesh = this.cardMeshs[index+1]
 	if mesh == nil then
-		print("GetCardMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
+		log("GetCardMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
 	end
 	return mesh
 end
@@ -51,7 +51,7 @@ function resMgr_component.create()
 	function this.GetCardMesh(index)
 		local mesh = this.cardMeshs[index+1]
 		if mesh == nil then
-			print("GetCardMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
+			log("GetCardMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
 		end
 		return mesh
 	end		
@@ -71,7 +71,7 @@ function resMgr_component.create()
     end
 
 
-	print("----------------------LoadCardMesh")
+	log("----------------------LoadCardMesh")
  	--LoadCardMesh()
 	return this
 	

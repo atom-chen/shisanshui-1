@@ -44,7 +44,7 @@ height£º¸ß
 PlayComPletecallback£º²¥·ÅÍê³É»Øµ÷
 µ÷ÓÃ²Î¿¼ ³ÔÅö¸Üºý¶¯»­Ãû³Æ·Ö±ðÎª chi1  gang1 peng1 hu1 zimo1
 animations_sys.PlayAnimation(this.gameObject.transform,"chi_peng_gang_hu","gang1",100,100,flase,function() 
-		print("PlayComPlete111111")
+		log("PlayComPlete111111")
 	end)
 
 ]]
@@ -62,7 +62,7 @@ function this.PlayAnimation(parentsTrans,animationsID,animationName,width,height
 			sketonAnimState:ClearTracks()
 			sketonAnimState:SetAnimation(0,animationName,isLoop)
 			skeletonAnimComponet.playComPleteCallBack = function(trackEntry)
-		--		print("PlayComPlete")
+		--		log("PlayComPlete")
 				animObj:SetActive(false);
 				if PlayComPletecallback ~= nil then
 					PlayComPletecallback()
@@ -95,7 +95,7 @@ function this.PlayAnimationByScreenPosition(parentsTrans,offsetx,offsety,animati
 			sketonAnimState:ClearTracks()
 			sketonAnimState:SetAnimation(0,animationName,isLoop)
 			skeletonAnimComponet.playComPleteCallBack = function(trackEntry)
-		--		print("PlayComPlete")
+		--		log("PlayComPlete")
 			--	animObj:SetActive(false);
 				
 				if PlayComPletecallback ~= nil then
@@ -129,7 +129,7 @@ function this.PlayAnimationWithLoop(parentsTrans,animationsID,animationName,widt
 			sketonAnimState:ClearTracks()
 			sketonAnimState:SetAnimation(0,animationName,true)
 		--	skeletonAnimComponet.playComPleteCallBack = function(trackEntry)
-			--	print("PlayComPlete")
+			--	log("PlayComPlete")
 			--	gameObj:SetActive(false);
 			--	Destroy(gameObj.gameObject)
 		--	end
@@ -147,7 +147,7 @@ function this.StopPlayAnimation(trans)
 			sketonAnimState:SetEmptyAnimation(0,0);
 			trans.gameObject:SetActive(false);
 			GameObject.Destroy(trans.gameObject)
-			print("Destory animations")
+			log("Destory animations")
 		end
 	end
 end
@@ -190,7 +190,7 @@ function this.StopPlayAnimationToCache(trans, animationsID)
 			sketonAnimState:SetEmptyAnimation(0,0);
 			trans.gameObject:SetActive(false);
 			-- GameObject.Destroy(trans.gameObject)
-			-- print("Destory animations")
+			-- log("Destory animations")
 			if animationsID ~= nil then
 				this.AddToCacheMap(trans, animationsID)
 			else
@@ -239,13 +239,13 @@ end
 				SkeletonAnimation.transform.SetActive(false);
 			end
 		else
-			print("StopPlayAnimation Error! animationsID is not exist")
+			log("StopPlayAnimation Error! animationsID is not exist")
 		end
 	
 end
 ]]
 function this.test(trackEntry)
-	print("PlayComPlete")
+	log("PlayComPlete")
 end
 
 function this.AddAnimationToList(animationsID)

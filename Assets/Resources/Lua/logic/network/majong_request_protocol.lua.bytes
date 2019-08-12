@@ -34,7 +34,7 @@ function this.EnterGameReq(gameData)
 	paraTbl[messagedefine.EField_Rule] = "default" -- 固定值
 	paraTbl["_gid"] = gameData.gid
 	paraTbl[messagedefine.EField_SitMode] = "byCard" ---- 根据什么来找房, 支持bykey, byid, 但对应的字段得带上
-	--print("gameData.table_key-------------------------------"..tostring(gameData.table_key))
+	--log("gameData.table_key-------------------------------"..tostring(gameData.table_key))
 	paraTbl[messagedefine.EFiled_TableKey] = ""      ---- 房间key, 是php用base64(AES）
 	paraTbl[messagedefine.EField_TableConfig] = configTbl ---- 房间配置
 	configTbl["accountc"] = gameData["account"] or {}
@@ -240,7 +240,7 @@ end
 
 function this.requestHu(urlValue,cardValue,tableID,seat)
 	if not cardValue  or  not tableID or  not seat then 
-		print("cardValue"..tostring(cardValue).."tableID"..tostring(tableID).."seat"..tostring(seat))
+		log("cardValue"..tostring(cardValue).."tableID"..tostring(tableID).."seat"..tostring(seat))
 		return
 	end
 	 local strMsgHead = this.GetMsgHead(urlValue)

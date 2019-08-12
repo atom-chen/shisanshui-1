@@ -80,7 +80,7 @@ function this.Spawn(prefabsTable, func, param1, param2, param3, param4)
 		end
 
 		if spawn_pools[v.strPrefab] == nil then
-			print("if spawn_pools[strPrefab] == nil then")
+			log("if spawn_pools[strPrefab] == nil then")
 		else
 			spawn_pools[v.strPrefab]:Spawn(actionSet)
 		end

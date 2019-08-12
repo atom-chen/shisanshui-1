@@ -74,9 +74,9 @@ end
 
 function this.buy()
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    print("buy")
+    log("buy")
     http_request_interface.getProductCfg({["ptype"]=1},function (code,m,str) 
-        print(str)
+        log(str)
         local s=string.gsub(str,"\\/","/")  
         local t=ParseJsonStr(s)
         if tonumber( t.ret)==0 then

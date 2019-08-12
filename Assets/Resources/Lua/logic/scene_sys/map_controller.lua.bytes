@@ -25,7 +25,7 @@ local mCurrLevelConfig = nil
 
 local mIsLoadingMap = false  -- 备注一下，这个如果是true要设置一下回调，不允许连跳
 function this.SetIsLoadingMap(bIsLoading)
-	--print("SetIsLoadingMap:"..tostring(bIsLoading))
+	--log("SetIsLoadingMap:"..tostring(bIsLoading))
 	mIsLoadingMap = bIsLoading
 end
 
@@ -252,7 +252,7 @@ function this.LoadLevelScene(mapID, play_sys)
 	
 	mCurrLevelConfig = config_data_center.getConfigDataByID("dataconfig_sceneconfig", "id", mapID)	
 	if (mCurrLevelConfig ~= nil) then
-		print("mCurrLevelConfig.sceneType=========================="..tostring(mCurrLevelConfig.sceneType))
+		log("mCurrLevelConfig.sceneType=========================="..tostring(mCurrLevelConfig.sceneType))
 		if mCurrLevelConfig.sceneType == scene_type.HENANMAHJONG then
 			require "logic/mahjong_sys/mahjong_play_sys"		
     		game_scene.gotoLevel(mapID, mCurrLevelConfig.sceneType, play_sys)
@@ -270,7 +270,7 @@ function this.ReqEnterMapReady()
 end
 
 function this.OnEnterMapRespone(pkgData)
-	--print("OnEnterMapRespone"..tostring(req))
+	--log("OnEnterMapRespone"..tostring(req))
 end
 
 --------------------------------系统&时序-----------------------

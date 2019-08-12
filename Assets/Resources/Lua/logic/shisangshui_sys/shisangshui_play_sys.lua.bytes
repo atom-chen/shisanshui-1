@@ -50,7 +50,7 @@ end
 
 --加载完场景后第一件事
 function this.HandleLevelLoadComplete()
-    print("============================shisangshui_play_sys")
+    log("============================shisangshui_play_sys")
     gs_mgr.ChangeState(gs_mgr.state_mahjong)
     map_controller.SetIsLoadingMap(false)
     mode_manager.InitializeMode(2)

@@ -25,7 +25,7 @@ function ucoder.unicode_to_utf8_000(convertStr)
             break
         end
 
-        -- print(unicode)
+        -- log(unicode)
   
         if unicode <= 0x007f then
 
@@ -53,7 +53,7 @@ function ucoder.unicode_to_utf8_000(convertStr)
 
     resultStr = string.gsub(resultStr, "\\/", "/") -- replace string: "\/"
     
-    -- print(resultStr)
+    -- log(resultStr)
     
     return resultStr
   
@@ -77,7 +77,7 @@ function ucoder.utf8_to_unicode(convertStr)
     
     while num1~=nil do
     
-        -- print(num1)
+        -- log(num1)
         
         local tempVar1,tempVar2
         
@@ -123,13 +123,13 @@ function ucoder.utf8_to_unicode(convertStr)
         end
         
         resultStr=resultStr..string.format("\\u%02x%02x",tempVar2,tempVar1)
-        -- print(resultStr)
+        -- log(resultStr)
         
         i=i+1
         num1=string.byte(convertStr,i)
     end
     
-    -- print(resultStr)
+    -- log(resultStr)
     
     return resultStr
 end

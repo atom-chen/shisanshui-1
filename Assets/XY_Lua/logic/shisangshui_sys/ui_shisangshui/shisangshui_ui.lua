@@ -331,6 +331,14 @@ local function InitWidgets()
        compTbl.xiapao.gameObject:SetActive(false)
     end
 	
+	this.CardsTbl = {}
+	for i = 1, 7 do
+		this.CardsTbl[i] = {}
+		for j = 1, 13 do
+			this.CardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+			this.CardsTbl[i][j].gameObject:SetActive(false);
+		end
+	end
 end
 
 
@@ -910,9 +918,167 @@ function this.SetBeiShu(viewSeat, beishu)
 	end 
 end
 
+--[[--
+ * @Description: 获取玩家  
+ ]]
+function this.GetPlayer(viewSeat)
+	return this.playerList[viewSeat]
+end
+
 --发牌
-function this.DealCard(data)
-	for i=1,6 do
-    	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/Cards")
-    end
+function this.DealCard(data, callback)
+	local roomData = room_data.GetSssRoomDataInfo()
+	local peopleNum = roomData.people_num
+	this.peoCardsTbl = {}
+	this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
+	this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
+	this.peoCardsTbl[4] = {this.CardsTbl[1], this.CardsTbl[3], this.CardsTbl[5], this.CardsTbl[7]}
+	this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
+	this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
+	this.peoCardsTbl[7] = this.CardsTbl
+	this.curPeoCardsTbl = this.peoCardsTbl[peopleNum]
+	for i = 1, peopleNum do
+		this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+		for j = 1, 13 do
+			this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+			--local pos = this.CardsTbl[i][j].transform.position = Vector3.New(0, 0, 0)
+			this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
+		end
+	end
+	coroutine.start(function()
+		coroutine.wait(2)
+		if callback ~= nil then
+			callback()	
+			callback = nil
+		end
+	end)
+end
+
+function this.CompareStart(callback)
+	this.CardCompareHandler(callback)
+end
+
+--[[--
+ * @Description: 牌形比较处理 
+ ]]
+function this.CardCompareHandler(callback)
+	local scoreData = {}    --积分数据表
+
+	local firstSort = {}    --第一次排序表
+	local secondSort = {}   --第二次排序表
+	local threeSort = {}    --第三次排序表
+	local sortIndex = nil
+	for i,v in ipairs(this.playerList) do
+		sortIndex = v.compareResult["nOpenFirst"]
+		table.insert(firstSort, sortIndex)
+		sortIndex = v.compareResult["nOpenSecond"]
+		table.insert(secondSort, sortIndex)
+		sortIndex = v.compareResult["nOpenThird"]
+		table.insert(threeSort, sortIndex)
+	end
+	table.sort(firstSort)
+	table.sort(secondSort)
+	table.sort(threeSort)
+
+	--比头墩
+	for j,k in ipairs(firstSort) do
+		for i ,Player in ipairs(this.playerList) do
+			if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
+					for 1, 3 do
+						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
+						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+						tran.transform.localPosition = Vector3.New(0, 0, 0)
+						--Player:PlayerGroupCard("Group1")
+						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+					end
+					coroutine.wait(1)
+					break
+				end
+			end
+		end
+	end
+	--这里增加一个事件，通知UI更新第一墩的积分数据
+	-- scoreData.index = 1
+	-- scoreData.totallScore = 0			
+	-- Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
+	
+	--比中墩
+	for j,k in ipairs(secondSort) do
+		for i ,Player in ipairs(this.playerList) do
+			if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
+					-- Player:PlayerGroupCard("Group2")
+					-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
+					-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
+
+					for 4, 8 do
+						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
+						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+						tran.transform.localPosition = Vector3.New(0, 0, 0)
+						--Player:PlayerGroupCard("Group1")
+						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+					end
+					coroutine.wait(1)
+					break
+				end
+			end
+		end
+	end
+	--这里增加一个事件，通知UI更新第二墩的积分数据
+	scoreData.index = 2
+	scoreData.totallScore = 0
+	Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
+
+	--比尾墩
+	for j,k in ipairs(threeSort) do
+		for i ,Player in ipairs(this.playerList) do
+			if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
+
+					for 9, 13 do
+						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
+						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+						tran.transform.localPosition = Vector3.New(0, 0, 0)
+						--Player:PlayerGroupCard("Group1")
+						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+					end
+
+					-- Player:PlayerGroupCard("Group3")
+					-- local cards = Player:showThreeCardByType() ----这里在通知UI界面显示相应排型
+					-- Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+					coroutine.wait(1)
+					break
+				end
+			end
+		end
+	end
+	
+	--这里增加一个事件，通知UI更新第三墩的积分数据
+	-- scoreData.index = 3
+	-- scoreData.totallScore = 0
+	-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
+	--总分
+	-- local myPlayer = this.GetPlayer(1)
+	-- local totallScore = myPlayer.compareResult["nTotallScore"]
+	-- log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
+	
+	-- scoreData.index = 4
+	-- scoreData.totallScore = totallScore
+	-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
+	
+	if callback ~= nil then
+		callback()
+		callback = nil
+	end
+	
+	--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
+	--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
+	--播放打枪动画
+	--this.PlayGunAnim()
+
+	--播放特殊牌形动画		
 end

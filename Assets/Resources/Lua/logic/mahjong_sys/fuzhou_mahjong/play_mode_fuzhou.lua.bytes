@@ -58,7 +58,7 @@ function play_mode_fuzhou.create(levelID)
      * @Description: 组装所需要的组件
      ]]
     function ConstructComponents()
-        print("ConstructComponents---------------------------------------")
+        log("ConstructComponents---------------------------------------")
         -- 组装
         this:AddComponent(comp_clickevent.create())
         this:AddComponent(comp_resMgr.create())

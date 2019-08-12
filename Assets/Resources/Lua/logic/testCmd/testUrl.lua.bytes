@@ -7,7 +7,7 @@ local startUrl = "ws://test.dstars.cc:8001?uid=%s&token=%s"
 local input_url
 
 function this.Show()
-	print("Show-------------------------------------")
+	log("Show-------------------------------------")
 
 	if this.gameObject==nil then
 		newNormalUI("Prefabs/UI/TestCmd/testUrl")
@@ -21,13 +21,13 @@ function this.Hide( )
 end
 
 function this.Start()
-	print("Start-------------------------------------")
+	log("Start-------------------------------------")
     this.RegisterEvents()
     this.Init()
 end
 
 function this.Init()
-	print("Init-------------------------------------")
+	log("Init-------------------------------------")
 	input_url.value = startUrl
 end
 function this.OnDestroy()
@@ -35,7 +35,7 @@ function this.OnDestroy()
 end
 
 function this.RegisterEvents()
-	print("RegisterEvents-------------------------------------")
+	log("RegisterEvents-------------------------------------")
 
 	input_url = componentGet(child(this.transform,"Input_Url"),"UIInput")
 

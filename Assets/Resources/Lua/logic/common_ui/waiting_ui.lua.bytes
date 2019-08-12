@@ -49,7 +49,7 @@ function this.Init()
 end
 
 function this.Uninit()
-	--print("waiting uninit")
+	--log("waiting uninit")
 	this.gameObject:SetActive(false)
 	
 	if timer_Elapse ~= nil then

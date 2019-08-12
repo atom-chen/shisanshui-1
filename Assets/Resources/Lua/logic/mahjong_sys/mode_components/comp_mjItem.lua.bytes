@@ -259,7 +259,7 @@ function comp_mjItem.create()
                 end
                 --[[
                 if clonemj == nil then
-                    print("delta.y----------- delta.y "..tostring(delta.y))
+                    log("delta.y----------- delta.y "..tostring(delta.y))
                     if delta.y > 3 then 
                         clonemj = mode_manager.GetCurrentMode():GetComponent("comp_resMgr"):CeateMJItem(this)
                         clonemj.mjObj.transform.localPosition = clonemj.mjObj.transform.localPosition+ Vector3(0,0,-mahjongConst.MahjongOffset_y)
@@ -271,11 +271,11 @@ function comp_mjItem.create()
                     --clonemj.mjObj.transform.localPosition = clonemj.mjObj.transform.localPosition+ Vector3(delta.x,delta.y,0)/210 -- 除数待修改，根据屏幕摄像机大小调整
                 end]]
 
-                --print("AddDragEvent--------------------AddDragEvent---------------"..tostring(delta))
+                --log("AddDragEvent--------------------AddDragEvent---------------"..tostring(delta))
             end)
 
             addDragEndCallbackSelf(this.mjModelObj, function (go)
-                --print("Input.mousePosition-----------"..tostring(Input.mousePosition))
+                --log("Input.mousePosition-----------"..tostring(Input.mousePosition))
                 if this.isDrag then
                     if Input.mousePosition.y > Screen.height/4 then
                         --this.dragEvent(this)
@@ -336,7 +336,7 @@ function comp_mjItem.create()
         end
 	end
 
-    --print("-----------创建麻将对象")
+    --log("-----------创建麻将对象")
     CreateObj()
 
 	return this

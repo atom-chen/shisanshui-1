@@ -27,7 +27,7 @@ printf("The value = %d", 100)
 
 ]]
 function printf(fmt, ...)
-    print(string.format(tostring(fmt), ...))
+    log(string.format(tostring(fmt), ...))
 end
 
 --[[--
@@ -331,7 +331,7 @@ end
 local Animal = class("Animal")
 local Duck = class("Duck", Animal)
 
-print(iskindof(Duck.new(), "Animal")) -- 输出 true
+log(iskindof(Duck.new(), "Animal")) -- 输出 true
 
 ~~~
 
@@ -963,7 +963,7 @@ end
 ~~~ lua
 
 local array = {"a", "b", "c"}
-print(table.indexof(array, "b")) -- 输出 2
+log(table.indexof(array, "b")) -- 输出 2
 
 ~~~
 
@@ -994,7 +994,7 @@ end
 ~~~ lua
 
 local hashtable = {name = "dualface", comp = "chukong"}
-print(table.keyof(hashtable, "chukong")) -- 输出 comp
+log(table.keyof(hashtable, "chukong")) -- 输出 comp
 
 ~~~
 
@@ -1026,7 +1026,7 @@ end
 ~~~ lua
 
 local array = {"a", "b", "c", "c"}
-print(table.removebyvalue(array, "c", true)) -- 输出 2
+log(table.removebyvalue(array, "c", true)) -- 输出 2
 
 ~~~
 
@@ -1071,7 +1071,7 @@ end)
 
 -- 输出修改后的表格内容
 for k, v in pairs(t) do
-    print(k, v)
+    log(k, v)
 end
 
 -- 输出
@@ -1117,7 +1117,7 @@ end
 local t = {name = "dualface", comp = "chukong"}
 table.walk(t, function(v, k)
     -- 输出每一个值
-    print(v)
+    log(v)
 end)
 
 ~~~
@@ -1163,7 +1163,7 @@ end)
 
 -- 输出修改后的表格内容
 for k, v in pairs(t) do
-    print(k, v)
+    log(k, v)
 end
 
 -- 输出
@@ -1210,7 +1210,7 @@ local t = {"a", "a", "b", "c"} -- 重复的 a 会被过滤掉
 local n = table.unique(t)
 
 for k, v in pairs(n) do
-    print(v)
+    log(v)
 end
 
 -- 输出
@@ -1268,7 +1268,7 @@ string._htmlspecialchars_set[">"] = "&gt;"
 
 ~~~ lua
 
-print(string.htmlspecialchars("<ABC>"))
+log(string.htmlspecialchars("<ABC>"))
 -- 输出 &lt;ABC&gt;
 
 ~~~
@@ -1298,7 +1298,7 @@ end
 
 ~~~ lua
 
-print(string.restorehtmlspecialchars("&lt;ABC&gt;"))
+log(string.restorehtmlspecialchars("&lt;ABC&gt;"))
 -- 输出 <ABC>
 
 ~~~
@@ -1328,7 +1328,7 @@ end
 
 ~~~ lua
 
-print(string.nl2br("Hello\nWorld"))
+log(string.nl2br("Hello\nWorld"))
 -- 输出
 -- Hello<br />World
 
@@ -1356,7 +1356,7 @@ end
 
 ~~~ lua
 
-print(string.text2html("<Hello>\nWorld"))
+log(string.text2html("<Hello>\nWorld"))
 -- 输出
 -- &lt;Hello&gt;<br />World
 
@@ -1433,7 +1433,7 @@ end
 ~~~ lua
 
 local input = "  ABC"
-print(string.ltrim(input))
+log(string.ltrim(input))
 -- 输出 ABC，输入字符串前面的两个空格被去掉了
 
 ~~~
@@ -1469,7 +1469,7 @@ end
 ~~~ lua
 
 local input = "ABC  "
-print(string.rtrim(input))
+log(string.rtrim(input))
 -- 输出 ABC，输入字符串最后的两个空格被去掉了
 
 ~~~
@@ -1519,7 +1519,7 @@ end
 ~~~ lua
 
 local input = "hello"
-print(string.ucfirst(input))
+log(string.ucfirst(input))
 -- 输出 Hello
 
 ~~~
@@ -1552,7 +1552,7 @@ end
 ~~~ lua
 
 local input = "hello world"
-print(string.urlencode(input))
+log(string.urlencode(input))
 -- 输出
 -- hello%20world
 
@@ -1587,7 +1587,7 @@ end
 ~~~ lua
 
 local input = "hello%20world"
-print(string.urldecode(input))
+log(string.urldecode(input))
 -- 输出
 -- hello world
 
@@ -1619,7 +1619,7 @@ end
 ~~~ lua
 
 local input = "你好World"
-print(string.utf8len(input))
+log(string.utf8len(input))
 -- 输出 7
 
 ~~~
@@ -1662,7 +1662,7 @@ end
 
 ~~~ lua
 
-print(string.formatnumberthousands(1924235))
+log(string.formatnumberthousands(1924235))
 -- 输出 1,924,235
 
 ~~~

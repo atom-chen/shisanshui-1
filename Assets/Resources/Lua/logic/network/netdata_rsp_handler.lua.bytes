@@ -69,11 +69,11 @@ function this.ParseFromString(pkgData, hideErrorMsg)
 
 
 	local rsp = ParseJsonStr(newData)	
-	--print("rsp================================"..tostring(rsp))
-    print("rsp================================"..CombinJsonStr(rsp))
+	--log("rsp================================"..tostring(rsp))
+    log("rsp================================"..CombinJsonStr(rsp))
 
    if rsp._para~=nil and rsp._para._errno~=nil then 
-      print(rsp._para._errno.."-------------------msg._para._errno")
+      log(rsp._para._errno.."-------------------msg._para._errno")
       local t= GetDictString(rsp._para._errno)  
       if t~=nil then
           message_box.ShowGoldBox(t,nil,1,{function ()message_box.Close()end},{"fonts_01"})

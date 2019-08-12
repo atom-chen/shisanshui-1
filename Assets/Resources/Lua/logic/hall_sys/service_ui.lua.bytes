@@ -54,7 +54,7 @@ function  this.copy(obj2,obj2)
     local str=componentGet(lab_txt.gameObject,"UILabel").text
     local t=string.split(str,":")
     local s=DelS(t[2])
-    print(s)
+    log(s)
     YX_APIManage.Instance:onCopy(s,function()fast_tip.Show("复制成功")end) 
 end
 

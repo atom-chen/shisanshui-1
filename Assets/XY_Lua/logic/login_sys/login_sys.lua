@@ -117,7 +117,6 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 	this.loginType = 9
 	--平台成功回调后开始连接服务器并登陆服务器 
 	log("this.share_uid=="..this.share_uid)
-	log(account)
     http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)

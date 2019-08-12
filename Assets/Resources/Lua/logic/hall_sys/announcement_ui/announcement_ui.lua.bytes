@@ -53,7 +53,7 @@ function  this.Hide()
 end
 this.emailrecord={}
 function this.delete(obj1,obj2) 
-    print(this.currentindex)
+    log(this.currentindex)
     if this.currentindex==nil or this.emailrecord[this.currentindex]==nil then
         return
     end    
@@ -88,7 +88,7 @@ function this.InitPanelRecord(count,code)
 		    return
 	    end 
     end 
-	print("InitPanelRecord") 
+	log("InitPanelRecord") 
 	if count >0 and count <=8 then
         for i=0, this.WrapContent_record.transform.childCount-1 do
 			destroy(this.WrapContent_record.transform:GetChild(i).gameObject)
@@ -106,7 +106,7 @@ function this.InitPanelRecord(count,code)
 end
 
 function this.InitItem(data,i,code) 
-    print("create")
+    log("create")
     local tmpItem
 	if code ==1 then 
 	          tmpItem = NGUITools.AddChild(this.WrapContent_record.gameObject,this.item.gameObject)
@@ -117,7 +117,7 @@ function this.InitItem(data,i,code)
 end
  
 function this.OnUpdateItem_emailrecord(go,index,realindex)
-    print("update")
+    log("update")
     local rindext=1-realindex   
     local redpoint=child(go.transform,"sp_red")
     redpoint.gameObject:SetActive(this.emailrecord[rindext].status==0) 
@@ -157,7 +157,7 @@ function this.toggleclick(obj1,obj2)
     componentGet(lab_content.gameObject,"UILabel").text=this.emailrecord[tonumber(obj2.name)].content
     local redpoint=child(obj2.transform,"sp_red") 
     redpoint.gameObject:SetActive(false)
-    http_request_interface.readEmail(this.emailrecord[tonumber(obj2.name)].eid,function(code,m,str)print(str) end) 
+    http_request_interface.readEmail(this.emailrecord[tonumber(obj2.name)].eid,function(code,m,str)log(str) end) 
     local isshow=true
     for i=0,obj2.transform.parent.childCount-1 do
         local redpoint=child(obj2.transform.parent:GetChild(i),"sp_red")

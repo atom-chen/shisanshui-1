@@ -17,7 +17,7 @@ local this = string_handler
 	require("utils/string_handler")
 	testStr = string_handler.setProperty(testStr, "ak", 800)
 	testStr = string_handler.setProperty(testStr, "mp", 100)
-	print(testStr)  
+	log(testStr)  
 	concole输出：攻击力是800的一件武器，攻击力是800哦，另外它的魔法增益是100
 
  * @param:       targetStr : 目标字符串

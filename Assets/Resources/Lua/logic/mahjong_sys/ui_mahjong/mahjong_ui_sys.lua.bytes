@@ -38,7 +38,7 @@ local function UpdatePlayerEnter(tbl,callback)
 			userdata.vip  = 0
 
 			http_request_interface.getImage({tbl["_para"]["_uid"]},function(code2,m2,str2)
-				print(tostring(str2))
+				log(tostring(str2))
 				local s2=string.gsub(str2,"\\/","/")
 	        	local t2=ParseJsonStr(s2)
 
@@ -60,7 +60,7 @@ end
 
 
 local function OnPlayerEnter( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl["_src"])
 	UpdatePlayerEnter(tbl,function()
@@ -97,7 +97,7 @@ local function OnPlayerEnter( tbl )
 
 	end
 
-	--print("OnPlayerEnter-----------------------------------------------------")
+	--log("OnPlayerEnter-----------------------------------------------------")
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_ENTER_GAME)
 end
 
@@ -173,7 +173,7 @@ local function OnALLPlayerXiaPao( tbl )
 end
 
 local function OnGameLaiZi( tbl )
-	--print(GetTblData(tbl))
+	--log(GetTblData(tbl))
 	ui_sound_mgr.PlaySoundClip("common/laizi")
 	mahjong_ui.ShowHunPai(tbl["_para"]["laizi"][1])
 end
@@ -198,7 +198,7 @@ local function OnPlayStart( tbl )
 end
 
 local function OnGameDeal( tbl )
-	--print(GetTblData(tbl))
+	--log(GetTblData(tbl))
 	mahjong_ui.HideOperTips()
 	roomdata_center.SetRoomLeftCard(mode_manager.GetCurrentMode().config.MahjongTotalCount)
 	roomdata_center.nCurrJu = tbl._para.subRound
@@ -224,7 +224,7 @@ end
 }
  ]]
 local function OnGameAskBlock( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	operatorcachedata.ClearOperTipsList()
 
@@ -306,7 +306,7 @@ end
 --[[--
  * @Description: 吃碰杠胡效果
  * animations_sys.PlayAnimation(this.gameObject.transform,"majhong_special_card_type","gang1",100,100,function() 
-		print("PlayComPlete111111")
+		log("PlayComPlete111111")
 	end)  
  ]]
 
@@ -346,7 +346,7 @@ end
 -- end
 
 local function OnGameWin( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local winner = tbl._para.stWinList[1].winner
 	local win_type = tbl._para.stWinList[1].winType
@@ -389,7 +389,7 @@ local function OnGameWin( tbl )
 end
 
 local function OnGameRewards( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	mahjong_ui.HideOperTips()
 
@@ -504,7 +504,7 @@ local function OnGameRewards( tbl )
  	else
  		
 		if byFanType>0 then
-			print("byFanType-----"..byFanType)
+			log("byFanType-----"..byFanType)
 			local fanTypeName = ""
 			if byFanType == 32 then
 	 			fanTypeName = "wuhuawugang_1"
@@ -544,7 +544,7 @@ local function OnGameRewards( tbl )
 	 			100,
 	 			100,
 	 			false,function()
-	 				print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	 				log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 					mahjong_ui.SetRewards(rewardsTbl,win_viewSeat,isBigReward,rid)
 	 			end)
 			end
@@ -558,7 +558,7 @@ local function OnGameRewards( tbl )
 end
 
 local function OnPointsRefresh( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl["_src"])
 
@@ -591,14 +591,14 @@ local function OnAskReady( tbl )
 end
 
 local function OnSyncBegin( tbl )
-	print(GetTblData(tbl))
-	print("重连同步开始")
+	log(GetTblData(tbl))
+	log("重连同步开始")
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_BEGIN)
 end
 
 local function OnSyncTable( tbl )
-	print("重连同步表")
-	print(GetTblData(tbl))
+	log("重连同步表")
+	log(GetTblData(tbl))
 
 	--[[
 		game_state:
@@ -834,14 +834,14 @@ function this.OnResetXiaPao( xiapao )
 end
 
 local function OnSyncEnd( tbl )
-	print(GetTblData(tbl))
-	print("重连同步结束")
+	log(GetTblData(tbl))
+	log("重连同步结束")
 
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_END)
 end
 
 local function OnLeaveEnd( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	local viewSeat = gvbl(tbl._src)
 	if roomdata_center.isStart == true then
 		mahjong_ui.SetPlayerMachine(viewSeat, true)
@@ -853,7 +853,7 @@ local function OnLeaveEnd( tbl )
 end
 
 local function OnPlayerOffline( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	
 	local viewSeat = gvbl(tbl._src)
 	if tbl._para.reason~=nil and tbl._para.reason == 0 and tbl._para.active == nil  then
@@ -882,7 +882,7 @@ local function OnPlayerOffline( tbl )
 end
 
 local function OnPlayerChat( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl._src)
 	local contentType = tbl["_para"]["contenttype"]
@@ -898,7 +898,7 @@ local function OnPlayerChat( tbl )
 end
 
 local function OnAutoPlay( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 
 	local viewSeat = gvbl(tbl._src)
 	local state = tbl["_para"]["setStatus"]
@@ -925,7 +925,7 @@ local function OnOpenGold()
 end
 
 local function OnRobGold( tbl )
-	print(GetTblData(tbl))
+	log(GetTblData(tbl))
 	
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F3_ROB_GOLD)
 end
@@ -999,7 +999,7 @@ local function OnStartFlag(tbl)
 end
 
 function this.Init()
-	print("-----------Start Regist Event UI ---------------!!!!!!!!!!")
+	log("-----------Start Regist Event UI ---------------!!!!!!!!!!")
 	Notifier.regist(cmdName.F1_ENTER_GAME, OnPlayerEnter)--玩家进入
 	Notifier.regist(cmdName.F1_GAME_READY, OnPlayerReady)--玩家准备
 	Notifier.regist(cmdName.F1_GAME_START,OnGameStart)--游戏开始
@@ -1113,10 +1113,10 @@ function this.UInit()
 end
 
 function this.GetHeadPic(textureComp, url )
-	print("GetHeadPic "..url)
+	log("GetHeadPic "..url)
 
 	DownloadCachesMgr.Instance:LoadImage(url,function( code,texture )
-		--print("!!!!!!!!!state:"..tostring(state))
+		--log("!!!!!!!!!state:"..tostring(state))
 		textureComp.mainTexture = texture 
 	end)
 

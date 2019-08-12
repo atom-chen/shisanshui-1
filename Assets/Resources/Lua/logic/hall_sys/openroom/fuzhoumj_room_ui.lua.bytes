@@ -119,7 +119,7 @@ function this.GetUserSelectData()
     if componentGet(toggleTbl.toggle_halfpure.gameObject, "UIToggle").value==true then
         paramtable["halfpure"]=1
         paramtable["allpure"]=1
-        print(11111111 .."halfpureallpure")
+        log(11111111 .."halfpureallpure")
     end
     if componentGet(toggleTbl.toggle_allpure.gameObject, "UIToggle").value==true then
         paramtable["allpure"]=1

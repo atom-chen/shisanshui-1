@@ -118,11 +118,11 @@ function this.UnInit()
 end
 
 function this.HandleRecvData(cmdId, msg)
-  print("收到服务端协议cmdId======================================="..cmdId.." msg: "..GetTblData(msg))
+  log("收到服务端协议cmdId======================================="..cmdId.." msg: "..GetTblData(msg))
 
   if msg._st ~=nil and msg._st == "err" then
     this.HandleSTError(cmdId, msg)
-    print("-------------!!!!!!!!!!!!!----------" .. GetTblData(msg))
+    log("-------------!!!!!!!!!!!!!----------" .. GetTblData(msg))
   elseif cmdId == "query_state" then
     this.HandleQueryStateMsg(msg)
   elseif cmdId == "session" then
@@ -163,7 +163,7 @@ function this.AddMsgToQueue(cmdId, msg)
 
   --将解析后的数据加入队列
   table.insert(msgqueue, msgTable)
-  print("msgqueue================================"..tostring(#msgqueue))
+  log("msgqueue================================"..tostring(#msgqueue))
 end
 
 --[[--
@@ -191,7 +191,7 @@ function this.Update()
 
       curSysTime = os.clock()
       msgqueue[1].msg.time = curSysTime - msgqueue[1].msg.time
-      print("curEvent================================"..tostring(msgqueue[1].cmdId))
+      log("curEvent================================"..tostring(msgqueue[1].cmdId))
       Notifier.dispatchCmd(curEvent, msgqueue[1].msg)
     end
   end
@@ -215,7 +215,7 @@ end
  * @Description: 消息事件完成后的回调处理
  ]]
 function this.OnMsgHandleDone(_event)
-  print("OnMsgHandleDone-xx----------------------------------"..tostring(_event))
+  log("OnMsgHandleDone-xx----------------------------------"..tostring(_event))
   --这里做一个事件认证
   if _event == curEvent then    
     eventNum = eventNum - 1
@@ -241,9 +241,9 @@ end
  * @Description: 处理查询状态后消息处理  
  ]]
 function this.HandleQueryStateMsg(msg)
-	print("处理查询状态后消息处理")
+	log("处理查询状态后消息处理")
 	if msg._para._dst ~= nil and msg._para._dst.status == "enter" then
-		print("msg._para._gid-----------------------------"..tostring(msg._para._dst._gid))
+		log("msg._para._gid-----------------------------"..tostring(msg._para._dst._gid))
 		if msg._para._dst._gid == ENUM_GAME_TYPE.TYPE_FUZHOU_MJ then
 			player_data.ReSetSessionData(msg._para)
 			local t=
@@ -282,7 +282,7 @@ function this.HandleQueryStateMsg(msg)
 				
 				local dst = msg._para._dst
 				shisangshui_play_sys.EnterGameReq(gamedata, dst)
-				print("十三水重连")
+				log("十三水重连")
 			end
 		end
 	elseif hall_data.CheckIsChooseRoomClick() then
@@ -313,13 +313,13 @@ end
  * @Description: 设置房间配置数据  
  ]]
 function this.SetRoomCfgData(msg)
-  print("msg._para._gid---------------------------"..tostring(msg._para._gid))
+  log("msg._para._gid---------------------------"..tostring(msg._para._gid))
 
-  print("ENUM_GAME_TYPE.TYPE_SHISHANSHUI---------------------------"..tostring(ENUM_GAME_TYPE.TYPE_SHISHANSHUI))
+  log("ENUM_GAME_TYPE.TYPE_SHISHANSHUI---------------------------"..tostring(ENUM_GAME_TYPE.TYPE_SHISHANSHUI))
   if msg._para._gid == ENUM_GAME_TYPE.TYPE_FUZHOU_MJ then
     roomdata_center.SetRoomCfgInfo(msg)  
   elseif msg._para._gid == ENUM_GAME_TYPE.TYPE_SHISHANSHUI then    
-    print("msg._para.rno---------------------------"..tostring(msg._para.rno))
+    log("msg._para.rno---------------------------"..tostring(msg._para.rno))
     roomdata_center.SetShiSangShuiRoomCfgInfo(msg)
   end
 end
@@ -385,12 +385,12 @@ end
 ]]
 
 function this.UpdataInfoHandle(msg)
-     print("HandlePushMsg------"..tostring(msg))
+     log("HandlePushMsg------"..tostring(msg))
     local tmp = msg._para.msg
     --local t = json.encode(tmp)
     local s=string.gsub(tmp,"\\","")
     s=string.sub(s, 1, -1)
-    print(s)
+    log(s)
     if s== nil or s =="" then
       return
     end
@@ -404,7 +404,7 @@ function this.UpdataInfoHandle(msg)
                   local account = t.account
                   local card = account.card 
                   Notifier.dispatchCmd(cmdName.MSG_ROOMCARD_REFRESH,card) 
-                  print("card"..card)
+                  log("card"..card)
               end
           end)
       end

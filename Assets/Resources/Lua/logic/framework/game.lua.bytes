@@ -25,7 +25,7 @@ local testScene = nil
  ]]
 function this.OnInitOK(testSceneflag, sceneTypeString, levelID)
 	this.InitModules()	
-	print("------------------------------------OnInitOK")
+	log("------------------------------------OnInitOK")
 	if (not testSceneflag) then
 		game_scene.gotoLogin()
 	else

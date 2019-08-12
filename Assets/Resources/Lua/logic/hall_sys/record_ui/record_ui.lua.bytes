@@ -25,7 +25,7 @@ this.gid={
 function this.UpdateRoomRecordSimpleData(data,code)   
 	this.open_roomRecordSimpleData =data  
 	this.maxCount = table.getCount(this.open_roomRecordSimpleData)
-    print(this.maxCount)
+    log(this.maxCount)
 	this.InitPanelRecord(this.maxCount,code)  
 end
 
@@ -48,7 +48,7 @@ function this.InitPanelRecord(count,code)
     end
      
             
-	print("InitPanelRecord")  
+	log("InitPanelRecord")  
 	if count >0 and count <=5 then
         if  code==1 then
             for i=0 ,hall_ui.WrapContent_record.transform.childCount-1 do
@@ -124,7 +124,7 @@ function this.OnUpdateItem_record(go,index,realindex)
         http_request_interface.getRoomSimpleByUid(nil,2,this.recordpage,function (code,m,str)
             local s=string.gsub(str,"\\/","/")  
             local t=ParseJsonStr(s)
-            print(str)
+            log(str)
             local count=table.getCount(this.open_roomRecordSimpleData)
             for i=1,table.getCount(t.data) do
                 this.open_roomRecordSimpleData[i+count]=t.data[i]
@@ -156,7 +156,7 @@ function this.OnUpdateItem_openrecord(go,index,realindex)
         http_request_interface.getRoomSimpleList(nil,99,this.openpage,function (code,m,str)
             local s=string.gsub(str,"\\/","/")  
             local t=ParseJsonStr(s)
-            print(str)
+            log(str)
             local count=table.getCount(this.open_roomRecordSimpleData)
             for i=1,table.getCount(t.data) do
                 this.open_roomRecordSimpleData[i+count]=t.data[i]
@@ -171,20 +171,20 @@ this.recordpage=0
 function this.opendetails(obj1,obj2)
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
     local rid=this.open_roomRecordSimpleData[tonumber(obj2.name)].rid 
---    print(rid.."------------rid")
+--    log(rid.."------------rid")
     if componentGet(hall_ui.toggle_openrecord.gameObject,"UIToggle").value==true then   
         if this.open_roomRecordSimpleData[tonumber(obj2.name)].status==2 then 
             http_request_interface.getRoomSimpleList(nil,{2}, 0, function (code, m, str) 
                local s=string.gsub(str,"\\/","/")  
                local t=ParseJsonStr(s)
-               print(str)
+               log(str)
                openrecord_ui.Show(t,2)    
             end)
         else
             http_request_interface.getRoomSimpleList(nil,{0,1,3}, 0, function (code, m, str)
                local s=string.gsub(str,"\\/","/")  
                local t=ParseJsonStr(s)
-               print(str)
+               log(str)
                openrecord_ui.Show(t,1)    
             end)
         end
@@ -196,7 +196,7 @@ function this.opendetails(obj1,obj2)
            http_request_interface.getRoomByRid(rid,1,function (code,m,str)
                local s=string.gsub(str,"\\/","/")  
                local t=ParseJsonStr(s)
-               print(str)
+               log(str)
                recorddetails_ui.Show(t)   
            end)
         end 

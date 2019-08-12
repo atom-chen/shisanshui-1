@@ -37,7 +37,7 @@ function this.JoinRoomHandler(enterData, enterType)
 
         local s=string.gsub(str, "\\/", "/")
         local data = ParseJsonStr(s) 
-        print("data--------------------------------------"..tostring(str))
+        log("data--------------------------------------"..tostring(str))
         if data ~= nil then
             --设置uri
             messagedefine.chessPath = "/"..data.cser._svr_t.."/"..data.cser._svr_id
@@ -67,10 +67,10 @@ function this.JoinRoomHandler(enterData, enterType)
 end
 
 function this.QueryState()
-    print("只在进第一次进游戏时查询状态00022222300")
+    log("只在进第一次进游戏时查询状态00022222300")
   http_request_interface.QueryStatus({}, function (code, m, str)
      local s=string.gsub(str,"\\/","/")
-     print("s--------------------------------"..tostring(s))
+     log("s--------------------------------"..tostring(s))
      local t=ParseJsonStr(s)   
      if data._dsts ~= nil and #t._dsts > 0 then     
         local tbl = {_dst = t._dsts[1]}
@@ -83,7 +83,7 @@ end
  * @Description: 进入游戏处理  
  ]]
 function this.EnterGameHandle(data)
-    print("GetTblData----------------------------------"..GetTblData(data))
+    log("GetTblData----------------------------------"..GetTblData(data))
     mahjong_play_sys.EnterGameReq(data)
     player_data.SetReconnectEpara(data) 
     --join_room.EnterGameHandle(data)

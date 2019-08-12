@@ -37,7 +37,7 @@ end
  * @Description: 进入状态
  ]]
 function gs_main_hall:EnterState( ... )
-	--print("gs_main_hall:EnterState", LOG.gs)
+	--log("gs_main_hall:EnterState", LOG.gs)
 	self.active = true
 end
 
@@ -45,6 +45,6 @@ end
  * @Description: 离开状态
  ]]
 function gs_main_hall:ExitState( ... )
-	--print("gs_main_hall:ExitState", LOG.gs)
+	--log("gs_main_hall:ExitState", LOG.gs)
 	self.active = false
 end

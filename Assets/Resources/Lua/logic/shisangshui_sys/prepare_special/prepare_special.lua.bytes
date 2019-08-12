@@ -39,7 +39,7 @@ end
 function this.Show(cards, nSpecialType, dun, recCards)
 	timeSecond = 30
 	recommendCards = recCards
-	print("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
+	log("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
 	my_cards = cards
 	if this.gameObject==nil then
 		require ("logic/shisangshui_sys/prepare_special/prepare_special")
@@ -99,7 +99,7 @@ function this.LoadAllCard(cards, nSpecialType, dun)
 ---[[
 	local cardGrid = child(this.transform, "cardGrid")
 	if cardGrid == nil then
-		print("cardGrid == nil")
+		log("cardGrid == nil")
 		return
 	end
 	

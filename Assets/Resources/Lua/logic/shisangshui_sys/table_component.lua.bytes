@@ -84,10 +84,10 @@ function table_component.create()
 		this.gun:SetActive(false)
 		this.tableCenter = GameObject.Find("tableCenter")
 		if this.tableCenter == nil then 
-			print("tableCenter is nil Error")
+			log("tableCenter is nil Error")
 		end
 		if #this.PlayerList > 0 then 
-			print("===InitPlayerTransFormError"..tostring(#this.PlayerList)) --
+			log("===InitPlayerTransFormError"..tostring(#this.PlayerList)) --
 			return 
 		end
 		local PlayerTransformList = {}
@@ -100,14 +100,14 @@ function table_component.create()
 		for i = 1, #PlayerTransformList do
 			local player = player_component.create()
 			player.playerObj = PlayerTransformList[i]
-			--print("玩家数组："..PlayerTransformList[i].name)
+			--log("玩家数组："..PlayerTransformList[i].name)
 			player.viewSeat = i
 			
 			--local logicSeat = room_usersdata_center.SetMyLogicSeat(player.viewSeat)
 			--player.usersdata = room_usersdata_center.usersDataList[logicSeat]
 			player.resMgrComponet = this.resMgrComponet
 			local cards = player.playerObj.transform:GetComponentsInChildren(typeof(UnityEngine.MeshFilter))
-			print("==============InitPlayerTransForm cards Array Length"..tostring(cards.Length))
+			log("==============InitPlayerTransForm cards Array Length"..tostring(cards.Length))
 			if cards ~= nil then 
 				for j = 0, cards.Length -1 do
 					local cardObj = cards[j]
@@ -129,7 +129,7 @@ function table_component.create()
 			table.insert(this.PlayerList,player)
 			table.insert(this.PlayerTransformList,PlayerTransformList[i].transform)
 			if player == nil then
-				print("Error Player is nil")
+				log("Error Player is nil")
 				return
 			end
 		end		
@@ -170,13 +170,13 @@ function table_component.create()
 	 * @Description: 摆牌ok处理   
 	 ]]
 	function this.ChooseOKCard(tbl)
-		print("============摆牌ok处理============="..tostring(tbl._src))
+		log("============摆牌ok处理============="..tostring(tbl._src))
 	--	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl._src)
 		local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(tbl._src) --查找当前座位号
 		if this.PlayerList ~= nil then
 			for i, player in pairs(this.PlayerList) do
-				print("viewSeat-----------------------------------"..tostring(viewSeat))
-				print("player.viewSeat-----------------------------------"..tostring(player.viewSeat))
+				log("viewSeat-----------------------------------"..tostring(viewSeat))
+				log("player.viewSeat-----------------------------------"..tostring(player.viewSeat))
 				if tostring(viewSeat) == tostring(player.viewSeat) then
 					player.playerObj:SetActive(true)
 					player.ShowAllCard(180)
@@ -268,7 +268,7 @@ function table_component.create()
 		--总分
 		local myPlayer = this.GetPlayer(1)
 		local totallScore = myPlayer.compareResult["nTotallScore"]
-		print("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
+		log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
 		
 		scoreData.index = 4
 		scoreData.totallScore = totallScore
@@ -292,7 +292,7 @@ function table_component.create()
 	 * @Description: 比牌开始  
 	 ]]
 	function this.CompareStart(compareFinshCallback)
-		print("CompareStart......................")
+		log("CompareStart......................")
 		for i ,Player in pairs(this.PlayerList) do
 			Player:SetCardMesh() --设置牌的值
 			--为特殊牌型显示一个展示图标
@@ -313,12 +313,12 @@ function table_component.create()
 		table.sort(this.PlayerList, function (player1,player2)
 			local firstType1 = player1.compareResult[sortKey]
 			local firstType2 = player2.compareResult[sortKey]			
-			--print("firstType1"..tostring(firstType1).."secondType"..tostring(firstType2))
+			--log("firstType1"..tostring(firstType1).."secondType"..tostring(firstType2))
 			if firstType1 < firstType2 then
 				return true
 			elseif firstType1 == firstType2 then
 				--牌形相同，再做进一步判断，暂时返回true
-				--print("++++++++++++the same Group ++++++++++"..tostring(sortKey))
+				--log("++++++++++++the same Group ++++++++++"..tostring(sortKey))
 				--[[
 				if test == true then
 					test = false
@@ -340,7 +340,7 @@ function table_component.create()
 	--进入下一局重置所有的动作
 	function this.ReSetAll()
 		this.ResetPlayerList()
-		print("重置所有比牌动作")
+		log("重置所有比牌动作")
 	end
 
 	--重置发牌动作
@@ -382,7 +382,7 @@ function table_component.create()
 						local shootList = v.compareResult["stShoots"]--找出每个人的打枪列表
 						if shootList ~= nil and #shootList > 0 then
 							if isPlayed ==false then
-								print("打枪全屏动画")
+								log("打枪全屏动画")
 								animations_sys.PlayAnimation(shisangshui_ui.transform, "shisanshui_shoot_kuang", "bomb box", 100, 100, false)
 								--ui_sound_mgr.PlaySoundClip("audio/daqiang")  ---打枪
 								ui_sound_mgr.PlaySoundClip("dub/daqiang_nv")  ---打枪提示
@@ -434,14 +434,14 @@ function table_component.create()
 				
 				for i, v in ipairs(this.PlayerList) do
 					if v.compareResult["nSpecialType"] ~= 0 and v.compareResult["nSpecialType"] ~= nil then
-						print("打枪完成, 开始特殊牌型展示")
+						log("打枪完成, 开始特殊牌型展示")
 						special_card_show.Show(v.compareResult["stCards"], v.compareResult["nSpecialType"], 2)
 						coroutine.wait(2)
 					end
 				end
 		
 				if card_data_manage.allShootChairId ~= 0 then
-					print("播放全垒打动画")
+					log("播放全垒打动画")
 					animations_sys.PlayAnimation(shisangshui_ui.transform,"daqiang_quanleida","homer",100,100,false)
 					ui_sound_mgr.PlaySoundClip("dub/quanleida_nv")  ---全垒打
 					coroutine.wait(2)
@@ -450,7 +450,7 @@ function table_component.create()
 		
 				shisangshui_play_sys.CompareFinish()--告诉服务器
 				Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_RESULT)--比牌结束
-				print("====================开始结算=======================")
+				log("====================开始结算=======================")
 				
 				--结算动画处理
 				local totalPoints = {}

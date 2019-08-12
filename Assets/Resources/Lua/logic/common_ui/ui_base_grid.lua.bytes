@@ -107,7 +107,7 @@ end
 function ui_base_grid:ReDataToItems(listDataUnit,initUnitFuncation,parentPath,isScrollStart)
 	parentPath = parentPath or self.defultParentPath
 	if parentPath == nil then
-		--print("Parent is nil")
+		--log("Parent is nil")
 		return
 	end
 	listDataUnit = listDataUnit or {}

@@ -41,7 +41,7 @@ end
  * @Description: 进入状态
  ]]
 function gs_mahjong:EnterState( ... )
-	--print("gs_level_multi:EnterState", LOG.gs)
+	--log("gs_level_multi:EnterState", LOG.gs)
 	self.active = true
 end
 
@@ -49,6 +49,6 @@ end
  * @Description: 离开状态
  ]]
 function gs_mahjong:ExitState( ... )
-	--print("gs_level_multi:ExitState", LOG.gs)
+	--log("gs_level_multi:ExitState", LOG.gs)
 	self.active = false
 end

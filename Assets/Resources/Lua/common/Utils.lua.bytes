@@ -44,8 +44,8 @@ function _warm(condition, msg)
 		return
 	end
 	if(not condition)then
-		_print("assert fail description:")
-		_print(msg)
+		_log("assert fail description:")
+		_log(msg)
 	end
 end
 
@@ -160,7 +160,7 @@ _print = function(msg)
 		return
 	end
 
-	print(msg)
+	log(msg)
 end
 
 --[[字符长度]]
@@ -511,10 +511,10 @@ function Utils.getLegalName(originName,cutLen,needStrFix)
 	local newName = nil
 
 	local len = Utils.getUtf8Len(originName)----string.len
-	-- _print("lance test 原有字符串长度："..len)
+	-- _log("lance test 原有字符串长度："..len)
 	if(len >cutLen)then
 		newName = Utils.subUtf8(originName,cutLen)
-		-- _print("lance test 截取字符："..cutLen..":"..newName)
+		-- _log("lance test 截取字符："..cutLen..":"..newName)
 
 		if(needStrFix)then
 			newName = newName.."..."
@@ -757,12 +757,12 @@ function Utils.GetBinaryFromNumber(number)
 	local hexString = string.format("%x", number)
 	for k = 1, string.len(hexString) do
 		local charValue = string.sub(hexString, k, k)
-		print("charValue: "..charValue)
+		log("charValue: "..charValue)
 		local binStr = hex2Binary[tostring(string.upper(charValue))]
 		if (binStr ~= nil) then
 			ret = ret..binStr
 		else
-			print("binStr is nil")
+			log("binStr is nil")
 		end
 	end
 

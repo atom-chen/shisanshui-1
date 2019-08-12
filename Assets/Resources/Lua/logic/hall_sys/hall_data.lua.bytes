@@ -30,7 +30,7 @@ function this.Init()
     if tonumber(this.GetPlayerPrefs("FristLogin"))~=1 then
         for k ,v in pairs(this.playerprefs)do
             this.SetPlayerPrefs(k,v)  
-            print(k.."k"..v.."v")
+            log(k.."k"..v.."v")
         end
         this.SetPlayerPrefs("FristLogin",1)  
     end  
@@ -50,7 +50,7 @@ function this.Init()
 end
 
 function this.register()
-    print(" Notifier.regist(cmdName.MSG_ROOMCARD_REFRESH,this.UpdateInfo)")
+    log(" Notifier.regist(cmdName.MSG_ROOMCARD_REFRESH,this.UpdateInfo)")
     Notifier.regist(cmdName.MSG_ROOMCARD_REFRESH,this.UpdateInfo)
 end
 
@@ -59,20 +59,20 @@ function this.UpdateInfo(roomcard)
     if not IsNil(hall_ui.gameObject) then 
         hall_ui.InitInfo()
     end
-    print("Updatacoin-----------------------------------") 
+    log("Updatacoin-----------------------------------") 
 end
 local times=0
 this.animationtable={}
  function this.staranimation()
     times=times+1
-    --print("times"..times)
+    --log("times"..times)
     if times==10 then
         for i=1,table.getCount(this.animationtable) do
             local an=componentGet(this.animationtable[i].gameObject,"SkeletonAnimation") 
             an.AnimationName=this.animationtable[i].gameObject.name
             an.playComPleteCallBack=function()
                 an.AnimationName="" 
-                --print("````````````````0000000000")  
+                --log("````````````````0000000000")  
             end
         end
         times=0

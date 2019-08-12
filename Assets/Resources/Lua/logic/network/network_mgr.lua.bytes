@@ -19,7 +19,7 @@ end
 
 function this.sendPkgNoWaitForRsp( cmdID, pkgBuffer )
 -- LogW("sendPkgNoWaitForRsp------",cmdID,pkgBuffer )
-    print("发送游戏服消息ID："..cmdID.." msg:"..GetTblData(pkgBuffer))
+    log("发送游戏服消息ID："..cmdID.." msg:"..GetTblData(pkgBuffer))
     SocketManager:onGameSendData(pkgBuffer)
 end
 
@@ -27,7 +27,7 @@ end
  * @Description: 切换网络状态  
  ]]
 function this.NetworkReachability(netstate)
-    print("netstate------------------------"..tostring(netstate))
+    log("netstate------------------------"..tostring(netstate))
     if netstate == 1 then   --1 代表wifi 
         fast_tip.Show("切换至WIFI网络")
     elseif netstate == 2 then  --2 代表移动
@@ -45,7 +45,7 @@ function this.AppPauseNotify(pause)
         durationTime = os.time()
     else
         durationTime = os.time() - durationTime
-        --print("durationTime2-----------------------"..tostring(os.time()))   
+        --log("durationTime2-----------------------"..tostring(os.time()))   
         SocketManager:setLeaveTime(durationTime)    
     end  
 end

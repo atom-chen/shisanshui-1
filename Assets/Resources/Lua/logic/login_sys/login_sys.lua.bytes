@@ -75,7 +75,7 @@ end
 
 
 function this.AutoLogin()
-	print("===============Application.platform----"..tostring(Application.platform))
+	log("===============Application.platform----"..tostring(Application.platform))
 	this.loginType = PlayerPrefs.GetInt("LoginType")
 
 	if tostring(Application.platform) == "WindowsEditor" then
@@ -113,11 +113,11 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 		 return 
 	end
 	
-	print("-------------------------"..tostring(ret));
+	log("-------------------------"..tostring(ret));
 	this.loginType = 9
 	--平台成功回调后开始连接服务器并登陆服务器 
-	print("this.share_uid=="..this.share_uid)
-	print(account)
+	log("this.share_uid=="..this.share_uid)
+	log(account)
     http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
@@ -132,7 +132,7 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 		if data_center.GetAllInfor().ret == 0 then
 	-- 		network_mgr.SetNetChnl(NetEngine.Instance:GetGameChnl())
 	-- 		local uid = data_center.GetLoginRetInfo()
-	-- 		print("URL:"..this.url)
+	-- 		log("URL:"..this.url)
 	-- 		local urlStr = string.format(this.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().uid)
 	-- 		network_mgr.Connect(urlStr)
 			
@@ -148,7 +148,7 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
 			SocketManager:createSocket("hall",urlStr,"online", 1)		
 		else
-			print("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));		
+			log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));		
 		end
 	end)	
 end
@@ -166,17 +166,17 @@ function this.WeiXinLogin()
 		local msgTable = ParseJsonStr(msg)
 		data_center.SetLoginRetInfo(msgTable)
 
-		print("Unity_WeiXinLogin=="..tostring(msgTable.access_token));
+		log("Unity_WeiXinLogin=="..tostring(msgTable.access_token));
 		if msgTable.result == 0 then
-			print("this.share_uid=="..this.share_uid)
+			log("this.share_uid=="..this.share_uid)
 			http_request_interface.otherLogin(this.loginType, msgTable.access_token, msgTable.access_token, 0, "code", this.share_uid, function (code,m,str)
 			-- this.share_uid = ""
-			print("Unity_WeiXin1=="..str)
-			print("Unity_WeiXin1=="..tostring(code))
-			print("Unity_WeiXin1=="..m)
+			log("Unity_WeiXin1=="..str)
+			log("Unity_WeiXin1=="..tostring(code))
+			log("Unity_WeiXin1=="..m)
 			this.isClicked = false
 			local s=string.gsub(str,"\\/","/")
-			print("Unity_WeiXin2=="..s)
+			log("Unity_WeiXin2=="..s)
 
 			local t=ParseJsonStr(s)
 			LogW("ttttttttttttttt---",t)
@@ -196,11 +196,11 @@ function this.WeiXinLogin()
 					local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
 					SocketManager:createSocket("hall",urlStr,"online", 1)	  
 				else
-					print("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
+					log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
 				end
 			end)
 		else
-			print("Login Failed"..tostring(msgTable))
+			log("Login Failed"..tostring(msgTable))
 		end
 	end)
 	
@@ -214,12 +214,12 @@ function this.QQLogin()
 	end
 	this.loginType = 3
 	
-	print("loginType:"..this.loginType)
+	log("loginType:"..this.loginType)
 --	YX_APIManage.Instance:QQLogin(this.LoginAndJumintoLobby(msg))
 	  YX_APIManage.Instance:QQLogin(function(msg)
 			local msgTable = ParseJsonStr(msg)
-		print("Unity_QQLogin=="..tostring(msgTable.access_token));
-		print("Unity_QQLoginOpenId=="..tostring(msgTable.openId));
+		log("Unity_QQLogin=="..tostring(msgTable.access_token));
+		log("Unity_QQLoginOpenId=="..tostring(msgTable.openId));
 		if msgTable.result == 0 then
 			http_request_interface.otherLogin(this.loginType,msgTable.openId,msgTable.access_token,0,"code",this.share_uid,function (code,m,str)
 		    this.isClicked = false
@@ -238,11 +238,11 @@ function this.QQLogin()
 				local urlStr = string.format(data_center.url, data_center.GetLoginRetInfo().uid, data_center.GetLoginRetInfo().session_key)
 				SocketManager:createSocket("hall",urlStr,"online", 1)	
 			else
-				print("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
+				log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
 			end 
 			end)
 		else
-			print("Login Failed"..tostring(msgTable))
+			log("Login Failed"..tostring(msgTable))
 		end
 	end)
 	
@@ -256,16 +256,16 @@ function this.LoginAndJumintoLobby(msgTable)
 	end
 	this.loginType = msgTable.LoginType
 
-	print("this.share_uid=="..this.share_uid)
+	log("this.share_uid=="..this.share_uid)
 	LogW("LoginAndJumintoLobby------",msgTable)
 	http_request_interface.otherLogin(msgTable.LoginType, msgTable.OpenID, msgTable.AccessToken, 0, "openid", this.share_uid, function (code,m,str)
 		this.share_uid = ""
-		print("Unity_WeiXin1=="..str)
-		print("Unity_WeiXin1=="..tostring(code))
-		print("Unity_WeiXin1=="..m)
+		log("Unity_WeiXin1=="..str)
+		log("Unity_WeiXin1=="..tostring(code))
+		log("Unity_WeiXin1=="..m)
 		this.isClicked = false
 		local s=string.gsub(str,"\\/","/")
-		print("Unity_WeiXin2=="..s)
+		log("Unity_WeiXin2=="..s)
 		local t=ParseJsonStr(s)
 		LogW("LoginAndJumintoLobby  ttttttttttttttt---",t)
 		data_center.SetLoginAllInfo(t)
@@ -279,7 +279,7 @@ function this.LoginAndJumintoLobby(msgTable)
 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
 			SocketManager:createSocket("hall",urlStr,"online", 1)	  
 		else
-			print("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
+			log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
 		end
 	end)	
 end
@@ -364,7 +364,7 @@ function this.EnterHallRsp(buffer)
 		login_ui.gameObject=nil	
 
 
-		print("登录大厅成功")
+		log("登录大厅成功")
 		map_controller.LoadHallScene(900001)	
 	--end
 end

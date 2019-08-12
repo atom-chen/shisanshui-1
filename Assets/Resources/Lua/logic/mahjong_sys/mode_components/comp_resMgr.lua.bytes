@@ -55,7 +55,7 @@ function comp_resMgr.create()
     function this:GetMahjongMesh(index)
     	local mesh = mjMeshs[index]
     	if mesh == nil then
-    		print("GetMahjongMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
+    		log("GetMahjongMesh !!!!!!!!!!!!!!!!!!!!!!!!!! error !!!!!!!!! index"..index)
     	end
         return mesh
     end

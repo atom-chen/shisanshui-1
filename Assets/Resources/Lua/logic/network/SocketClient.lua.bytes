@@ -104,7 +104,7 @@ end
 
 
 function SocketClient:connect()
-	print(self._chlName, ": " , "连接服务器..", self._addr)
+	log(self._chlName, ": " , "连接服务器..", self._addr)
 
 	if self._wsocket then
 		self:clearSocket(false)
@@ -199,13 +199,13 @@ function SocketClient:connect()
 	-- 启动定时器
  	if self._chlName == "hall" then
  		YX_APIManage.Instance:setHallTimer(function (  )
- 		-- print("---------updateNetTimer-----")
+ 		-- log("---------updateNetTimer-----")
  			self:update()
  		end)
 
  	elseif self._chlName == "game" then
  		YX_APIManage.Instance:setGameTimer(function (  )
- 		-- print("---------updateNetTimer-----")
+ 		-- log("---------updateNetTimer-----")
  			self:update()
  		end)
  	end
@@ -433,7 +433,7 @@ function SocketClient:sendEvent(tblEvent, _dst, _svrName, _svrID)
 	--sc
 	_strMsg = _strMsg .. "@@@@" .. CombinJsonStr(tblMsg)
 
-	--print("sendEvent====" .. _strMsg)
+	--log("sendEvent====" .. _strMsg)
 	
 	self._wsocket:Send(_strMsg)
 	self._lastSendTime = os.time()
@@ -500,7 +500,7 @@ end
 -- @des: 发送心跳包，处理发送消息队列与接收消息队列缓存
 -- @param: xx
 function SocketClient:update()
-	-- print("SocketClient:update------")
+	-- log("SocketClient:update------")
 	local curTime = os.time()
 	if self._connectStatus ==NetStatus.connecting then
 

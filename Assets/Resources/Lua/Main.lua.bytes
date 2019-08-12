@@ -41,7 +41,7 @@ end
  * @Description: lua层的主入口
  ]]
 function Main()	
-	print("lua层的主入口")
+	log("lua层的主入口")
 	math.randomseed(os.clock())		
 	GameManager.OnInitOK(false, "", 0)
 	-- UpdateBeat:Add(Update)

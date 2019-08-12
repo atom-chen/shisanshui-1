@@ -27,7 +27,7 @@ function this.GetLogicIDbySerID(chairID)
 	if logicID <= 0 then
 		logicID = logicID + roomdata_center.MaxPlayer()
 	end
-	print("转换ID， 人数： "..tostring(roomdata_center.MaxPlayer()).." chiarID: "..chairID.." offset: "..tostring(offset))
+	log("转换ID， 人数： "..tostring(roomdata_center.MaxPlayer()).." chiarID: "..chairID.." offset: "..tostring(offset))
 	return logicID
 end
 

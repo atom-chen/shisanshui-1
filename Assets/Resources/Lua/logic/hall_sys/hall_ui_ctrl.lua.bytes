@@ -26,7 +26,7 @@ end
  * @Description: 加载完场景做的第一件事
  ]]
 function this.HandleLevelLoadComplete()
-	print("gs_mgr.state_main_hall-------------------------------")
+	log("gs_mgr.state_main_hall-------------------------------")
   	gs_mgr.ChangeState(gs_mgr.state_main_hall)
   	map_controller.SetIsLoadingMap(false)
 
@@ -41,7 +41,7 @@ end
 
 function this.OnGetClientConfig(code, m, str)
   --等获取游戏配置列表后再查询状态  
-  print("this.OnGetClientConfig============"..str)
+  log("this.OnGetClientConfig============"..str)
   local realUrl =nil
   local s = string.gsub(str,"\\/","/")
   local data = ParseJsonStr(s)
@@ -59,7 +59,7 @@ function this.OnGetClientConfig(code, m, str)
         else
           PlayerPrefs.SetInt("jsonversion", tonumber(data["jsonversion"]))
           --request_config["gid"]=gid
-          print("拉取json文件")
+          log("拉取json文件")
           NetWorkManage.Instance:HttpDownTextAsset(realUrl, function(code, msg)
           end, Application.persistentDataPath.."/games/gamerule")
         end

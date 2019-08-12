@@ -314,6 +314,7 @@ function this.LoadAllCard(cards)
 		end
 		local k = i - 1
 		card_data.tran.transform.localPosition = Vector3.New(-558 + 93 * k, 0, 0)
+		card_data.tran.transform.localScale = Vector3.New(0.9, 0.9, 0.9)
 		card_data.tran.name = tostring(i)
 		card_data.pos = Vector3.New(-558 + 93 * k, 0, 0)
 		card_data.name = tostring(i)
@@ -372,7 +373,7 @@ function this.CardClick(obj, fast)
 		local indexKey = this.GetDownCardKey(cardData)
 		table.remove(selectDownCards, indexKey)
 	else
-		if obj.transform.localScale ~= Vector3.New(0.65, 0.65, 0.65) then
+		if obj.transform.localScale ~= Vector3.New(0.91, 0.91, 0.91) then
 			log("换牌错误")
 			return
 		end
@@ -461,7 +462,7 @@ function this.CardBgClick(obj)
 		local cardData = UIEventListener.Get(v.tran.gameObject).parameter
 		local cardNum = cardData.card
 		v.tran.transform:DOLocalMove(cardPlaceTranList[place_up_index].tran.transform.localPosition, 0.3, true)
-		v.tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.3)
+		v.tran.transform:DOScale(Vector3.New(0.91, 0.91, 0.91), 0.3)
 		cardData.cardType = CardType[3]
 		cardData.up_index = place_up_index
 		UIEventListener.Get(v.tran.gameObject).parameter = cardData
@@ -743,7 +744,7 @@ function this.AutoPlace1Click(index)
 			return
 		end
 		cardTranTbl[cardNum].tran.transform:DOLocalMove(destOjbPos.tran.transform.localPosition, 0.3, true)
-		cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
+		--cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
 		local parameterData = UIEventListener.Get(cardTranTbl[cardNum].tran.gameObject).parameter
 		parameterData.cardType = CardType[3]
 		parameterData.up_index = i

@@ -37,12 +37,12 @@ end
  * @Description: 进入状态
  ]]
 function gs_update_version:EnterState( ... )
-	--print("gs_update_version:EnterState", LOG.gs)
+	--log("gs_update_version:EnterState", LOG.gs)
 end
 
 --[[--
  * @Description: 离开状态
  ]]
 function gs_update_version:ExitState( ... )
-	--print("gs_update_version:ExitState", LOG.gs)
+	--log("gs_update_version:ExitState", LOG.gs)
 end

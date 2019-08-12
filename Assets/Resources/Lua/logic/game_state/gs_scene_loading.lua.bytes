@@ -38,7 +38,7 @@ end
  * @Description: 进入状态
  ]]
 function gs_scene_loading:EnterState( ... )
-	--print("gs_scene_loading:EnterState", LOG.gs)
+	--log("gs_scene_loading:EnterState", LOG.gs)
 	self.active = true
 end
 
@@ -46,7 +46,7 @@ end
  * @Description: 离开状态
  ]]
 function gs_scene_loading:ExitState( ... )
-	--print("gs_scene_loading:ExitState", LOG.gs)
+	--log("gs_scene_loading:ExitState", LOG.gs)
 	self.active = false
 end
 
@@ -54,6 +54,6 @@ end
  * @Description: 处理尝试加载场景
  ]]
 function gs_scene_loading:HandleTryToLoadScene(sceneId, sceneType , newSys)
-	--print("gs_scene_loading:HandleTryToLoadScene", LOG.gs)
+	--log("gs_scene_loading:HandleTryToLoadScene", LOG.gs)
 	gs_mgr.AddLoadSceneInfo(sceneId, sceneType , newSys)
 end

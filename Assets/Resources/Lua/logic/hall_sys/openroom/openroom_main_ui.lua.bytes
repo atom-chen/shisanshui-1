@@ -92,9 +92,9 @@ function this.OnBtnCreateClick(obj)
 		config_rule["addColor"] = gameDataInfo.add_card
 		config_rule["buyhorse"] = gameDataInfo.isChip
 		config_rule["maxfan"] = gameDataInfo.max_multiple
-		print("people num : "..gameDataInfo.people_num)
+		log("people num : "..gameDataInfo.people_num)
 		
-		print("addghost : "..gameDataInfo.add_ghost)
+		log("addghost : "..gameDataInfo.add_ghost)
 		config_rule.gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.GetSssRoomDataInfo().gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.RequestSssCreateRoom(config_rule)
@@ -104,10 +104,10 @@ function this.OnBtnCreateClick(obj)
 	--[[
 	local input = componentGet(child(this.transform, "Input/Label"), "UILabel")
 	if input ~= nil then
-		print("roomNo: "..tostring(input.text))
+		log("roomNo: "..tostring(input.text))
 		local roomNo = tonumber(input.text)
 		if roomNo ~= nil then
-			print("roomNo: "..tostring(roomNo))
+			log("roomNo: "..tostring(roomNo))
 			open_room_data.RequestGetInRoom(gameDataInfo.gid, roomNo)
 			return
 		end

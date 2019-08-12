@@ -30,7 +30,7 @@ function player_component.create()
 	function this:PlayerGroupCard(group)
 		local groupTrans =	this.playerObj.transform:FindChild(group)
 		local cards = groupTrans.transform:GetComponentsInChildren(typeof(UnityEngine.MeshFilter))
-		print("PlayFirstGroupCard"..tostring(cards.Length))
+		log("PlayFirstGroupCard"..tostring(cards.Length))
 
 		for j = 0, cards.Length -1 do
 			local cardObj = cards[j]
@@ -128,7 +128,7 @@ function player_component.create()
 	--设置材质
 	function this:SetCardMesh(cards)
 		if this.compareResult == nil then
-			print("SetCard Mesh Error")
+			log("SetCard Mesh Error")
 		end
 		local stCards = cards
 		if cards == nil then
@@ -141,7 +141,7 @@ function player_component.create()
 		local meshtable3 = {}
 		for i = 1 ,#stCards do
 			local cardIndex = stCards[i]
-			print("CardValue:"..tostring(card_define.cardDic[cardIndex]))
+			log("CardValue:"..tostring(card_define.cardDic[cardIndex]))
 			local meshValue = card_define.cardDic[cardIndex]
 			local mesh = this.resMgrComponet.GetCardMesh(meshValue)
 			if i >0 and i < 6 then --ºó¶Õ
@@ -193,7 +193,7 @@ function player_component.create()
 		yoffset = yoffset + 0.01
 	end
 		
-		print("CardList"..tostring(#this.CardList))
+		log("CardList"..tostring(#this.CardList))
 		coroutine.start(function()
 		for k,vv in pairs(this.CardList) do
 			vv.gameObject:SetActive(true)
@@ -282,7 +282,7 @@ function player_component.create()
 		end]]
 	this.playerObj:SetActive(false)
 	this.compareResult = {}
-	print("++++++++++玩家数据重置,座位号:"..tostring(this.viewSeat))
+	log("++++++++++玩家数据重置,座位号:"..tostring(this.viewSeat))
 	end
 
 	--牌重置

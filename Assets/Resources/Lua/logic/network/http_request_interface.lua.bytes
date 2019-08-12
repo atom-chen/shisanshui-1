@@ -46,7 +46,7 @@ function this.getGameInfo(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getGameInfo--------") 
+    log("-----------Finish_getGameInfo--------") 
 end
   
 
@@ -57,7 +57,7 @@ function  this.setting(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_setting--------") 
+    log("-----------Finish_setting--------") 
 end
 
 function this.delEmail(param,callback)
@@ -75,7 +75,7 @@ function  this.feedBack(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_feedBack--------") 
+    log("-----------Finish_feedBack--------") 
 end
 
 
@@ -87,7 +87,7 @@ function  this.getFeedBack(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getFeedBack--------") 
+    log("-----------Finish_getFeedBack--------") 
 end
 
 
@@ -100,7 +100,7 @@ function  this.actUser(nickname,sex,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_actUser--------") 
+    log("-----------Finish_actUser--------") 
 end
 
 
@@ -113,7 +113,7 @@ function  this.getValidByUid(mtype,stype,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getValidByUid--------") 
+    log("-----------Finish_getValidByUid--------") 
 end
 
 
@@ -126,7 +126,7 @@ function  this.getUserInfo(uid,gid,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getUserInfo--------") 
+    log("-----------Finish_getUserInfo--------") 
 end
 
 
@@ -137,7 +137,7 @@ function  this.sysTime(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_sysTime--------") 
+    log("-----------Finish_sysTime--------") 
 end
 
  
@@ -149,7 +149,7 @@ function  this.setImage(imagetype,imageurl,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_setImage--------") 
+    log("-----------Finish_setImage--------") 
 end
 
 
@@ -161,7 +161,7 @@ function  this.getImage(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getImage--------") 
+    log("-----------Finish_getImage--------") 
 end
 
 
@@ -171,10 +171,10 @@ function  this.otherLogin(rtype,openid,access_token,logintime,subrtype,share_uid
     local param={["rtype"]=rtype,["openid"]=openid,["access_token"]=access_token,["logintime"]=logintime,["subrtype"]=subrtype,["share_uid"] = share_uid} 
     local t=this.GetTable("GameMember.otherLogin",param) 
     local rt=json.encode(t) 
-    print("http_request_interface------" .. rt)
+    log("http_request_interface------" .. rt)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
-        print("收到返回")
-        print(str)
+        log("收到返回")
+        log(str)
         if code == -1 then
             fast_tip.Show("您的网络状态不好，请稍后再试")
         else 
@@ -194,7 +194,7 @@ function  this.otherBind(uno,verify,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_otherBind--------") 
+    log("-----------Finish_otherBind--------") 
 end
 
 
@@ -209,7 +209,7 @@ function  this.getBalanceM(openid,access_token,openkey,pf,pfkey,accout_type,call
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getBalanceM--------") 
+    log("-----------Finish_getBalanceM--------") 
 end
 
 
@@ -222,7 +222,7 @@ function  this.idCardVerify(name,id_no,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_idCardVerify--------") 
+    log("-----------Finish_idCardVerify--------") 
 end
 
 
@@ -236,7 +236,7 @@ function  this.getAccount(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getAccount--------") 
+    log("-----------Finish_getAccount--------") 
 end
 
 
@@ -249,7 +249,7 @@ function  this.checkIdCard(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_checkIdCard--------") 
+    log("-----------Finish_checkIdCard--------") 
 end
 
 
@@ -262,7 +262,7 @@ function  this.getClientConfig(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
 end) 
-    print("-----------Finish_getClientConfig--------")
+    log("-----------Finish_getClientConfig--------")
 end
 
 
@@ -279,7 +279,7 @@ function this.getRoomListByGid(param,callback)
             callback(code,m,str)
         end 
     end)
-    print("-----------Finish_getRoomListByGid--------")
+    log("-----------Finish_getRoomListByGid--------")
 end
 
 --快速入座{gid:游戏ID}
@@ -289,7 +289,7 @@ function this.roomFastEnter(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end)
-    print("-----------Finish_roomFastEnter--------")
+    log("-----------Finish_roomFastEnter--------")
 end
 
 
@@ -300,10 +300,10 @@ function  this.createRoom(param, callback)
     local rt=json.encode(t)
 	print ("createroom:  "..tostring(rt))
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
-        print(str)
+        log(str)
         callback(code,m,str) 
     end) 
-    print("-----------Finish_createRoom--------") 
+    log("-----------Finish_createRoom--------") 
 end
 
 --获得用户已开房间列表 {"gid":游戏id,"status":状态0已开房1已开局2已结算,"page":第几页,从0开始}
@@ -314,7 +314,7 @@ function  this.getGameRoomList(gid,status,page,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getGameRoomList--------") 
+    log("-----------Finish_getGameRoomList--------") 
 end
 
 function this.getRoomSimpleList(gid,status,page,callback)
@@ -324,7 +324,7 @@ function this.getRoomSimpleList(gid,status,page,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getGameRoomList--------")     
+    log("-----------Finish_getGameRoomList--------")     
 end
 
 -- 根据房号查找房间信息{"gid":游戏id,"rno":房号}
@@ -337,7 +337,7 @@ function  this.getRoomByRno(rno, callback)
         callback(code,m,str)
     end) 
 
-    print("-----------Finish_getRoomByRno--------")
+    log("-----------Finish_getRoomByRno--------")
 end
 
 --根据房id查找房间信息 {"rid":房号}
@@ -348,7 +348,7 @@ function  this.getRoomByRid(rid,rank,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getRoomByRid--------") 
+    log("-----------Finish_getRoomByRid--------") 
 end
 
 
@@ -360,7 +360,7 @@ function  this.getGameRoomListByUid(gid,status,page,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getGameRoomListByUid--------") 
+    log("-----------Finish_getGameRoomListByUid--------") 
 end
 
 --根据用户ID获取简单玩牌数据列表 {"gid":游戏id,"status":状态0已开房1已开局2已结算,"page":第几页,从0开始}
@@ -371,7 +371,7 @@ function this.getRoomSimpleByUid(gid,status,page,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getGameRoomSimpleByUid--------") 
+    log("-----------Finish_getGameRoomSimpleByUid--------") 
 end
 
 
@@ -382,7 +382,7 @@ function  this.getNotice(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getNotice--------") 
+    log("-----------Finish_getNotice--------") 
 end
 
 
@@ -394,7 +394,7 @@ function  this.getEmails(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getEmails--------") 
+    log("-----------Finish_getEmails--------") 
 end
 
 
@@ -407,7 +407,7 @@ function  this.readEmail(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_readEmail--------") 
+    log("-----------Finish_readEmail--------") 
 end
 
 
@@ -421,7 +421,7 @@ function  this.getEmailAttachment(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getEmailAttachment--------") 
+    log("-----------Finish_getEmailAttachment--------") 
 end
 
 
@@ -433,7 +433,7 @@ function  this.getNewEmails(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getNewEmails--------") 
+    log("-----------Finish_getNewEmails--------") 
 end
 
 
@@ -445,7 +445,7 @@ function  this.prepay(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_prepay--------") 
+    log("-----------Finish_prepay--------") 
 end
 
 
@@ -455,7 +455,7 @@ function this.getTask(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_getTask--------") 
+    log("-----------Finish_getTask--------") 
     -- body
 end
 
@@ -467,13 +467,13 @@ function this.getimage(url,width,height,callback)
 end
 
 function this.GetLotteryDayData(param,callback)
-    print("inter----------------GetLotteryDayData")
+    log("inter----------------GetLotteryDayData")
     local t=this.GetTable("ModDayrwd.roll",param)
     local rt=json.encode(t)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------GetLotteryDayData--------") 
+    log("-----------GetLotteryDayData--------") 
 
 end
 
@@ -483,7 +483,7 @@ function this.GetLotteryCfgData(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------GetLotteryCfgDayData--------") 
+    log("-----------GetLotteryCfgDayData--------") 
 
 end
 
@@ -493,7 +493,7 @@ function this.rwd(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end) 
-    print("-----------Finish_rwd--------") 
+    log("-----------Finish_rwd--------") 
 end
 
 --获取商品配置列表
@@ -503,7 +503,7 @@ function this.getProductCfg(param,callback)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         callback(code,m,str)
     end)
-    print("-----------Finish_roomFastEnter--------")
+    log("-----------Finish_roomFastEnter--------")
 end
 
 
@@ -517,7 +517,7 @@ function this.GetPayOrder( stype,pid,num,callback)
      local param={["pid"]=pid,["stype"]=stype,["num"]=num} 
     local t=this.GetTable("GameStore.prepay",param) 
     local rt=json.encode(t)
-     print("-----------GetPayOrder--------" .. rt )
+     log("-----------GetPayOrder--------" .. rt )
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         if code == -1 then
             fast_tip.Show("您的网络状态不好，请稍后再试")
@@ -525,7 +525,7 @@ function this.GetPayOrder( stype,pid,num,callback)
             callback(code,m,str)
         end 
     end) 
-    print("-----------Finish_GetIAppPayOrder--------") 
+    log("-----------Finish_GetIAppPayOrder--------") 
 end
 
 --endregion
@@ -535,7 +535,7 @@ function this.ToRoom(param, callback)
     waiting_ui.Show()
     local t=this.GetTable("GameSAR.toRoom", param)     
     local rt=json.encode(t)  
-    print("ToRoom------" .. rt)   
+    log("ToRoom------" .. rt)   
     NetWorkManage.Instance:HttpPOSTRequest(rt, function (code, m, str)        
         waiting_ui.Hide()
         if code == -1 then
@@ -550,11 +550,11 @@ end
  * @Description: 只在进第一次进游戏时查询状态  
  ]]
 function this.QueryStatus(param, callback)
-    print("只在进第一次进游戏时查询状态")
+    log("只在进第一次进游戏时查询状态")
     --waiting_ui.Show()
     local t=this.GetTable("GameSAR.queryStatus", param) 
     local rt=json.encode(t)    
-    print("rt------------------------------"..tostring(rt))
+    log("rt------------------------------"..tostring(rt))
     NetWorkManage.Instance:HttpPOSTRequest(rt, function (code, m, str)        
         --waiting_ui.Hide()
         if code == -1 then

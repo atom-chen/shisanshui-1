@@ -149,6 +149,25 @@ end
 local function OnGameDeal( tbl )
 	shisangshui_ui.SetAllPlayerReady(false)
 	shisangshui_ui.IsShowBeiShuiBtn(false)
+
+	shisangshui_ui.DealCard(nil, function()
+		player_component.CardList = tbl["_para"]["stCards"]
+		recommendCards = tbl["_para"]["recommendCards"]
+		log("牌的数据"..tostring(player_component.CardList))
+	
+		local isSpecial = tbl["_para"]["nSpecialType"]
+
+		local score = tbl["_para"]["nSpecialScore"]
+		if isSpecial == 0 then
+			log("显示摆牌")
+			place_card.Show(player_component.CardList, recommendCards)
+		else
+			log("显示特殊牌型")
+			prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
+		end
+		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
+	end)
+
 	--log(GetTblData(tbl))
 	--shisangshui_ui.HideOperTips()
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
@@ -390,6 +409,31 @@ end
 local function OnCompareResult(tbl)
    card_data_manage.compareResultPara = tbl["_para"]
 
+   log("比牌结果")
+	local myLogicSeat = tbl["_src"]
+	local allCompareData = tbl["_para"]["stAllCompareData"]
+	--card_data_manage.allShootChairId = tbl["_para"]["nAllShootChairID"] ----全垒打玩家椅子id, 0表示没有全垒打
+	
+	
+	local myViewSeat = room_usersdata_center.GetViewSeatByLogicSeat(myLogicSeat)
+	if allCompareData ~=nil then
+	
+		for i,v in ipairs(allCompareData) do
+			local charid = v["chairid"]
+			local viewSeatId = room_usersdata_center.GetViewSeatByLogicSeatNum(charid) --查找当前座位号
+			log("+++++++桌子的座位号+++++++++++"..tostring(viewSeatId))
+			local Player = shisangshui_ui.GetPlayer(viewSeatId)
+			Player.viewSeat = viewSeatId
+			Player.compareResult = v
+
+		end
+	else
+		log("比牌数据错误")
+	end
+	
+	shisangshui_ui.CompareStart(function()
+	  
+	end)
  
 end
 

@@ -192,9 +192,9 @@ function comp_show_base:InitForReady()
     self.compDice.Init()
     self:SetOutCardEfObj(nil, true)        
     self.compPlayerMgr:ResetPlayer()
-    print("#self.lightDirTbl------------------"..#self.lightDirTbl)
+    log("#self.lightDirTbl------------------"..#self.lightDirTbl)
     for i,v in ipairs(self.lightDirTbl) do
-        --print("#self.lightDirTbl------------------")
+        --log("#self.lightDirTbl------------------")
         v.gameObject:SetActive(false)
     end
 end
@@ -244,10 +244,10 @@ function comp_show_base:OnGameDeal(tbl)
             dice_small = temp
         end
 
-        print("Dice========="..dice_big.." "..dice_small)
+        log("Dice========="..dice_big.." "..dice_small)
 
         self.compDice.Play(tbl["_para"]["dice"][1], tbl["_para"]["dice"][2], function ()
-            print("GetBankerViewSeat()----------------------"..roomdata_center.GetBankerViewSeat())
+            log("GetBankerViewSeat()----------------------"..roomdata_center.GetBankerViewSeat())
             local viewSeat = roomdata_center.GetBankerViewSeat() + dice_big + dice_small -1
             viewSeat = viewSeat % 4
             if viewSeat == 0 then
@@ -271,12 +271,12 @@ end
  * @Description: 定癞  
  ]]
 function comp_show_base:OnGameLaiZi(tbl)
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     roomdata_center.hun = tbl["_para"]["laizi"][1]
 
     local cardValue = tbl._para.cards[1]
     local dun = tbl._para.sits[1]/2
-    print("OnGameLaiZi !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
+    log("OnGameLaiZi !!!!!!!!!!!!! dun "..dun.." cardValue "..cardValue)
     self.compTable:ShowLai(dun, cardValue, true, function()
         self.compPlayerMgr:GetPlayer(1):ShowLaiInHand()
         self.compPlayerMgr:AllSortHandCard()
@@ -318,7 +318,7 @@ end
  * @Description: 出牌  
  ]]
 function comp_show_base:OnPlayCard(tbl)
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     local src = tbl["_src"]
     local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
 
@@ -330,7 +330,7 @@ function comp_show_base:OnPlayCard(tbl)
     end
 
     local value = tbl["_para"]["cards"][1]
-    --print("!!!!!!!!!!!!!!!viewSeat"..tostring(viewSeat))
+    --log("!!!!!!!!!!!!!!!viewSeat"..tostring(viewSeat))
     self.compPlayerMgr:GetPlayer(viewSeat):OutCard(value, function (pos)
        self.compResMgr:SetOutCardEfObj(pos)
     end)
@@ -345,7 +345,7 @@ end
  * @Description: 弃牌处理
  ]]
 function comp_show_base:OnGiveCard(tbl)
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     local src = tbl["_src"]
     local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
 
@@ -369,7 +369,7 @@ end
  * @Description: 碰牌处理  
  ]]
 function comp_show_base:OnTriplet( tbl )
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = self.gvblnFun(tbl._para.tripletWho)
     local offset = lastPlayViewSeat - operPlayViewSeat 
@@ -409,7 +409,7 @@ end
  * @Description: 杠牌处理  
  ]]
 function comp_show_base:OnQuadruplet( tbl )
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = self.gvblnFun(tbl._para.quadrupletWho)
     local offset = lastPlayViewSeat - operPlayViewSeat 
@@ -456,14 +456,14 @@ function comp_show_base:OnQuadruplet( tbl )
 end
 
 function comp_show_base:OnGameCollect(tbl)
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
 
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = operPlayViewSeat-1
     if lastPlayViewSeat<1 then
         lastPlayViewSeat = roomdata_center.MaxPlayer()
     end
-    --print("lastPlayViewSeat"..lastPlayViewSeat.."self.gvbl(tbl._para.collectWho)"..self.gvblnFun(tbl._para.collectWho)) 
+    --log("lastPlayViewSeat"..lastPlayViewSeat.."self.gvbl(tbl._para.collectWho)"..self.gvblnFun(tbl._para.collectWho)) 
     local mj = self.compPlayerMgr:GetPlayer(lastPlayViewSeat):GetLastOutCard()
 
     local operType = MahjongOperAllEnum.Collect
@@ -707,7 +707,7 @@ end
 
 -- 牌值  是否为金牌
 function comp_show_base:OnGameOpenGlod(tbl)
-    print(GetTblData(tbl))
+    log(GetTblData(tbl))
     local cardValue = tbl._para.nCard
     local isGold = tbl._para.bGold
 

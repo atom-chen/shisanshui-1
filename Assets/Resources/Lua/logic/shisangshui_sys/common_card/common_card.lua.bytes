@@ -45,7 +45,7 @@ function this.Awake()
 end
 
 function this.Show(cards, nSpecialType, pos, localSecond)
-	print("显示普通牌型"..tostring(nSpecialType))
+	log("显示普通牌型"..tostring(nSpecialType))
 	ui_sound_mgr.PlaySoundClip("CardTpye_Girl/NormalType/".. NormalTypeMusicConfig[nSpecialType])
 	if this.gameObject==nil then
 		require ("logic/shisangshui_sys/common_card/common_card")
@@ -67,7 +67,7 @@ function this.Show(cards, nSpecialType, pos, localSecond)
 	end
 	this.transform.localScale = Vector3.New(0.8, 0.8, 0.8)
 	this.transform:DOScale(Vector3.New(1, 1, 1), 0.2)
-	print("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
+	log("---------cards------"..tostring(cards).."  dun: "..tostring(dun))
 	my_cards = cards
 
 
@@ -126,7 +126,7 @@ function this.LoadAllCard(cards, nSpecialType)
 		local cardParent = child(this.transform, "cardGrid/"..tostring(min))
 		min = min + 1
 		if cardParent == nil then
-			print("cardGrid == nil")
+			log("cardGrid == nil")
 			return
 		end
 		local cardObj = newNormalUI("Prefabs/Card/"..tostring(cards[i]), cardParent)

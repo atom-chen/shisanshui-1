@@ -88,7 +88,7 @@ end
 ---------------------------设置数据start-------------------------
 function this.SetLoginRetInfo(loginInfo)
 	userInfo = loginInfo
-	print("loginUserInfo======================="..tostring(loginInfo))
+	log("loginUserInfo======================="..tostring(loginInfo))
 end
 function this.SetLoginAllInfo(AllfInfo)
     all=AllfInfo
