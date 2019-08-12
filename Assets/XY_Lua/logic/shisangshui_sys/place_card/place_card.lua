@@ -126,6 +126,38 @@ end
 function this.OnDestroy()
 end
 
+local hoverObj = nil
+function this.OnFingerHover(myself, fingerHoverEvent)
+	if fingerHoverEvent.Selection ~= nil then
+		log("OnFingerHoverForLua"..tostring(fingerHoverEvent.Selection.name))
+		if hoverObj == fingerHoverEvent.Selection then
+			return
+		else
+			if fingerHoverEvent.Selection.tag == "Card" then
+				local data = UIEventListener.Get(fingerHoverEvent.Selection.gameObject).parameter
+				if data ~= nil and data.cardType == CardType[3] and hoverObj ~= nil then
+					return
+				end
+				hoverObj = fingerHoverEvent.Selection
+				this.CardClick(hoverObj, true, true)
+			end
+		end
+	end
+end
+
+function this.OnFingerUp(myself,fingerUpEvent)
+	log("Lua fingerUpEvent++++++++++")
+	hoverObj = nil
+end
+
+function this.OnSwipe(myself,direction,fingerSwipe)
+	log("Direction:"..tostring(direction))
+	if tostring(direction) == "Down" then
+		--local data = UIEventListener.Get(fingerSwipe.gameObject).parameter
+		--this.DownOneCard(data, true)
+	end
+end
+
 ---[[
 function this.initinfor()
 	for i = 1, 13 do

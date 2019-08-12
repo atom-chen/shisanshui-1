@@ -277,14 +277,16 @@ local function InitWidgets()
 
     --创建用户列表
     this.playerList = {}
-	local roomData = room_data.GetSssRoomDataInfo()
-	local peopleNum = roomData.people_num
-	log("PeopleNum:"..tostring(peopleNum))
+	if this.peopleNum == nil then
+		local roomData = room_data.GetSssRoomDataInfo()
+		this.peopleNum = roomData.people_num
+	end
+	log("PeopleNum:"..tostring(this.peopleNum))
     for i=1,6 do
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
-			if i < tonumber(peopleNum) or i == tonumber(peopleNum) then
-			local viewSeateConfig = config_data_center.getConfigDataByID("dataconfig_shisanshuitableconfig","id",tonumber(peopleNum))
+			if i < tonumber(this.peopleNum) or i == tonumber(this.peopleNum) then
+			local viewSeateConfig = config_data_center.getConfigDataByID("dataconfig_shisanshuitableconfig","id",tonumber(this.peopleNum))
 			local position = viewSeateConfig["pos"..tostring(i)]
 			local posjson = string.gsub(position,"\\/","/")  
 			local seateJson = ParseJsonStr(posjson)
@@ -729,6 +731,7 @@ function this.ResetAll()
 	this.HideScoreGroup()
 	this.HideRewards()
 	this.HideSpecialCardIcon()
+	this.ClearCards()
 end
 
   function this.HideScoreGroup()
@@ -927,8 +930,10 @@ end
 
 --发牌
 function this.DealCard(data, callback)
-	local roomData = room_data.GetSssRoomDataInfo()
-	local peopleNum = roomData.people_num
+	if this.peopleNum == nil then
+		local roomData = room_data.GetSssRoomDataInfo()
+		this.peopleNum = roomData.people_num
+	end
 	this.peoCardsTbl = {}
 	this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
 	this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
@@ -936,8 +941,8 @@ function this.DealCard(data, callback)
 	this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
 	this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
 	this.peoCardsTbl[7] = this.CardsTbl
-	this.curPeoCardsTbl = this.peoCardsTbl[peopleNum]
-	for i = 1, peopleNum do
+	this.curPeoCardsTbl = this.peoCardsTbl[this.peopleNum]
+	for i = 1, this.peopleNum do
 		this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
 		for j = 1, 13 do
 			this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
@@ -956,6 +961,17 @@ end
 
 function this.CompareStart(callback)
 	this.CardCompareHandler(callback)
+end
+
+function this.ClearCards()
+	if this.cards ~= nil then
+		for i, v in pairs(this.cards) do
+			for j, k in pairs(v) do
+				GameObject.Destroy(k.gameObject)
+			end
+		end
+	end
+	this.cards = {}
 end
 
 --[[--
@@ -980,101 +996,130 @@ function this.CardCompareHandler(callback)
 	table.sort(secondSort)
 	table.sort(threeSort)
 
-	--比头墩
-	for j,k in ipairs(firstSort) do
-		for i ,Player in ipairs(this.playerList) do
-			if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
-				if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
-					for 1, 3 do
-						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
-						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-						tran.transform.localPosition = Vector3.New(0, 0, 0)
-						--Player:PlayerGroupCard("Group1")
-						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+	this.ClearCards()
+	coroutine.start(function()
+		--比头墩
+		for j,k in ipairs(firstSort) do
+			for i ,Player in ipairs(this.playerList) do
+				if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
+					this.cards[i] = {}
+					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
+						for n = 1, 3 do
+							print(GetTblData(Player.compareResult.stCards))
+							print(tostring(Player.compareResult.stCards[n]))
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+							tran.transform.localPosition = Vector3.New(0, 0, 0)
+
+							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 6 + 3
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 6 + 5
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 6 + 5
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 6 + 5
+							if card == 40 then
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 6 + 4
+							end
+							this.cards[i][n] = tran
+							--Player:PlayerGroupCard("Group1")
+							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						end
+						coroutine.wait(1)
+						break
 					end
-					coroutine.wait(1)
-					break
 				end
 			end
 		end
-	end
-	--这里增加一个事件，通知UI更新第一墩的积分数据
-	-- scoreData.index = 1
-	-- scoreData.totallScore = 0			
-	-- Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
-	
-	--比中墩
-	for j,k in ipairs(secondSort) do
-		for i ,Player in ipairs(this.playerList) do
-			if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) then
-				if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
-					-- Player:PlayerGroupCard("Group2")
-					-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
-					-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
+		--这里增加一个事件，通知UI更新第一墩的积分数据
+		-- scoreData.index = 1
+		-- scoreData.totallScore = 0			
+		-- Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
+		
+		--比中墩
+		for j,k in ipairs(secondSort) do
+			for i ,Player in ipairs(this.playerList) do
+				if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) then
+					if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
+						-- Player:PlayerGroupCard("Group2")
+						-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
+						-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
 
-					for 4, 8 do
-						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
-						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-						tran.transform.localPosition = Vector3.New(0, 0, 0)
-						--Player:PlayerGroupCard("Group1")
-						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						for n = 4, 8 do
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+							tran.transform.localPosition = Vector3.New(0, 0, 0)
+							--Player:PlayerGroupCard("Group1")
+							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 3
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 2 + 5
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 2 + 5
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 2 + 5
+							if card == 40 then
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 2 + 4
+							end
+							this.cards[i][n] = tran
+						end
+						coroutine.wait(1)
+						break
 					end
-					coroutine.wait(1)
-					break
 				end
 			end
 		end
-	end
-	--这里增加一个事件，通知UI更新第二墩的积分数据
-	scoreData.index = 2
-	scoreData.totallScore = 0
-	Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
+		--这里增加一个事件，通知UI更新第二墩的积分数据
+		scoreData.index = 2
+		scoreData.totallScore = 0
+		Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
 
-	--比尾墩
-	for j,k in ipairs(threeSort) do
-		for i ,Player in ipairs(this.playerList) do
-			if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
-				if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
+		--比尾墩
+		for j,k in ipairs(threeSort) do
+			for i ,Player in ipairs(this.playerList) do
+				if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
+					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 
-					for 9, 13 do
-						local tran = newNormalUI("Prefabs/Card/"..tostring(card), Player[i])
-						tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-						tran.transform.localPosition = Vector3.New(0, 0, 0)
-						--Player:PlayerGroupCard("Group1")
-						--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-						--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						for n = 9, 13 do
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+							tran.transform.localPosition = Vector3.New(0, 0, 0)
+							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 3
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 2 + 5
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 2 + 5
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 2 + 5
+							if card == 40 then
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 2 + 4
+							end
+							this.cards[i][n] = tran
+							--Player:PlayerGroupCard("Group1")
+							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						end
+
+						-- Player:PlayerGroupCard("Group3")
+						-- local cards = Player:showThreeCardByType() ----这里在通知UI界面显示相应排型
+						-- Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						coroutine.wait(1)
+						break
 					end
-
-					-- Player:PlayerGroupCard("Group3")
-					-- local cards = Player:showThreeCardByType() ----这里在通知UI界面显示相应排型
-					-- Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
-					coroutine.wait(1)
-					break
 				end
 			end
 		end
-	end
-	
-	--这里增加一个事件，通知UI更新第三墩的积分数据
-	-- scoreData.index = 3
-	-- scoreData.totallScore = 0
-	-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
-	--总分
-	-- local myPlayer = this.GetPlayer(1)
-	-- local totallScore = myPlayer.compareResult["nTotallScore"]
-	-- log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
-	
-	-- scoreData.index = 4
-	-- scoreData.totallScore = totallScore
-	-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
-	
-	if callback ~= nil then
-		callback()
-		callback = nil
-	end
-	
+		
+		--这里增加一个事件，通知UI更新第三墩的积分数据
+		-- scoreData.index = 3
+		-- scoreData.totallScore = 0
+		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
+		--总分
+		-- local myPlayer = this.GetPlayer(1)
+		-- local totallScore = myPlayer.compareResult["nTotallScore"]
+		-- log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
+		
+		-- scoreData.index = 4
+		-- scoreData.totallScore = totallScore
+		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
+		
+		if callback ~= nil then
+			callback()
+			callback = nil
+		end
+	end)
 	--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
 	--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
 	--播放打枪动画

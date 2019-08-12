@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011171874832
 GameObject:
   m_ObjectHideFlags: 1
@@ -1704,7 +1704,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011158905000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -540, y: 0, z: 0}
+  m_LocalPosition: {x: -960, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1731,7 +1731,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010288555034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -960, z: 0}
+  m_LocalPosition: {x: 0, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1932,7 +1932,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012081945656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -540, y: 960, z: 0}
+  m_LocalPosition: {x: -960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2975,7 +2975,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011339976120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540, y: 960, z: 0}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -3024,8 +3024,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 92, y: 59.99994, z: 0}
-  m_Center: {x: 16, y: 0.000030517578, z: 0}
+  m_Size: {x: 120, y: 160, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000010381473354
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3120,8 +3120,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 92, y: 59.99994, z: 0}
-  m_Center: {x: 16, y: 0.000030517578, z: 0}
+  m_Size: {x: 120, y: 160, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000012359498670
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3204,8 +3204,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 92, y: 59.99994, z: 0}
-  m_Center: {x: 16, y: 0.000030517578, z: 0}
+  m_Size: {x: 120, y: 160, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000013972891180
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3216,8 +3216,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 92, y: 59.99994, z: 0}
-  m_Center: {x: 16, y: 0.000030517578, z: 0}
+  m_Size: {x: 120, y: 160, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000014050967656
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3388,7 +3388,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3008
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -4030,7 +4030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604e27d00aa3cbf40a58f2d8a0cb5647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: 0
+  group: 1
   activeSprite: {fileID: 114000013733330938}
   activeAnimation: {fileID: 0}
   animator: {fileID: 0}
@@ -5397,7 +5397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d64b3d4913bd046b1f61203702e583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 0}
+  tweenTarget: {fileID: 1000010418964338}
   tweenGroup: 0
   trigger: 0
   playDirection: 0
@@ -7957,7 +7957,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3008
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -8100,7 +8100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d64b3d4913bd046b1f61203702e583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 0}
+  tweenTarget: {fileID: 1000010418964338}
   tweenGroup: 0
   trigger: 0
   playDirection: 0

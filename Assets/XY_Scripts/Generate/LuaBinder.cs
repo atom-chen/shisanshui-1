@@ -82,7 +82,10 @@ public static class LuaBinder
 		LuaHelperWrap.Register(L);
 		TrieFilterWrap.Register(L);
 		UniWebViewMessageWrap.Register(L);
-		Singleton_NetWorkManageWrap.Register(L);
+        FingerHoverEventWrap.Register(L);
+        FingerUpEventWrap.Register(L);
+        FingerDownEventWrap.Register(L);
+        Singleton_NetWorkManageWrap.Register(L);
 		Singleton_DownloadCachesMgrWrap.Register(L);
 		Singleton_YX_APIManageWrap.Register(L);
 		Singleton_SingleWebWrap.Register(L);
