@@ -263,7 +263,8 @@ local function InitWidgets()
     	widgetTbl.allScore.gameObject:SetActive(false)
     end
 
-
+    this.xipai = componentGet(child(widgetTbl.panel,"Anchor_Center/xipai"),"UISpriteAnimation")
+    this.xipai.gameObject:SetActive(false)
 		--特殊牌型图标
 	special_card_type.group = child(widgetTbl.panel,"Anchor_Center/special_card_type_group")
 	if special_card_type.group ~= nil then
@@ -282,7 +283,7 @@ local function InitWidgets()
 		this.peopleNum = roomData.people_num
 	end
 	log("PeopleNum:"..tostring(this.peopleNum))
-    for i=1,6 do
+    for i=1,7 do
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
 			if i < tonumber(this.peopleNum) or i == tonumber(this.peopleNum) then
@@ -418,6 +419,7 @@ function this.Awake()
 	
 	shisangshui_ui_sys.Init()
 	msg_dispatch_mgr.SetIsEnterState(true)	
+	this.InitCards()
 end
 
 function this.Start()
@@ -928,12 +930,7 @@ function this.GetPlayer(viewSeat)
 	return this.playerList[viewSeat]
 end
 
---发牌
-function this.DealCard(data, callback)
-	if this.peopleNum == nil then
-		local roomData = room_data.GetSssRoomDataInfo()
-		this.peopleNum = roomData.people_num
-	end
+function this.InitCards()
 	this.peoCardsTbl = {}
 	this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
 	this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
@@ -941,17 +938,45 @@ function this.DealCard(data, callback)
 	this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
 	this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
 	this.peoCardsTbl[7] = this.CardsTbl
+	if this.peopleNum == nil then
+		local roomData = room_data.GetSssRoomDataInfo()
+		this.peopleNum = roomData.people_num
+	end
 	this.curPeoCardsTbl = this.peoCardsTbl[this.peopleNum]
+	this.cardPosTbl = {}
 	for i = 1, this.peopleNum do
-		this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+		this.cardPosTbl[i] = {}
 		for j = 1, 13 do
-			this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-			--local pos = this.CardsTbl[i][j].transform.position = Vector3.New(0, 0, 0)
-			this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
+			this.cardPosTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+			local pos = this.CardsTbl[i][j].transform.localPosition
+			this.cardPosTbl[i][j] = pos
 		end
 	end
+end
+
+--发牌
+function this.DealCard(data, callback)
+	if this.peopleNum == nil then
+		local roomData = room_data.GetSssRoomDataInfo()
+		this.peopleNum = roomData.people_num
+	end
+	this.InitCards()
+
 	coroutine.start(function()
+    	this.xipai.gameObject:SetActive(true)
+		this.xipai:Play()
+		coroutine.wait(1)
+		for i = 1, this.peopleNum do
+			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+			for j = 1, 13 do
+				this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+				this.curPeoCardsTbl[i][j].transform.localPosition = Vector3.New(0, 0, 0)
+				this.curPeoCardsTbl[i][j].transform:DOLocalMove(this.cardPosTbl[i][j], 0.2 + 0.1 * j, true)
+				this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
+			end
+		end
 		coroutine.wait(2)
+    	this.xipai.gameObject:SetActive(false)
 		if callback ~= nil then
 			callback()	
 			callback = nil

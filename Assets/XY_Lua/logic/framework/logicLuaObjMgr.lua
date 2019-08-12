@@ -50,3 +50,73 @@ end
 function this.getLuaObjByGameObj(gameObject)
 	return luaObjectTable[gameObject]	
 end
+
+function this.Awake(UiFormsName)
+--	logError("logicLuaObjMgr.Awake")
+	UI_Manager:Instance():Awake(UiFormsName)
+end
+
+function this.Update(UiFormsName)
+	UI_Manager:Instance():Update(UiFormsName)
+end
+
+function this.Start(UiFormsName)
+	UI_Manager:Instance():Start(UiFormsName)
+end
+
+function this.OnEnable(UiFormsName)
+	UI_Manager:Instance():OnEnable(UiFormsName)
+end
+
+function this.OnDisable(UiFormsName)
+	UI_Manager:Instance():OnDisable(UiFormsName)
+end
+
+function this.OnTriggerEnter(UiFormsName,collider)
+	UI_Manager:Instance():OnTriggerEnter(UiFormsName,collider)
+end
+
+function this.OnTriggerStay(UiFormsName,collider)
+	UI_Manager:Instance():OnTriggerStay(UiFormsName,collider)
+end
+
+function this.OnTriggerExit(UiFormsName,collider)
+	UI_Manager:Instance():OnTriggerExit(UiFormsName,collider)
+end
+
+function this.OnCollisionEnter(UiFormsName,collision)
+	UI_Manager:Instance():OnCollisionEnter(UiFormsName,collision)
+end
+
+function this.OnCollisionStay(UiFormsName,collision)
+	UI_Manager:Instance():OnCollisionStay(UiFormsName,collision)
+end
+
+function this.OnCollisionExit(UiFormsName,collision)
+	UI_Manager:Instance():OnCollisionExit(UiFormsName,collision)
+end
+
+function this.OnFingerHover(UiFormsName,e)
+	log("滑动")
+	UI_Manager:Instance():OnFingerHover(UiFormsName,e)
+end
+
+function this.OnSwipe(UiFormsName,Direction,SelectObj)
+	UI_Manager:Instance():OnSwipe(UiFormsName,Direction,SelectObj)
+end
+
+function this.OnFingerUp(UiFormsName,fingerUp)
+	UI_Manager:Instance():OnFingerUp(UiFormsName,fingerUp)
+end
+
+function this.OnFingerDown(UiFormsName,fingerDown)
+	UI_Manager:Instance():OnFingerUp(UiFormsName,fingerUp)
+end
+
+function this.OnTap(UiFormsName,tap)
+	UI_Manager:Instance():OnTap(UiFormsName,tap)
+end
+
+function this.OnDragRecognizer(UiFormsName,DeltaMove,normalizedTime)
+	UI_Manager:Instance():OnDragRecognizer(UiFormsName,DeltaMove,normalizedTime)
+end

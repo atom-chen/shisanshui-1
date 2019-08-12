@@ -1,0 +1,280 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000011150104942}
+  m_IsPrefabParent: 1
+--- !u!1 &1000011150104942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010670202172}
+  - 114: {fileID: 114000011323265460}
+  m_Layer: 0
+  m_Name: XipaiAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010670202172
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011150104942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000011323265460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011150104942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebd2e0fe8fa5534486602b7b88e97f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 8d154c6d65b867b468a27b61b3243c69, type: 2}
+  mSprites:
+  - name: xipai_1_1
+    x: 347
+    y: 130
+    width: 46
+    height: 42
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 46
+    paddingRight: 36
+    paddingTop: 49
+    paddingBottom: 37
+  - name: xipai_1_10
+    x: 0
+    y: 27
+    width: 126
+    height: 56
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 31
+    paddingBottom: 41
+  - name: xipai_1_11
+    x: 0
+    y: 141
+    width: 126
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 30
+    paddingBottom: 41
+  - name: xipai_1_12
+    x: 0
+    y: 199
+    width: 127
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 0
+    paddingTop: 30
+    paddingBottom: 41
+  - name: xipai_1_13
+    x: 379
+    y: 212
+    width: 119
+    height: 44
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 4
+    paddingTop: 42
+    paddingBottom: 42
+  - name: xipai_1_14
+    x: 347
+    y: 173
+    width: 116
+    height: 35
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 5
+    paddingTop: 51
+    paddingBottom: 42
+  - name: xipai_1_15
+    x: 256
+    y: 21
+    width: 82
+    height: 34
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 26
+    paddingRight: 20
+    paddingTop: 52
+    paddingBottom: 42
+  - name: xipai_1_16
+    x: 256
+    y: 56
+    width: 64
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 35
+    paddingRight: 29
+    paddingTop: 47
+    paddingBottom: 33
+  - name: xipai_1_17
+    x: 394
+    y: 130
+    width: 46
+    height: 42
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 46
+    paddingRight: 36
+    paddingTop: 49
+    paddingBottom: 37
+  - name: xipai_1_2
+    x: 256
+    y: 105
+    width: 62
+    height: 53
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 42
+    paddingRight: 24
+    paddingTop: 42
+    paddingBottom: 33
+  - name: xipai_1_3
+    x: 256
+    y: 159
+    width: 90
+    height: 49
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 26
+    paddingRight: 12
+    paddingTop: 42
+    paddingBottom: 37
+  - name: xipai_1_4
+    x: 256
+    y: 209
+    width: 122
+    height: 47
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 2
+    paddingTop: 38
+    paddingBottom: 43
+  - name: xipai_1_5
+    x: 128
+    y: 90
+    width: 126
+    height: 54
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 33
+    paddingBottom: 41
+  - name: xipai_1_6
+    x: 128
+    y: 35
+    width: 126
+    height: 54
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 33
+    paddingBottom: 41
+  - name: xipai_1_7
+    x: 128
+    y: 201
+    width: 127
+    height: 55
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 32
+    paddingBottom: 41
+  - name: xipai_1_8
+    x: 128
+    y: 145
+    width: 126
+    height: 55
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 32
+    paddingBottom: 41
+  - name: xipai_1_9
+    x: 0
+    y: 84
+    width: 126
+    height: 56
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 31
+    paddingBottom: 41
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
+  mCoordinates: 0
+  sprites: []

@@ -136,6 +136,11 @@ GameObject:
   - 114: {fileID: 114000013450878956}
   - 114: {fileID: 114000012375322124}
   - 54: {fileID: 54000012947980250}
+  - 114: {fileID: 114000011445319424}
+  - 114: {fileID: 114000013163145508}
+  - 114: {fileID: 114000011337715410}
+  - 114: {fileID: 114000013259166150}
+  - 114: {fileID: 114000013372652294}
   m_Layer: 5
   m_Name: place_card
   m_TagString: Untagged
@@ -6402,6 +6407,33 @@ MonoBehaviour:
   mAtlas: {fileID: 114000012374055392, guid: f355980e5e041324f808e26cf3ec64d4, type: 2}
   mSpriteName: dun
   mFillCenter: 1
+--- !u!114 &114000011337715410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010145700552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15fff10a1d1d97e41be795c2cbd028bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredFingerCount: 1
+  DistanceUnit: 2
+  MaxSimultaneousGestures: 1
+  ResetMode: 0
+  Raycaster: {fileID: 0}
+  ClusterManager: {fileID: 0}
+  Delegate: {fileID: 0}
+  UseSendMessage: 1
+  EventMessageName: OnSwipe
+  EventMessageTarget: {fileID: 0}
+  SendMessageToSelection: 0
+  IsExclusive: 0
+  MinDistance: 0.5
+  MaxDistance: 0
+  MinVelocity: 5
+  MaxDeviation: 25
 --- !u!114 &114000011377849858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6573,6 +6605,23 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114000011445319424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010145700552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d4b152ea6d4a44bbd27f639edb4bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FingerIndexFilter: -1
+  Raycaster: {fileID: 0}
+  UseSendMessage: 1
+  SendMessageToSelection: 1
+  MessageTarget: {fileID: 0}
+  MessageName: OnFingerHover
 --- !u!114 &114000011515452704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9341,6 +9390,23 @@ MonoBehaviour:
   mDepth: 7
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
+--- !u!114 &114000013163145508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010145700552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4762978c2447048aacc02a04592aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FingerIndexFilter: -1
+  Raycaster: {fileID: 0}
+  UseSendMessage: 1
+  SendMessageToSelection: 1
+  MessageTarget: {fileID: 0}
+  MessageName: OnFingerUp
 --- !u!114 &114000013186656890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9642,6 +9708,33 @@ MonoBehaviour:
   mAtlas: {fileID: 114000012374055392, guid: f355980e5e041324f808e26cf3ec64d4, type: 2}
   mSpriteName: daojishi01
   mFillCenter: 1
+--- !u!114 &114000013259166150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010145700552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407289a35f3c592419f607d117d413c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredFingerCount: 1
+  DistanceUnit: 2
+  MaxSimultaneousGestures: 1
+  ResetMode: 0
+  Raycaster: {fileID: 0}
+  ClusterManager: {fileID: 0}
+  Delegate: {fileID: 0}
+  UseSendMessage: 1
+  EventMessageName: OnTap
+  EventMessageTarget: {fileID: 0}
+  SendMessageToSelection: 0
+  IsExclusive: 0
+  RequiredTaps: 2
+  MoveTolerance: 0.5
+  MaxDuration: 0
+  MaxDelayBetweenTaps: 0.5
 --- !u!114 &114000013296285442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9772,6 +9865,24 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114000013372652294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010145700552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf945d278a7402a4cb9cd26aec5c0fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cameras: []
+  IgnoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  RayThickness: 0
+  VisualizeRaycasts: 1
+  UsePhysics2D: 1
 --- !u!114 &114000013390368162
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -368,6 +368,15 @@ function this.LoadAllCard(cards)
 		end
 		UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
 		UIEventListener.Get(card_data.tran.gameObject).parameter = cardData
+
+        UIEventListener.Get(card_data.tran.gameObject).OnHover = function (obj, isOver)
+        	log("悬浮")
+        	if isOver then
+	    		local finger = {}
+	    		finger.Selection = obj
+	            this.OnFingerHover(nil, finger)
+	        end
+        end 
 	end
 	--]]
 
