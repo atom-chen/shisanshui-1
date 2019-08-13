@@ -22,7 +22,7 @@ GameObject:
   - 65: {fileID: 65000012931241026}
   m_Layer: 5
   m_Name: 3
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

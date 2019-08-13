@@ -441,11 +441,11 @@ public class LogicBaseLua : MonoBehaviour
     {
        
        
-        if(m_onFingerHoverFunc != null)
+        if(m_onFingerHoverFunc != null && e.Selection.tag == "Card")
         {
             m_onFingerHoverFunc.BeginPCall();
             m_onFingerHoverFunc.Push(self);
-            m_onFingerHoverFunc.Push(e);
+            m_onFingerHoverFunc.Push(e.Selection);
             m_onFingerHoverFunc.PCall();
             m_onFingerHoverFunc.EndPCall();
 

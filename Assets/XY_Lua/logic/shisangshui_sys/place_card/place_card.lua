@@ -127,21 +127,18 @@ function this.OnDestroy()
 end
 
 local hoverObj = nil
-function this.OnFingerHover(myself, fingerHoverEvent)
-	if fingerHoverEvent.Selection ~= nil then
-		log("OnFingerHoverForLua"..tostring(fingerHoverEvent.Selection.name))
-		if hoverObj == fingerHoverEvent.Selection then
-			return
-		else
-			if fingerHoverEvent.Selection.tag == "Card" then
-				local data = UIEventListener.Get(fingerHoverEvent.Selection.gameObject).parameter
-				if data ~= nil and data.cardType == CardType[3] and hoverObj ~= nil then
-					return
-				end
-				hoverObj = fingerHoverEvent.Selection
-				this.CardClick(hoverObj, true, true)
+function this.OnFingerHover(myself, finger)
+	--log("OnFingerHoverForLua:"..tostring(finger.name))
+	if hoverObj ~= nil and hoverObj.name == finger.name then
+		return
+	else
+			--print("--------------")
+			local data = UIEventListener.Get(finger.gameObject).parameter
+			if data ~= nil and data.cardType == CardType[3] and hoverObj ~= nil then
+				return
 			end
-		end
+			hoverObj = finger
+			this.CardClick(hoverObj, true, true)
 	end
 end
 

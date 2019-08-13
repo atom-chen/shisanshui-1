@@ -282,14 +282,14 @@ function getLogStr(fmt, ...)
     if type(fmt)~="string" 
         or (type(fmt)=="string" and string.find(fmt,"%%s")==0) then
 
-        if table.nums(paramslist)>0 then
+        if table.getn(paramslist)>0 then
             local fmts = fmt
             if type(fmt)=="table" then
                 fmts = tostringex(fmt, len)
             end
             
             table.insert(list, 1, fmts)
-            fmt = string.rep("%s ", table.nums(paramslist)+1)
+            fmt = string.rep("%s ", table.getn(paramslist)+1)
         else
             list = {tostringex(fmt==nil and "nil" or fmt)}
             fmt = "%s"
@@ -304,7 +304,7 @@ function getLogStr(fmt, ...)
     local r = arr[4]
     local times = os.date("%X", os.time())
     local str = string.format("[%s] %s", times, fmt)
-    -- if table.nums(list)>0 then
+    -- if table.getn(list)>0 then
     --     str = string.format(str,table.unpack(list))
     -- end
     for i=4,#arr do 
