@@ -970,7 +970,7 @@ function this.DealCard(data, callback)
 			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
 			for j = 1, 13 do
 				this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-				this.curPeoCardsTbl[i][j].transform.localPosition = Vector3.New(0, 0, 0)
+				this.curPeoCardsTbl[i][j].transform.position = Vector3.New(0, 0, 0)
 				this.curPeoCardsTbl[i][j].transform:DOLocalMove(this.cardPosTbl[i][j], 0.2 + 0.1 * j, true)
 				this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
 			end

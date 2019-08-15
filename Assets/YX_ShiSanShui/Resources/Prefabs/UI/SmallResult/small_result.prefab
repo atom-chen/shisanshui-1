@@ -2202,7 +2202,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1280, y: 720, z: 0}
+  m_Size: {x: 1920, y: 1080, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010044171390
 MonoBehaviour:
@@ -3018,7 +3018,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3002
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -3212,13 +3212,13 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 218
-  mHeight: 72
+  mHeight: 80
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.0277777
-  mType: 0
+  aspectRatio: 2.725
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -3231,8 +3231,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000012374055392, guid: f355980e5e041324f808e26cf3ec64d4, type: 2}
-  mSpriteName: a011
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u724C\u578B-\u6309\u94AE-\u672A\u9009"
   mFillCenter: 1
 --- !u!114 &114000011179001100
 MonoBehaviour:
@@ -3305,7 +3305,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -3732,7 +3732,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -3745,8 +3745,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: xjs_di02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000012125249856
 MonoBehaviour:
@@ -3843,8 +3843,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 0.8}
   mPivot: 4
-  mWidth: 1280
-  mHeight: 720
+  mWidth: 1920
+  mHeight: 1080
   mDepth: 2
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -3916,7 +3916,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -3929,8 +3929,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: xjs_di02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000012519107760
 MonoBehaviour:
@@ -4490,7 +4490,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -4503,8 +4503,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: xjs_di02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000012910766838
 MonoBehaviour:
@@ -4543,7 +4543,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -4556,8 +4556,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: xjs_di02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000012924595572
 MonoBehaviour:
@@ -5241,7 +5241,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3004
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -5468,7 +5468,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -5481,8 +5481,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011017402442, guid: 03a1b5b0d54ad3846874f3c97442c1ab, type: 2}
-  mSpriteName: xjs_di01
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000013917289138
 MonoBehaviour:
@@ -5650,7 +5650,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3008
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -5698,7 +5698,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.62053573
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -5711,8 +5711,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: xjs_di02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000014221438852
 MonoBehaviour:
