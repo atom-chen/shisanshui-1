@@ -82,7 +82,7 @@ function ui_manager:CloseUiForms(UiFormName,IsDestory)
 			elseif Ui.m_CloseType == UiCloseType.UiCloseType_Navigation then
 				self:NavigationPop()	
 				table.remove(self.m_CurrentShowFormsList,index)
-		--		Trace("============="..table.nums(self.m_CurrentShowFormsList))
+		--		log("============="..table.nums(self.m_CurrentShowFormsList))
 				return
 			end
 		end

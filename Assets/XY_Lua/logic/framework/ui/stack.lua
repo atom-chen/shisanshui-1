@@ -15,7 +15,7 @@ end
 function stack:Pop()
     local size = self:Size()
     if self:IsEmpty() then
-        Trace("Error: Stack is empty!")
+        log("Error: Stack is empty!")
         return
     end
     return table.remove(self.stack_table,size)
@@ -24,7 +24,7 @@ end
 function stack:Top()
     local size = self:Size()
     if self:IsEmpty() then
-        Trace("Error: Stack is empty!")
+        log("Error: Stack is empty!")
         return
     end
     return self.stack_table[size]
@@ -52,7 +52,7 @@ function stack:PrintElement()
     local size = self:Size()
 
     if self:IsEmpty() then
-        Trace("Error: Stack is empty!")
+        log("Error: Stack is empty!")
         return
     end
 

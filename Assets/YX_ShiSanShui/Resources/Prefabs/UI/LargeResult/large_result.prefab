@@ -4222,7 +4222,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3003
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -4295,7 +4295,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.425
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -4308,8 +4308,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000012374055392, guid: f355980e5e041324f808e26cf3ec64d4, type: 2}
-  mSpriteName: a01
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u724C\u578B-\u6309\u94AE-\u5DF2\u9009"
   mFillCenter: 1
 --- !u!114 &114000010127002726
 MonoBehaviour:
@@ -5113,8 +5113,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000010501348012
 MonoBehaviour:
@@ -5231,8 +5231,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000010556989060
 MonoBehaviour:
@@ -6087,8 +6087,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000010850487474
 MonoBehaviour:
@@ -6780,7 +6780,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.425
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -6793,8 +6793,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000012374055392, guid: f355980e5e041324f808e26cf3ec64d4, type: 2}
-  mSpriteName: a02
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u724C\u578B-\u6309\u94AE-\u672A\u9009"
   mFillCenter: 1
 --- !u!114 &114000011206748328
 MonoBehaviour:
@@ -6907,8 +6907,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000011282770218
 MonoBehaviour:
@@ -7076,7 +7076,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -8353,8 +8353,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000012321040038
 MonoBehaviour:
@@ -11450,8 +11450,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011472351198, guid: b9d3d4f51808ad647b36251525666408, type: 2}
-  mSpriteName: pjjs_di
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: "\u51C6\u5907-\u7AD9\u8D77-\u5F39\u6846"
   mFillCenter: 1
 --- !u!114 &114000014235923506
 MonoBehaviour:

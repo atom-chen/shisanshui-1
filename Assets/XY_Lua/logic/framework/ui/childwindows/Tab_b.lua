@@ -10,12 +10,12 @@ end
 
 function Tab_b:OnOpen()
 	base.OnOpen(self)
-	Trace("Tab_b OnOpen")
+	log("Tab_b OnOpen")
 end
 
 function Tab_b:OnClose()
 	base.OnClose(self)
-	Trace("Tab_b OnClose")
+	log("Tab_b OnClose")
 end
 
 return Tab_b

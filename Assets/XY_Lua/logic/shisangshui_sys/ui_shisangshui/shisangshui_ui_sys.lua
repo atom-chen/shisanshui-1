@@ -11,6 +11,7 @@ require "logic/shisangshui_sys/small_result/small_result"
 require "logic/shisangshui_sys/special_card_show/special_card_show"
 require "logic/shisangshui_sys/play_mode_shisangshui"
 require "logic/shisangshui_sys/place_card/place_card"
+require "logic/shisangshui_sys/lib_recomand"
 --require "logic/hall_sys/openroom/room_data"
 
 shisangshui_ui_sys = {}
@@ -487,7 +488,7 @@ local function OnShowPokerCard(tbl)
 		return
 	end
 	local position = tbl.nguiPosition
-	this.ShowCommonCard(tbl.cardTable,tbl.type, position)
+	--this.ShowCommonCard(tbl.cardTable,tbl.type, position)
 --	shisangshui_ui.SetPlayerLightFrame(tbl.chairid)--暂时不显示框
 	log("显示每一墩牌的数据")
 end

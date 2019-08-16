@@ -251,7 +251,7 @@ function tostringex(v, len)
     return ret
 end
 
-function traceback()
+function logback()
     local level = 3
     local ret = ""
     while true do
@@ -352,6 +352,16 @@ function saveLogFile(fileName,data)
 end
 
 function log(fmt, ...)
+
+--    local tab = {}
+--    for k, v in pairs({...}) do
+--        table.insert(tab, tostring(v))
+--    end
+--    local str = table.concat(tab, "\t")
+--    local output = str ..'\n'.. debug.traceback()..'\n'
+--    Debugger.Log(output)
+
+
     --if Setting.setting.isDebug == true then
         local msg = getLogStr(fmt, ...) or "nil"
        -- UnityEngine.Debug('[INFO] {0} ')
@@ -481,8 +491,8 @@ function dump(value, desciption, nesting)
         return tostring(v)
     end
 
-    local traceback = string.split(debug.traceback("", 2), "\n")
-    log("dump from: " .. string.trim(traceback[3]))
+    local logback = string.split(debug.logback("", 2), "\n")
+    log("dump from: " .. string.trim(logback[3]))
 
     local function _dump(value, desciption, indent, nest, keylen)
         desciption = desciption or "<var>"

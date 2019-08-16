@@ -7,7 +7,7 @@ end
 
 function UiTest_a:OnInit()
 	base.OnInit(self)
-	Trace("OnInit UiTest_a")
+	log("OnInit UiTest_a")
 	self.m_UiLayer = UILayerEnum.UILayerEnum_Top
 	self:InitItem()
 end
@@ -15,7 +15,7 @@ end
 function UiTest_a:OnOpen(...)
 
 	base.OnOpen(self,...)
-	Trace("OnOpen UiTest_a")
+	log("OnOpen UiTest_a")
 end
 
 function UiTest_a:InitItem()
@@ -40,7 +40,7 @@ end
 
 function UiTest_a:changeclick()
 	UI_Manager:Instance():ShowUiForms("UiTest_b",UiCloseType.UiCloseType_Navigation,function() 
-			Trace("Close uitest_a")
+			log("Close uitest_a")
 		end)
 	
 end

@@ -15,13 +15,13 @@ end
 
 function UiTest:OnInit()
 	base.OnInit(self)
-	Trace("OnInit UiTest")
+	log("OnInit UiTest")
 	self:InitItem()
 end
 
 function UiTest:OnOpen(...)
 	base.OnOpen(self,...)
-	Trace("OnOpen UiTest")
+	log("OnOpen UiTest")
 end
 
 function UiTest:InitItem()
@@ -44,7 +44,7 @@ function UiTest:InitTab()
 	self.tab.gameObject = self.tabRoot.gameObject
 	self.tab:Open(self.tabRoot.gameObject)
 	self.tab.onSwitchCallBack = function(Object)
-		Trace("页面切换完成："..Object)
+		log("页面切换完成："..Object)
 	end
 end
 
@@ -54,7 +54,7 @@ function UiTest:closeWin()
 end
 function UiTest:changeclick()
 	UI_Manager:Instance():ShowUiForms("UiTest_a",UiCloseType.UiCloseType_Navigation,function() 
-		Trace("Close uitest_a")
+		log("Close uitest_a")
 	end)
 	
 	

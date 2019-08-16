@@ -305,10 +305,10 @@ MonoBehaviour:
     y: 283
     width: 152
     height: 100
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 50
+    borderRight: 50
+    borderTop: 40
+    borderBottom: 40
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
@@ -318,10 +318,10 @@ MonoBehaviour:
     y: 27
     width: 152
     height: 100
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 50
+    borderRight: 50
+    borderTop: 40
+    borderBottom: 40
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

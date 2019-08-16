@@ -113,7 +113,7 @@ end
 
 function ClubNormalEditView:OnCopyBtnClick()
 	local str = self.clubInfo.club_phone
-	Trace("Id --- OnCopyBtnClick:"..tostring(str))
+	log("Id --- OnCopyBtnClick:"..tostring(str))
 	YX_APIManage.Instance:onCopy(str,function()UI_Manager:Instance():FastTip(LanguageMgr.GetWord(6043))end)
 end
 
@@ -234,7 +234,7 @@ end
 
 function ClubInfoView:OnCopyBtnClick()
 	local str = self.clubInfo.shid
-	Trace("Id --- OnCopyBtnClick:"..tostring(str))
+	log("Id --- OnCopyBtnClick:"..tostring(str))
 	YX_APIManage.Instance:onCopy(str,function()UI_Manager:Instance():FastTip(LanguageMgr.GetWord(6043))end)
 end
 

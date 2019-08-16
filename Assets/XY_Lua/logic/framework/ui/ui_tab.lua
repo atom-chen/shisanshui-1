@@ -41,11 +41,11 @@ function ui_tab:OnInit()
 		if tabBtns ~= nil then
 			for i = 0,tabBtns.Length - 1,1 do
 				local btn = tabBtns[i]
-			--	Trace("tabBtn Name:"..btn.name)
+			--	log("tabBtn Name:"..btn.name)
 				local tabWindow = self.tabWindowRoot:FindChild(btn.name)
 				
 				if tabWindow ~= nil then
-			--		Trace("tabWindow Name:"..tabWindow.name)
+			--		log("tabWindow Name:"..tabWindow.name)
 					local luaFile = ui_script_enum["ui_script_"..btn.name]
 					local luaFileObj = require(luaFile):create()
 					luaFileObj.gameObject = tabWindow.gameObject
@@ -103,7 +103,7 @@ function ui_tab:SwitchToCurrentTab()
 				if self.disableIcon ~= nil then
 					local disableSprite = v.btn.transform:GetComponentInChildren(typeof(UISprite))
 					disableSprite.spriteName = self.disableIcon
-				--	Trace(v.btn.name.." disableSprite:"..disableSprite.spriteName)
+				--	log(v.btn.name.." disableSprite:"..disableSprite.spriteName)
 
 					--show normal title
 					if self.selectTitleKey then
@@ -126,7 +126,7 @@ function ui_tab:SwitchToCurrentTab()
 	if self.enableIcon ~= nil then
 		local enableSprite = self.currentTab.btn.transform:GetComponentInChildren(typeof(UISprite))
 		enableSprite.spriteName = self.enableIcon
-	--	Trace(self.currentTab.btn.name.." enableSprite:"..enableSprite.spriteName)
+	--	log(self.currentTab.btn.name.." enableSprite:"..enableSprite.spriteName)
 
 		--show select title
 		if self.selectTitleKey then
@@ -163,7 +163,7 @@ end
 
 function ui_tab:OnOpen()
 	base.OnOpen(self)
---	Trace("Tab ======== OnOpen")
+--	log("Tab ======== OnOpen")
 	self:SwitchToCurrentTab()
 end
 
