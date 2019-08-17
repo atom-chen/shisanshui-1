@@ -966,17 +966,18 @@ function this.DealCard(data, callback)
     	this.xipai.gameObject:SetActive(true)
 		this.xipai:Play()
 		coroutine.wait(1)
+    	this.xipai.gameObject:SetActive(false)
 		for i = 1, this.peopleNum do
 			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
 			for j = 1, 13 do
 				this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
 				this.curPeoCardsTbl[i][j].transform.position = Vector3.New(0, 0, 0)
-				this.curPeoCardsTbl[i][j].transform:DOLocalMove(this.cardPosTbl[i][j], 0.2 + 0.1 * j, true)
+				local tween = this.curPeoCardsTbl[i][j].transform:DOLocalMove(this.cardPosTbl[i][j], 0.2, true)
+				tween:SetDelay(0.1 * j)
 				this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
 			end
 		end
-		coroutine.wait(2)
-    	this.xipai.gameObject:SetActive(false)
+		coroutine.wait(1.4)
 		if callback ~= nil then
 			callback()	
 			callback = nil
@@ -1030,16 +1031,17 @@ function this.CardCompareHandler(callback)
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
 						for n = 1, 3 do
+							log("加载的牌：".."Prefabs/Card/"..tostring(Player.compareResult.stCards[n]))
 							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 
-							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 1 + 1
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 1 + 3
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 1 + 3
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 1 + 3
+							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
 							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 1 + 2
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
 							end
 							this.cards[i][n] = tran
 							--Player:PlayerGroupCard("Group1")
@@ -1073,11 +1075,13 @@ function this.CardCompareHandler(callback)
 							--Player:PlayerGroupCard("Group1")
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
 							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 3
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 2 + 25
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 2 + 25
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 2 + 25
+			
+							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
 							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 2 + 24
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
 							end
 							this.cards[i][n] = tran
 						end
@@ -1102,12 +1106,12 @@ function this.CardCompareHandler(callback)
 							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
-							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 93
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 2 + 95
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 2 + 95
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 2 + 95
+							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
 							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 2 + 94
+								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
 							end
 							this.cards[i][n] = tran
 							--Player:PlayerGroupCard("Group1")

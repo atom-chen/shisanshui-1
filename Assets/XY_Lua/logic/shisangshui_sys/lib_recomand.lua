@@ -1729,7 +1729,7 @@ function libRecomand:Get_Pt_Two_Pair_Laizi_second(cards, nLaziCount)
     local tempResult1 = {}
     local tempResult2 = {}
     local nLaiziNum = nLaziCount
-    bFind, t = self.Get_Pt_One_Pair_Laizi_second(cards, nLaiziNum)
+    bFind, t = self:Get_Pt_One_Pair_Laizi_second(cards, nLaiziNum)
     if bFind and #t > 1 then
         for i=1, #t-1 do
             tempResult1 = {}
@@ -1753,6 +1753,8 @@ function libRecomand:Get_Pt_Two_Pair_Laizi_second(cards, nLaziCount)
                         break
                     end 
                 end
+                log(GetTblData(tempResult1))
+                log(GetTblData(tempResult2))
                 
                 bFind = true
                 table.insert(result, tempResult1)
@@ -1760,6 +1762,7 @@ function libRecomand:Get_Pt_Two_Pair_Laizi_second(cards, nLaziCount)
             end
         end
     end
+    log(GetTblData(result))
     return bFind, result
 end
 
