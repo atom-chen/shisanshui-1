@@ -430,7 +430,7 @@ function this.LoadAllCard(cards)
 		if room_data.GetSssRoomDataInfo().isChip == true and card == 40 then
 			componentGet(child(card_data.tran.transform, "ma"),"UISprite").depth = i * 2 + 4
 		end
-		UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
+		--UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
 		UIEventListener.Get(card_data.tran.gameObject).parameter = cardData
 
         UIEventListener.Get(card_data.tran.gameObject).OnHover = function (obj, isOver)
@@ -490,7 +490,7 @@ function this.CardClick(obj, fast)
 		local indexKey = this.GetDownCardKey(cardData)
 		table.remove(selectDownCards, indexKey)
 	else
-		if obj.transform.localScale ~= Vector3.New(0.65, 0.65, 0.65) then
+		if obj.transform.localScale ~= Vector3.New(0.9, 0.9, 0.9) then
 			Trace("换牌错误")
 			return
 		end
@@ -501,7 +501,7 @@ function this.CardClick(obj, fast)
 				obj.transform:DOLocalMove(Vector3.New(pos.x, 0, pos.z), animationTime, true)
 				obj.transform:DOScale(Vector3.New(1, 1, 1), animationTime)
 				selectCardData.tran.transform:DOLocalMove(obj.transform.localPosition, animationTime, true)
-				selectCardData.tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), animationTime)
+				selectCardData.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationTime)
 				
 				local _, dun, dun_no = this.GetDun(cardData.up_index)
 				up_placed_cards[dun][dun_no] = selectCardData
@@ -519,7 +519,7 @@ function this.CardClick(obj, fast)
 						coroutine.wait(animationWaitTime)
 						print("fast1: "..tostring(fast))
 						animationMove = false
-						cardGrid:Reposition()
+						--cardGrid:Reposition()
 						coroutine.wait(animationWaitTime)
 					end)
 				--local _select, select_dun, select_dun_no = this.GetDun(selectCardData.up_index)
@@ -633,7 +633,7 @@ function this.CardBgClick(obj)
 		local cardData = UIEventListener.Get(v.tran.gameObject).parameter
 		local cardNum = cardData.card
 		v.tran.transform:DOLocalMove(cardPlaceTranList[place_up_index].tran.transform.localPosition, animationTime, true)
-		v.tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), animationSmallTime)
+		v.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationSmallTime)
 		cardData.cardType = CardType[3]
 		cardData.up_index = place_up_index
 		UIEventListener.Get(v.tran.gameObject).parameter = cardData
@@ -661,7 +661,7 @@ function this.CardBgClick(obj)
 	animationMove = true
 	coroutine.start(function ()
 		coroutine.wait(animationWaitTime)
-		cardGrid:Reposition()
+		--cardGrid:Reposition()
 		coroutine.wait(animationWaitTime)
 --[[		if this.IsPlaceFinish() then
 			this.PlaceCardFinish()
@@ -1074,7 +1074,7 @@ function this.DownCardClick(dun)
 	this.TipsBtnShow(left_card)
 	coroutine.start(function ()
 		coroutine.wait(0.31)
-		cardGrid:Reposition()
+		--cardGrid:Reposition()
 	end
 	)
 end

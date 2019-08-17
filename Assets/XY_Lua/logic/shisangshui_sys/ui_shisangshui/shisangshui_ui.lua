@@ -1022,6 +1022,13 @@ function this.CardCompareHandler(callback)
 	table.sort(secondSort)
 	table.sort(threeSort)
 
+	if this.curPeoCardsTbl == nil then this.InitCards() end
+	if this.playerList[1].CardsTbl == nil then
+		for i = 1, this.peopleNum do
+			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+		end	
+	end
+
 	this.ClearCards()
 	coroutine.start(function()
 		--比头墩
