@@ -1,0 +1,319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000012100616196}
+  m_IsPrefabParent: 1
+--- !u!1 &1000012100616196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013596567926}
+  - 114: {fileID: 114000011675705008}
+  m_Layer: 0
+  m_Name: ClubAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000013596567926
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012100616196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000011675705008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012100616196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebd2e0fe8fa5534486602b7b88e97f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: d3a64c455d84a6a4691056d5d65e4611, type: 2}
+  mSprites:
+  - name: "\u4EBA\u6570-icon"
+    x: 1421
+    y: 1639
+    width: 30
+    height: 26
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 3
+    paddingBottom: 3
+  - name: "\u4ECB\u7ECD-\u8F93\u5165\u6846"
+    x: 0
+    y: 1618
+    width: 780
+    height: 430
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-icon"
+    x: 1782
+    y: 1947
+    width: 120
+    height: 101
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 12
+    paddingBottom: 11
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-\u5934\u50CF"
+    x: 1903
+    y: 1948
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u4FF1\u4E50\u90E8\u4E3B\u9875-\u5934\u90E8\u80CC\u666F"
+    x: 781
+    y: 1868
+    width: 1000
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u4FF1\u4E50\u90E8\u5934\u50CF"
+    x: 0
+    y: 1096
+    width: 276
+    height: 276
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 2
+    paddingBottom: 2
+  - name: "\u4FF1\u4E50\u90E8-\u641C\u7D22\u6846"
+    x: 640
+    y: 1497
+    width: 1000
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5171\u7528-btn"
+    x: 640
+    y: 1154
+    width: 780
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u521B\u5EFA\u4FF1\u4E50\u90E8-btn"
+    x: 781
+    y: 1623
+    width: 639
+    height: 244
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 10
+    paddingRight: 11
+    paddingTop: 8
+    paddingBottom: 8
+  - name: "\u52A0\u5165\u4FF1\u4E50\u90E8-btn"
+    x: 0
+    y: 1373
+    width: 639
+    height: 244
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 10
+    paddingRight: 11
+    paddingTop: 8
+    paddingBottom: 8
+  - name: "\u540C\u610F"
+    x: 1421
+    y: 1767
+    width: 290
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5934\u50CF-\u7167\u7247\u56FE\u6807"
+    x: 1782
+    y: 1809
+    width: 78
+    height: 78
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5934\u90E8-\u5173\u95EDx"
+    x: 1712
+    y: 1822
+    width: 46
+    height: 45
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 4
+    paddingTop: 5
+    paddingBottom: 4
+  - name: "\u6211\u8981\u7EC4\u5C40-btn"
+    x: 0
+    y: 975
+    width: 552
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u62D2\u7EDD"
+    x: 1421
+    y: 1666
+    width: 290
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u641C\u7D22-icon"
+    x: 1712
+    y: 1776
+    width: 45
+    height: 45
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 3
+    paddingTop: 4
+    paddingBottom: 3
+  - name: "\u767B\u5F55\u6CE8\u518C-\u8F93\u5165\u6846"
+    x: 640
+    y: 1275
+    width: 780
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u80CC\u666F-style1"
+    x: 640
+    y: 1396
+    width: 1000
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u89C2\u6218-btn\u6846"
+    x: 1910
+    y: 1888
+    width: 127
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u8FDB\u5165-btn\u80CC\u666F"
+    x: 1782
+    y: 1888
+    width: 127
+    height: 58
+    borderLeft: 50
+    borderRight: 50
+    borderTop: 25
+    borderBottom: 25
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
+  mCoordinates: 0
+  sprites: []

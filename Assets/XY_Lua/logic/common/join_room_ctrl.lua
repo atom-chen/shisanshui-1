@@ -121,7 +121,7 @@ end
  ]]
 function this.EnterGameHandle(data)
     log("GetTblData----------------------------------"..GetTblData(data))
-    mahjong_play_sys.EnterGameReq(data)
+    --mahjong_play_sys.EnterGameReq(data)
     player_data.SetReconnectEpara(data) 
     --join_room.EnterGameHandle(data)
 end

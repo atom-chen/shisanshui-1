@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: denglu_denglu2
-  m_Shader: {fileID: 4800000, guid: 1e8a610c9e01c3648bac42585e5fc676, type: 3}
+  m_Name: recordAtlas
+  m_Shader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 4000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -18,11 +18,8 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: fa86b819443fdd54cb897688a491f30d, type: 3}
+        m_Texture: {fileID: 2800000, guid: e9387a419fc66a44392ec5c71302a0db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: _Cutoff
-      second: 0.1
+    m_Floats: []
     m_Colors: []

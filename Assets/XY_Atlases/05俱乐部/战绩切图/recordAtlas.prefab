@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000011920147902}
+  m_IsPrefabParent: 1
+--- !u!1 &1000011920147902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011244555192}
+  - 114: {fileID: 114000014044660714}
+  m_Layer: 0
+  m_Name: recordAtlas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011244555192
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011920147902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000014044660714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011920147902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebd2e0fe8fa5534486602b7b88e97f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: f9f71dc14cb3369409f7d785b162b06a, type: 2}
+  mSprites:
+  - name: "\u5171\u591A\u5C11\u7528\u6237-\u6570\u5B57\u80CC\u666F"
+    x: 0
+    y: 341
+    width: 57
+    height: 57
+    borderLeft: 26
+    borderRight: 26
+    borderTop: 26
+    borderBottom: 26
+    paddingLeft: 1
+    paddingRight: 2
+    paddingTop: 2
+    paddingBottom: 1
+  - name: "\u5171\u7528-\u8FDB\u5165\u7BAD\u5934"
+    x: 488
+    y: 475
+    width: 20
+    height: 37
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 6
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 5
+  - name: "\u5F00\u67AA\u6D1E"
+    x: 0
+    y: 305
+    width: 36
+    height: 35
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 2
+    paddingTop: 4
+    paddingBottom: 1
+  - name: "\u6218\u7EE9\u5217\u8868-\u6253\u67AA\u80CC\u666F"
+    x: 0
+    y: 457
+    width: 330
+    height: 55
+    borderLeft: 50
+    borderRight: 50
+    borderTop: 20
+    borderBottom: 20
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u6218\u7EE9\u5C0F\u9ED8\u8BA4\u5934\u50CF"
+    x: 0
+    y: 399
+    width: 57
+    height: 57
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 2
+    paddingTop: 2
+    paddingBottom: 1
+  - name: "\u6218\u7EE9\u6392\u540D\u6570-\u80CC\u666F"
+    x: 331
+    y: 459
+    width: 96
+    height: 53
+    borderLeft: 40
+    borderRight: 40
+    borderTop: 40
+    borderBottom: 40
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u67AA"
+    x: 428
+    y: 480
+    width: 59
+    height: 32
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 1
+    paddingTop: 7
+    paddingBottom: 1
+  - name: "\u7BAD\u5934\u5C55\u5F00"
+    x: 428
+    y: 459
+    width: 37
+    height: 20
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 6
+    paddingTop: 6
+    paddingBottom: 6
+  mPixelSize: 1
+  mReplacement: {fileID: 0}
+  mCoordinates: 0
+  sprites: []

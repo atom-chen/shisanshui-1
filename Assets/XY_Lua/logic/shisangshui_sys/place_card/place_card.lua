@@ -566,6 +566,24 @@ function this.CardClick(obj, fast)
 	end
 end
 
+function this.RankDownCard()
+
+	local downCard = {}
+	for i = 1, 13 do
+		local obj = cardGrid.transform:FindChild(tostring(i))
+		local oneCard = UIEventListener.Get(obj.gameObject).parameter
+		if oneCard.cardType == CardType[1] then
+			table.insert(downCard, oneCard)
+		end
+	end
+	local num = math.floor(#downCard / 2)
+	for i = 1, #downCard do
+		local v = downCard[i]
+		local pos = Vector3.New(-93 * num + i * 93, 0, 0)
+		v.tran.transform:DOLocalMove(pos, animationTime, true)
+	end
+end
+
 function this.GetDownCardKey(cardData)
 	for i = 1, #selectDownCards do
 		if selectDownCards[i].down_index == cardData.down_index then
@@ -661,6 +679,7 @@ function this.CardBgClick(obj)
 	animationMove = true
 	coroutine.start(function ()
 		coroutine.wait(animationWaitTime)
+		this.RankDownCard()
 		--cardGrid:Reposition()
 		coroutine.wait(animationWaitTime)
 --[[		if this.IsPlaceFinish() then
@@ -1074,6 +1093,7 @@ function this.DownCardClick(dun)
 	this.TipsBtnShow(left_card)
 	coroutine.start(function ()
 		coroutine.wait(0.31)
+		this.RankDownCard()
 		--cardGrid:Reposition()
 	end
 	)

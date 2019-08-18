@@ -965,7 +965,7 @@ function this.DealCard(data, callback)
 	coroutine.start(function()
     	this.xipai.gameObject:SetActive(true)
 		this.xipai:Play()
-		coroutine.wait(1)
+		coroutine.wait(1.8)
     	this.xipai.gameObject:SetActive(false)
 		for i = 1, this.peopleNum do
 			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
