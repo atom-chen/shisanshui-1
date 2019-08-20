@@ -9,6 +9,7 @@ local ClubRoomView = require("logic/club_sys/View/new/ClubRoomView")
 local ClubInviteBtnsView = require("logic/club_sys/View/new/ClubInviteBtnsView")
 local ClubNonView = require("logic/club_sys/View/new/ClubNonView")
 local ClubManageView = require "logic/club_sys/View/new/ClubManageView"
+require "logic/club_sys/ClubModel"
 
 ClubUI = ui_base.New()
 local normalColor = Color(254 / 255, 234/ 255, 200 / 255)
@@ -16,6 +17,7 @@ local selectColor = Color(163 / 255, 88/ 255, 27 / 255)
 
 function ClubUI:OnInit()
 	self.model = ClubModel
+	self.model:ctor()
 	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 
@@ -24,7 +26,7 @@ function ClubUI:OnInit()
 	self.togglesList = {}
 	self:InitToggles()
 
-	self.shareBtnGo = child(self.gameObject, "Panel_Top/inviteBtn")
+	self.shareBtnGo = child(self.gameObject, "Panel_Top/inviteBtn").gameObject
 	addClickCallbackSelf(self.shareBtnGo, self.OnShareClick, self)
 
 	--self.shareBtnGo:SetActive(not G_isAppleVerifyInvite)
@@ -64,7 +66,7 @@ end
 
 function ClubUI:InitToggles()
 	for i = 1, 4 do
-		local go = child(self.gameObject, "Panel_Middle/btns/toggle".. i)
+		local go = child(self.gameObject, "Panel_Middle/btns/toggle".. i).gameObject
 		local sp = subComponentGet(self.transform, "Panel_Middle/btns/toggle" .. i, typeof(UISprite))
 		local lbl = subComponentGet(self.transform, "Panel_Middle/btns/toggle" .. i .. "/Label", typeof(UILabel))
 		local index = i
@@ -283,9 +285,11 @@ end
 
 
 function ClubUI:OnClubCreateClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	--UI_Manager:Instance():ShowUiForms("ClubCreateUI")
-	if self.model:IsAgent() or G_isAppleVerifyInvite  then
+	--if self.model:IsAgent() or G_isAppleVerifyInvite  then
+	if self.model:IsAgent() then
 		UI_Manager:Instance():ShowUiForms("ClubCreateUI")
 	else
 		UIManager:ShowUiForms("ClubInputUI", nil, nil, ClubInputUIEnum.InputCode)

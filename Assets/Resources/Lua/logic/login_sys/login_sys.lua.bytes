@@ -117,8 +117,8 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 	this.loginType = 9
 	--平台成功回调后开始连接服务器并登陆服务器 
 	log("this.share_uid=="..this.share_uid)
-    http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
+    http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
 		if code then
 			
@@ -150,6 +150,54 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 			log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));		
 		end
 	end)	
+end
+
+--[[--
+* @Description: 手机登陆成功回调
+* @param:       手机登陆信息
+]]
+function this.OnPhoneLoginOK(accInfo, isReconnet,tel_num, password, ver_num)	
+	if this.isAgreeContract == false then
+		--弹出提示框没有同意服务条款
+		fast_tip.Show("请选择同意服务条款")
+		this.isClicked = false
+		 return 
+	end
+	
+	log("-------------------------"..tostring(ret));
+	this.loginType = 9
+	--平台成功回调后开始连接服务器并登陆服务器 
+	log("this.share_uid=="..this.share_uid)
+    http_request_interface.PhoneLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
+    		0,0,0,this.share_uid,tel_num,ver_num,password, function (code,m,str)
+		if code then
+		end
+		local s=string.gsub(str,"\\/","/")  
+        local t=ParseJsonStr(s)
+		data_center.SetLoginAllInfo(t) 
+        http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
+		if data_center.GetAllInfor().ret == 0 then
+	-- 		network_mgr.SetNetChnl(NetEngine.Instance:GetGameChnl())
+	-- 		local uid = data_center.GetLoginRetInfo()
+	-- 		log("URL:"..this.url)
+	-- 		local urlStr = string.format(this.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().uid)
+	-- 		network_mgr.Connect(urlStr)
+			
+	-- --		majong_request_interface.HeartBeatReq()
+
+			this.EnterHallRsp("")
+
+			PlayerPrefs.SetInt("LoginType", this.loginType)
+			PlayerPrefs.SetString("AccessToken", 0)
+			PlayerPrefs.SetString("OpenID", NetWorkManage.Instance:GetMacAddress())
+
+
+			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
+			SocketManager:createSocket("hall",urlStr,"online", 1)		
+		else
+			log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));		
+		end
+	end)
 end
 
 function this.WeiXinLogin()

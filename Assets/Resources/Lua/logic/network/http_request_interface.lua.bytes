@@ -104,11 +104,13 @@ end)
 end
 
 
-
+--mtype， 0 注册   1 修改密码
 --根据uid获得验证码 {"mtype":2忘记保险箱密码,"stype":发送类型（0手机1邮箱)}
-function  this.getValidByUid(mtype,stype,callback)
-    local param={["mtype"]=mtype,["stype"]=stype}
-    local t=this.GetTable("GameTools.getValidByUid",param)
+function  this.getValidByUid(mtype,stype,uno,callback)
+    --local param={["mtype"]=mtype,["stype"]=stype}
+    --local param={["mtype"]=mtype,["stype"]=stype,["uno"]=uno}
+    local param={["mtype"]=mtype,["uno"]=uno}
+    local t=this.GetTable("GameMember.getValid",param)
     local rt=json.encode(t)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
     callback(code,m,str)
@@ -182,10 +184,25 @@ function  this.otherLogin(rtype,openid,access_token,logintime,subrtype,share_uid
         end 
     end) 
 end
+
+--{"share_uid":"分享用户ID","rtype":第三方注册类型(2微信 3QQ 4ucgame 5ysdk微信 6ysdkQQ 7笨手机 8富豪 9游客 10奇酷),"openid":微信code,"access_token":token,"logintime":登陆时间,"subrtype":"code 或者 openid"}
+function  this.PhoneLogin(rtype,openid,access_token,logintime,subrtype,share_uid,uno,verify,pwd,callback)
+    log("第三方注册登录")
+    local param={["rtype"]=rtype,["openid"]=openid,["access_token"]=access_token,["logintime"]=logintime,["subrtype"]=subrtype,["share_uid"] = share_uid,["uno"]=uno,["verify"]=verify,["pwd"]=pwd} 
+    local t=this.GetTable("GameMember.Login",param) 
+    local rt=json.encode(t) 
+    log("http_request_interface------" .. rt)
+    NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
+        log("收到返回")
+        log(str)
+        if code == -1 then
+            fast_tip.Show("您的网络状态不好，请稍后再试")
+        else 
+            callback(code,m,str)
+        end 
+    end) 
+end
  
-
-
-
 --第三方账号绑定手机号或者邮箱{"uno":"手机或者邮箱","verify":验证码}
 function  this.otherBind(uno,verify,callback)
     local param={["uno"]=uno,["verify"]=verify} 
@@ -197,7 +214,16 @@ end)
     log("-----------Finish_otherBind--------") 
 end
 
-
+--第三方账号绑定手机号或者邮箱{"uno":"手机或者邮箱","verify":验证码, pwd, nickname}
+function  this.PhoneRegisterUser(uno,verify,pwd,nickname,callback)
+    local param={["uno"]=uno,["verify"]=verify,["pwd"]=pwd,["nickname"]=nickname} 
+    local t=this.GetTable("GameMember.registerUser",param) 
+    local rt=json.encode(t)  
+    NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
+        callback(code,m,str)
+    end) 
+    log("-----------Finish_otherBind--------") 
+end
 
 
 

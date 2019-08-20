@@ -2,9 +2,9 @@ local base = require "logic/framework/ui/uibase/ui_view_base"
 local Item = class("Item", base)
 
 function Item:InitView()
-	self.titleLabel = self:GetComponent("title", typeof(UILabel))
-	self.desLabel = self:GetComponent("des", typeof(UILabel))
-	self.iconGo = self:GetGameObject("icon")
+	self.titleLabel = subComponentGet(self.transform,"title", typeof(UILabel))
+	self.desLabel = subComponentGet(self.transform,"des", typeof(UILabel))
+	self.iconGo = child(self.gameObject, "icon").gameObject
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
 end
 
@@ -16,8 +16,8 @@ end
 
 function Item:SetInfo(index, word1, word2)
 	self.index = index
-	self.desLabel.text = LanguageMgr.GetWord(word1)
-	self.titleLabel.text = LanguageMgr.GetWord(word2)
+	self.desLabel.text = ""--LanguageMgr.GetWord(word1)
+	self.titleLabel.text = ""--LanguageMgr.GetWord(word2)
 end
 
 function Item:SetCallback(callback, target)
@@ -114,10 +114,10 @@ end
 
 
 function ClubManageView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.itemList = {}
 	for i = 1, 4 do
-		local go = self:GetGameObject("scroll/item" .. i)
+		local go = child(self.gameObject,"scroll/item" .. i).gameObject
 		local item = Item:create(go)
 		item:SetInfo(i, cfg[i][1], cfg[i][2])
 		item:SetSelect(false)

@@ -2,13 +2,13 @@ local base = require "logic/framework/ui/uibase/ui_view_base"
 local ClubRoomItem = class("ClubRoomItem", base)
 
 function ClubRoomItem:InitView()
-	self.model = model_manager:GetModel("ClubModel")
-	self.nameLabel = self:GetComponent("room", typeof(UILabel))
-	self.roundLabel = self:GetComponent("round", typeof(UILabel))
-	self.numLabel = self:GetComponent("num", typeof(UILabel))
-	self.icon = self:GetComponent("icon", typeof(UISprite))
-	self.leaderNameLabel = self:GetComponent("name", typeof(UILabel))
-	self.selfIconGo = self:GetGameObject("selfIcon")
+	self.model = ClubModel
+	self.nameLabel = subComponentGet(self.transform, "room", typeof(UILabel))
+	self.roundLabel = subComponentGet(self.transform, "round", typeof(UILabel))
+	self.numLabel = subComponentGet(self.transform, "num", typeof(UILabel))
+	self.icon = subComponentGet(self.transform, "icon", typeof(UISprite))
+	self.leaderNameLabel = subComponentGet(self.transform, "name", typeof(UILabel))
+	self.selfIconGo = child(self.gameObject, "selfIcon").gameObject
 	self.selfIconGo:SetActive(false)
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
 end

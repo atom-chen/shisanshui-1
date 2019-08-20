@@ -2,18 +2,18 @@ local base = require "logic/framework/ui/uibase/ui_view_base"
 local ClubNonView = class("ClubNonView",base)
 
 function ClubNonView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	
-	self.copyQQBtn = self:GetGameObject("right/copy1Btn")
-	self.copyWechatBtn = self:GetGameObject("right/copy2Btn")
-	self.qqLbl = self:GetComponent("right/QQLbl","UILabel")
-	self.wechatLbl = self:GetComponent("right/WechatLbl","UILabel")
+	self.copyQQBtn = child(self.gameObject,"right/copy1Btn").gameObject
+	self.copyWechatBtn = child(self.gameObject,"right/copy2Btn").gameObject
+	self.qqLbl = subComponentGet(self.transform,"right/QQLbl","UILabel")
+	self.wechatLbl = subComponentGet(self.transform,"right/WechatLbl","UILabel")
 	
-	self.rightGo = self:GetGameObject("right")
-	self.rightGo:SetActive(not G_isAppleVerifyInvite)
+	self.rightGo = child(self.gameObject,"right").gameObject
+	--self.rightGo:SetActive(not G_isAppleVerifyInvite)
 	
-	self.qqLbl.text = "QQ:"..global_define.qq
-	self.wechatLbl.text = "微信:"..global_define.winXin
+	self.qqLbl.text = "QQ:"--..global_define.qq
+	self.wechatLbl.text = "微信:"--..global_define.winXin
 
 
 	addClickCallbackSelf(self.copyWechatBtn, self.CopyWeiXin, self)

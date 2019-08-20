@@ -3,20 +3,20 @@ local ClubMembersView = class("ClubMembersView", base)
 local ui_wrap = require "logic/framework/ui/uibase/ui_wrap"
 local ButtonInfo = require("logic/club_sys/Data/ButtonInfo")
 local ClubMemberItem = require("logic/club_sys/View/new/ClubMemberItem")
-local UIManager = UI_Manager:Instance() 
+--local UIManager = UI_Manager:Instance() 
 
 
 function ClubMembersView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.itemList = {}
 	self.info = nil
 	self:InitItem()
 	self.btnsView = require ("logic/club_sys/View/ClubBtnsView"):create(self:GetGameObject("container/btnsPanel"))
-	self.panel = self:GetComponent("container/scrollview",typeof(UIPanel))
-	self.membernum = self:GetGameObject("panel_bottom/bottom/num")--人数
-	self.bottom = self:GetGameObject("panel_bottom")
-	self.redGo = self:GetGameObject("panel_bottom/bottom/redPoint")
-	self.redNumLabel = self:GetComponent("panel_bottom/bottom/redPoint/Label", typeof(UILabel))
+	self.panel = subComponentGet(self.transform,"container/scrollview",typeof(UIPanel))
+	self.membernum = child(self.gameObject,"panel_bottom/bottom/num").gameObject--人数
+	self.bottom = child(self.gameObject,"panel_bottom").gameObject
+	self.redGo = child(self.gameObject,"panel_bottom/bottom/redPoint").gameObject
+	self.redNumLabel = subComponentGet(self.transform,"panel_bottom/bottom/redPoint/Label", typeof(UILabel))
 
 	self.btnsView:SetLimit(-208, 600, 330, -330)
 	self.btnsView:SetActive(false)

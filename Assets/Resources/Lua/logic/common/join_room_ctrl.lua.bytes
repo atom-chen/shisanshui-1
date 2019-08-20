@@ -107,15 +107,11 @@ function this.QueryState(callback)
     local t=ParseJsonStr(s)   
 
     local dst = t._dsts
-    log(GetTblData(dst))
-    log(GetTblData(dst._gid))
-    if dst and dst[1]._gid then     
+    if dst and #dst > 0 and dst[1]._gid then     
         local tbl = {_dst = t._dsts[1]}
-        log("进入房间重连")
         this.EnterGameHandle(tbl)
      else
         if callback ~= nil then
-            log("回调。。。。。。")
             callback()
         end
      end

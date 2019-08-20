@@ -24,6 +24,7 @@
  require"logic/hall_sys/activity/activity_ui"
  require "logic/common/join_room_ctrl"
  require"logic/hall_sys/record_ui/openrecord_ui"
+ require"logic/club_sys/Window/ClubUI"
 
 
  hall_ui = ui_base.New()
@@ -154,6 +155,12 @@ function this.ui_Top()
    if btn_setting~=nil then
      addClickCallbackSelf(btn_setting.gameObject,this.setting,this)
    end 
+
+
+   local btn_club = child(this.transform, "Panel_BottomRight/btn_club")--
+   if btn_club~=nil then
+     addClickCallbackSelf(btn_club.gameObject,this.OpenClubUI,this)
+   end 
  end 
 
 --Panel_Middle
@@ -253,6 +260,10 @@ function this.ui_Bottom()
 
 
 --------------------------------------按钮相关逻辑-----------------------------------------
+function hall_ui:OpenClubUI()
+  ClubUI:OnOpen()
+end
+
 function this.Onbtn_goldClick()
   log("Onbtn_goldClick") 
    --- notice_ui.Show("wadawd46ad56wa4dadwadaaaaaadawdadadadawdawadadawdawdwdaww",5)

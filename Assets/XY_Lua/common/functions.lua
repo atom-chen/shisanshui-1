@@ -1302,3 +1302,8 @@ function WorldToScreenPos( worldPos )
 	screenPos.z = 0
 	return screenPos
 end
+
+--判断表是否为｛｝
+function isEmpty(tbl)
+    return _G.next(tbl) == nil
+end

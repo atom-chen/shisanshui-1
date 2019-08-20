@@ -5,7 +5,7 @@ local ClubListView = class("ClubListView", base)
 local ClubItem = require "logic/club_sys/View/new/ClubSelfItemView"
 
 function ClubListView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 
 	self.itemList = {}
 	self:InitItems()

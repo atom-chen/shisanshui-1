@@ -187,22 +187,7 @@ function this.OnCheckStatusChange()
 end
 
 function this.OnBtnYouKeClick()
-	--界面处理 （To do）
-	if login_sys.isClicked == true then
-		log("is clicked,hold on!")
-		return
-	else
-		--login_sys.isClicked = true
-	end
-	login_sys.OnPlatLoginOK()
-	--测试用，直接登录
-	-- log("-------------------------------------OnBtnYouKeClick")
-	-- if tostring(Application.platform) ==  "WindowsEditor"   then
-	-- 	login_sys.OnPlatLoginOK()
-	-- elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-	-- 	login_sys.WeiXinLogin()
-	-- end
- --    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	login_sys.OnPhoneLoginOK(nil, nil, this.account.value, this.password.value)
 end
 
 function this.OnBtnQQClick()

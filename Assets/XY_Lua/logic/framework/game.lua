@@ -10,6 +10,10 @@ require "common/functions"
 require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
+require "logic/framework/ui/ui_enum"
+
+UI_Manager = require "logic/framework/ui/ui_manager"
+UIManager = UI_Manager:Instance()
 
 GameEvent = require "logic/framework/ui/GameEvent"
 

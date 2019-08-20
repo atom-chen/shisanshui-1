@@ -27,7 +27,7 @@ local HelpContentMap =
 
 function ClubInputUI:ctor()
 	base.ctor(self)
-	HelpContentMap[1][1] = LanguageMgr.GetWord(10080)
+	HelpContentMap[1][1] = "111111111"--LanguageMgr.GetWord(10080)
 	self.inputView = nil
 	self.helpView = nil
 	self.titleSp = nil

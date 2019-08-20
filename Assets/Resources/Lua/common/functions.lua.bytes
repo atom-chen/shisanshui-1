@@ -251,7 +251,6 @@ end
 
 
 function newobject(prefab)
-	log(prefab.name)
 	if prefab ~= nil then
 		local obj = GameObject.Instantiate(prefab)
 		return obj;
@@ -330,7 +329,6 @@ end
 --同步加载UI预设 ----Start----------->
 function newNormalUI(path, parent)
     local prefab = newNormalObjSync(path, typeof(GameObject))
-    log(prefab.name)
 	local obj = newNormalUIprefab(prefab, parent)	
 	if obj ~= nil then
 		local ctrl = obj:AddComponent(typeof(XYHY.LuaDestroyBundle))
@@ -428,7 +426,7 @@ function child(go ,str)
 		log("go == nil")
 		return nil
 	end
-	return go:FindChild(str);
+	return go.transform:FindChild(str);
 end
 
 --[[--
@@ -586,9 +584,9 @@ end
 function addClickCallbackSelf(go, callback, self)
 	if (go ~= nil) then
 		if self ~= nil then
-		    UIEventListener.Get(go).onClick = function(obj) callback(self, obj) end
+		    UIEventListener.Get(go.gameObject).onClick = function(obj) callback(self, obj) end
 		else
-		    UIEventListener.Get(go).onClick = callback
+		    UIEventListener.Get(go.gameObject).onClick = callback
 		end
 	else
 		Fatal("can not find the control, its name is: "..controlName)
@@ -1303,4 +1301,9 @@ function WorldToScreenPos( worldPos )
 	local screenPos = Camera.main.WorldToScreenPoint(worldPos) -- 目的获取z，在Start方法
 	screenPos.z = 0
 	return screenPos
+end
+
+--判断表是否为｛｝
+function isEmpty(tbl)
+    return _G.next(tbl) == nil
 end

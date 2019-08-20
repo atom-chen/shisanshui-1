@@ -1,6 +1,6 @@
 local base = require("logic.framework.ui.uibase.ui_window")
-local ClubUI = class("ClubUI", base)
-local UIManager = UI_Manager:Instance() 
+--local ClubUI = class("ClubUI", base)
+--local UIManager = UI_Manager:Instance() 
 local addClickCallbackSelf = addClickCallbackSelf
 local ClubListView = require("logic/club_sys/View/new/ClubListViewWithGrid")
 local ClubInfoView = require("logic/club_sys/View/new/ClubInfoView")
@@ -9,38 +9,41 @@ local ClubRoomView = require("logic/club_sys/View/new/ClubRoomView")
 local ClubInviteBtnsView = require("logic/club_sys/View/new/ClubInviteBtnsView")
 local ClubNonView = require("logic/club_sys/View/new/ClubNonView")
 local ClubManageView = require "logic/club_sys/View/new/ClubManageView"
+require "logic/club_sys/ClubModel"
 
+ClubUI = ui_base.New()
 local normalColor = Color(254 / 255, 234/ 255, 200 / 255)
 local selectColor = Color(163 / 255, 88/ 255, 27 / 255)
 
 function ClubUI:OnInit()
-	self.model = model_manager:GetModel("ClubModel")
-	self.closeBtnGo = self:GetGameObject("Panel_Top/backBtn")
+	self.model = ClubModel
+	self.model:ctor()
+	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 
-	self.bg1Go = self:GetGameObject("Panel_Top/bg1")
-	self.redGo = self:GetGameObject("Panel_Middle/btns/redPoint")
+	self.bg1Go = child(self.gameObject, "Panel_Top/bg1").gameObject
+	self.redGo = child(self.gameObject, "Panel_Middle/btns/redPoint").gameObject
 	self.togglesList = {}
 	self:InitToggles()
 
-	self.shareBtnGo = self:GetGameObject("Panel_Top/inviteBtn")
+	self.shareBtnGo = child(self.gameObject, "Panel_Top/inviteBtn").gameObject
 	addClickCallbackSelf(self.shareBtnGo, self.OnShareClick, self)
 
-	self.shareBtnGo:SetActive(not G_isAppleVerifyInvite)
+	--self.shareBtnGo:SetActive(not G_isAppleVerifyInvite)
 
-	self.clubListView = ClubListView:create(self:GetGameObject("Panel_Middle/clubListView"))
+	self.clubListView = ClubListView:create(child(self.gameObject, "Panel_Middle/clubListView"))
 
 	self.currentToggleSp = nil
 	self.curIndex = -1
 
 	self.viewList = {}
-	local roomView = ClubRoomView:create(self:GetGameObject("Panel_Middle/clubRoomView"))
+	local roomView = ClubRoomView:create(child(self.gameObject, "Panel_Middle/clubRoomView"))
 	self.viewList[1] = roomView
-	local memberView = ClubMemberView:create(self:GetGameObject("Panel_Middle/clubMemberView"))
+	local memberView = ClubMemberView:create(child(self.gameObject, "Panel_Middle/clubMemberView"))
 	self.viewList[2] = memberView
-	local infoView = ClubInfoView:create(self:GetGameObject("Panel_Middle/clubInfoView"))
+	local infoView = ClubInfoView:create(child(self.gameObject, "Panel_Middle/clubInfoView"))
 	self.viewList[3] = infoView
-	local clubManageView = ClubManageView:create(self:GetGameObject("Panel_Middle/clubManageView"))
+	local clubManageView = ClubManageView:create(child(self.gameObject, "Panel_Middle/clubManageView"))
 	self.viewList[4] = clubManageView
 	
 	--代理商隐藏功能（个人俱乐部列表）
@@ -48,24 +51,24 @@ function ClubUI:OnInit()
 		clubManageView:SetAgent(self.model:IsAgent())
 	end
 	
-	self.clubInviteBtnsView = ClubInviteBtnsView:create(self:GetGameObject("Panel_Middle/invitePanel"))
+	self.clubInviteBtnsView = ClubInviteBtnsView:create(child(self.gameObject, "Panel_Middle/invitePanel"))
 	
-	self.Panel_Middle = self:GetGameObject("Panel_Middle")
-	self.nonClubView = ClubNonView:create(self:GetGameObject("Panel_NonClub"))
+	self.Panel_Middle = child(self.gameObject,"Panel_Middle").gameObject
+	self.nonClubView = ClubNonView:create(child(self.gameObject, "Panel_NonClub"))
 	self.nonClubView:SetActive(false)
 	
 	
-	self.createBtnGo = self:GetGameObject("Panel_Bottom/createBtn")
+	self.createBtnGo = child(self.gameObject, "Panel_Bottom/createBtn").gameObject
 	addClickCallbackSelf(self.createBtnGo, self.OnClubCreateClick, self)
-	self.joinBtnGo = self:GetGameObject("Panel_Bottom/joinBtn")
+	self.joinBtnGo = child(self.gameObject, "Panel_Bottom/joinBtn").gameObject
 	addClickCallbackSelf(self.joinBtnGo, self.OnClubJoinClick, self)
 end
 
 function ClubUI:InitToggles()
 	for i = 1, 4 do
-		local go = self:GetGameObject("Panel_Middle/btns/toggle".. i)
-		local sp = self:GetComponent("Panel_Middle/btns/toggle" .. i, typeof(UISprite))
-		local lbl = self:GetComponent("Panel_Middle/btns/toggle" .. i .. "/Label", typeof(UILabel))
+		local go = child(self.gameObject, "Panel_Middle/btns/toggle".. i).gameObject
+		local sp = subComponentGet(self.transform, "Panel_Middle/btns/toggle" .. i, typeof(UISprite))
+		local lbl = subComponentGet(self.transform, "Panel_Middle/btns/toggle" .. i .. "/Label", typeof(UILabel))
 		local index = i
 		addClickCallbackSelf(go, function() self:OnToggleClick(index) end, self)
 		self.togglesList[i] = {sp, lbl}
@@ -79,6 +82,14 @@ function ClubUI:OnShareClick()
 end
 
 function ClubUI:OnOpen()	
+	if self.gameObject==nil then
+		require ("logic/club_sys/Window/ClubUI")
+		self.gameObject=newNormalUI("Prefabs/UI/club_ui/club_ui")
+	else
+		self.gameObject:SetActive(true)
+	end
+	self.transform = self.gameObject.transform
+	self:OnInit()
 	self:RegistEvent()
 	self:isShowNonClubView(function()
 		self.clubListView:UpdateList(true)
@@ -274,9 +285,11 @@ end
 
 
 function ClubUI:OnClubCreateClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	--UI_Manager:Instance():ShowUiForms("ClubCreateUI")
-	if self.model:IsAgent() or G_isAppleVerifyInvite  then
+	--if self.model:IsAgent() or G_isAppleVerifyInvite  then
+	if self.model:IsAgent() then
 		UI_Manager:Instance():ShowUiForms("ClubCreateUI")
 	else
 		UIManager:ShowUiForms("ClubInputUI", nil, nil, ClubInputUIEnum.InputCode)

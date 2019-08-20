@@ -9,6 +9,7 @@ local LastClubIDKey = "LAST_CLUB_ID"
 --local UIManager = UI_Manager:Instance() 
 
 function ClubModel:ctor()
+	log("ClubModel  创建。。。。。。。。。。。。。。。。。。。。。。。。。")
 	self.locationTab = {}
 	-- 第一版使用，用于遍历显示
 	self.locationList = {}
