@@ -9,6 +9,7 @@ require "logic/shisangshui_sys/lib_normal_card_logic"
 require "logic/shisangshui_sys/shisangshui_play_sys"
 require "logic/shisangshui_sys/lib_laizi_card_logic"
 require "logic/shisangshui_sys/common/array"
+require "logic/shisangshui_sys/common/bit"
 require "logic/shisangshui_sys/card_define"
 
  
@@ -56,6 +57,23 @@ local recommend_cards
 local lastTime = 0  ----倒计时
 
 local cardGrid
+
+
+local isRecommond = false
+
+local animationMove = false
+local nSpecialType
+local animationSmallTime = 0.02
+local animationTime = 0.3
+
+local animationWaitTime = 0.3
+
+
+local totalTime = nil
+--底部按扭牌型序号
+local allCardTypeIndex = 0
+local bottonSelectCardsBtn = 0
+local isSelectDown = false
 
 function this.Awake() 
    this.initinfor()   
@@ -124,6 +142,35 @@ end
  * @Description: 销毁  
  ]]
 function this.OnDestroy()
+end
+
+local hoverObj = nil
+function this.OnFingerHover(myself, finger)
+	--log("OnFingerHoverForLua:"..tostring(finger.name))
+	if hoverObj ~= nil and hoverObj.name == finger.name then
+		return
+	else
+			--print("--------------")
+			local data = UIEventListener.Get(finger.gameObject).parameter
+			if data ~= nil and data.cardType == CardType[3] and hoverObj ~= nil then
+				return
+			end
+			hoverObj = finger
+			this.CardClick(hoverObj, true, true)
+	end
+end
+
+function this.OnFingerUp(myself,fingerUpEvent)
+	log("Lua fingerUpEvent++++++++++")
+	hoverObj = nil
+end
+
+function this.OnSwipe(myself,direction,fingerSwipe)
+	log("Direction:"..tostring(direction))
+	if tostring(direction) == "Down" then
+		--local data = UIEventListener.Get(fingerSwipe.gameObject).parameter
+		--this.DownOneCard(data, true)
+	end
 end
 
 ---[[
@@ -212,6 +259,21 @@ function this.registerevent()
 		cardTipBtn[6] = cardTip6
 		UIEventListener.Get(cardTip6.gameObject).onClick = this.BtnClick
 	end
+	local cardTip7 = child(this.transform, "Panel_Bottom/placeCard/tips/cardTip7")
+	if cardTip7 ~= nil then
+		cardTipBtn[7] = cardTip7
+		UIEventListener.Get(cardTip7.gameObject).onClick = this.BtnClick
+	end
+	local cardTip8 = child(this.transform, "Panel_Bottom/placeCard/tips/cardTip8")
+	if cardTip8 ~= nil then
+		cardTipBtn[8] = cardTip8
+		UIEventListener.Get(cardTip8.gameObject).onClick = this.BtnClick
+	end
+	local cardTip9 = child(this.transform, "Panel_Bottom/placeCard/tips/cardTip9")
+	if cardTip9 ~= nil then
+		cardTipBtn[9] = cardTip9
+		UIEventListener.Get(cardTip9.gameObject).onClick = this.BtnClick
+	end
 	local cardType1 = child(this.transform, "Panel_TopRight/cardType1")
 	if cardType1 ~= nil then
 		UIEventListener.Get(cardType1.gameObject).onClick = this.BtnClick
@@ -254,38 +316,72 @@ function this.registerevent()
 end
 	
 function this.TipsBtnShow(cards)
-	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Straight_Flush(Array.Clone(cards))
+	local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(cards))
+	local bFound, temp = libRecomand:Get_Pt_Straight_Flush_Laizi_second(Array.Clone(normal_cards), nLaziCount)
+	log("剩余牌的数量:"..tostring(#normal_cards))
 	this.BtnGray(cardTipBtn[1], bFound)
 	
-	bFound, temp = LibNormalCardLogic:Get_Max_Pt_Four(Array.Clone(cards))
+	bFound, temp = libRecomand:Get_Pt_Four_Laizi_second(Array.Clone(normal_cards), nLaziCount)
 	this.BtnGray(cardTipBtn[2], bFound)
 	
-	bFound, temp = LibNormalCardLogic:Get_Max_Pt_Full_Hosue(Array.Clone(cards))
+	bFound, temp = libRecomand:Get_Pt_Full_Hosue_Laizi_second(Array.Clone(normal_cards), nLaziCount)
+	--bFound, temp = libRecomand:Get_Pt_Full_Hosue_Laizi_Ext(Array.Clone(normal_cards), nLaziCount)
+	
 	this.BtnGray(cardTipBtn[3], bFound)
 	
-	bFound, temp = LibNormalCardLogic:Get_Max_Pt_Flush(Array.Clone(cards))
+	bFound, temp = libRecomand:Get_Pt_Flush_Laizi_second(Array.Clone(normal_cards), nLaziCount)
 	this.BtnGray(cardTipBtn[4], bFound)
 	
-	bFound, temp = LibNormalCardLogic:Get_Max_Pt_Straight(Array.Clone(cards))
+	bFound, temp = libRecomand:Get_Pt_Straight_Laizi_second(Array.Clone(normal_cards), nLaziCount)
 	this.BtnGray(cardTipBtn[5], bFound)
 	
-	bFound, temp = LibNormalCardLogic:Get_Max_Pt_Three(Array.Clone(cards))
+	bFound, temp = libRecomand:Get_Pt_Three_Laizi_second(Array.Clone(normal_cards), nLaziCount)
 	this.BtnGray(cardTipBtn[6], bFound)
+	
+	bFound, temp = libRecomand:Get_Pt_Five_Laizi_second(Array.Clone(normal_cards), nLaziCount)
+	this.BtnGray(cardTipBtn[7], bFound)
+	
+	bFound, temp = libRecomand:Get_Pt_One_Pair_Laizi_second(Array.Clone(normal_cards),nLaziCount)
+	this.BtnGray(cardTipBtn[8],bFound)
+
+	bFound, temp = libRecomand:Get_Pt_Two_Pair_Laizi_second(Array.Clone(normal_cards),nLaziCount)
+	log("是否有二对："..tostring(bFound))
+
+		log(bFound)
+		log("二对")
+		log(GetTblData(temp))
+	this.BtnGray(cardTipBtn[9],bFound)
 end
 
 function this.BtnGray(trans, isCanClick)
-	local collider = componentGet(trans, "BoxCollider")
-	local bg = componentGet(child(trans, "Background"), "UISprite")
-	if collider == nil or bg == nil then
-		log("collider = nil or bg = nil : "..trans.name)
-		return
-	end
+	--local collider = componentGet(trans, "BoxCollider")
+	-- local enbale_bg = componentGet(child(trans, "Background"), "UISprite")
+	-- local disable_bg = componentGet(child(trans, "Background (1)"), "UISprite")
+	local active1 = child(trans, "active")
+	local inactive = child(trans, "inactive")
+	--if collider == nil or bg == nil then
+	--	print("collider = nil or bg = nil : "..trans.name)
+	--	return
+	--end
 	if isCanClick then
-		collider.enabled = true
-		bg.color = Color.white
+	
+		--collider.enabled = true
+	--	bg.spriteName = "pzaj-001"
+		-- enbale_bg.gameObject:SetActive(true)
+		-- disable_bg.gameObject:SetActive(false)
+		
+		active1.gameObject:SetActive(true)
+		inactive.gameObject:SetActive(false)
 	else
-		collider.enabled = false
-		bg.color = Color.gray
+		
+		--collider.enabled = false
+	--	bg.spriteName = "pzaj-002"
+		
+		-- enbale_bg.gameObject:SetActive(false)
+		-- disable_bg.gameObject:SetActive(true)
+		
+		active1.gameObject:SetActive(false)
+		inactive.gameObject:SetActive(true)
 	end
 end
 
@@ -314,6 +410,7 @@ function this.LoadAllCard(cards)
 		end
 		local k = i - 1
 		card_data.tran.transform.localPosition = Vector3.New(-558 + 93 * k, 0, 0)
+		card_data.tran.transform.localScale = Vector3.New(0.9, 0.9, 0.9)
 		card_data.tran.name = tostring(i)
 		card_data.pos = Vector3.New(-558 + 93 * k, 0, 0)
 		card_data.name = tostring(i)
@@ -333,8 +430,17 @@ function this.LoadAllCard(cards)
 		if room_data.GetSssRoomDataInfo().isChip == true and card == 40 then
 			componentGet(child(card_data.tran.transform, "ma"),"UISprite").depth = i * 2 + 4
 		end
-		UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
+		--UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
 		UIEventListener.Get(card_data.tran.gameObject).parameter = cardData
+
+        UIEventListener.Get(card_data.tran.gameObject).OnHover = function (obj, isOver)
+        	log("悬浮")
+        	if isOver then
+	    		local finger = {}
+	    		finger.Selection = obj
+	            this.OnFingerHover(nil, finger)
+	        end
+        end 
 	end
 	--]]
 
@@ -342,26 +448,38 @@ function this.LoadAllCard(cards)
 end
 
 function this.CardClick(obj, fast)
+	--ui_sound_mgr.PlaySoundClip(data_center.GetResRootPath().."/sound/audio/chupai")
+	if animationMove then
+		return
+	end
 	local cardData = UIEventListener.Get(obj).parameter
 	if cardData == nil then
-		log("-----cardData = nil-----")
+		logError("-----cardData = nil-----")
+		return
 	end
 	local cardNowType = cardData.cardType
 	local cardNum = cardData.card
-	log("CardType: "..tostring(cardNowType).."  num: "..cardNum)
+	print("CardType: "..tostring(cardNowType).."  num: "..cardNum)
 	if(tonumber(cardNowType) == CardType[1]) then
-		obj.transform:DOLocalMoveY(40, 0.05, true)
+		bottonSelectCardsBtn = 0
+		if hover ~= nil and hover == true then
+			local pos = obj.transform.localPosition
+			obj.transform.localPosition = Vector3.New(pos.x, 40, pos.z)
+		else
+			obj.transform:DOLocalMoveY(40, animationSmallTime, true)
+		end
 		local selectDownCardData = {}
 		cardData.cardType = CardType[2]
 		--selectDownCards[tonumber(obj.name)] = cardData
 		table.insert(selectDownCards, cardData)
 		UIEventListener.Get(obj).parameter = cardData
 	elseif (tonumber(cardNowType) == CardType[2]) then
-		if fast ~= nil and fast == true then
+		bottonSelectCardsBtn = 0
+		if hover ~= nil and hover == true then
 			local pos = obj.transform.localPosition
 			obj.transform.localPosition = Vector3.New(pos.x, 0, pos.z)
 		else
-			obj.transform:DOLocalMoveY(0, 0.05, true)
+			obj.transform:DOLocalMoveY(0, animationSmallTime, true)
 		end
 		local selectDownCardData = {}
 		cardData.cardType = CardType[1]
@@ -372,18 +490,55 @@ function this.CardClick(obj, fast)
 		local indexKey = this.GetDownCardKey(cardData)
 		table.remove(selectDownCards, indexKey)
 	else
-		if obj.transform.localScale ~= Vector3.New(0.65, 0.65, 0.65) then
-			log("换牌错误")
+		if obj.transform.localScale ~= Vector3.New(0.9, 0.9, 0.9) then
+			Trace("换牌错误")
 			return
 		end
 		if selectUpCard == nil then
-			selectUpCard = obj
-			UIEventListener.Get(selectUpCard.gameObject).parameter = cardData
-			return
+			if #selectDownCards == 1 then
+				local selectCardData = UIEventListener.Get(selectDownCards[1].tran.gameObject).parameter
+				local pos = selectCardData.tran.transform.localPosition
+				obj.transform:DOLocalMove(Vector3.New(pos.x, 0, pos.z), animationTime, true)
+				obj.transform:DOScale(Vector3.New(1, 1, 1), animationTime)
+				selectCardData.tran.transform:DOLocalMove(obj.transform.localPosition, animationTime, true)
+				selectCardData.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationTime)
+				
+				local _, dun, dun_no = this.GetDun(cardData.up_index)
+				up_placed_cards[dun][dun_no] = selectCardData
+				selectCardData.up_index = cardData.up_index
+				selectCardData.cardType = CardType[3]
+				cardData.up_index = 0
+				cardData.cardType = CardType[1]
+				this.UpdateLeftCard(left_card, selectDownCards[1].card)
+				table.insert(left_card, cardData.card)
+				selectDownCards[1] = nil
+				selectDownCards = {}
+				this.TipsBtnShow(left_card)
+				animationMove = true
+				coroutine.start(function ()
+						coroutine.wait(animationWaitTime)
+						print("fast1: "..tostring(fast))
+						animationMove = false
+						--cardGrid:Reposition()
+						coroutine.wait(animationWaitTime)
+					end)
+				--local _select, select_dun, select_dun_no = this.GetDun(selectCardData.up_index)
+				--up_placed_cards[dun][dun_no], up_placed_cards[select_dun][select_dun_no] = 
+				--	up_placed_cards[select_dun][select_dun_no], up_placed_cards[dun][dun_no]
+					
+				--cardData.up_index, selectCardData.up_index = selectCardData.up_index, cardData.up_index
+				
+				--child(selectUpCard.transform, "guanghuan").gameObject:SetActive(false)
+			else
+				selectUpCard = obj
+				child(selectUpCard.transform, "guanghuan").gameObject:SetActive(true)
+				UIEventListener.Get(selectUpCard.gameObject).parameter = cardData
+				return
+			end
 		else
 			local selectCardData = UIEventListener.Get(selectUpCard.gameObject).parameter
-			obj.transform:DOLocalMove(selectUpCard.transform.localPosition, 0.3, true)
-			selectUpCard.transform:DOLocalMove(obj.transform.localPosition, 0.3, true)
+			obj.transform:DOLocalMove(selectUpCard.transform.localPosition, animationTime, true)
+			selectUpCard.transform:DOLocalMove(obj.transform.localPosition, animationTime, true)
 			
 			local _, dun, dun_no = this.GetDun(cardData.up_index)
 			local _select, select_dun, select_dun_no = this.GetDun(selectCardData.up_index)
@@ -391,11 +546,41 @@ function this.CardClick(obj, fast)
 				up_placed_cards[select_dun][select_dun_no], up_placed_cards[dun][dun_no]
 				
 			cardData.up_index, selectCardData.up_index = selectCardData.up_index, cardData.up_index
+			
+			child(selectUpCard.transform, "guanghuan").gameObject:SetActive(false)
 			selectUpCard = nil
 			if place_index >= 14 then
 				this.XiangGongTip()
 			end
 		end
+	end
+	print("fast1: "..tostring(fast))
+	if fast == nil or fast == false then
+		animationMove = true
+		coroutine.start(function ()
+			coroutine.wait(animationWaitTime)
+			print("fast1: "..tostring(fast))
+			animationMove = false
+		end
+		)
+	end
+end
+
+function this.RankDownCard()
+
+	local downCard = {}
+	for i = 1, 13 do
+		local obj = cardGrid.transform:FindChild(tostring(i))
+		local oneCard = UIEventListener.Get(obj.gameObject).parameter
+		if oneCard.cardType == CardType[1] then
+			table.insert(downCard, oneCard)
+		end
+	end
+	local num = math.floor(#downCard / 2)
+	for i = 1, #downCard do
+		local v = downCard[i]
+		local pos = Vector3.New(-93 * num + i * 93, 0, 0)
+		v.tran.transform:DOLocalMove(pos, animationTime, true)
 	end
 end
 
@@ -422,6 +607,10 @@ function this.GetConfirmCard()
 end
 
 function this.CardBgClick(obj)
+	if animationMove then
+		return
+	end
+	--ui_sound_mgr.PlaySoundClip(data_center.GetResRootPath().."/sound/audio/chupai")
 	local place_up_index = tonumber(obj.name)
 	local select_num = 0
 	for i, v in ipairs(selectDownCards) do
@@ -429,20 +618,21 @@ function this.CardBgClick(obj)
 			select_num = select_num + 1
 		end
 	end
+	if select_num == 0 then
+		return
+	end
 	local place_up_max = this.GetMaxFromPosInDun(place_up_index)
 	if select_num > place_up_max then
 		local CanPlaceMaxPos = this.GetMaxPosInDun (place_up_index)
 		if select_num > CanPlaceMaxPos then
-			local box= message_box.ShowGoldBox("选中的牌太多",nil,1,{function ()message_box:Close()end},{"fonts_01"})
+			print("select_num: "..tostring(select_num).." PosNUM: "..tostring(CanPlaceMaxPos))
+			local box= message_box.ShowGoldBox(GetDictString(6035),{function ()message_box:Close()end},{"fonts_01"})
 			return
 		else
 			place_up_index = this.GetMinDun(place_up_index)
 		end
 	end
-	table.sort(selectDownCards, function (a, b)
-			return GetCardValue(a.card) < GetCardValue(b.card)
-		end)
-		
+	selectDownCards = this.CardUpSort(selectDownCards)
     local place, dun = this.GetDun(place_up_index)
 	for i, v in ipairs(selectDownCards) do
 		if place_index > 13 then
@@ -460,12 +650,12 @@ function this.CardBgClick(obj)
 		cardPlaceTranList[place_up_index].card = v.card
 		local cardData = UIEventListener.Get(v.tran.gameObject).parameter
 		local cardNum = cardData.card
-		v.tran.transform:DOLocalMove(cardPlaceTranList[place_up_index].tran.transform.localPosition, 0.3, true)
-		v.tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.3)
+		v.tran.transform:DOLocalMove(cardPlaceTranList[place_up_index].tran.transform.localPosition, animationTime, true)
+		v.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationSmallTime)
 		cardData.cardType = CardType[3]
 		cardData.up_index = place_up_index
 		UIEventListener.Get(v.tran.gameObject).parameter = cardData
-		--log("selectDownCards: i:  "..i.."  v: "..v.tran.name)
+		--print("selectDownCards: i:  "..i.."  v: "..v.tran.name)
 		this.UpdateLeftCard(left_card, cardData.card)
 		
 		local dun, dun_no = this.GetDunNo(place_up_index)
@@ -480,14 +670,22 @@ function this.CardBgClick(obj)
 	for k,v in ipairs(selectDownCards) do
 		selectDownCards[k] = nil
 	end
+	allCardTypeIndex = 0
 	selectDownCards = {}
 	this.DunBtnShow(place_up_index - 1)
 	this.TipsBtnShow(left_card)
 	this.BuPai()
 
+	animationMove = true
 	coroutine.start(function ()
-		coroutine.wait(0.31)
-		cardGrid:Reposition()
+		coroutine.wait(animationWaitTime)
+		this.RankDownCard()
+		--cardGrid:Reposition()
+		coroutine.wait(animationWaitTime)
+--[[		if this.IsPlaceFinish() then
+			this.PlaceCardFinish()
+		end--]]
+		animationMove = false
 	end
 	)
 end
@@ -568,79 +766,91 @@ end
 
 function this.BtnClick(obj)
 	--同花顺
+	--同花顺
 	if obj.name == "cardTip1" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Straight_Flush(Array.Clone(left_card))
-		if temp == nil then
-			log("没有同花顺")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		for i, v in ipairs(temp) do
-			if cardTranTbl[v] ~= nil then
-				this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
-			end
-		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Straight_Flush_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(1, temp, laiziCards)
 	--铁枝
 	elseif obj.name == "cardTip2" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Four(Array.Clone(left_card))
-		if temp == nil then
-			log("没有铁枝")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		temp = this.FindSameCard(temp)
-		for i, v in pairs(temp) do
-			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
-		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Four_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(2, temp, laiziCards)
 	--葫芦
 	elseif obj.name == "cardTip3" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Full_Hosue(Array.Clone(left_card))
-		if temp == nil then
-			log("没有葫芦")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		temp = this.FindSameCard(temp)
-		for i, v in ipairs(temp) do
-			log("card3.....: "..tostring(v))
-			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
-		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Full_Hosue_Laizi_second(normal_cards, nLaziCount)
+		--local bFound, temp = libRecomand:Get_Pt_Full_Hosue_Laizi_Ext(normal_cards, nLaziCount)
+	
+		this.CardTypeBottomClick(3, temp, laiziCards)
 		--同花
 	elseif obj.name == "cardTip4" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Flush(Array.Clone(left_card))
-		if temp == nil then
-			log("没有同花")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		temp = this.FindSameCard(temp)
-		for i, v in ipairs(temp) do
-			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
-		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Flush_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(4, temp, laiziCards)
 		--顺子
 	elseif obj.name == "cardTip5" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Straight(Array.Clone(left_card))
-		if temp == nil then
-			log("没有顺子")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		temp = this.FindSameCard(temp)
-		for i, v in ipairs(temp) do
-			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
-		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Straight_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(5, temp, laiziCards)
 	--三条
 	elseif obj.name == "cardTip6" then
-		local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Three(Array.Clone(left_card))
-		if temp == nil then
-			log("没有三条")
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
 			return
 		end
-		this.DownSelectCard()
-		temp = this.FindSameCard(temp)
-		for i, v in ipairs(temp) do
-			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject)
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Three_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(6, temp, laiziCards)
+		--五同
+	elseif obj.name == "cardTip7" then
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
+			return
 		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_Five_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(7, temp, laiziCards)
+	elseif obj.name == "cardTip8" then
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
+			return
+		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		local bFound, temp = libRecomand:Get_Pt_One_Pair_Laizi_second(normal_cards, nLaziCount)
+		this.CardTypeBottomClick(8, temp, laiziCards)
+	elseif obj.name == "cardTip9" then
+		local active1 = child(obj.transform, "active")
+		if active1.gameObject.activeSelf == false then
+			return
+		end
+		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
+		log(GetTblData(normal_cards))
+		local bFound, temp = libRecomand:Get_Pt_Two_Pair_Laizi_second(normal_cards, nLaziCount)
+		log(bFound)
+		log("二对")
+		log(GetTblData(temp))
+		this.CardTypeBottomClick(9, temp, laiziCards)
 	--确定
 	elseif obj.name == "OkBtn" then
 		log("------OkBtn click--")
@@ -699,6 +909,57 @@ function this.BtnClick(obj)
 	end
 end
 
+function this.CardTypeBottomClick(index, temp, laiziCards)
+	if temp == nil  or #temp == 0 then
+		log("没有相应的推荐牌型:"..tostring(index))
+		return
+	end
+	local allResult = libRecomand:Get_Rec_Cards_Laizi(temp, laiziCards)
+	log("牌型："..index)
+	this.DownSelectCard()
+	if bottonSelectCardsBtn == index and allCardTypeIndex >= #allResult then
+		allCardTypeIndex = 0
+		isSelectDown = true
+		return
+	end
+	if bottonSelectCardsBtn ~= index then
+		allCardTypeIndex = 0
+	end
+	isSelectDown = false
+	allCardTypeIndex = allCardTypeIndex + 1
+	local cards = this.FindSameCard(allResult[allCardTypeIndex])
+	for i, v in ipairs(cards) do
+		local y = cardTranTbl[v].tran.transform.localPosition.y
+		if cardTranTbl[v] ~= nil and cardTranTbl[v].tran.transform.localPosition.y < 50 then
+			this.CardClick(cardTranTbl[tonumber(v)].tran.gameObject, true)
+		elseif cardTranTbl[tonumber(v) + 100] ~= nil then
+			this.CardClick(cardTranTbl[tonumber(v) + 100].tran.gameObject, true)
+		end
+	end
+	animationMove = true
+	coroutine.start(function ()
+		coroutine.wait(animationWaitTime)
+		animationMove = false
+	end
+	)
+	bottonSelectCardsBtn = index
+end
+
+function this.GetallCardType(cards)
+	local normalCards = {}
+    local laiziCards = {}
+    for _, v in ipairs(cards) do
+        local nValue = GetCardValue(v)
+        if LibLaiZi:IsLaiZi(nValue) then
+            table.insert(laiziCards, v)
+        else
+            table.insert(normalCards, v)
+        end
+    end
+    local nLaziCount = #laiziCards
+	return normalCards, nLaziCount, laiziCards
+end
+
 function this.DownSelectCard()
 	---[[
 	for i, v in ipairs(selectDownCards) do
@@ -743,7 +1004,7 @@ function this.AutoPlace1Click(index)
 			return
 		end
 		cardTranTbl[cardNum].tran.transform:DOLocalMove(destOjbPos.tran.transform.localPosition, 0.3, true)
-		cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
+		--cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
 		local parameterData = UIEventListener.Get(cardTranTbl[cardNum].tran.gameObject).parameter
 		parameterData.cardType = CardType[3]
 		parameterData.up_index = i
@@ -832,7 +1093,8 @@ function this.DownCardClick(dun)
 	this.TipsBtnShow(left_card)
 	coroutine.start(function ()
 		coroutine.wait(0.31)
-		cardGrid:Reposition()
+		this.RankDownCard()
+		--cardGrid:Reposition()
 	end
 	)
 end
@@ -1086,4 +1348,89 @@ function this.Update()
 	end
 	timeLbl.text = tostring(math.floor(leftTime))
 	timeSpt.fillAmount = leftTime / room_data.GetSssRoomDataInfo().placeCardTime
+end
+
+function this.CardSort(srcCards)
+	table.sort(srcCards, function(a, b) return GetCardValue(a) < GetCardValue(b) end)
+	--铁枝
+	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Four(Array.Clone(srcCards))
+	if temp ~= nil then
+		local signleCard
+		for i = 1, #srcCards - 1, 1 do
+			if i < #srcCards - 1 and GetCardValue(srcCards[i]) ~= GetCardValue(srcCards[i + 1]) then 
+				signleCard = srcCards[i]
+				table.remove(srcCards, i)
+				break
+			end
+		end
+		table.insert(srcCards, signleCard)
+		return srcCards
+	end
+	--葫芦
+	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Full_Hosue(Array.Clone(srcCards))
+	if temp ~= nil then
+		if GetCardValue(srcCards[3]) == GetCardValue(srcCards[2]) then
+			return srcCards
+		else
+			local signleCard = srcCards[2]
+			table.remove(srcCards, 2)
+			table.insert(srcCards, signleCard)
+			
+			signleCard = srcCards[1]
+			table.remove(srcCards, 1)
+			table.insert(srcCards, signleCard)
+			return srcCards
+		end
+	end
+	--三条
+	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Three(Array.Clone(srcCards))
+	if temp ~= nil then
+		for i = 1, #srcCards do
+			if GetCardValue(srcCards[i]) ~= GetCardValue(temp[1]) then
+				table.insert(temp, srcCards[i])
+			end
+		end
+		return temp
+	end
+	--二对
+	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_Two_Pair(Array.Clone(srcCards))
+	if temp ~= nil then
+		for i = 1, #srcCards do
+			if GetCardValue(srcCards[i]) ~= GetCardValue(temp[1]) and  GetCardValue(srcCards[i]) ~= GetCardValue(temp[3]) then
+				table.insert(temp, srcCards[i])
+				break
+			end
+		end
+		return temp
+	end
+	--一对
+	local bFound, temp = LibNormalCardLogic:Get_Max_Pt_One_Pair(Array.Clone(srcCards))
+	if temp ~= nil then
+		for i = 1, #srcCards do
+			if GetCardValue(srcCards[i]) ~= GetCardValue(temp[1]) then
+				table.insert(temp, srcCards[i])
+			end
+		end
+		return temp
+	end
+	return srcCards
+end
+
+function this.CardUpSort(srcUpCards)
+	local srcCards = {}
+	for i = 1, #srcUpCards do
+		srcCards[i] = srcUpCards[i].card
+	end
+	srcCards = this.CardSort(srcCards)
+	local sortUpCards = {}
+	for i = 1, #srcCards do
+		for j =  #srcUpCards, 1, -1 do
+			if srcCards[i] == srcUpCards[j].card then
+				table.insert(sortUpCards, srcUpCards[j])
+				table.remove(srcUpCards, j)
+				break
+			end
+		end
+	end
+	return sortUpCards
 end

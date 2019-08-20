@@ -102,10 +102,12 @@ end
 
 function this.QueryState(callback)
   http_request_interface.QueryStatus({}, function (code, m, str)
-     local s=string.gsub(str,"\\/","/")
-     log("QueryState:"..tostring(s))
-     local t=ParseJsonStr(s)   
-     if t._dsts ~= nil and #t._dsts > 0 then     
+    local s=string.gsub(str,"\\/","/")
+    log("QueryState:"..tostring(s))
+    local t=ParseJsonStr(s)   
+
+    local dst = t._dsts
+    if dst and #dst > 0 and dst[1]._gid then     
         local tbl = {_dst = t._dsts[1]}
         this.EnterGameHandle(tbl)
      else
@@ -121,7 +123,7 @@ end
  ]]
 function this.EnterGameHandle(data)
     log("GetTblData----------------------------------"..GetTblData(data))
-    --mahjong_play_sys.EnterGameReq(data)
+    mahjong_play_sys.EnterGameReq(data)
     player_data.SetReconnectEpara(data) 
     --join_room.EnterGameHandle(data)
 end

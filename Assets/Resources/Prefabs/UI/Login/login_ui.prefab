@@ -1794,7 +1794,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 291, y: 95, z: 0}
+  m_Size: {x: 155.2, y: 145.37, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65787661858627442
 BoxCollider:
@@ -2887,7 +2887,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11458222, guid: 552438b608bb5eb4b90e6ac26e52dad6, type: 2}
-  mText: "\u9A8C\u8BC1\u7801\u767B\u5F55"
+  mText: "\u5BC6\u7801\u767B\u5F55"
   mFontSize: 36
   mFontStyle: 0
   mAlignment: 0

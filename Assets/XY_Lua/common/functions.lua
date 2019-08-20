@@ -252,7 +252,8 @@ end
 
 function newobject(prefab)
 	if prefab ~= nil then
-		return GameObject.Instantiate(prefab);
+		local obj = GameObject.Instantiate(prefab)
+		return obj;
 	else
 		return nil
 	end
@@ -425,7 +426,7 @@ function child(go ,str)
 		log("go == nil")
 		return nil
 	end
-	return go:FindChild(str);
+	return go.transform:FindChild(str);
 end
 
 --[[--
@@ -583,9 +584,9 @@ end
 function addClickCallbackSelf(go, callback, self)
 	if (go ~= nil) then
 		if self ~= nil then
-		    UIEventListener.Get(go).onClick = function(obj) callback(self, obj) end
+		    UIEventListener.Get(go.gameObject).onClick = function(obj) callback(self, obj) end
 		else
-		    UIEventListener.Get(go).onClick = callback
+		    UIEventListener.Get(go.gameObject).onClick = callback
 		end
 	else
 		Fatal("can not find the control, its name is: "..controlName)

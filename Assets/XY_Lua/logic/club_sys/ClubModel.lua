@@ -1,12 +1,12 @@
-local ClubModel = class("ClubModel")
+ClubModel = class("ClubModel")
 require ("logic/club_sys/ClubUtil")
 local http_request_interface = http_request_interface
 local HttpCmdName = HttpCmdName
-local UIManager = UI_Manager:Instance()
+--local UIManager = UI_Manager:Instance()
 local ClubMemberState = ClubMemberState
 local FirstKey = "CLUB_FRIST_PLAY"
 local LastClubIDKey = "LAST_CLUB_ID"
-local UIManager = UI_Manager:Instance() 
+--local UIManager = UI_Manager:Instance() 
 
 function ClubModel:ctor()
 	self.locationTab = {}
@@ -16,9 +16,9 @@ function ClubModel:ctor()
 	self.agentInfo = nil
 	self.firstPlay = true
 
-	if G_isAppleVerifyInvite then
-		self.firstPlay = false
-	end
+	-- if G_isAppleVerifyInvite then
+	-- 	self.firstPlay = false
+	-- end
 
 	self.clubList = {}
 	self.clubMap = {}

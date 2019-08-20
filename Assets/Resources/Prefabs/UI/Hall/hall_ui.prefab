@@ -836,13 +836,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000014208735986}
   - 65: {fileID: 65000014050967656}
-  - 114: {fileID: 114000011925498382}
   - 114: {fileID: 114000011635460174}
   - 114: {fileID: 114000010792638230}
   - 114: {fileID: 114000011123333710}
-  - 114: {fileID: 114000010187039134}
   m_Layer: 5
-  m_Name: tgl_club
+  m_Name: btn_club
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1753,6 +1751,7 @@ Transform:
   m_Children:
   - {fileID: 4000011608609630}
   - {fileID: 4000012715583178}
+  - {fileID: 4000014208735986}
   m_Father: {fileID: 4000013613568796}
   m_RootOrder: 8
 --- !u!4 &4000010344053962
@@ -2194,7 +2193,6 @@ Transform:
   - {fileID: 4000013337679282}
   - {fileID: 4000014242929288}
   - {fileID: 4000011303318148}
-  - {fileID: 4000014208735986}
   m_Father: {fileID: 4000010275718192}
   m_RootOrder: 0
 --- !u!4 &4000011623869300
@@ -2988,7 +2986,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012064325392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48, y: 72, z: 0}
+  m_LocalPosition: {x: 8, y: 102, z: 0}
   m_LocalScale: {x: 0.9983999, y: 0.9983999, z: 0.9983999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2996,8 +2994,8 @@ Transform:
   - {fileID: 4000012384995196}
   - {fileID: 4000013219397290}
   - {fileID: 4000012661023042}
-  m_Father: {fileID: 4000011608609630}
-  m_RootOrder: 6
+  m_Father: {fileID: 4000010275718192}
+  m_RootOrder: 2
 --- !u!4 &4000014228380746
 Transform:
   m_ObjectHideFlags: 1
@@ -3418,7 +3416,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3008
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -3628,23 +3626,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &114000010187039134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012064325392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb3f7a6fc49c1c44e859adb7580eeb70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activate:
-  - {fileID: 1000012296630586}
-  deactivate:
-  - {fileID: 1000012347033284}
-  target: {fileID: 0}
-  inverse: 0
 --- !u!114 &114000010198375534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5731,30 +5712,6 @@ MonoBehaviour:
   hover: {x: 1.1, y: 1.1, z: 1.1}
   pressed: {x: 1.05, y: 1.05, z: 1.05}
   duration: 0.2
---- !u!114 &114000011925498382
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012064325392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604e27d00aa3cbf40a58f2d8a0cb5647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  group: 1
-  activeSprite: {fileID: 114000013573492616}
-  activeAnimation: {fileID: 0}
-  animator: {fileID: 0}
-  startsActive: 0
-  instantTween: 0
-  optionCanBeNone: 0
-  onChange: []
-  checkSprite: {fileID: 0}
-  checkAnimation: {fileID: 0}
-  eventReceiver: {fileID: 0}
-  functionName: OnActivate
-  startsChecked: 0
 --- !u!114 &114000011950582158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8048,7 +8005,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3008
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

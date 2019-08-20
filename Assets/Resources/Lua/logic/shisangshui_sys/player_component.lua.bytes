@@ -141,7 +141,6 @@ function player_component.create()
 		local meshtable3 = {}
 		for i = 1 ,#stCards do
 			local cardIndex = stCards[i]
-			log("CardValue:"..tostring(card_define.cardDic[cardIndex]))
 			local meshValue = card_define.cardDic[cardIndex]
 			local mesh = this.resMgrComponet.GetCardMesh(meshValue)
 			if i >0 and i < 6 then --ºó¶Õ

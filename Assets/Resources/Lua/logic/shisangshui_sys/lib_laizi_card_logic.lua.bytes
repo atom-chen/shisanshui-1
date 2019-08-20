@@ -1,7 +1,4 @@
--- package.cpath = package.cpath .. ";" .. "../script_thirteen/clib/fzthirteen.so"
---local card_algrithm_test = require "card_algrithm_test"
---local LibBase = import(".lib_base")
---local LibLaiziCardLogic = class("LibLaiziCardLogic", LibBase)
+
 require "logic/shisangshui_sys/lib_laizi"
 require "logic/shisangshui_sys/common/array"
 

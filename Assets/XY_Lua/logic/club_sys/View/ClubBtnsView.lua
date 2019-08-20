@@ -1,6 +1,6 @@
 local base = require "logic/framework/ui/uibase/ui_view_base"
 local ClubBtnsView = class("ClubBtnsView", base)
-local BtnView = require("logic/common_ui/BtnView")
+local BtnView = require("logic/club_sys/BtnView")
 local LuaHelper = LuaHelper
 
 
@@ -10,10 +10,10 @@ local bgHeightOffset = 50
 local width = 220
 
 function ClubBtnsView:InitView()
-	self.btSp = self:GetComponent("btnsView", typeof(UISprite))
-	self.btnViewTr = self:GetGameObject('btnsView').transform
-	self.btnItemGo = self:GetGameObject("btnsView/btn1")
-	self.maskGo = self:GetGameObject("btnsView/mask")
+	self.btSp = subComponentGet(self.transform,"btnsView", typeof(UISprite))
+	self.btnViewTr = child(self.gameObject, 'btnsView')
+	self.btnItemGo = child(self.gameObject, "btnsView/btn1").gameObject
+	self.maskGo = child(self.gameObject, "btnsView/mask").gameObject
 	self.btnList = {}
 	local btn = BtnView:create(self.btnItemGo)
 	self.btnList[1] = btn

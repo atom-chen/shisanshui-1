@@ -35,6 +35,10 @@ local configInitFuncDict = {
 --[dp.."小写"] = function () require(pre.."小写_pb") pdt[dp.."小写"] = 小写sheet名字_x end,--最好注释下xlsx名啊，不然别人根本找不到是哪个xlsx里的
 }
 
+local playerPosList = {
+	[1] = Vector3.New()
+}
+
 --[[--
  * @Description: 载入某配置文件  
  * @param:       configName config对应的Bytes文件名 
@@ -141,6 +145,7 @@ end
  * @param:       configName config对应的Bytes文件名  
                  IDName     ID字段对应的列名字
                  ID         传入的ID值
+                 dataconfig_shisanshuitableconfig","id",tonumber(this.peopleNum
  ]]
 function this.getConfigDataByID(configName, IDName, ID)
 	if (elementDataDict[configName] == nil) then

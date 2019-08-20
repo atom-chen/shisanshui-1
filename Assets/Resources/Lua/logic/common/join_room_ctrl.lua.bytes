@@ -102,14 +102,20 @@ end
 
 function this.QueryState(callback)
   http_request_interface.QueryStatus({}, function (code, m, str)
-     local s=string.gsub(str,"\\/","/")
-     log("QueryState:"..tostring(s))
-     local t=ParseJsonStr(s)   
-     if t._dsts ~= nil and #t._dsts > 0 then     
+    local s=string.gsub(str,"\\/","/")
+    log("QueryState:"..tostring(s))
+    local t=ParseJsonStr(s)   
+
+    local dst = t._dsts
+    log(GetTblData(dst))
+    log(GetTblData(dst._gid))
+    if dst and dst[1]._gid then     
         local tbl = {_dst = t._dsts[1]}
+        log("进入房间重连")
         this.EnterGameHandle(tbl)
      else
         if callback ~= nil then
+            log("回调。。。。。。")
             callback()
         end
      end

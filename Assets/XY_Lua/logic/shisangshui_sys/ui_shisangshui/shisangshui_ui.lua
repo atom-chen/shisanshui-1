@@ -1055,12 +1055,12 @@ function this.CardCompareHandler(callback)
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
 							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
 						end
-						coroutine.wait(1)
 						break
 					end
 				end
 			end
 		end
+		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第一墩的积分数据
 		-- scoreData.index = 1
 		-- scoreData.totallScore = 0			
@@ -1092,12 +1092,12 @@ function this.CardCompareHandler(callback)
 							end
 							this.cards[i][n] = tran
 						end
-						coroutine.wait(1)
 						break
 					end
 				end
 			end
 		end
+		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第二墩的积分数据
 		scoreData.index = 2
 		scoreData.totallScore = 0
@@ -1129,7 +1129,7 @@ function this.CardCompareHandler(callback)
 						-- Player:PlayerGroupCard("Group3")
 						-- local cards = Player:showThreeCardByType() ----这里在通知UI界面显示相应排型
 						-- Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
-						coroutine.wait(1)
+						--coroutine.wait(1)
 						break
 					end
 				end

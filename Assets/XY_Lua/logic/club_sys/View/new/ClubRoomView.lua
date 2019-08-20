@@ -4,20 +4,20 @@ local ClubRoomItem = require("logic/club_sys/View/new/ClubRoomItem")
 local ui_wrap = require "logic/framework/ui/uibase/ui_wrap"
 
 function ClubRoomView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
-	self.createBtnGo = self:GetGameObject("Grid/createRoomBtn")
+	self.model = ClubModel
+	self.createBtnGo = child(self.transform,"Grid/createRoomBtn").gameObject
 	addClickCallbackSelf(self.createBtnGo, self.OnCreateBtnClick, self)
-	self.joinBtnGo = self:GetGameObject("Grid/joinRoomBtn")
+	self.joinBtnGo = child(self.transform,"Grid/joinRoomBtn").gameObject
 	addClickCallbackSelf(self.joinBtnGo, self.OnJoinBtnClick, self)
-	self.autoOpenBtnGo = self:GetGameObject("Grid/autoCreateRoomBtn")
+	self.autoOpenBtnGo = child(self.transform,"Grid/autoCreateRoomBtn").gameObject
 	addClickCallbackSelf(self.autoOpenBtnGo,self.OnautoOpenBtnClick,self)
-	self.Grid = self:GetGameObject("Grid")
+	self.Grid = child(self.transform,"Grid").gameObject
 	self.cid = nil
-	self.tipGo = self:GetGameObject("tips")
+	self.tipGo = child(self.transform,"tips").gameObject
 
 	self.itemList = {}
 
-	self.wrapTr = self:GetGameObject("container/scrollview/ui_wrapcontent").transform
+	self.wrapTr = child(self.transform,"container/scrollview/ui_wrapcontent")
 	self:InitItems()
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
 	self.wrap:InitUI(109)

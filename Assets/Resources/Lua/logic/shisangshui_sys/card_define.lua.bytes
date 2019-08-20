@@ -226,6 +226,24 @@ end
 function GetCardValue(nCard)
     return bit.band(nCard, MASK_VALUE)
 end
+--根据花色和点数  获取牌
+function GetCardByColorValue(nColor, nValue)
+    --花色：0-3
+    if nColor < 0 or nColor > 3 then
+        nColor = nColor % 3
+    end
+
+    --A
+    if nValue == 1 then
+        nValue = 14
+    end
+    --点数2-14
+    if nValue < 2 or nValue > 14 then
+        nValue = 0
+    end
+
+    return (bit.blshift(nColor, 4) + nValue)
+end
 --判断是否是鬼牌
 function IsGhostCard(nCard)
     local bRet = false

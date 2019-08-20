@@ -20,9 +20,10 @@ this.sp_room={
 }
 this.gid={
 [18]="福州麻将",
-[11]="十三水"
+[22]="十三水"
 } 
-function this.UpdateRoomRecordSimpleData(data,code)   
+function this.UpdateRoomRecordSimpleData(data,code) 
+    --code:1为历史记录，2 为开房记录  
 	this.open_roomRecordSimpleData =data  
 	this.maxCount = table.getCount(this.open_roomRecordSimpleData)
     log(this.maxCount)
@@ -32,14 +33,14 @@ end
 
 
 function this.InitPanelRecord(count,code) 
-	if code==1 then
+	if code==1 then--历史记录
 		hall_ui.WrapContent_record.minIndex = -count+1
 		hall_ui.WrapContent_record.maxIndex = 0
         if hall_ui.WrapContent_record.transform.childCount >=4  then
 		    return
 	    end 
     end
-    if code==2 then
+    if code==2 then--开房记录
         hall_ui.WrapContent_openrecord.minIndex = -count+1
 		hall_ui.WrapContent_openrecord.maxIndex = 0
         if hall_ui.WrapContent_openrecord.transform.childCount >=4  then

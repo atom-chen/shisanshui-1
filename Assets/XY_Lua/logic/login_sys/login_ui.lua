@@ -1,12 +1,6 @@
---[[--
- * @Description: 登陆界面
- * @Author:      shine
- * @FileName:    login_ui.lua
- * @DateTime:    2017-05-18 15:06:02
- ]]
-
 require "common/TestMode"
 require "logic/login_sys/login_sys" 
+require "logic/login_sys/forgetPassword_ui"
 
 login_ui = ui_base.New()
 
@@ -131,11 +125,22 @@ function this.RegisterEvents()
 	if btnChessLicense ~= nil then
 		addClickCallbackSelf(btnChessLicense.gameObject,this.OnBtnChessLicense,this)
 	end
+
+
+	local registerBtn = child(this.transform,"loingPanel/registerBtn") 
+	if registerBtn ~= nil then
+		addClickCallbackSelf(registerBtn.gameObject,this.registerUser,this)
+	end
 	
 	this.account = subComponentGet(this.transform, "loingPanel/account", typeof(UIInput))
 	this.password = subComponentGet(this.transform, "loingPanel/password", typeof(UIInput))
     --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
+end
+
+function this.registerUser()
+	log("注册")
+	forgetPassword_ui.Show()
 end
 
 function this.OnServiceClick()
@@ -182,22 +187,7 @@ function this.OnCheckStatusChange()
 end
 
 function this.OnBtnYouKeClick()
-	--界面处理 （To do）
-	if login_sys.isClicked == true then
-		log("is clicked,hold on!")
-		return
-	else
-		--login_sys.isClicked = true
-	end
-	login_sys.OnPlatLoginOK()
-	--测试用，直接登录
-	-- log("-------------------------------------OnBtnYouKeClick")
-	-- if tostring(Application.platform) ==  "WindowsEditor"   then
-	-- 	login_sys.OnPlatLoginOK()
-	-- elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-	-- 	login_sys.WeiXinLogin()
-	-- end
- --    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	login_sys.OnPhoneLoginOK(nil, nil, this.account.value, this.password.value)
 end
 
 function this.OnBtnQQClick()
@@ -237,14 +227,19 @@ function this.OnBtnWeiXinClick()
 	log("-------------------------------------OnBtnYouKeClick")
 	if tostring(Application.platform) ==  "WindowsEditor"   then
 		log(this.account.value)
-		if this.account.value == "" then
+		if this.account.value == nil or this.account.value == "" then
 			login_sys.OnPlatLoginOK(nil, nil, "1234")
 		else
 			login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 		end
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-		--login_sys.WeiXinLogin()
-		login_sys.OnPlatLoginOK(nil, nil, this.account.value)
+
+		if this.account.value == nil or this.account.value == "" then
+			login_sys.WeiXinLogin()
+		else
+			login_sys.OnPlatLoginOK(nil, nil, this.account.value)
+		end
+		--login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 	end
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end

@@ -218,7 +218,7 @@ function this.AddCardTglClick(btnTbl, addCardNum)
 			if i == addCardNum[j] then
 				--boxCollider.enabled = true  
                 btn.isEnabled=true
-			    lbl.color = Color.New(139 / 255, 37 / 255, 13 / 255)
+			    --lbl.color = Color.New(139 / 255, 37 / 255, 13 / 255)
 				bg.color = Color.white
 			end
 		end

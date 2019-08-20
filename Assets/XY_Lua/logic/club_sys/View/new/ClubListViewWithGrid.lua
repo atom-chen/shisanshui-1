@@ -4,15 +4,15 @@ local ClubItem = require "logic/club_sys/View/new/ClubSelfItemView"
 local addClickCallbackSelf = addClickCallbackSelf
 
 function ClubListViewWithGrid:InitView()
-	self.model = model_manager:GetModel("ClubModel")
-	self.itemGo = self:GetGameObject("container/scrollview/ui_wrapcontent/item")
-	self.scroll = self:GetComponent("container/scrollview", typeof(UIScrollView))
+	self.model = ClubModel
+	self.itemGo = child(self.gameObject, "container/scrollview/ui_wrapcontent/item")
+	self.scroll = subComponentGet(self.transform, "container/scrollview", typeof(UIScrollView))
 	self.itemList = {}
 	local item = ClubItem:create(self.itemGo)
 	self.itemList[1] = item
 	self.itemList[1]:SetCallback(self.OnItemClick, self)
 
-	self.grid = self:GetComponent("container/scrollview/ui_wrapcontent", typeof(UIGrid))
+	self.grid = subComponentGet(self.transform, "container/scrollview/ui_wrapcontent", typeof(UIGrid))
 end
 
 

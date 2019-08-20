@@ -8,6 +8,7 @@ local this = majong_request_interface
 --请求进入游戏
 function this.EnterGameReq(gameData)
     local urlStr = string.format(data_center.url, data_center.GetLoginRetInfo().uid, data_center.GetLoginRetInfo().session_key)
+    log(urlStr)
     
     local srvName = ""
     local srvID = nil

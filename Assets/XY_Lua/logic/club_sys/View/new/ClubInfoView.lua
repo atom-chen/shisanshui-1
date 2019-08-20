@@ -3,12 +3,12 @@ local ClubAgentEditView = class("ClubAgentEditView", base)
 local addClickCallbackSelf = addClickCallbackSelf
 
 function ClubAgentEditView:InitView()
-	self.model = model_manager:GetModel("ClubModel")
-	self.gameLabel = self:GetComponent("game",  typeof(UILabel))
-	self.gameBtnGo = self:GetGameObject("editGameBtn")
+	self.model = ClubModel
+	self.gameLabel = subComponentGet(self.transform,"game",  typeof(UILabel))
+	self.gameBtnGo = child(self.gameObject,"editGameBtn").gameObject
 	addClickCallbackSelf(self.gameBtnGo, self.OnGameBtnClick, self)
-	self.bgSp = self:GetComponent("bg1", typeof(UISprite))
-	self.bgTr = self:GetGameObject("bg4").transform
+	self.bgSp = subComponentGet(self.transform,"bg1", typeof(UISprite))
+	self.bgTr = child(self.gameObject,"bg4")
 end
 
 function ClubAgentEditView:SetInfo(clubInfo, state)
@@ -126,27 +126,27 @@ local ClubInfoView = class("ClubInfoView", base)
 
 function ClubInfoView:InitView()
 	self.clubInfo = nil
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.curIconId = nil
 	self.curLocationId = nil
 
-	self.clubNameLabel = self:GetComponent("clubName", typeof(UILabel))
-	self.locationLabel = self:GetComponent("location", typeof(UILabel))
-	self.leaderNameLabel = self:GetComponent("leaderName", typeof(UILabel))
-	self.memberLabel = self:GetComponent("memeber", typeof(UILabel))
-	self.idLabel = self:GetComponent("Id", typeof(UILabel))
+	self.clubNameLabel = subComponentGet(self.transform,"clubName", typeof(UILabel))
+	self.locationLabel = subComponentGet(self.transform,"location", typeof(UILabel))
+	self.leaderNameLabel = subComponentGet(self.transform,"leaderName", typeof(UILabel))
+	self.memberLabel = subComponentGet(self.transform,"memeber", typeof(UILabel))
+	self.idLabel = subComponentGet(self.transform,"Id", typeof(UILabel))
 
-	self.icon = self:GetComponent("icon", typeof(UISprite))
-	self.changeBtnGo = self:GetGameObject("changeBtn")
+	self.icon = subComponentGet(self.transform,"icon", typeof(UISprite))
+	self.changeBtnGo = child(self.gameObject,"changeBtn").gameObject
 	addClickCallbackSelf(self.changeBtnGo, self.OnIconClick, self)
-	self.nameBtnGo = self:GetGameObject("editNameBtn")
+	self.nameBtnGo = child(self.gameObject,"editNameBtn").gameObject
 	addClickCallbackSelf(self.nameBtnGo, self.OnNameBtnClick, self)
-	self.locationBtnGo = self:GetGameObject("editLocationBtn")
+	self.locationBtnGo = child(self.gameObject,"editLocationBtn").gameObject
 	addClickCallbackSelf(self.locationBtnGo, self.OnLocationBtnClick, self)
-	self.copyBtnGo = self:GetGameObject("copyBtn")
+	self.copyBtnGo = child(self.gameObject,"copyBtn").gameObject
 	addClickCallbackSelf(self.copyBtnGo, self.OnCopyBtnClick, self)
 
-	self.exitBtnGo = self:GetGameObject("exitBtn")
+	self.exitBtnGo = child(self.gameObject,"exitBtn").gameObject
 	addClickCallbackSelf(self.exitBtnGo, self.OnExitBtnClick, self)
 
 	self.agentEditView = ClubAgentEditView:create(self:GetGameObject("agentEditView"))

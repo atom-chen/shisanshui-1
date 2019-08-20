@@ -209,7 +209,7 @@ function this.ui_Middle()
      addClickCallbackSelf(this.toggle_record.gameObject,this.record,this)
    end
 
-   this.toggle_openrecord = child(this.transform, "Panel_Left/sp_left/toggle_openrecord")--开放记录
+   this.toggle_openrecord = child(this.transform, "Panel_Left/sp_left/toggle_openrecord")--开房记录
    if this.toggle_openrecord~=nil then
      addClickCallbackSelf(this.toggle_openrecord.gameObject,this.openrecord,this)
    end

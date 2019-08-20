@@ -251,8 +251,10 @@ end
 
 
 function newobject(prefab)
+	log(prefab.name)
 	if prefab ~= nil then
-		return GameObject.Instantiate(prefab);
+		local obj = GameObject.Instantiate(prefab)
+		return obj;
 	else
 		return nil
 	end
@@ -328,6 +330,7 @@ end
 --同步加载UI预设 ----Start----------->
 function newNormalUI(path, parent)
     local prefab = newNormalObjSync(path, typeof(GameObject))
+    log(prefab.name)
 	local obj = newNormalUIprefab(prefab, parent)	
 	if obj ~= nil then
 		local ctrl = obj:AddComponent(typeof(XYHY.LuaDestroyBundle))

@@ -11,6 +11,8 @@ require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
 
+GameEvent = require "logic/framework/ui/GameEvent"
+
 --管理器--
 GameManager = {}
 local this = GameManager

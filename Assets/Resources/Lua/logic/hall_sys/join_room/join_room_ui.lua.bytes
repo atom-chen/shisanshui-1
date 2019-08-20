@@ -120,7 +120,7 @@ function this.RequestGetInRoom(rno)
     -- for i,v in ipairs(t) do
     --     rno=rno..v
     -- end
-    this.Hide()
+    --this.Hide()
     join_room_ctrl.JoinRoomByRno(rno)
 end
 

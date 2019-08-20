@@ -67,23 +67,23 @@ function play_mode_shisangshui.create(levelID)
 	
 	local function OnGameDeal(tbl)
 		log("发牌")
-		this.InitTable(function()
-			player_component.CardList = tbl["_para"]["stCards"]
-			recommendCards = tbl["_para"]["recommendCards"]
-			log("牌的数据"..tostring(player_component.CardList))
+		--this.InitTable(function()
+			-- player_component.CardList = tbl["_para"]["stCards"]
+			-- recommendCards = tbl["_para"]["recommendCards"]
+			-- log("牌的数据"..tostring(player_component.CardList))
 		
-			local isSpecial = tbl["_para"]["nSpecialType"]
+			-- local isSpecial = tbl["_para"]["nSpecialType"]
 
-			local score = tbl["_para"]["nSpecialScore"]
-			if isSpecial == 0 then
-				log("显示摆牌")
-				place_card.Show(player_component.CardList, recommendCards)
-			else
-				log("显示特殊牌型")
-				prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
-			end
-			Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
-		end)
+			-- local score = tbl["_para"]["nSpecialScore"]
+			-- if isSpecial == 0 then
+			-- 	log("显示摆牌")
+			-- 	place_card.Show(player_component.CardList, recommendCards)
+			-- else
+			-- 	log("显示特殊牌型")
+			-- 	prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
+			-- end
+			-- Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
+		--end)
 	end
 	
 	local function OnAskChoose(tbl)

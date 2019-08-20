@@ -11,9 +11,9 @@ function ui_view_base:SetGo(go)
 	if go == nil then
 		return
 	end
-	self.gameObject = go
+	self.gameObject = go.gameObject
 	self.transform = go.transform
-	self.isActive = go.activeSelf
+	self.isActive = go.gameObject.activeSelf
 	self:InitView()
 end
 
