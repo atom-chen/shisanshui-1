@@ -9,7 +9,6 @@ local LastClubIDKey = "LAST_CLUB_ID"
 --local UIManager = UI_Manager:Instance() 
 
 function ClubModel:ctor()
-	log("ClubModel  创建。。。。。。。。。。。。。。。。。。。。。。。。。")
 	self.locationTab = {}
 	-- 第一版使用，用于遍历显示
 	self.locationList = {}
@@ -348,7 +347,9 @@ end
 function ClubModel:ReqBindAgent(exid)
 	local param = {}
 	param.exid = exid
+	--print(HttpCmdName.ClubBindAgent)
 	http_request_interface.SendHttpRequest(HttpCmdName.ClubBindAgent, param)
+	--http_request_interface.SendHttpRequest("GameClub.bindAgent", param)
 end
 -- agentInfo 暂时不抽成类
 --{"uid":2322989,"appid":4,"bid":1,"name":"","status":1,"ctime":1511968543,"parentid":0,"agtype":1,"sharerate":50,"naid":0}

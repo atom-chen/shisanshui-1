@@ -31,7 +31,7 @@ function ClubInputUI:ctor()
 	self.inputView = nil
 	self.helpView = nil
 	self.titleSp = nil
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.type = ClubInputUIEnum.InputClubID
 	self.destroyType = UIDestroyType.ChangeScene
 end
@@ -166,7 +166,7 @@ function ClubInputUI:OnRefreshDepth()
   local uiEffect = child(self.gameObject.transform, "panel/Panel_Top/Title/Effect_youxifenxiang")
   if uiEffect and self.sortingOrder then
     local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
   end
 end
 

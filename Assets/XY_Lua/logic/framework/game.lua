@@ -11,6 +11,7 @@ require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
 require "logic/framework/ui/ui_enum"
+HttpCmdName = require "logic/framework/HttpCmdName"
 
 UI_Manager = require "logic/framework/ui/ui_manager"
 UIManager = UI_Manager:Instance()

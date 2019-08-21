@@ -30,7 +30,8 @@ function CommonInputi:InitView()
 end
 
 function CommonInputi:InputClick(obj)
-	ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
+	--ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	local index = tonumber(obj.name)
 	if (index >= 0 and index <= 9)then
 		if self.Count < 6 then
