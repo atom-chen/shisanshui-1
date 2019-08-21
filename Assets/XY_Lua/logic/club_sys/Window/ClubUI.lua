@@ -289,11 +289,12 @@ function ClubUI:OnClubCreateClick()
 	--ui_sound_mgr.PlayButtonClick()
 	--UI_Manager:Instance():ShowUiForms("ClubCreateUI")
 	--if self.model:IsAgent() or G_isAppleVerifyInvite  then
-	if self.model:IsAgent() then
+	-- if self.model:IsAgent() then
+	-- 	UI_Manager:Instance():ShowUiForms("ClubCreateUI")
+	-- else
+	-- 	UIManager:ShowUiForms("ClubInputUI", nil, nil, ClubInputUIEnum.InputCode)
+	-- end
 		UI_Manager:Instance():ShowUiForms("ClubCreateUI")
-	else
-		UIManager:ShowUiForms("ClubInputUI", nil, nil, ClubInputUIEnum.InputCode)
-	end
 end
 
 function ClubUI:OnClubJoinClick()
