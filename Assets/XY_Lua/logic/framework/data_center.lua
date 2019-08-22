@@ -107,6 +107,17 @@ end
 
 
 ---------------------------外部接口start--------------------------
+function this.CheckRoomCard(num)
+	if userInfo.card == nil or userInfo.card < num then
+		MessageBox.ShowYesNoBox("钻石不足，是否前往商城购买？", function ()
+        	UI_Manager:Instance():ShowUiForms("shop_ui")
+        	MessageBox.HideBox()
+    	end, function() MessageBox.HideBox() end, nil, false)
+		return false
+	end
+	return true
+end
+
 --获取登录信息
 function this.GetLoginRetInfo()
 	return userInfo

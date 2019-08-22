@@ -244,7 +244,7 @@ function ClubLocationChooseUI:OnRefreshDepth()
   local uiEffect = child(self.gameObject.transform, "bg/top/tittle/Effect_youxifenxiang")
   if uiEffect and self.sortingOrder then
     local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
   end
 end
 

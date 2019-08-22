@@ -1,4 +1,4 @@
-local HttpCmdName = {}
+HttpCmdName = {}
 
 -- 俱乐部相关  club
 HttpCmdName.ClubBindAgent = "GameClub.bindAgent"  -- 绑定代理商

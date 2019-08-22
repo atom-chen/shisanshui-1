@@ -339,6 +339,12 @@ function newNormalUI(path, parent)
 	return obj
 end
 
+function LoadNarmalUI(path,parent)
+	local prefab = newNormalObjSync(path, typeof(GameObject))
+	local obj = newNormalUIprefab(prefab, parent)	
+	return obj
+end
+
 function newSceneResidentMemoryUI(path, parent)
     local prefab = newSceneResidentMemoryObjSync(path, typeof(GameObject))
 	local obj = newNormalUIprefab(prefab, parent)

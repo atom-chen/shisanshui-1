@@ -7,7 +7,8 @@ public class NetWorkManageWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(NetWorkManage), typeof(Singleton<NetWorkManage>));
-		L.RegFunction("HttpPOSTRequest", HttpPOSTRequest);
+        L.RegFunction("HttpPostRequestWithData", HttpPostRequestWithData);
+        L.RegFunction("HttpPOSTRequest", HttpPOSTRequest);
 		L.RegFunction("HttpRequestByMothdType", HttpRequestByMothdType);
 		L.RegFunction("HttpDownImage", HttpDownImage);
 		L.RegFunction("HttpDownAssetBundle", HttpDownAssetBundle);
@@ -27,7 +28,38 @@ public class NetWorkManageWrap
 		L.EndClass();
 	}
 
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+    [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+    static int HttpPostRequestWithData(IntPtr L)
+    {
+        try
+        {
+            ToLua.CheckArgsCount(L, 4);
+            NetWorkManage obj = (NetWorkManage)ToLua.CheckObject(L, 1, typeof(NetWorkManage));
+            string arg0 = ToLua.CheckString(L, 2);
+            string arg1 = ToLua.CheckString(L, 3);
+            System.Action<int, string, string> arg2 = null;
+            LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
+
+            if (funcType4 != LuaTypes.LUA_TFUNCTION)
+            {
+                arg2 = (System.Action<int, string, string>)ToLua.CheckObject(L, 4, typeof(System.Action<int, string, string>));
+            }
+            else
+            {
+                LuaFunction func = ToLua.ToLuaFunction(L, 4);
+                arg2 = DelegateFactory.CreateDelegate(typeof(System.Action<int, string, string>), func) as System.Action<int, string, string>;
+            }
+
+            obj.HttpPostRequestWithData(arg0, arg1, arg2);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            return LuaDLL.toluaL_exception(L, e);
+        }
+    }
+
+    [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int HttpPOSTRequest(IntPtr L)
 	{
 		try

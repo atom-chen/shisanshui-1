@@ -35,6 +35,79 @@ function this.GetTable(method,param)
     return t
 end 
 
+--俱乐部
+function this.SendHttpRequest(key, param, dontShowWaiting, needRetry, isQuit)
+    -- 默认打开等待界面
+    -- if not dontShowWaiting then
+    --     -- waiting_ui.Show()
+    --     UI_Manager:Instance():ShowUiForms("waiting_ui")
+    -- end
+    local t = this.GetTable(key, param)
+    local rt = json.encode(t)
+    -- 暂时先使用HttpPOSTRequest逻辑 之后整理
+    -- if Debugger.useLog then
+    --     logWarning(rt)
+    -- end
+    this.HttpPOSTRequest(rt,
+        function(str, code, msg) 
+             if Debugger.useLog then
+                log("receive:" .. str)
+            end
+            local s =string.gsub(str,"\\/","/")
+            this.OnReceiveHttpResponse(key, s)
+        end,
+        showaiting, needRetry, isQuit)
+end
+
+function this.HttpPOSTRequest(rt,callback,dontShowWaiting, needRetry, retryTime,isQuit) 
+    NetWorkManage.Instance:HttpPOSTRequest(rt,function(code, msg, str)
+        -- if not dontShowWaiting then
+        --     waiting_ui.Hide()
+        -- end 
+        if code == 0 then
+            -- waiting_ui.Hide()
+            UI_Manager:Instance():CloseUiForms("waiting_ui")
+            callback(str,code, msg)
+            
+            -- if timeStart~=nil then
+            -- if timeStart~=nil then
+            --     timeStart:Stop()
+            --     timeStart=nil
+            -- end
+        else
+            if needRetry == nil then
+                needRetry = true
+            end
+            if not needRetry then
+                this.ShowError(code,rt,callback,dontShowWaiting, needRetry, retryTime,isQuit)
+            else
+                if retryTime == 3 then
+                    this.ShowError(code,rt,callback,dontShowWaiting, needRetry, retryTime,isQuit)
+                    return
+                end
+                retryTime = retryTime or 1
+                retryTime = retryTime + 1
+                this.HttpPOSTRequest(rt,callback,dontShowWaiting, needRetry, retryTime,isQuit)
+                --timeStart= Timer.New(function ()this.HttpPOSTRequest(rt,callback,dontShowWaiting, needRetry, retryTime,isQuit)end,3,1)
+                -- timeStart:Start()
+            end
+        end    
+    end)
+end
+
+-- 绑定代理
+function this.BindAgent(ag_uid, callback)
+    local param = {["ag_uid"] = ag_uid}
+    local t = this.GetTable("GameMember.bindAgent", param)
+    local rt = json.encode(t)
+    this.HttpPOSTRequest(rt, function(str)
+        local retStr = ParseJsonStr(str)
+        if callback ~= nil then
+            callback(retStr.ret)
+        end
+    end)
+end
+
 --[[
 -----测试用--------- 
 ]]-----------

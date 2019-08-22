@@ -131,8 +131,9 @@ function this.OnSureClick()
 	-- 		logError(22222,GetTblData(userInfo))
 	-- 	end,this)
 --
+	local num = math.random(1000)
 --第三方账号绑定手机号或者邮箱{"uno":"手机或者邮箱","verify":验证码, pwd, nickname}
-	http_request_interface.PhoneRegisterUser(tel_num,ver_num,password, "", function (code,m,str)
+	http_request_interface.PhoneRegisterUser(tel_num,ver_num,password, tostring(num), function (code,m,str)
 		if code then
 			
 		end

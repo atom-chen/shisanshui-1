@@ -93,6 +93,46 @@ public class NetWorkManage : Singleton<NetWorkManage>
         ServerUrl = _serverUrl;       
     }
 
+    public void HttpPostRequestWithData(string url, string param, Action<int, string, string> callBack)
+    {
+        Debug.Log(BaseUrl);
+        Debug.Log(SubPath);
+        Debug.Log(BaseUrl + SubPath + param);
+        Debug.Log("发送请求：" + url);
+        Debug.Log("发送数据：" + param);
+        HTTPRequest request = new HTTPRequest(new Uri(url), HTTPMethods.Post, (HTTPRequest originalRequest, HTTPResponse response) =>
+        {
+            string responseStr = "";
+            int result = 0;
+            string msg = "";
+            if (originalRequest.State == HTTPRequestStates.Finished)
+            {
+                Debug.Log("网络请求成功:" + response.StatusCode + response.IsSuccess);
+                result = response.StatusCode;
+                msg = response.Message;
+                if (response.IsSuccess)
+                {
+                    result = 0;
+                    responseStr = Encoding.UTF8.GetString(response.Data);
+                }
+                Debug.Log(responseStr);
+            }
+            else
+            {
+                result = -1;
+                msg = "TimeOut";
+            }
+            if (callBack != null)
+            {
+                callBack(result, msg, responseStr);
+            }
+        });
+
+        request.RawData = Encoding.UTF8.GetBytes(param);
+        Debug.Log(request.Uri);
+        HTTPManager.SendRequest(request);
+    }
+
     public void HttpPOSTRequest(string param, Action<int, string, string> callBack)
     {
         string url = BaseUrl + SubPath + param;

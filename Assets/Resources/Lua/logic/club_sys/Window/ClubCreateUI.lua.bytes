@@ -7,7 +7,7 @@ local LanguageMgr = LanguageMgr
 
 function ClubCreateUI:OnInit()
 	self.destroyType = UIDestroyType.Immediately
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.gameIds = nil
 	self.locationId = nil
 	self.selectIconId = 1
@@ -98,10 +98,10 @@ end
 function ClubCreateUI:ClearContent()
 	self.nameLabel.text = ""
 	self.nameInputLabel.value = ""
-	self.nameInputLabel.defaultText = LanguageMgr.GetWord(10001)
+	self.nameInputLabel.defaultText = "11111111111111111111"--LanguageMgr.GetWord(10001)
 
-	self.locationLabel.text = LanguageMgr.GetWord(10003)
-	self.gameLabel.text = LanguageMgr.GetWord(10004)
+	self.locationLabel.text = "11111111111111111111"--LanguageMgr.GetWord(10003)
+	self.gameLabel.text = "11111111111111111111"--LanguageMgr.GetWord(10004)
 	self.connectionLabel.text = ""
 	self.introLabel.text = ""
 	self.introInputLabel.value = ""
@@ -110,12 +110,14 @@ function ClubCreateUI:ClearContent()
 end
 
 function ClubCreateUI:OnCloseBtnClick()
-	ui_sound_mgr.PlayCloseClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayCloseClick()
 	UIManager:CloseUiForms("ClubCreateUI")
 end
 
 function ClubCreateUI:OnNameBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	UIManager:ShowUiForms("ClubNameInputUI", nil, nil, 1, self.nameInputLabel.value, function (tab, value )
 		self.nameInputLabel.value = value
 	end, self, 100)
@@ -123,26 +125,30 @@ function ClubCreateUI:OnNameBtnClick()
 end
 
 function ClubCreateUI:OnConnectionBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	UIManager:ShowUiForms("ClubNameInputUI", nil, nil, 4, self.connectionInputLabel.value, function (tab, value )
 		self.connectionInputLabel.value = value
 	end, self, 20)
 end
 
 function ClubCreateUI:OnIntroBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	UIManager:ShowUiForms("ClubNameInputUI", nil, nil, 3, self.introInputLabel.value, function (tab, value )
 		self.introInputLabel.value = value
 	end, self, 30)
 end
 
 function ClubCreateUI:OnLocationBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	UIManager:ShowUiForms("ClubLocationChooseUI",nil, nil, self.curLocationId, self.OnLocationSelected, self)
 end
 
 function ClubCreateUI:OnGameBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
 	UIManager:ShowUiForms("ClubGameChooseUI", nil, nil, self.gameIds, self.OnGameSelected, self)
 end
 
@@ -175,33 +181,46 @@ function ClubCreateUI:OnLocationSelected(id)
 end
 
 function ClubCreateUI:OnCreateBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayButtonClick()
+		log("-------------------1")
 	if self.nameInputLabel.value == "" then
-		UIManager:FastTip(LanguageMgr.GetWord(10011))
-		return
+		fast_tip.Show("请输入账号")
+		--UIManager:FastTip(LanguageMgr.GetWord(10011))
+		--return
+		self.nameInputLabel.value = "1111"
 	end
 
+		log("-------------------2")
 	if self.locationId == nil or self.locationId == 0 then
-		UIManager:FastTip(LanguageMgr.GetWord(10012))
-		return
+		fast_tip.Show("请输入6~15位数字或者字母的密码")
+		--UIManager:FastTip(LanguageMgr.GetWord(10012))
+		--return
+		self.nameInputLabel.value = "1111"
 	end
 
+		log("-------------------3")
 	if self.gameIds == nil or #self.gameIds == 0 then
-		UIManager:FastTip(LanguageMgr.GetWord(10013))
-		return
+		fast_tip.Show("请输入6~15位数字或者字母的密码")
+		--UIManager:FastTip(LanguageMgr.GetWord(10013))
+		--return
+		self.gameIds = 22
 	end
+		log("111111111111111")
 	if self.cost > 0 then
+		log("111111111111111")
 		--TER0327-label
-		local msgBox = MessageBox.ShowYesNoBox("[893609]创建个人俱乐部需消耗[-][AC1421]【" .. self.cost .. "钻石】[-][893609]，确定创建吗?[-]", 
-			function ()
+--		local msgBox = MessageBox.ShowYesNoBox("[893609]创建个人俱乐部需消耗[-][AC1421]【" .. self.cost .. "钻石】[-][893609]，确定创建吗?[-]", 
+--			function ()
 				if data_center.CheckRoomCard(self.cost) then
 					self.model:ReqCreateClub(self.nameInputLabel.value, self.gameIds, self.introInputLabel.value, self.locationId, self.selectIconId, self.connectionInputLabel.value)
 				end
-			end)
+--			end)
 		if msgBox and msgBox.EnableContentBBCode then
 	        msgBox:EnableContentBBCode()
 	    end
 	else
+		log("111111111111111")
 		self.model:ReqCreateClub(self.nameInputLabel.value, self.gameIds, self.introInputLabel.value, self.locationId, self.selectIconId, self.connectionInputLabel.value)
 	end
 end
@@ -211,7 +230,7 @@ function ClubCreateUI:OnRefreshDepth()
   -- local effect = self:GetGameObject("panel/anim_role")
   if uiEffect and self.sortingOrder then
     local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
     -- Utils.SetEffectSortLayer(effect, topLayerIndex)
   end
 end

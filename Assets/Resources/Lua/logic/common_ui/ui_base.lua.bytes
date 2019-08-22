@@ -139,3 +139,11 @@ function ui_base:InitPanelRenderQueue()
 		self.logicBaseLuaScript:InitPanelRenderQueue()
 	end
 end
+
+function ui_base:GetTransform(path)
+	local tr = self.transform:Find(path)
+	if tr ~= nil then
+		return tr
+	end
+	return nil
+end

@@ -10,7 +10,10 @@ require "common/functions"
 require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
-UI_Manager = require("logic/framework/ui/ui_manager")
+require "logic/framework/ui/ui_enum"
+HttpCmdName = require("logic/framework/HttpCmdName")
+
+UI_Manager = require "logic/framework/ui/ui_manager"
 UIManager = UI_Manager:Instance()
 
 GameEvent = require "logic/framework/ui/GameEvent"
@@ -38,6 +41,9 @@ function this.OnInitOK(testSceneflag, sceneTypeString, levelID)
 		testScene(sceneTypeString, levelID)
 	end
 	config_data_center.PreLoadConfigData()
+	print(HttpCmdName)
+	log(GetTblData(HttpCmdName))
+	--log(HttpCmdName.ClubCreate)
 end
 
 --[[--

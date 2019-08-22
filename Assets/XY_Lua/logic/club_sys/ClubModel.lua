@@ -1,7 +1,7 @@
 ClubModel = class("ClubModel")
 require ("logic/club_sys/ClubUtil")
 local http_request_interface = http_request_interface
-local HttpCmdName = HttpCmdName
+--local HttpCmdName = HttpCmdName
 --local UIManager = UI_Manager:Instance()
 local ClubMemberState = ClubMemberState
 local FirstKey = "CLUB_FRIST_PLAY"
@@ -348,8 +348,7 @@ function ClubModel:ReqBindAgent(exid)
 	local param = {}
 	param.exid = exid
 	--print(HttpCmdName.ClubBindAgent)
---	http_request_interface.SendHttpRequest(HttpCmdName.ClubBindAgent, param)
-	http_request_interface.SendHttpRequest("GameClub.bindAgent", param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubBindAgent, param)
 end
 -- agentInfo 暂时不抽成类
 --{"uid":2322989,"appid":4,"bid":1,"name":"","status":1,"ctime":1511968543,"parentid":0,"agtype":1,"sharerate":50,"naid":0}

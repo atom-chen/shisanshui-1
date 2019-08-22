@@ -141,7 +141,8 @@ function ClubNameInputUI:OnBtnYesClick()
 end
 
 function ClubNameInputUI:OnBtnCloseClick()
-	ui_sound_mgr.PlayCloseClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	--ui_sound_mgr.PlayCloseClick()
 	UIManager:CloseUiForms("ClubNameInputUI")
 end
 

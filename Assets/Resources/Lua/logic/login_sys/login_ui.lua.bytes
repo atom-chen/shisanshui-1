@@ -30,8 +30,6 @@ end
  * @Description: 启动事件
  ]]
  function this.Awake()
- 	log("login_ui Awake：打钱呢")
- 	log("login_ui Awake：打钱呢")
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);

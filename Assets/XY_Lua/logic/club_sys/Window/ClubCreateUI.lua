@@ -210,12 +210,12 @@ function ClubCreateUI:OnCreateBtnClick()
 	if self.cost > 0 then
 		log("111111111111111")
 		--TER0327-label
-		local msgBox = MessageBox.ShowYesNoBox("[893609]创建个人俱乐部需消耗[-][AC1421]【" .. self.cost .. "钻石】[-][893609]，确定创建吗?[-]", 
-			function ()
+--		local msgBox = MessageBox.ShowYesNoBox("[893609]创建个人俱乐部需消耗[-][AC1421]【" .. self.cost .. "钻石】[-][893609]，确定创建吗?[-]", 
+--			function ()
 				if data_center.CheckRoomCard(self.cost) then
 					self.model:ReqCreateClub(self.nameInputLabel.value, self.gameIds, self.introInputLabel.value, self.locationId, self.selectIconId, self.connectionInputLabel.value)
 				end
-			end)
+--			end)
 		if msgBox and msgBox.EnableContentBBCode then
 	        msgBox:EnableContentBBCode()
 	    end

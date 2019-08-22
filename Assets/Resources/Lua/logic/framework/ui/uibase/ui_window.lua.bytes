@@ -46,6 +46,7 @@ function ui_window:Init()
 	self.m_inited = true
 --	self.m_UiLayer = UILayerEnum.UILayerEnum_Normal
 	local path = ui_prefab_enum["ui_enum_"..self.UiFormName]
+	log(path)
 	self.gameObject = LoadNarmalUI(path)
 	self.transform = self.gameObject.transform
 	self.gameObject.transform.parent = self.m_UiRoot.gameObject.transform
