@@ -424,8 +424,16 @@ function ClubModel:ReqCreateClub(name, gidList, content, locationId, icon, conta
 	param.gids = gidList
 	param.icon = icon
 	param.club_phone = contact
-	--http_request_interface.SendHttpRequest(HttpCmdName.ClubCreate, param)
-	self:SendRequest(HttpCmdName.ClubCreate, param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubCreate, param)
+	--self:SendRequest(HttpCmdName.ClubCreate, param)
+
+	-- http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubCreate,param,function(msgTab)
+	-- 	if not self:CheckMsgRet(msgTab) then
+	-- 		return
+	-- 	end
+	-- 	log("创建俱乐部返回")
+	-- 	callback(msgTab)
+	-- end)
 end
 
 function ClubModel:OnResCreateClub(msgTab)

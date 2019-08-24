@@ -287,21 +287,22 @@ local function InitWidgets()
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
 			if i < tonumber(this.peopleNum) or i == tonumber(this.peopleNum) then
-			local viewSeateConfig = config_data_center.getConfigDataByID("dataconfig_shisanshuitableconfig","id",tonumber(this.peopleNum))
-			local position = viewSeateConfig["pos"..tostring(i)]
-			local posjson = string.gsub(position,"\\/","/")  
-			local seateJson = ParseJsonStr(posjson)
-			log("LocalPosition frome configTable:"..tostring(seateJson))
+			--local viewSeateConfig = config_data_center.getConfigDataByID("dataconfig_shisanshuitableconfig","id",tonumber(this.peopleNum))
+			--local position = viewSeateConfig["pos"..tostring(i)]
+			--local posjson = string.gsub(position,"\\/","/")  
+			--local seateJson = ParseJsonStr(posjson)
+			-- log("LocalPosition frome configTable:"..tostring(seateJson))
 			
-			local x = seateJson["x"]
-			local y = seateJson["y"]
-			local z = 0
+			-- local x = seateJson["x"]
+			-- local y = seateJson["y"]
+			-- local z = 0
 			
-			local prepare_x = seateJson["prepare_x"]
-			local prepare_y = seateJson["prepare_y"]
+			-- local prepare_x = seateJson["prepare_x"]
+			-- local prepare_y = seateJson["prepare_y"]
 			
 			
-			playerTrans.localPosition = Vector3(x,y,z)
+			--playerTrans.localPosition = Vector3(x,y,z)
+			playerTrans.gameObject:SetActive(true)
 			local playerComponent = shisanshui_player_ui.New(playerTrans)
 			playerComponent.SetReadyLocalPosition(prepare_x,prepare_y)
     		table.insert(this.playerList, playerComponent)
@@ -520,6 +521,7 @@ end
 
 --设置用户信息
 function this.SetPlayerInfo( viewSeat, usersdata)
+	print(viewSeat)
 	if this.playerList[viewSeat] ~= nil then
 		this.playerList[viewSeat].Show(usersdata,viewSeat)
 	end
@@ -631,8 +633,8 @@ function this.SetPlayerLightFrame(viewSeat)
 			log("+++++++++AnimationError!!!!!!!")
 		end
 		log("当前桌面对应的座位号"..tostring(Player.viewSeat).."transformName"..tostring(Player.transform.name))
-		this.lightFrameObj = animations_sys.PlayAnimationWithLoop(Player.transform,"shisanshui_icon_frame","flame",114,124)
-		componentGet(this.lightFrameObj.gameObject,"SkeletonAnimation"):ChangeQueue(3001)
+--		this.lightFrameObj = animations_sys.PlayAnimationWithLoop(Player.transform,"shisanshui_icon_frame","flame",114,124)
+--		componentGet(this.lightFrameObj.gameObject,"SkeletonAnimation"):ChangeQueue(3001)
 	end
 end
 
