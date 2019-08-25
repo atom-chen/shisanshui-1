@@ -161,6 +161,11 @@ function this.ui_Top()
    if btn_club~=nil then
      addClickCallbackSelf(btn_club.gameObject,this.OpenClubUI,this)
    end 
+
+    local btn_record=child(this.transform, "Panel_BottomRight/Grid_bottom/btn_zhanji")--战绩
+    if btn_record~=nil then
+     addClickCallbackSelf(btn_record.gameObject,this.OpenRecordUI,this)
+   end
  end 
 
 --Panel_Middle
@@ -261,7 +266,8 @@ function this.ui_Bottom()
 
 --------------------------------------按钮相关逻辑-----------------------------------------
 function hall_ui:OpenClubUI()
-  ClubUI:OnOpen()
+  --ClubUI:OnOpen()
+   UI_Manager:Instance():ShowUiForms("ClubUI")
 end
 
 function this.Onbtn_goldClick()
@@ -393,6 +399,38 @@ function this.activity(obj1,obj2)
     recorddata={}
     openrecorddata={}
   end  
+end
+
+function this.OpenRecordUI() 
+
+    --record_ui.Show()
+    --if true then return end
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+    log("OpenRecordUI")
+    http_request_interface.getRoomSimpleByUid(nil, 2, 0, function (code, m, str)
+        local s=string.gsub(str,"\\/","/")  
+        local t=ParseJsonStr(s) 
+        local sp_nocord=child(this.transform,"Panel_Left/sp_left/sp_norecord")
+        componentGet(this.toggle_record,"UIToggle").value=true
+        recorddata=t.data
+        record_ui.Show()
+        record_ui.UpdateRoomRecordSimpleData(t.data,1)
+        log(str)
+        if table.getCount(t.data)==0 then
+            sp_nocord.gameObject:SetActive(true)
+        else
+            sp_nocord.gameObject:SetActive(false)
+        end
+   end)
+      --开房记录
+    -- http_request_interface.getRoomSimpleList(nil,99,0,function (code,m,str)
+    --       local s=string.gsub(str,"\\/","/")  
+    --       local t=ParseJsonStr(s)
+    --       --record_ui.UpdateRoomRecordSimpleData(t.data,2)
+    --       openrecorddata=t.data
+    --       log(str)
+    --       local sp_nocord=child(this.transform,"Panel_Left/sp_left/sp_norecord") 
+    --   end) 
 end
 
 function this.setting()

@@ -213,6 +213,7 @@ end
 
 function ui_manager:LoadUIForm(UiFormName)
 	local luaFile = ui_script_enum["ui_script_"..UiFormName]
+	log(luaFile)
 	local luaFileObj = require(luaFile):create()
 	luaFileObj.UiFormName = UiFormName
 	luaFileObj.m_UiRoot = self.m_UiRoot

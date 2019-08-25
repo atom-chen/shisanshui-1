@@ -1,5 +1,5 @@
 local base = require("logic.framework.ui.uibase.ui_window")
---local ClubUI = class("ClubUI", base)
+local ClubUI = class("ClubUI", base)
 --local UIManager = UI_Manager:Instance() 
 local addClickCallbackSelf = addClickCallbackSelf
 local ClubListView = require("logic/club_sys/View/new/ClubListViewWithGrid")
@@ -11,13 +11,16 @@ local ClubNonView = require("logic/club_sys/View/new/ClubNonView")
 local ClubManageView = require "logic/club_sys/View/new/ClubManageView"
 require "logic/club_sys/ClubModel"
 
-ClubUI = ui_base.New()
+--ClubUI = ui_base.New()
 local normalColor = Color(254 / 255, 234/ 255, 200 / 255)
 local selectColor = Color(163 / 255, 88/ 255, 27 / 255)
+local this
 
 function ClubUI:OnInit()
+	this = self
 	self.model = ClubModel
 	self.model:ctor()
+	self.model:Init()
 	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 
@@ -82,14 +85,14 @@ function ClubUI:OnShareClick()
 end
 
 function ClubUI:OnOpen()	
-	if self.gameObject==nil then
-		require ("logic/club_sys/Window/ClubUI")
-		self.gameObject=newNormalUI("Prefabs/UI/club_ui/club_ui")
-	else
-		self.gameObject:SetActive(true)
-	end
-	self.transform = self.gameObject.transform
-	self:OnInit()
+	-- if self.gameObject==nil then
+	-- 	require ("logic/club_sys/Window/ClubUI")
+	-- 	self.gameObject=newNormalUI("Prefabs/UI/club_ui/club_ui")
+	-- else
+	-- 	self.gameObject:SetActive(true)
+	-- end
+	-- self.transform = self.gameObject.transform
+	-- self:OnInit()
 	self:RegistEvent()
 	self:isShowNonClubView(function()
 		self.clubListView:UpdateList(true)
@@ -147,7 +150,9 @@ function ClubUI:OnClubListNumUpdate()
 	end
 end	
 
-function ClubUI:OnCurClubChange()
+function ClubUI.OnCurClubChange()
+	self = this
+	--log(GetTblData(self))
 	self:UpdateCurClub()
 	-- 切换俱乐部 刷新
 	if self.viewList[self.curIndex] ~= nil then
@@ -156,6 +161,7 @@ function ClubUI:OnCurClubChange()
 end
 
 function ClubUI:UpdateCurClub()
+	log("ClubUI:UpdateCurClub")
 	local clubInfo = self.model.currentClubInfo
 	if clubInfo == nil then
 		UIManager:CloseUiForms("ClubUI")
@@ -251,9 +257,9 @@ function ClubUI:SetToggle(index, force)
 	end
 	self.currentToggleSp = self.togglesList[index]
 	self.currentToggleSp[1].spriteName = "button_26"
-	self.currentToggleSp[2].myFormat = UILabelFormat.F53
+--	self.currentToggleSp[2].myFormat = UILabelFormat.F53
 
-	self.currentToggleSp[2]:resetMyFormatData(true)
+	--self.currentToggleSp[2]:resetMyFormatData(true)
 
 	if self.viewList[index] == nil then
 		return
@@ -278,7 +284,7 @@ function ClubUI:OnRefreshDepth()
   local uiEffect = child(self.gameObject.transform, "Panel_Top/bg/top/tittle/Effect_youxifenxiang")
   if uiEffect and self.sortingOrder then
     local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
   end
 end
 
@@ -298,7 +304,8 @@ function ClubUI:OnClubCreateClick()
 end
 
 function ClubUI:OnClubJoinClick()
-	ui_sound_mgr.PlayButtonClick()
+	--ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	UI_Manager:Instance():ShowUiForms("join_ui_new")
 end
 

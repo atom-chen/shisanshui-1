@@ -13,9 +13,9 @@ end
 
 function ClubAgentEditView:SetInfo(clubInfo, state)
 	self.clubInfo = clubInfo
-	self.curGids = ClubUtil.GetOpenClubGids(clubInfo.gids)
+--	self.curGids = ClubUtil.GetOpenClubGids(clubInfo.gids)
 	self.state = state
-	self.gameLabel.text = ClubUtil.GetGameContent(self.curGids)
+--	self.gameLabel.text = ClubUtil.GetGameContent(self.curGids)
 	self.gameBtnGo:SetActive(self.state == ClubMemberState.agent)
 
 	self:UpdateBg()
@@ -44,8 +44,8 @@ function ClubAgentEditView:OnGameSelected(gids)
 		UIManager:FastTip(LanguageMgr.GetWord(10013))
 		return
 	end
-	self.curGids = ClubUtil.GetOpenClubGids(gids)
-	self.gameLabel.text = ClubUtil.GetGameContent(self.curGids)
+	-- self.curGids = ClubUtil.GetOpenClubGids(gids)
+	-- self.gameLabel.text = ClubUtil.GetGameContent(self.curGids)
 	self.model:ReqEditClub(self.clubInfo.cid, nil, nil, gids, nil, nil)
 end
 
@@ -267,7 +267,8 @@ function ClubInfoView:OnIconClick()
 end
 
 function ClubInfoView:OnLocationBtnClick()
-	ui_sound_mgr.PlayButtonClick()
+	--ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	UIManager:ShowUiForms("ClubLocationChooseUI", nil, nil, self.curLocationId, self.OnPositionSelected, self)
 end
 

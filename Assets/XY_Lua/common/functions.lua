@@ -253,6 +253,7 @@ end
 function newobject(prefab)
 	if prefab ~= nil then
 		local obj = GameObject.Instantiate(prefab)
+		log(prefab.name)
 		return obj;
 	else
 		return nil

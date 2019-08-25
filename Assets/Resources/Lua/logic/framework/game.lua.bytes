@@ -11,6 +11,7 @@ require "common/functionEx1"
 require "logic/game_state/gs_mgr"
 require "logic/framework/msg_dispatch_mgr"
 require "logic/framework/ui/ui_enum"
+HttpProxy = require "logic/network/HttpProxy"
 HttpCmdName = require("logic/framework/HttpCmdName")
 
 UI_Manager = require "logic/framework/ui/ui_manager"
@@ -41,9 +42,6 @@ function this.OnInitOK(testSceneflag, sceneTypeString, levelID)
 		testScene(sceneTypeString, levelID)
 	end
 	config_data_center.PreLoadConfigData()
-	print(HttpCmdName)
-	log(GetTblData(HttpCmdName))
-	--log(HttpCmdName.ClubCreate)
 end
 
 --[[--

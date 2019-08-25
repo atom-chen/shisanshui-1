@@ -3,7 +3,7 @@ HttpCmdName = {}
 -- 俱乐部相关  club
 HttpCmdName.ClubBindAgent = "GameClub.bindAgent"  -- 绑定代理商
 HttpCmdName.ClubGetAgentInfo = "GameClub.getAgentInfo" -- 获得自己代理身份
-HttpCmdName.ClubCreate  = "CreateClub"  -- 创建俱乐部
+HttpCmdName.ClubCreate  = "GameClub.createClub"  -- 创建俱乐部
 HttpCmdName.ClubApply = "ClubApply"  -- 加入俱乐部
 HttpCmdName.ClubGetApplyList = "GetClubApplyList" --获得俱乐部申请列表
 HttpCmdName.ClubDealClubApply = "DealClubApply" --处理俱乐部申请信息 
@@ -57,4 +57,4 @@ HttpCmdName.UpdatePwdByPhone = "UpdatePwdByPhone"--修改手机登录密码
 
 
 
---return HttpCmdName
+return HttpCmdName

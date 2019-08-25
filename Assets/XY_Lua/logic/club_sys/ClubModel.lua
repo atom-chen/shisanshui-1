@@ -8,6 +8,13 @@ local FirstKey = "CLUB_FRIST_PLAY"
 local LastClubIDKey = "LAST_CLUB_ID"
 --local UIManager = UI_Manager:Instance() 
 
+local ClubMemberState =   -- 自己对于指定俱乐部的状态
+{
+	none = 1,  		-- 非俱乐部成员
+	member = 2, 	-- 俱乐部成员（包括管理者）
+	agent = 3, 		-- 创建者(代理商和非代理商）
+}
+
 function ClubModel:ctor()
 	self.locationTab = {}
 	-- 第一版使用，用于遍历显示
@@ -60,8 +67,9 @@ function ClubModel:ctor()
 end
 
 function ClubModel:Init()
+	--log(GetTblData(self))
 	-- ClubUtil.InitGameType()
-	self.control = ControlManager:GetCtrl("ClubControl")
+--	self.control = ControlManager:GetCtrl("ClubControl")
 	Notifier.regist(HttpCmdName.ClubBindAgent, self.OnResBindAgent, self)
 	Notifier.regist(HttpCmdName.ClubGetAgentInfo, self.OnResGetAgentInfo, self)
 	Notifier.regist(HttpCmdName.ClubCreate, self.OnResCreateClub, self)
@@ -331,7 +339,7 @@ function ClubModel:SaveLastClubId(id)
 		return
 	end
 	self.lastClubId = id
-	PlayerPrefs.SetInt(LastClubIDKey .. self.selfPlayerId, id)
+--	PlayerPrefs.SetInt(LastClubIDKey .. self.selfPlayerId, id)
 end
 
 function ClubModel:CheckClearFristState()
@@ -339,7 +347,7 @@ function ClubModel:CheckClearFristState()
 		return
 	end
 	self.firstPlay = false
-	PlayerPrefs.SetInt(FirstKey .. self.selfPlayerId, 1) 
+--	PlayerPrefs.SetInt(FirstKey .. self.selfPlayerId, 1) 
 	Notifier.dispatchCmd(GameEvent.OnClearFristState)
 end
 
@@ -436,14 +444,19 @@ function ClubModel:ReqCreateClub(name, gidList, content, locationId, icon, conta
 	-- end)
 end
 
-function ClubModel:OnResCreateClub(msgTab)
+function ClubModel:OnResCreateClub(msgTab, that)
+	log("创建俱乐部返回")
+	--log(GetTblData(self))
+	--log(GetTblData(that))
+	log(GetTblData(msgTab))
+	--self = ClubModel
 	self.isAutoOpenCraeteClub = false
 	--UIManager:CloseUiForms("ClubCreateUI")
 	ClubUtil.CloseCreateClub()
 --	UIManager:CloseUiForms("ClubCreateOrJoinUI")
 
 	-- UIManager:FastTip(LanguageMgr.GetWord(10021, msgTab.club.cname))
-	local club = msgTab
+	local club = msgTab.club
 
 	local shareFriendFunc
 	shareFriendFunc = function ()
@@ -456,19 +469,19 @@ function ClubModel:OnResCreateClub(msgTab)
 		end
 		invite_sys.inviteToClub(club,0,shareAgainFunc)
 	end
-	local p = "微信"
-	if data_center.GetPlatform() == LoginType.QQLOGIN then
-		p = "QQ"
-	end
+	-- local p = "微信"
+	-- if data_center.GetPlatform() == LoginType.QQLOGIN then
+	-- 	p = "QQ"
+	-- end
 
-	if G_isAppleVerifyInvite then
-		MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname)) 
-	else
-		MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname),shareFriendFunc,"分享给"..p.."好友") 
-	end
+	-- if G_isAppleVerifyInvite then
+	-- 	MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname)) 
+	-- else
+	-- 	MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname),shareFriendFunc,"分享给"..p.."好友") 
+	-- end
 
-	
 	self:CheckClearFristState()
+
 	self:AddOrUpdateClub(club)
 	self:SetCurrentClubInfo(club)
 end
@@ -479,10 +492,16 @@ function ClubModel:ReqApplyClub(shid, ctype)
 	local param = {}
 	param.shid = shid 
 	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubApply, param, 
-	self:SendRequestWithCalback(HttpCmdName.ClubApply, param, 
-		function(msgTab)
+	-- self:SendRequestWithCalback(HttpCmdName.ClubApply, param, 
+	-- 	function(msgTab)
+	-- 		self:OnResApplyClub(msgTab, ctype)
+	-- 	end, nil)
+
+
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubApply, param,
+		function (msgTab)
 			self:OnResApplyClub(msgTab, ctype)
-		end, nil)
+	end, nil)
 end
 
 function ClubModel:OnResApplyClub(msgTab, ctype)
@@ -761,9 +780,9 @@ function ClubModel:ReqGetAllRoomList(force)
 	if not self:HasClub() or game_scene.getCurSceneType() ~= scene_type.HALL then
 		return
 	end
-	if not force and not self.control:CheckCanRequsetRoomList() then
-		return
-	end
+	-- if not force and not self.control:CheckCanRequsetRoomList() then
+	-- 	return
+	-- end
 	local  param = {}
 	HttpProxy.SendRoomRequest(HttpCmdName.getAllClubRoomList,param,
 	function(msgTab, str) 
@@ -861,12 +880,20 @@ function ClubModel:ReqSearchOClubList(page,size,callback)
 	param.page = page
 	param.size = size
     --http_request_interface.SendHttpRequestWithCallback(HttpCmdName.TTHClub, param, 
-    self:SendRequestWithCalback(HttpCmdName.TTHClub, param, 
-	function(msgtab)
-		if callback then
-			callback(msgtab)
-		end
-	end,nil, true)
+ --    self:SendRequestWithCalback(HttpCmdName.TTHClub, param, 
+	-- function(msgtab)
+	-- 	if callback then
+	-- 		callback(msgtab)
+	-- 	end
+	-- end,nil, true)
+
+
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.TTHClub, param,
+		function(msgtab)
+			if callback then
+				callback(msgtab)
+			end
+		end,nil, true)
 end 
 function ClubModel:OnResSearchClubList(msgTab)
 	if not self:CheckMsgRet(msgTab) then
@@ -1059,6 +1086,7 @@ function ClubModel:AddOrUpdateClub(clubInfo)
 	if clubInfo == 0 then
 		return
 	end
+	log(GetTblData(clubInfo))
 	if self.clubMap[clubInfo.cid] ~= nil then
 		if clubInfo.club_phone == nil then
 			clubInfo.club_phone = ""

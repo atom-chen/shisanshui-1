@@ -4,7 +4,7 @@
  
 --endregion
 
-record_ui={}
+record_ui=ui_base.New()
 local this=record_ui
 this.roomstatus={
 "已开房",
@@ -22,8 +22,37 @@ this.gid={
 [18]="福州麻将",
 [22]="十三水"
 } 
+
+local WrapContent_record = nil
+local WrapContent_openrecord = nil
+local sp_record = nil
+local sp_openrecord = nil
+
+function this.Show()
+    if IsNil(this.gameObject) then
+        require ("logic/hall_sys/record_ui/record_ui")
+        this.gameObject=newNormalUI("Prefabs/UI/Hall/record_ui")
+    else
+        this.gameObject:SetActive(true)
+    end 
+
+    WrapContent_record = subComponentGet(this.transform, "sp_left/sv_record/grid_record","UIWrapContent")
+   if WrapContent_record ~= nil then
+        WrapContent_record.onInitializeItem = record_ui.OnUpdateItem_record
+   end
+
+   WrapContent_openrecord = subComponentGet(this.transform, "sp_left/sv_openrecord/grid_openrecord","UIWrapContent")
+   if WrapContent_openrecord ~= nil then
+        WrapContent_openrecord.onInitializeItem = record_ui.OnUpdateItem_openrecord
+   end
+
+   sp_record=child(this.transform, "sp_left/sv_record/sp_record01")
+   sp_openrecord=child(this.transform, "sp_left/sv_openrecord/sp_record01")
+end
+
 function this.UpdateRoomRecordSimpleData(data,code) 
     --code:1为历史记录，2 为开房记录  
+    log("code:1为历史记录，2 为开房记录:"..code)
 	this.open_roomRecordSimpleData =data  
 	this.maxCount = table.getCount(this.open_roomRecordSimpleData)
     log(this.maxCount)
@@ -34,16 +63,16 @@ end
 
 function this.InitPanelRecord(count,code) 
 	if code==1 then--历史记录
-		hall_ui.WrapContent_record.minIndex = -count+1
-		hall_ui.WrapContent_record.maxIndex = 0
-        if hall_ui.WrapContent_record.transform.childCount >=4  then
+		WrapContent_record.minIndex = -count+1
+		WrapContent_record.maxIndex = 0
+        if WrapContent_record.transform.childCount >=4  then
 		    return
 	    end 
     end
     if code==2 then--开房记录
-        hall_ui.WrapContent_openrecord.minIndex = -count+1
-		hall_ui.WrapContent_openrecord.maxIndex = 0
-        if hall_ui.WrapContent_openrecord.transform.childCount >=4  then
+        WrapContent_openrecord.minIndex = -count+1
+		WrapContent_openrecord.maxIndex = 0
+        if WrapContent_openrecord.transform.childCount >=4  then
 		    return
 	    end 
     end
@@ -52,16 +81,16 @@ function this.InitPanelRecord(count,code)
 	log("InitPanelRecord")  
 	if count >0 and count <=5 then
         if  code==1 then
-            for i=0 ,hall_ui.WrapContent_record.transform.childCount-1 do
-                destroy(hall_ui.WrapContent_record.transform:GetChild(i).gameObject)
+            for i=0 ,WrapContent_record.transform.childCount-1 do
+                destroy(WrapContent_record.transform:GetChild(i).gameObject)
             end
 		    for i=0, count-1 do
 			    local go= this.InitItem(this.open_roomRecordSimpleData[i+1],i,code)  
                 this.OnUpdateItem_record(go,nil,-i)
 		    end
         else
-            for i=0 ,hall_ui.WrapContent_openrecord.transform.childCount-1 do
-                destroy(hall_ui.WrapContent_openrecord.transform:GetChild(i).gameObject)
+            for i=0 ,WrapContent_openrecord.transform.childCount-1 do
+                destroy(WrapContent_openrecord.transform:GetChild(i).gameObject)
             end
 		    for i=0, count-1 do
 			    local go= this.InitItem(this.open_roomRecordSimpleData[i+1],i,code) 
@@ -71,8 +100,8 @@ function this.InitPanelRecord(count,code)
 	elseif count>5 then
 		for a=0,4 do
 			this.InitItem(this.open_roomRecordSimpleData[a+1],a,code)
-            hall_ui.WrapContent_record.enabled = code==1  
-            hall_ui.WrapContent_openrecord.enabled =code==2 
+            WrapContent_record.enabled = code==1  
+            WrapContent_openrecord.enabled =code==2 
 		end 
 	end
 end
@@ -80,12 +109,12 @@ end
 function this.InitItem(data,i,code) 
     local tmpItem
 	if code ==1 then
-     	  tmpItem= NGUITools.AddChild(hall_ui.WrapContent_record.gameObject,hall_ui.sp_record.gameObject)
+     	  tmpItem= NGUITools.AddChild(WrapContent_record.gameObject,sp_record.gameObject)
 		  tmpItem.transform.localPosition = Vector3.New(0,-i*126,0)
 		  tmpItem.gameObject:SetActive(true) 
           
 	else
-	      tmpItem = NGUITools.AddChild(hall_ui.WrapContent_openrecord.gameObject,hall_ui.sp_openrecord.gameObject)
+	      tmpItem = NGUITools.AddChild(WrapContent_openrecord.gameObject,sp_openrecord.gameObject)
 		  tmpItem.transform.localPosition = Vector3.New(0,-i*126,0)
 		  tmpItem.gameObject:SetActive(true) 
 	end 

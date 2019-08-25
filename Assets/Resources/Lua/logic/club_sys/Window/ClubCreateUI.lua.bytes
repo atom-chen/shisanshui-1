@@ -183,12 +183,12 @@ end
 function ClubCreateUI:OnCreateBtnClick()
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	--ui_sound_mgr.PlayButtonClick()
-		log("-------------------1")
+		log(self.nameInputLabel.value)
 	if self.nameInputLabel.value == "" then
 		fast_tip.Show("请输入账号")
 		--UIManager:FastTip(LanguageMgr.GetWord(10011))
 		--return
-		self.nameInputLabel.value = "1111"
+		--self.nameInputLabel.value = "1111"
 	end
 
 		log("-------------------2")
@@ -196,7 +196,7 @@ function ClubCreateUI:OnCreateBtnClick()
 		fast_tip.Show("请输入6~15位数字或者字母的密码")
 		--UIManager:FastTip(LanguageMgr.GetWord(10012))
 		--return
-		self.nameInputLabel.value = "1111"
+		--self.nameInputLabel.value = "1111"
 	end
 
 		log("-------------------3")

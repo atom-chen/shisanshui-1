@@ -59,6 +59,56 @@ function this.SendHttpRequest(key, param, dontShowWaiting, needRetry, isQuit)
         showaiting, needRetry, isQuit)
 end
 
+function this.SendHttpRequestWithCallback(key, param,callback, target, dontShowWaiting, needRetry, isQuit)
+   -- if not dontShowWaiting then
+   --      -- waiting_ui.Show()
+   --      UI_Manager:Instance():ShowUiForms("waiting_ui")
+   --  end
+    local t = this.GetTable(key, param)
+    local rt = json.encode(t)
+    -- 暂时先使用HttpPOSTRequest逻辑 之后整理
+    -- if Debugger.useLog then
+    --     logWarning(rt)
+    -- end
+    this.HttpPOSTRequest(rt,
+        function(str, code, msg) 
+             if Debugger.useLog then
+                logWarning("receive:" .. str)
+            end
+            local s =string.gsub(str,"\\/","/")
+            this.OnReceiveHttpResponseWithCallback(key, s, callback, target)
+        end,
+        showaiting, needRetry, isQuit)
+end
+
+function this.OnReceiveHttpResponse(key, retStr)
+    local tab = nil
+    if not pcall( function () tab = ParseJsonStr(retStr) end) then
+        ParseJsonStr(retStr)
+        -- waiting_ui.Hide()
+        UI_Manager:Instance():CloseUiForms("waiting_ui")
+        return
+    end
+    log("收到消息了，该返回了"..key)
+    Notifier.dispatchCmd(key, tab)
+end
+
+function this.OnReceiveHttpResponseWithCallback(key, retStr, callback, target)
+    local tab = nil
+    if not pcall( function () tab = ParseJsonStr(retStr) end) then
+        -- waiting_ui.Hide()
+        UI_Manager:Instance():CloseUiForms("waiting_ui")
+        return
+    end
+    if callback ~= nil then
+        if target ~= nil then
+            callback(target, tab, retStr)
+        else
+            callback(tab)
+        end
+    end
+end
+
 function this.HttpPOSTRequest(rt,callback,dontShowWaiting, needRetry, retryTime,isQuit) 
     NetWorkManage.Instance:HttpPOSTRequest(rt,function(code, msg, str)
         -- if not dontShowWaiting then

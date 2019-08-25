@@ -18,6 +18,7 @@ local selectColor = Color(163 / 255, 88/ 255, 27 / 255)
 function ClubUI:OnInit()
 	self.model = ClubModel
 	self.model:ctor()
+	self.model:Init()
 	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 
@@ -298,7 +299,8 @@ function ClubUI:OnClubCreateClick()
 end
 
 function ClubUI:OnClubJoinClick()
-	ui_sound_mgr.PlayButtonClick()
+	--ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	UI_Manager:Instance():ShowUiForms("join_ui_new")
 end
 

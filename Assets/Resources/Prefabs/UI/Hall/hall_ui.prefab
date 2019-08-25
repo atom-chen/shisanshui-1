@@ -139,13 +139,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013337679282}
   - 65: {fileID: 65000010216688872}
-  - 114: {fileID: 114000011395470304}
   - 114: {fileID: 114000013148303026}
   - 114: {fileID: 114000012536360954}
   - 114: {fileID: 114000013655905458}
-  - 114: {fileID: 114000012223415172}
   m_Layer: 5
-  m_Name: tgl_zhanji
+  m_Name: btn_zhanji
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3416,7 +3414,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3010
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -5256,30 +5254,6 @@ MonoBehaviour:
   mAtlas: {fileID: 114000010984865870, guid: d5edb893b9775694b9fbfb9943104588, type: 2}
   mSpriteName: fangka
   mFillCenter: 1
---- !u!114 &114000011395470304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010305420794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604e27d00aa3cbf40a58f2d8a0cb5647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  group: 1
-  activeSprite: {fileID: 114000013428521358}
-  activeAnimation: {fileID: 0}
-  animator: {fileID: 0}
-  startsActive: 0
-  instantTween: 0
-  optionCanBeNone: 0
-  onChange: []
-  checkSprite: {fileID: 0}
-  checkAnimation: {fileID: 0}
-  eventReceiver: {fileID: 0}
-  functionName: OnActivate
-  startsChecked: 0
 --- !u!114 &114000011505059816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6075,23 +6049,6 @@ MonoBehaviour:
   mAtlas: {fileID: 114000010984865870, guid: d5edb893b9775694b9fbfb9943104588, type: 2}
   mSpriteName: gengduo02
   mFillCenter: 1
---- !u!114 &114000012223415172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010305420794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb3f7a6fc49c1c44e859adb7580eeb70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activate:
-  - {fileID: 1000010392675800}
-  deactivate:
-  - {fileID: 1000011543221458}
-  target: {fileID: 0}
-  inverse: 0
 --- !u!114 &114000012250007314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8005,7 +7962,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3010
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

@@ -166,3 +166,8 @@ end
 function  this.GetCommonVolume()
     return  componentGet(commAudioSource,"AudioSource").volume 
 end
+
+function this.PlayButtonClick()
+    this.PlaySoundClip("common/audio_button_click")
+    --this.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
+end

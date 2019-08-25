@@ -26,6 +26,7 @@ local result_para_data = {}
 local function OnPlayerEnter( tbl )
 	log(GetTblData(tbl))
 	local viewSeat = gvbl(tbl["_src"])
+	log("本地座位号："..viewSeat)
 	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
 	local userdata = room_usersdata.New()
 	userdata.name = tbl["_para"]["_uid"]

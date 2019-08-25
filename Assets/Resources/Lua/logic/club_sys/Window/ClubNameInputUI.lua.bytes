@@ -129,7 +129,8 @@ function ClubNameInputUI:UpdateType()
 end
 
 function ClubNameInputUI:OnBtnYesClick()
-	ui_sound_mgr.PlayButtonClick()
+--	ui_sound_mgr.PlayButtonClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	if self.callback ~= nil then
 		local value = self.curInputLabel.value 
 		if self.type < 3 then

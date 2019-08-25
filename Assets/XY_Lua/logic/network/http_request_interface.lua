@@ -72,9 +72,9 @@ function this.SendHttpRequestWithCallback(key, param,callback, target, dontShowW
     -- end
     this.HttpPOSTRequest(rt,
         function(str, code, msg) 
-             if Debugger.useLog then
-                logWarning("receive:" .. str)
-            end
+            --  if Debugger.useLog then
+            --     logWarning("receive:" .. str)
+            -- end
             local s =string.gsub(str,"\\/","/")
             this.OnReceiveHttpResponseWithCallback(key, s, callback, target)
         end,
@@ -89,6 +89,7 @@ function this.OnReceiveHttpResponse(key, retStr)
         UI_Manager:Instance():CloseUiForms("waiting_ui")
         return
     end
+    log("收到消息了，该返回了"..key)
     Notifier.dispatchCmd(key, tab)
 end
 

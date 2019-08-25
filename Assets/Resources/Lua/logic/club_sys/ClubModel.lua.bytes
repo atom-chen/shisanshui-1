@@ -1,7 +1,7 @@
 ClubModel = class("ClubModel")
 require ("logic/club_sys/ClubUtil")
 local http_request_interface = http_request_interface
-local HttpCmdName = HttpCmdName
+--local HttpCmdName = HttpCmdName
 --local UIManager = UI_Manager:Instance()
 local ClubMemberState = ClubMemberState
 local FirstKey = "CLUB_FRIST_PLAY"
@@ -61,7 +61,7 @@ end
 
 function ClubModel:Init()
 	-- ClubUtil.InitGameType()
-	self.control = ControlManager:GetCtrl("ClubControl")
+--	self.control = ControlManager:GetCtrl("ClubControl")
 	Notifier.regist(HttpCmdName.ClubBindAgent, self.OnResBindAgent, self)
 	Notifier.regist(HttpCmdName.ClubGetAgentInfo, self.OnResGetAgentInfo, self)
 	Notifier.regist(HttpCmdName.ClubCreate, self.OnResCreateClub, self)
@@ -339,7 +339,7 @@ function ClubModel:CheckClearFristState()
 		return
 	end
 	self.firstPlay = false
-	PlayerPrefs.SetInt(FirstKey .. self.selfPlayerId, 1) 
+--	PlayerPrefs.SetInt(FirstKey .. self.selfPlayerId, 1) 
 	Notifier.dispatchCmd(GameEvent.OnClearFristState)
 end
 
@@ -348,8 +348,7 @@ function ClubModel:ReqBindAgent(exid)
 	local param = {}
 	param.exid = exid
 	--print(HttpCmdName.ClubBindAgent)
---	http_request_interface.SendHttpRequest(HttpCmdName.ClubBindAgent, param)
-	http_request_interface.SendHttpRequest("GameClub.bindAgent", param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubBindAgent, param)
 end
 -- agentInfo 暂时不抽成类
 --{"uid":2322989,"appid":4,"bid":1,"name":"","status":1,"ctime":1511968543,"parentid":0,"agtype":1,"sharerate":50,"naid":0}
@@ -425,11 +424,20 @@ function ClubModel:ReqCreateClub(name, gidList, content, locationId, icon, conta
 	param.gids = gidList
 	param.icon = icon
 	param.club_phone = contact
-	--http_request_interface.SendHttpRequest(HttpCmdName.ClubCreate, param)
-	self:SendRequest(HttpCmdName.ClubCreate, param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubCreate, param)
+	--self:SendRequest(HttpCmdName.ClubCreate, param)
+
+	-- http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubCreate,param,function(msgTab)
+	-- 	if not self:CheckMsgRet(msgTab) then
+	-- 		return
+	-- 	end
+	-- 	log("创建俱乐部返回")
+	-- 	callback(msgTab)
+	-- end)
 end
 
 function ClubModel:OnResCreateClub(msgTab)
+	log("创建俱乐部返回")
 	self.isAutoOpenCraeteClub = false
 	--UIManager:CloseUiForms("ClubCreateUI")
 	ClubUtil.CloseCreateClub()
@@ -449,21 +457,22 @@ function ClubModel:OnResCreateClub(msgTab)
 		end
 		invite_sys.inviteToClub(club,0,shareAgainFunc)
 	end
-	local p = "微信"
-	if data_center.GetPlatform() == LoginType.QQLOGIN then
-		p = "QQ"
-	end
+	-- local p = "微信"
+	-- if data_center.GetPlatform() == LoginType.QQLOGIN then
+	-- 	p = "QQ"
+	-- end
 
-	if G_isAppleVerifyInvite then
-		MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname)) 
-	else
-		MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname),shareFriendFunc,"分享给"..p.."好友") 
-	end
+	-- if G_isAppleVerifyInvite then
+	-- 	MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname)) 
+	-- else
+	-- 	MessageBox.ShowSingleBox(LanguageMgr.GetWord(10021, club.cname),shareFriendFunc,"分享给"..p.."好友") 
+	-- end
 
-	
-	self:CheckClearFristState()
-	self:AddOrUpdateClub(club)
-	self:SetCurrentClubInfo(club)
+	log(GetTblData(self))
+	ClubModel:CheckClearFristState()
+
+	ClubModel:AddOrUpdateClub(club)
+	ClubModel:SetCurrentClubInfo(club)
 end
 
 

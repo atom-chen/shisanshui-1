@@ -74,7 +74,7 @@ end
 
 
 
-function this.AutoLogin()
+function this.AutoLogin(account)
 	log("===============Application.platform----"..tostring(Application.platform))
 	this.loginType = PlayerPrefs.GetInt("LoginType")
 
@@ -92,7 +92,7 @@ function this.AutoLogin()
 
 				--如果是安卓手机游客登录流程
 				if this.loginType == 9 then
-					this.OnPlatLoginOK()
+					this.OnPlatLoginOK(nil, nil, account)
 				else --微信或QQ自动登录流程
 					this.LoginAndJumintoLobby(msgTable)
 				end
