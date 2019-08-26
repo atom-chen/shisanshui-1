@@ -97,20 +97,20 @@ end
 
 function HttpProxy.SendRequesetInternal(url, mode, key, param, callback, target, sendCfg)
 	sendCfg = sendCfg or HttpProxy.DefaultSendCfg
-	if sendCfg.showWaiting then
-		UI_Manager:Instance():ShowUiForms("waiting_ui")
-	end
+	-- if sendCfg.showWaiting then
+	-- 	UI_Manager:Instance():ShowUiForms("waiting_ui")
+	-- end
 	-- waiting 相关
 	local t = HttpProxy.GetRequestTable(mode, key, param)
 	local paramStr = json.encode(t) 
 	HttpProxy.SendInternal(url, paramStr, function(str, code, msg) 
 		local s =string.gsub(str,"\\/","/")
 		local tab = nil
-	    if not pcall( function () tab = json.decode(s) end) then
-	        logError(key,"json decode error",str)
-	        UI_Manager:Instance():CloseUiForms("waiting_ui")
-	        return
-	    end
+	    -- if not pcall( function () tab = json.decode(s) end) then
+	    --     logError(key,"json decode error",str)
+	    --     UI_Manager:Instance():CloseUiForms("waiting_ui")
+	    --     return
+	    -- end
 	    if not ErrorHandler.CheckMsgErrorNo(tab, sendCfg.noTips, sendCfg.errorHandler) then
 	    	sendCfg.errorHandler = nil
 	    	return
@@ -135,7 +135,12 @@ end
 
 
 function HttpProxy.SendRoomRequest(key, param, callback, target, sendCfg)
-	HttpProxy.SendRequest(HttpProxy.HttpMode.Room, key, param, callback, target, sendCfg)
+
+
+	http_request_interface.SendHttpRequestWithCallback(key, param,callback,nil, true)
+
+
+	--HttpProxy.SendRequest(HttpProxy.HttpMode.Room, key, param, callback, target, sendCfg)
 end
 
 function HttpProxy.SendUserRequest(key, param, callback, target, sendCfg)

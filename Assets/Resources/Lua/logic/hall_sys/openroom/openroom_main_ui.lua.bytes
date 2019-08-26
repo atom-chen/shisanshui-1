@@ -14,6 +14,7 @@ local toggleTbl = {}
 
 function this.Show()
 	room_data.InitData()
+	log("加载创建房间界面")
 	if this.gameObject==nil then
 		this.gameObject=newNormalUI("Prefabs/UI/OpenRoom/openroom_main_ui")
 	else

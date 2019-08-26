@@ -45,11 +45,33 @@ local HTTPNETTYPE =
 	DEFAULT = 6,
 }
 
+
+--登录信息
+local userInfo = 
+{
+	nickname = nil,
+	uid = nil,
+	diamond = nil,
+	coin = nil,
+	ingot = nil,
+	score = nil,
+	cvalue = nil,
+	vip = nil,
+	safecoin = nil,
+	bankrupt = nil,
+	phone = nil,
+	email = nil,
+	ttype = nil,
+	sitemid = nil,
+	pwd = nil,
+	session_key = nil,
+}
+
 --ws 服务器地址控制
 local srvUrlType = NetWorkManage.Instance.ServerUrlType
 
 if srvUrlType == HTTPNETTYPE.INTERNET_TEST then 		--外网测试
-	this.url = "ws://huanyingwl.com:8001?uid=%s&token=%s"
+	this.url = "wss://huanyingwl.com/wss?uid=%s&token=%s"
 	this.shareUrl = "ws://huanyingwl.com"
 elseif srvUrlType == HTTPNETTYPE.LOCAL_FZMJ_TEST then 	--福州麻将内网
 	this.url = "ws://192.168.2.202:8001?uid=%s&token=%s"
@@ -135,4 +157,30 @@ function this.GetQQHallLoginInfo(  )
 	return qqHallLoginInfo
 end
 
+function this.SetLoginUserInfo(infoData)
+    userInfoTbl = infoData
+	userInfo = userInfoTbl["user"]
+
+	--将uid本地缓存
+	if PlayerPrefs.HasKey("USER_UID") and PlayerPrefs.GetString("USER_UID")~= nil and PlayerPrefs.GetString("USER_UID") == tostring(userInfo.uid) then
+		return
+	end
+	PlayerPrefs.SetString("USER_UID", userInfo.uid)
+end
+
+function this.SetUserInfo(infoData)
+	userInfo = infoData
+	-- 兼容登录和php
+	userInfo.imageurl = infoData.imgurl
+	userInfo.imagetype = infoData.imgtype
+		--将uid本地缓存
+	if PlayerPrefs.HasKey("USER_UID") and PlayerPrefs.GetString("USER_UID")~= nil and PlayerPrefs.GetString("USER_UID") == tostring(userInfo.uid) then
+		return
+	end
+	PlayerPrefs.SetString("USER_UID", userInfo.uid)
+end
+
+function this.GetLoginUserInfo()
+	return userInfo
+end
 ---------------------------外部接口end--------------------------

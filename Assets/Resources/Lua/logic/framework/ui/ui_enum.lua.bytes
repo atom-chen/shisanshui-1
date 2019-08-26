@@ -51,7 +51,7 @@ ui_prefab_enum =
 	ui_enum_poker_largeResult_ui = "Prefabs/UI/poker_largeResult_ui",
 	ui_enum_gps_ui = "Prefabs/UI/gps_ui/gps_ui",
     
-    ui_enum_join_ui_new="Prefabs/UI/join_ui_new/join_ui_new",
+    ui_enum_join_ui_new="Prefabs/UI/join_ui_new",
 	ui_enum_InviteNoticeUI = "Prefabs/UI/common/invite_notice_ui",
 	
 	--------------------------------------------wenxuan-----------------------------------------------
@@ -148,7 +148,7 @@ ui_script_enum =
 	ui_script_login_ui = "logic/login_sys/login_ui",
 	ui_script_chat_ui = "logic/common_ui/chat_ui",
 	ui_script_waiting_ui = "logic/common_ui/waiting_ui",
-    ui_script_join_ui_new="logic/hall_sys/join_ui_new/join_ui_new",
+    ui_script_join_ui_new="logic/hall_sys/join_ui_new",
 	ui_script_InviteNoticeUI = "logic/common_ui/InviteNoticeUI",
 	ui_script_autoCreateRoom_ui = "logic/hall_sys/openroom/autoCreateRoom_ui",
 	ui_script_bindPhone_ui = "logic/hall_sys/personInfo_ui/bindPhone_ui",

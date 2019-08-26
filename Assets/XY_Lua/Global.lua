@@ -1,15 +1,9 @@
---[[--
- * @Description: 最先被C#包含的lua文件，用来放置一些常用的
-                 C#导出类，以及基本的lua文件，还有常用的一些lua函数（这些函数可以考虑
-                 整理到其他工具lua文件中）
- * @Author:      shine
- * @FileName:    Golbal.lua
- * @DateTime:    2015-05-16 11:00:18
- ]]
-
 require "common/json"
 require "common/functions"
 require"logic/common_ui/ui_sound_mgr"
+
+
+GameUtil = require "utils/GameUtil"
 String 			= System.String
 Screen			= UnityEngine.Screen
 GameObject 		= UnityEngine.GameObject

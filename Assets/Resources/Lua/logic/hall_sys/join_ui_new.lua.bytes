@@ -51,7 +51,7 @@ function join_ui_new:OnOpen()
     self.clubInfo=nil
     self.clubState = nil
     self.detailpanel={}
-    self.model = model_manager:GetModel("ClubModel")
+    self.model = ClubModel
     self.wrap = ui_wrap:create(self:GetGameObject("panel/left/container"))
 	self.wrap:InitUI(106)
 	self.wrap.OnUpdateItemInfo = function(go, rindex, index)  self:OnItemUpdate(go, index, rindex)  end
@@ -136,7 +136,7 @@ function join_ui_new:OnRefreshDepth()
   local uiEffect = child(self.gameObject.transform, "bg/top/title/Effect_youxifenxiang")
   if uiEffect and self.sortingOrder then
     local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--    Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
   end
 end
 
@@ -327,7 +327,7 @@ function join_ui_new:RequestGetInRoom()
 	end
 end 
 function  join_ui_new:CloseWin()
-    ui_sound_mgr.PlayCloseClick()   
+--    ui_sound_mgr.PlayCloseClick()   
 	UI_Manager:Instance():CloseUiForms("join_ui_new",true)
 end 
 return join_ui_new

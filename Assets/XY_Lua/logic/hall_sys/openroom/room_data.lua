@@ -117,25 +117,26 @@ function this.ReadSssConfData()
  	if nil ~= str and "" ~= str then
 		roomConfData = ParseJsonStr(str)
 	end
-	
 	local tmp_table = nil
-	for i,v in ipairs(roomConfData) do
-		if	i == 1 then	
- 			tmp_table = v
-			for a,b in ipairs(tmp_table)  do
-				if b~=nil then
-					sssroomDataInfo.play_num = b["exData"][1]
+	if roomConfData ~= nil then
+		for i,v in ipairs(roomConfData) do
+			if	i == 1 then	
+	 			tmp_table = v
+				for a,b in ipairs(tmp_table)  do
+					if b~=nil then
+						sssroomDataInfo.play_num = b["exData"][1]
+					end
 				end
+			else
+				sssroomDataInfo.isChip =false
+				sssroomDataInfo.isZhuang =false
+				sssroomDataInfo.add_card =0
+				sssroomDataInfo.add_ghost =0
+				sssroomDataInfo.max_multiple =1
+				sssroomDataInfo.people_num = 4
 			end
-		else
-			sssroomDataInfo.isChip =false
-			sssroomDataInfo.isZhuang =false
-			sssroomDataInfo.add_card =0
-			sssroomDataInfo.add_ghost =0
-			sssroomDataInfo.max_multiple =1
-			sssroomDataInfo.people_num = 4
-		end
-	end	
+		end	
+	end
 end
 
 --[[--

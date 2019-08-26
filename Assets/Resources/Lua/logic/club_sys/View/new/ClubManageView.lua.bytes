@@ -56,8 +56,8 @@ function ClubManageView:SetAgent(_isAgent)
 end
 
 function ClubManageView:RefreshView()
-	if self.clubInfo ~= model_manager:GetModel("ClubModel").currentClubInfo then
-		self.clubInfo =  model_manager:GetModel("ClubModel").currentClubInfo 
+	if self.clubInfo ~= ClubModel.currentClubInfo then
+		self.clubInfo =  ClubModel.currentClubInfo 
 	end
 	if self.clubInfo == nil then
 		return
