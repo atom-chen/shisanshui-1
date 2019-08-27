@@ -34,7 +34,7 @@ end
 function ClubMemberItem:SetInfo(info, callback, target)
 	self.info = info
 	-- self.type = type
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 
 	-- self:UpdateType()
 	-- 刷数据

@@ -1,0 +1,62 @@
+
+daqiang.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+0
+  rotate: false
+  xy: 650, 265
+  size: 281, 245
+  orig: 281, 245
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 353, 260
+  size: 295, 250
+  orig: 295, 250
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2, 2
+  size: 322, 266
+  orig: 322, 266
+  offset: 0, 0
+  index: -1
+dong
+  rotate: false
+  xy: 849, 149
+  size: 105, 114
+  orig: 105, 114
+  offset: 0, 0
+  index: -1
+tx1
+  rotate: false
+  xy: 2, 270
+  size: 349, 240
+  orig: 349, 240
+  offset: 0, 0
+  index: -1
+tx2
+  rotate: false
+  xy: 709, 140
+  size: 138, 123
+  orig: 138, 123
+  offset: 0, 0
+  index: -1
+tx3
+  rotate: true
+  xy: 551, 81
+  size: 177, 156
+  orig: 177, 156
+  offset: 0, 0
+  index: -1
+yxks_shouqiang
+  rotate: false
+  xy: 326, 37
+  size: 223, 221
+  orig: 223, 221
+  offset: 0, 0
+  index: -1

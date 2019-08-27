@@ -34,7 +34,7 @@ end
 function ClubMemberItem:SetInfo(info, callback, target)
 	self.info = info
 	-- self.type = type
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 
 	-- self:UpdateType()
 	-- 刷数据
@@ -70,10 +70,10 @@ function ClubMemberItem:UpdateView()
 
 	if self.info.uid == self.model.selfPlayerId then
 		self.bgSp.spriteName = "common_54"
-		self:SetLabelsFormat(UILabelFormat.F10)
+--		self:SetLabelsFormat(UILabelFormat.F10)
 	else
 		self.bgSp.spriteName = "common_11"
-		self:SetLabelsFormat(UILabelFormat.F12)
+--		self:SetLabelsFormat(UILabelFormat.F12)
 	end
 
 	if self.model:CheckIsClubCreater(self.model.currentClubInfo.cid, self.info.uid) then

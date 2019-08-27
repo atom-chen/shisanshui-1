@@ -512,7 +512,8 @@ function ClubModel:OnResApplyClub(msgTab, ctype)
 	UIManager:CloseUiForms("ClubInputUI")
 --	UIManager:CloseUiForms("ClubCreateOrJoinUI")
 	if ctype == nil or ctype == 0 then
-		UIManager:FastTip(LanguageMgr.GetWord(10042))
+--		UIManager:FastTip(LanguageMgr.GetWord(10042))
+		fast_tip.Show("申请加入俱乐部成功，请等待群主审核")
 	end
 	self:CheckClearFristState()
 	-- addplayer -> 
@@ -586,7 +587,8 @@ function ClubModel:ReqGetClubUser(cid)
 	local param = {}
 	param.cid = cid
 	--http_request_interface.SendHttpRequest(HttpProxy.HttpHttpMode.Club,HttpCmdName.ClubGetClubUser, param)
-	self:SendRequest(HttpCmdName.ClubGetClubUser, param)
+	--self:SendRequest(HttpCmdName.ClubGetClubUser, param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetClubUser, param)
 end
 
 function ClubModel:OnResGetClubUser(msgTab)

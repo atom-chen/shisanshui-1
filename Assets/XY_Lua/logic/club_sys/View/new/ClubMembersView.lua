@@ -43,7 +43,9 @@ function ClubMembersView:OnApplyBtnClick()
 		Timer.New(function() isClicked = false end,1,1):Start()
     end
 	
-	ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
+	ui_sound_mgr.PlayButtonClick()
+	--ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
+	--数据上报
 	report_sys.EventUpload(1)
 	UI_Manager:Instance():ShowUiForms("ClubApplyUI",UiCloseType.UiCloseType_CloseNothing,nil,self.cid)
 end

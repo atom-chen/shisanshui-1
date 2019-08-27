@@ -5,6 +5,7 @@
  * @DateTime:    2017-05-19 14:33:40
  ]]
 
+require "logic/common/HeadImageHelper"
 hall_data = {}
 local this = hall_data
 
