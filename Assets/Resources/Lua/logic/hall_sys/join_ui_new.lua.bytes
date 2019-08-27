@@ -300,9 +300,9 @@ function join_ui_new:SetSelectState(item,boo)
         item.selfTable.game:SetLabelFormat(UILabelFormat.F18)
         item.selfTable.sp.spriteName="common_04"
     else
-        item.selfTable.name:SetLabelFormat(UILabelFormat.F8)
-        item.selfTable.num:SetLabelFormat(UILabelFormat.F8)
-        item.selfTable.game:SetLabelFormat(UILabelFormat.F19)
+        -- item.selfTable.name:SetLabelFormat(UILabelFormat.F8)
+        -- item.selfTable.num:SetLabelFormat(UILabelFormat.F8)
+        -- item.selfTable.game:SetLabelFormat(UILabelFormat.F19)
         item.selfTable.sp.spriteName="common_82"
     end
 end
@@ -318,13 +318,14 @@ end
 
 function join_ui_new:RequestGetInRoom()
 	local numList = self.input_ui:GetNumList()
-	if #numList == 6 then
+	--if #numList == 6 then
 		local rno = table.concat(numList)
 		self.model:ReqApplyClub(rno)
 		self.input_ui:ClearNumList()
-    else
-        UIManager:FastTip(LanguageMgr.GetWord(10041))
-	end
+    --else
+        --UIManager:FastTip(LanguageMgr.GetWord(10041))
+    --    fast_tip.Show("语言丢了")
+	--end
 end 
 function  join_ui_new:CloseWin()
 --    ui_sound_mgr.PlayCloseClick()   

@@ -1,4 +1,4 @@
-ClubModel = class("ClubModel")
+local ClubModel = class("ClubModel")
 require ("logic/club_sys/ClubUtil")
 local http_request_interface = http_request_interface
 --local HttpCmdName = HttpCmdName
@@ -16,6 +16,7 @@ local ClubMemberState =   -- 自己对于指定俱乐部的状态
 }
 
 function ClubModel:ctor()
+	print("老子诞生了")
 	self.locationTab = {}
 	-- 第一版使用，用于遍历显示
 	self.locationList = {}
@@ -311,7 +312,9 @@ function ClubModel:ShowClubCachedNtf()
 end
 
 function ClubModel:OnLoginSuccess()
+	log("登录后获取俱乐部列表")
 	ClubUtil.InitLocations()
+	--self = ClubModel
 	self.selfPlayerId = data_center.GetLoginUserInfo().uid
 	self:LoadNewPlayerState()
 	self:LoadLastClubId()
@@ -395,6 +398,7 @@ function ClubModel:ReqGetAgentInfo()
 end
 
 function ClubModel:OnResGetAgentInfo(msgTab)
+	local check = self:CheckMsgRet(msgTab)
 	if not self:CheckMsgRet(msgTab) then
 		return
 	end
@@ -990,11 +994,13 @@ end
 
 --获得用户所有俱乐部,加入的和创建的
 function ClubModel:ResGetUserAllClubList(dontShow)
-	--http_request_interface.SendHttpRequest(HttpCmdName.ClubGetUserAllClubList, nil, dontShow)
-	self:SendRequest(HttpCmdName.ClubGetUserAllClubList)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetUserAllClubList)
+	--self:SendRequest(HttpCmdName.ClubGetUserAllClubList)
 end
 
 function ClubModel:OnResGetUserAllClubList(msgTab)
+	--self = ClubModel
+	log(GetTblData(msgTab))
 	local count = 0
 	if self.clubList ~= nil then
 		count = #self.clubList
@@ -1009,7 +1015,8 @@ function ClubModel:OnResGetUserAllClubList(msgTab)
 		self.clubMap = {}
 	end
 
-	if self:HasClub() then
+	local hasClub = self:HasClub()
+	if hasClub then
 		if self.lastClubId ~= nil and self.clubMap[self.lastClubId] ~= nil and self.clubMap[self.lastClubId].ctype ~= 1 then
 			self:SetCurrentClubInfo(self.clubMap[self.lastClubId], nil, true)
 		else
@@ -1207,6 +1214,7 @@ function ClubModel:ClearCurrentClubInfo()
 end
 
 function ClubModel:HasClub()
+	log("是否有俱乐部")
 	return self.clubList ~= nil and #self.clubList > 0  
 end
 
@@ -1347,6 +1355,7 @@ function ClubModel:ReqJoinShareClub(cid,shareId,stime,callback)
 end
 
 function ClubModel:CheckMsgRet(msgTab)
+	log(GetTblData(msgTab))
 	if msgTab.ret ~= 0 then
 		if msgTab.ret >= 100 and msgTab.ret <= 200 then
 			if msgTab.msg ~= nil and msgTab.msg ~= "" then

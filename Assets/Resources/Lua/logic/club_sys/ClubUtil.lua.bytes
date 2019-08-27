@@ -111,9 +111,17 @@ end
 
 
 function ClubUtil.GetOpenClubGids(clubGids)
+	log("开放的俱乐部列表")
+	log(GetTblData(clubGids))
+	if type(clubGids) =="number" then 
+		local gids = {}
+		table.insert(gids,clubGids) 
+		log(GetTblData(gids))
+		return gids
+	end
 	local legal_gids = {}
 	--local open_gids = model_manager:GetModel("GameModel"):GetOpenGidList()
-	for _,gid in ipairs(clubGids or {}) do
+	for _,gid in pairs(clubGids or {}) do
 		--if IsTblIncludeValue(gid,open_gids) then
 			table.insert(legal_gids,gid)
 		--end
@@ -143,7 +151,7 @@ function ClubUtil.GetGameContent(gids, sp, count)
 	local strTab = {}
 	for i = 1, #gids do
 		if global_define.CheckHasName(gids[i]) then
-		strTab[#strTab + 1] = GameUtil.GetGameName(gids[i])
+			strTab[#strTab + 1] = GameUtil.GetGameName(gids[i])
 		end
 	end
 	local content = table.concat(strTab, sp)

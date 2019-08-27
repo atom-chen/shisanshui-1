@@ -231,7 +231,7 @@ end
 function ClubUI:OnCloseBtnClick()
 	ui_sound_mgr.PlayCloseClick()
 	UIManager:CloseUiForms("ClubUI")
-	UI_Manager:Instance():ShowUiForms("hall_ui",UiCloseType.UiCloseType_CloseOther)
+	--UI_Manager:Instance():ShowUiForms("hall_ui",UiCloseType.UiCloseType_CloseOther)
 end
 
 function ClubUI:PlayOpenAmination()
@@ -252,8 +252,8 @@ function ClubUI:SetToggle(index, force)
 	self.curIndex = index
 	if self.currentToggleSp ~= nil then
 		self.currentToggleSp[1].spriteName = "button_25"
-		self.currentToggleSp[2].myFormat = UILabelFormat.F42
-		self.currentToggleSp[2]:resetMyFormatData(true)
+--		self.currentToggleSp[2].myFormat = UILabelFormat.F42
+--		self.currentToggleSp[2]:resetMyFormatData(true)
 	end
 	self.currentToggleSp = self.togglesList[index]
 	self.currentToggleSp[1].spriteName = "button_26"

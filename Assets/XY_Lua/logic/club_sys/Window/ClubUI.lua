@@ -19,8 +19,8 @@ local this
 function ClubUI:OnInit()
 	this = self
 	self.model = ClubModel
-	self.model:ctor()
-	self.model:Init()
+	-- self.model:ctor()
+	-- self.model:Init()
 	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 

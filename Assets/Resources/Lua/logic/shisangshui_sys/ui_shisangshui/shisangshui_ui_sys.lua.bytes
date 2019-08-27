@@ -103,6 +103,7 @@ end
 
 local function OnPlayerReady( tbl )
 --	small_result.Hide()
+	log(GetTblData(tbl))
 	local logicSeat =  room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
 	local viewSeat = gvbl(tbl["_src"])
 	shisangshui_ui.SetLeftCard()--显示房间局数

@@ -171,3 +171,8 @@ function this.PlayButtonClick()
     this.PlaySoundClip("common/audio_button_click")
     --this.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
 end
+
+function this.PlayCloseClick()
+    this.PlaySoundClip("common/audio_close_dialog")
+    --this.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_close_dialog")
+end

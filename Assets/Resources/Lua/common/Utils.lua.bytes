@@ -397,7 +397,7 @@ function _check_str(str,where )
 		return
 	end
 	local msg = where.." type error,string value required"
-	error(msg)
+	log(msg)
 end
 
 function _check_table(t , where )

@@ -1311,5 +1311,9 @@ end
 
 --判断表是否为｛｝
 function isEmpty(tbl)
-    return _G.next(tbl) == nil
+	if type(tbl) == "table" and #tbl > 0 then
+		return false
+	else
+    	return true
+    end
 end

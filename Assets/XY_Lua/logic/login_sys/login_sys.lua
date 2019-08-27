@@ -7,6 +7,7 @@
 require "logic/network/majong_request_interface"
 require "logic/network/http_request_interface" 
 require "logic/common_ui/fast_tip"
+ClubModel = require ("logic/club_sys/ClubModel")
 SocketManager = require("logic.network.SocketManager"):create()
 
 
@@ -78,27 +79,27 @@ function this.AutoLogin(account)
 	log("===============Application.platform----"..tostring(Application.platform))
 	this.loginType = PlayerPrefs.GetInt("LoginType")
 
-	if tostring(Application.platform) == "WindowsEditor" then
-		if this.loginType > 0 then				
-			this.OnPlatLoginOK()
-		end
-	elseif tostring(Application.platform)  == "Android" or tostring(Application.platform) == "IPhonePlayer" then
-		if PlayerPrefs.HasKey("LoginType") and PlayerPrefs.HasKey("AccessToken") and PlayerPrefs.HasKey("OpenID") then												
-			if this.loginType > 0 then				
-				local msgTable = {}
-				msgTable.LoginType = this.loginType
-				msgTable.AccessToken = PlayerPrefs.GetString("AccessToken")
-				msgTable.OpenID = PlayerPrefs.GetString("OpenID")
+	--if tostring(Application.platform) == "WindowsEditor" then
+	--	if this.loginType > 0 then				
+			this.OnPlatLoginOK(nil, nil, account)
+	--	end
+	-- elseif tostring(Application.platform)  == "Android" or tostring(Application.platform) == "IPhonePlayer" then
+	-- 	if PlayerPrefs.HasKey("LoginType") and PlayerPrefs.HasKey("AccessToken") and PlayerPrefs.HasKey("OpenID") then												
+	-- 		if this.loginType > 0 then				
+	-- 			local msgTable = {}
+	-- 			msgTable.LoginType = this.loginType
+	-- 			msgTable.AccessToken = PlayerPrefs.GetString("AccessToken")
+	-- 			msgTable.OpenID = PlayerPrefs.GetString("OpenID")
 
-				--如果是安卓手机游客登录流程
-				if this.loginType == 9 then
-					this.OnPlatLoginOK(nil, nil, account)
-				else --微信或QQ自动登录流程
-					this.LoginAndJumintoLobby(msgTable)
-				end
-			end
-		end				
-	end
+	-- 			--如果是安卓手机游客登录流程
+	-- 			if this.loginType == 9 then
+	-- 				this.OnPlatLoginOK(nil, nil, account)
+	-- 			else --微信或QQ自动登录流程
+	-- 				this.LoginAndJumintoLobby(msgTable)
+	-- 			end
+	-- 		end
+	-- 	end				
+	-- end
 end
 
 --[[--
@@ -118,6 +119,7 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 	--平台成功回调后开始连接服务器并登陆服务器 
 	log("this.share_uid=="..this.share_uid)
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
+    if account == nil then account = NetWorkManage.Instance:GetMacAddress() end
     http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
 		if code then
@@ -143,7 +145,10 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 			PlayerPrefs.SetString("AccessToken", 0)
 			PlayerPrefs.SetString("OpenID", NetWorkManage.Instance:GetMacAddress())
 
-
+			--俱乐部请求
+			ClubModel:ctor()
+			ClubModel:Init()
+			Notifier.dispatchCmd(GameEvent.LoginSuccess)
 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
 			SocketManager:createSocket("hall",urlStr,"online", 1)		
 		else

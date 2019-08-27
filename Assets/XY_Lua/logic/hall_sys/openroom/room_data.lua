@@ -16,8 +16,8 @@ local this = room_data
 
 --局数
 PlayNum = {
-	[1] = 4,
-	[2] = 8, 
+	[1] = 8,
+	[2] = 12, 
 	[3] = 16
 }
 --人数
@@ -58,7 +58,7 @@ local sssroomDataInfo =
 	--总局数
 	play_num = PlayNum[1],
 	--当前局
-	cur_playNum = 4,
+	cur_playNum = 8,
 	-- 人数
 	people_num = PeopleNum[1],
 	-- 加色
@@ -118,6 +118,7 @@ function this.ReadSssConfData()
 		roomConfData = ParseJsonStr(str)
 	end
 	local tmp_table = nil
+	roomConfData = nil
 	if roomConfData ~= nil then
 		for i,v in ipairs(roomConfData) do
 			if	i == 1 then	

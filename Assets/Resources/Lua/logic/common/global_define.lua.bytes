@@ -51,3 +51,12 @@ this.httpfwtk=this.http.."/gamewap/youxianqipai/view/fuwutiaokuan.html"
 this.httpyszc=this.http.."/gamewap/youxianqipai/view/yinsizhengce.html"
 this.httpactivity=this.http.."/gamewap/youxianqipai/view/huodonggonggao.html"
 this.defineimg="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=190291064,674331088&fm=58" 
+
+function this.CheckHasName(gid)
+  for k,v in pairs(ENUM_GAME_TYPE) do
+    if gid == v then
+      return true
+    end
+  end
+  return false
+end
