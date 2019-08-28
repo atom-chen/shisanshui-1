@@ -7,7 +7,7 @@ local ClubMemberItem = require("logic/club_sys/View/new/ClubMemberItem")
 local ui_wrap = require "logic/framework/ui/uibase/ui_wrap"
 
 function ClubApplyUI:OnInit()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.type = ClubMemberEnum.apply
 	self.notAutoClose = false
 
@@ -116,7 +116,7 @@ function ClubApplyUI:OnRefreshDepth()
 	local uiEffect = child(self.gameObject.transform, "panel/Panel_Top/Title/Effect_youxifenxiang")
 	if uiEffect and self.sortingOrder then
 		local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-		Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--		Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
 	end
 end
 

@@ -127,3 +127,37 @@ function this.EnterGameHandle(data)
     player_data.SetReconnectEpara(data) 
     --join_room.EnterGameHandle(data)
 end
+
+function this.CreateClubRoom(data)
+--    UI_Manager:Instance():ShowUiForms("waiting_ui")
+    --http_request_interface.createClubRoom(data, function (str)
+    local param = {}
+    param.param = data
+    http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubCreateClubRoom, param, function(dataTbl)
+        --waiting_ui.Hide()
+        -- local s = string.gsub(str, "\\/", "/")
+        -- local dataTbl = ParseJsonStr(s)
+        if dataTbl ~= nil then
+            log("CreateClubRoom:-----------------"..GetTblData(dataTbl))
+            -- if tonumber(dataTbl.ret)~=0 then
+            --     UI_Manager:Instance():CloseUiForms("waiting_ui")
+            --     model_manager:GetModel("ClubModel"):CheckMsgRet(dataTbl)
+            -- else            
+                --设置当前的gameid
+            data_center.SetCurGameID(dataTbl["roominfo"]["gid"])
+            --根据_dsts来确定是否重连，如果有就重连，木有就不重连
+            if dataTbl._dst ~= nil and dataTbl._dst._gid ~= nil then  
+                 --重连必须重以_dsts里面的_gid为准。目前暂时只取第一个，其它忽略
+                data_center.SetCurGameID(dataTbl._dst._gid)
+                this.ReEnterRoomByQuery(dataTbl._dst)            
+            else
+                ----十三水水庄玩法直接enter
+                --if dataTbl["roominfo"]["gid"] ~= nil and dataTbl["roominfo"]["gid"] == ENUM_GAME_TYPE.TYPE_ShuiZhuang_SSS then
+                --  this.JoinRoomByRno(dataTbl.roominfo.rno)
+                --else
+                    this.CreateRoomHandler(dataTbl)
+                --end                 
+            end
+        end        
+    end)     
+end

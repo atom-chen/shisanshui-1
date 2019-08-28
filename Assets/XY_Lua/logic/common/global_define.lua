@@ -31,6 +31,16 @@ function  this.GetUrlData( )
    return url
 end
 
+--登陆类型
+LoginType=
+{
+    WXLOGIN = 2,
+    QQLOGIN = 3,
+    YOUKE = 9,
+}
+
+this.CreateRoomPlayerPrefs = "createRoomCache_" -- 开房数据持久化固定字符串createRoomCache_gid
+this.ClubCreateRoomPlayerPrefs = "clubCreateRoomCache_"
 --原来地址改
 --this.sss_path = Application.persistentDataPath.."/games/gamerule/FuZhou_ShiSangShui_Rule.json"
 this.sss_path = Application.persistentDataPath.."/games/gamerule/PuXian_ShiSangShui_Rule.json"

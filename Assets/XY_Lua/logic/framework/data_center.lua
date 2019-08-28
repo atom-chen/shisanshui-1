@@ -30,6 +30,7 @@ userInfo.sitemid = nil;
 userInfo.pwd = nil;
 userInfo.session_key = nil;
 
+local curPlatform = nil
 
 --游戏类型
 local gameType = 1
@@ -183,5 +184,18 @@ end
 
 function this.GetLoginUserInfo()
 	return userInfo
+end
+
+function this.GetPlatform()
+	if PlayerPrefs.HasKey("LoginType") then
+        return PlayerPrefs.GetInt("LoginType")
+    else
+        return LoginType.YOUKE
+    end
+end
+
+function this.GetCurPlatform()
+	curPlatform = tostring(Application.platform)
+	return curPlatform
 end
 ---------------------------外部接口end--------------------------

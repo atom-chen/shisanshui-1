@@ -524,8 +524,8 @@ function ClubModel:ReqGetClubApplyList(cid)
 
 	local param = {}
 	param.cid = cid 
-	--http_request_interface.SendHttpRequest(HttpCmdName.ClubGetApplyList, param, dontShow)
-	self:SendRequest(HttpCmdName.ClubGetApplyList, param)
+	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetApplyList, param)
+	--self:SendRequest(HttpCmdName.ClubGetApplyList, param)
 end
 
 function ClubModel:OnResGetClubApplyList(msgTab)
