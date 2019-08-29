@@ -152,9 +152,9 @@ end
 local function OnGameDeal( tbl )
 	shisangshui_ui.SetAllPlayerReady(false)
 	shisangshui_ui.IsShowBeiShuiBtn(false)
-	shisangshui_ui.ShowCard(0)
 
 	shisangshui_ui.DealCard(nil, function()
+		shisangshui_ui.ShowCard(0)
 		player_component.CardList = tbl["_para"]["stCards"]
 		recommendCards = tbl["_para"]["recommendCards"]
 		log("牌的数据"..tostring(player_component.CardList))
@@ -676,6 +676,7 @@ function this.Init()
 	Notifier.regist(cmdName.F1_SYNC_BEGIN,OnSyncBegin)--重连同步开始
 	Notifier.regist(cmdName.F1_SYNC_TABLE,OnSyncTable)--重连同步表
 	Notifier.regist(cmdName.F1_SYNC_END,OnSyncEnd)--重连同步结束
+	Notifier.regist(cmdName.CHOOSE_OK,OnChooseOK)
 	
 	Notifier.regist(cmdName.F1_SYNC_TABLE,OnSyncTable)--重连同步表
 
@@ -714,7 +715,7 @@ function this.UInit()
 	Notifier.remove(cmdName.F1_GAME_PLAYSTART,OnPlayStart)--打牌开始
 	Notifier.remove(cmdName.F1_GAME_DEAL,OnGameDeal)--发牌
 
-	Notifier.regist(cmdName.CHOOSE_OK,OnChooseOK)
+	Notifier.remove(cmdName.CHOOSE_OK,OnChooseOK)
 	Notifier.remove(cmdName.F1_GAME_GIVECARD,OnGiveCard)--摸牌
 	Notifier.remove(cmdName.F1_GAME_PLAY,OnPlayCard)--出牌
 
@@ -839,10 +840,10 @@ function this.getuserimage(tx,itype,iurl)
 end
 
 local function OnChooseOK(tbl)
-		log("摆牌完成")
-		--需要扣牌
-		local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
-		shisangshui_ui.ShowCard(logicSeat)
+	log("摆牌完成,妈的还不调用不要你了")
+	--需要扣牌
+	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
+	shisangshui_ui.ShowCard(logicSeat)
 
-		--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
-	end
+	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
+end

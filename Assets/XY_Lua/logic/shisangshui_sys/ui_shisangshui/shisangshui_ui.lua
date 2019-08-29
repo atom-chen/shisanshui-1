@@ -283,6 +283,7 @@ local function InitWidgets()
 		this.peopleNum = roomData.people_num
 	end
 	log("PeopleNum:"..tostring(this.peopleNum))
+	this.CardsTbl = {}
     for i=1,7 do
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
@@ -305,6 +306,15 @@ local function InitWidgets()
 			playerTrans.gameObject:SetActive(true)
 			local playerComponent = shisanshui_player_ui.New(playerTrans)
 			playerComponent.SetReadyLocalPosition(prepare_x,prepare_y)
+			playerComponent.cardsPos = {}
+
+			this.CardsTbl[i] = {}
+			for j = 1, 13 do
+				this.CardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+				this.CardsTbl[i][j].gameObject:SetActive(false);
+				playerComponent.cardsPos[j] = this.CardsTbl[i][j].transform.localPosition
+			end
+			playerComponent.cardObjs = this.CardsTbl[i]
     		table.insert(this.playerList, playerComponent)
 		end
     		playerTrans.gameObject:SetActive(false)
@@ -335,14 +345,13 @@ local function InitWidgets()
        compTbl.xiapao.gameObject:SetActive(false)
     end
 	
-	this.CardsTbl = {}
-	for i = 1, 7 do
-		this.CardsTbl[i] = {}
-		for j = 1, 13 do
-			this.CardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-			this.CardsTbl[i][j].gameObject:SetActive(false);
-		end
-	end
+	-- for i = 1, 7 do
+	-- 	this.CardsTbl[i] = {}
+	-- 	for j = 1, 13 do
+	-- 		this.CardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+	-- 		this.CardsTbl[i][j].gameObject:SetActive(false);
+	-- 	end
+	-- end
 end
 
 
@@ -933,27 +942,27 @@ function this.GetPlayer(viewSeat)
 end
 
 function this.InitCards()
-	this.peoCardsTbl = {}
-	this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
-	this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
-	this.peoCardsTbl[4] = {this.CardsTbl[1], this.CardsTbl[3], this.CardsTbl[5], this.CardsTbl[7]}
-	this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
-	this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
-	this.peoCardsTbl[7] = this.CardsTbl
-	if this.peopleNum == nil then
-		local roomData = room_data.GetSssRoomDataInfo()
-		this.peopleNum = roomData.people_num
-	end
-	this.curPeoCardsTbl = this.peoCardsTbl[this.peopleNum]
-	this.cardPosTbl = {}
-	for i = 1, this.peopleNum do
-		this.cardPosTbl[i] = {}
-		for j = 1, 13 do
-			this.cardPosTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-			local pos = this.CardsTbl[i][j].transform.localPosition
-			this.cardPosTbl[i][j] = pos
-		end
-	end
+	-- this.peoCardsTbl = {}
+	-- this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
+	-- this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
+	-- this.peoCardsTbl[4] = {this.CardsTbl[1], this.CardsTbl[3], this.CardsTbl[5], this.CardsTbl[7]}
+	-- this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
+	-- this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
+	-- this.peoCardsTbl[7] = this.CardsTbl
+	-- if this.peopleNum == nil then
+	-- 	local roomData = room_data.GetSssRoomDataInfo()
+	-- 	this.peopleNum = roomData.people_num
+	-- end
+	--this.curPeoCardsTbl = this.peoCardsTbl[this.peopleNum]
+	--this.cardPosTbl = {}
+	-- for i = 1, this.peopleNum do
+	-- 	this.cardPosTbl[i] = {}
+	-- 	for j = 1, 13 do
+	-- 		this.cardPosTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+	-- 		local pos = this.CardsTbl[i][j].transform.localPosition
+	-- 		this.cardPosTbl[i][j] = pos
+	-- 	end
+	-- end
 end
 
 --nil 全部显示, 0全部隐藏--其他为1家
@@ -965,20 +974,22 @@ function this.ShowCard(index)
 		this.peopleNum = roomData.people_num
 	end
 	if index == nil then--全部显示
+		log("显示出来所有的牌")
 		for i = 1, this.peopleNum do
 			for j = 1, 13 do
-				this.curPeoCardsTbl[i][j].gameObject:SetActive(true)
+				this.playerList[i].cardObjs[j].gameObject:SetActive(true)
 			end
 		end		
 	elseif index == 0 then--全部隐藏
+		log(tostring(this.peopleNum))
 		for i = 1, this.peopleNum do
 			for j = 1, 13 do
-				this.curPeoCardsTbl[i][j].gameObject:SetActive(false)
+				this.playerList[i].cardObjs[j].gameObject:SetActive(false)
 			end
 		end
 	else
 		for j = 1, 13 do
-			this.curPeoCardsTbl[index][j].gameObject:SetActive(true)
+			this.playerList[index].cardObjs[j].gameObject:SetActive(true)
 		end
 	end
 end
@@ -997,13 +1008,13 @@ function this.DealCard(data, callback)
 		coroutine.wait(1.8)
     	this.xipai.gameObject:SetActive(false)
 		for i = 1, this.peopleNum do
-			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+			--this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
 			for j = 1, 13 do
-				this.curPeoCardsTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-				this.curPeoCardsTbl[i][j].transform.position = Vector3.New(0, 0, 0)
-				local tween = this.curPeoCardsTbl[i][j].transform:DOLocalMove(this.cardPosTbl[i][j], 0.2, true)
+				--this.playerList[i].cardObjs[j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
+				this.playerList[i].cardObjs[j].transform.position = Vector3.New(0, 0, 0)
+				local tween = this.playerList[i].cardObjs[j].transform:DOLocalMove(this.playerList[i].cardsPos[j], 0.2, true)
 				tween:SetDelay(0.1 * j)
-				this.curPeoCardsTbl[i][j].gameObject:SetActive(true);
+				this.playerList[i].cardObjs[j].gameObject:SetActive(true);
 			end
 		end
 		coroutine.wait(1.4)
@@ -1069,12 +1080,12 @@ function this.CardCompareHandler(callback)
 	table.sort(secondSort)
 	table.sort(threeSort)
 
-	if this.curPeoCardsTbl == nil then this.InitCards() end
-	if this.playerList[1].CardsTbl == nil then
-		for i = 1, this.peopleNum do
-			this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
-		end	
-	end
+	-- if this.curPeoCardsTbl == nil then this.InitCards() end
+	-- if this.playerList[1].CardsTbl == nil then
+	-- 	for i = 1, this.peopleNum do
+	-- 		this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
+	-- 	end	
+	-- end
 
 	this.ClearCards()
 	coroutine.start(function()
@@ -1085,7 +1096,7 @@ function this.CardCompareHandler(callback)
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
 						for n = 1, 3 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.CardsTbl[n])
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.cardObjs[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 
@@ -1123,7 +1134,7 @@ function this.CardCompareHandler(callback)
 						-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
 
 						for n = 4, 8 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.CardsTbl[n])
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.cardObjs[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 							--Player:PlayerGroupCard("Group1")
@@ -1158,7 +1169,7 @@ function this.CardCompareHandler(callback)
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 
 						for n = 9, 13 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.CardsTbl[n])
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.cardObjs[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 3
