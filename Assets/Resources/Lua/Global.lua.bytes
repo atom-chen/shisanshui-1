@@ -2,6 +2,7 @@ require "common/json"
 require "common/functions"
 require"logic/common_ui/ui_sound_mgr"
 
+require "logic/report_sys/report_sys"
 
 GameUtil = require "utils/GameUtil"
 String 			= System.String

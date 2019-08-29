@@ -78,7 +78,7 @@ end
 
 function this.GetBaseImage()
     if IsNil(baseImage) then
-        local baseImagePrefab = newNormalObjSync(data_center.GetAppConfDataTble().appPath.."/uitextures/art/common_head", typeof(UnityEngine.Texture2D))
+        local baseImagePrefab = newNormalObjSync("uitextures/art/common_head", typeof(UnityEngine.Texture2D))
         baseImage = newobject(baseImagePrefab)
         GameObject.DontDestroyOnLoad(baseImage)
     end

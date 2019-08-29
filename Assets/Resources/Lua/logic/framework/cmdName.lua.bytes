@@ -189,3 +189,35 @@ cmdName.ROOM_SUM_SCORE = "room_sum_score" --十三水总积分
 cmdName.FuZhouSSS_ASKMULT = "MSG_ASKMULT"	--等待闲家选择倍数
 cmdName.FuZhouSSS_MULT = "MSG_MULT" -- 选择倍数通知(回复自己选择倍数)
 cmdName.FuZhouSSS_ALLMULT = "MSG_ALLMULT" --选择倍数通知(所有人的选择倍数)
+
+
+
+cmdName.MSG_VOICE_INFO 					= "MSG_VOICE_INFO"   			--语音信息（包含语音id以及下载路径）
+cmdName.MSG_VOICE_PLAY_BEGIN 			= "MSG_VOICE_PLAY_BEGIN" 		--语音播放开始通知（参数1代表玩家座位号）
+cmdName.MSG_VOICE_PLAY_END 				= "MSG_VOICE_PLAY_END"    		--语音播放结束通知（参数1代表玩家座位号）
+
+cmdName.MSG_CHAT_TEXT 					= "MSG_CHAT_TEXT"  --文字聊天信息
+cmdName.MSG_CHAT_IMAGA 					= "MSG_CHAT_IMAGA"  --图片聊天信息
+cmdName.MSG_CHAT_INTERACTIN 			= "MSG_CHAT_INTERACTIN"	--互动聊天信息
+
+cmdName.MSG_UPDATE_ROOM_LEFT_CARD       = "MSG_UPDATE_ROOM_LEFT_CARD" -- 更新房间剩余牌数
+cmdName.MSG_UPDATE_PLAYER_HUA_CARD 		= "MSG_UPDATE_PLAYER_HUA_CARD"  -- 更新玩家花牌数量
+--cmdName.MSG_CLIENT_CHECKT_TING 			= "MSG_CLIENT_CHECKT_TING"  -- 客户端计算听牌
+cmdName.MSG_ON_GUO_CLICK 				= "GAME_ON_GUO_CLICK"  -- 过点击
+
+cmdName.MSG_EARLY_SETTLEMENT 			= "MSG_EARLY_SETTLEMENT" --管理员强制提前进行游戏结算
+cmdName.MSG_FREEZE_USER 				= "MSG_FREEZE_USER" --冻结帐号
+cmdName.MSG_FREEZE_OWNER 				= "MSG_FREEZE_OWNER"		--未开局管理员封房主号
+
+cmdName.MSG_CHANGE_ACCOUNT 				= "MSG_CHANGE_ACCOUNT"		--切换账号
+
+cmdName.MSG_MOUSE_BTN_UP 				= "MSG_MOUSE_BTN_UP"   -- 鼠标/触摸 松手事件  暂时只在麻将内有效
+cmdName.MSG_MOUSE_BTN_DOWN 				= "MSG_MOUSE_BTN_DOWN"  -- 鼠标/触摸 点下事件
+cmdName.MSG_MOUSE_BTN   				= "MSG_MOUSE_BTN"		-- 鼠标/触摸  正在按下事件
+
+
+cmdName.MSG_RAND_ENTER_EVENT 			= "MSG_RAND_ENTER_EVENT"
+
+cmdName.MSG_MJ_OUT_WARNING 				= "MSG_MJ_OUT_WARNING"   --麻将提示警告
+cmdName.MSG_START_GAME					= "MSG_START_GAME"
+

@@ -18,6 +18,7 @@ UI_Manager = require "logic/framework/ui/ui_manager"
 UIManager = UI_Manager:Instance()
 
 GameEvent = require "logic/framework/ui/GameEvent"
+MessageBox = require "logic/common_ui/MessageBox"
 
 --管理器--
 GameManager = {}

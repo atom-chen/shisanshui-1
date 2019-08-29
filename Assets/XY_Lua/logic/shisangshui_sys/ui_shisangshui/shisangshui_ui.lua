@@ -1040,8 +1040,8 @@ function this.CardCompareHandler(callback)
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
 						for n = 1, 3 do
-							log("加载的牌：".."Prefabs/Card/"..tostring(Player.compareResult.stCards[n]))
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							log("加载的牌：".."Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]))
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 
@@ -1078,7 +1078,7 @@ function this.CardCompareHandler(callback)
 						-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
 
 						for n = 4, 8 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 							--Player:PlayerGroupCard("Group1")
@@ -1112,7 +1112,7 @@ function this.CardCompareHandler(callback)
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 
 						for n = 9, 13 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n]), Player.CardsTbl[n])
+							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
 							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 3

@@ -151,7 +151,7 @@ function ClubManageView:OnItemClick(item)
 		self.model:ReqSetClubConfig(unpack(oldValueTab))
 	else
 		oldValueTab[item.index + 1] = 1
-		MessageBox.ShowYesNoBox(LanguageMgr.GetWord(cfg[item.index][3], self.clubInfo.cname), 
+		MessageBox.ShowYesNoBox("文字丢了",--LanguageMgr.GetWord(cfg[item.index][3], self.clubInfo.cname), 
 			function()
 				self.model:ReqSetClubConfig(unpack(oldValueTab))
 			end)

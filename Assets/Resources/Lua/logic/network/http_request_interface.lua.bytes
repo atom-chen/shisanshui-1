@@ -245,6 +245,7 @@ end
 
 --获得用户详细信息 {"uid":用户id,"gid":游戏id}
 function  this.getUserInfo(uid,gid,callback)
+    log("获得用户详细信息")
     local param={["uid"]=uid,["gid"]=gid}
     local t=this.GetTable("GameMember.getUserInfo",param)
     local rt=json.encode(t) 
@@ -252,6 +253,20 @@ function  this.getUserInfo(uid,gid,callback)
     callback(code,m,str)
 end) 
     log("-----------Finish_getUserInfo--------") 
+end
+
+--根据uid获取用户信息
+function this.GetUserInfo(uid,callback)
+    local param = {["uid"] = uid}
+    local t = this.GetTable("GameMember.getUserInfo100", param)
+    local rt = json.encode(t)
+    this.HttpPOSTRequest(rt, function(str)
+        log("----------GetUserInfo--------"..str)
+        if callback ~= nil then
+            callback(str)
+        end
+    end, true)
+    log("-----------Finish_GetUserInfo--------") 
 end
 
 
