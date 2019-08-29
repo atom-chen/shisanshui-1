@@ -956,6 +956,31 @@ function this.InitCards()
 	end
 end
 
+--nil 全部显示, 0全部隐藏--其他为1家
+function this.ShowCard(index)
+	if this.peopleNum == nil then
+		local roomData = room_data.GetSssRoomDataInfo()
+		this.peopleNum = roomData.people_num
+	end
+	if index == nil then--全部显示
+		for i = 1, this.peopleNum do
+			for j = 1, 13 do
+				this.curPeoCardsTbl[i][j].gameObject:SetActive(true)
+			end
+		end		
+	elseif index == 0 then--全部隐藏
+		for i = 1, this.peopleNum do
+			for j = 1, 13 do
+				this.curPeoCardsTbl[i][j].gameObject:SetActive(false)
+			end
+		end
+	else
+		for j = 1, 13 do
+			this.curPeoCardsTbl[index][j].gameObject:SetActive(true)
+		end
+	end
+end
+
 --发牌
 function this.DealCard(data, callback)
 	if this.peopleNum == nil then
@@ -988,6 +1013,18 @@ function this.DealCard(data, callback)
 end
 
 function this.CompareStart(callback)
+	this.ShowCard()
+	-- for i ,Player in pairs(this.PlayerList) do
+	-- 	Player:SetCardMesh() --设置牌的值
+	-- 	--为特殊牌型显示一个展示图标
+	-- 	if tonumber(Player.compareResult["nSpecialType"]) > 0 then
+	-- 		local data = {}
+	-- 		data.viewSeat = Player.viewSeat
+	-- 		data.position = Utils.WorldPosToScreenPos(Player.playerObj.transform.position)
+	-- 		--Notifier.dispatchCmd(cmdName.SpecialCardType, data)
+	-- 		this.ShowSpecialCardIcon(data)
+	-- 	end			
+	-- end
 	this.CardCompareHandler(callback)
 end
 
@@ -1040,7 +1077,6 @@ function this.CardCompareHandler(callback)
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
 						for n = 1, 3 do
-							log("加载的牌：".."Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]))
 							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.CardsTbl[n])
 							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 							tran.transform.localPosition = Vector3.New(0, 0, 0)
@@ -1064,9 +1100,9 @@ function this.CardCompareHandler(callback)
 		end
 		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第一墩的积分数据
-		-- scoreData.index = 1
-		-- scoreData.totallScore = 0			
-		-- Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
+		scoreData.index = 1
+		scoreData.totallScore = 0			
+		Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
 		
 		--比中墩
 		for j,k in ipairs(secondSort) do
@@ -1139,17 +1175,17 @@ function this.CardCompareHandler(callback)
 		end
 		
 		--这里增加一个事件，通知UI更新第三墩的积分数据
-		-- scoreData.index = 3
-		-- scoreData.totallScore = 0
-		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
+		scoreData.index = 3
+		scoreData.totallScore = 0
+		Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
 		--总分
-		-- local myPlayer = this.GetPlayer(1)
-		-- local totallScore = myPlayer.compareResult["nTotallScore"]
-		-- log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
+		local myPlayer = this.GetPlayer(1)
+		local totallScore = myPlayer.compareResult["nTotallScore"]
+		log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
 		
-		-- scoreData.index = 4
-		-- scoreData.totallScore = totallScore
-		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
+		scoreData.index = 4
+		scoreData.totallScore = totallScore
+		Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
 		
 		if callback ~= nil then
 			callback()
@@ -1159,7 +1195,116 @@ function this.CardCompareHandler(callback)
 	--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
 	--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
 	--播放打枪动画
-	--this.PlayGunAnim()
+	this.PlayGunAnim()
 
 	--播放特殊牌形动画		
+end
+
+--播放打枪动画及以后流程
+function this.PlayGunAnim()				
+	local isPlayed = false	
+	--coroutine.wait(0.5)
+	coroutine.start(function()
+		for i,v in ipairs(this.playerList) do
+			if v.compareResult["stShoots"] ~= nil then
+				local shootList = v.compareResult["stShoots"]--找出每个人的打枪列表
+				if shootList ~= nil and #shootList > 0 then
+					if isPlayed ==false then
+						--log("打枪全屏动画")
+						animations_sys.PlayAnimation(this.transform, "shisanshui_shoot_kuang", "bomb box", 100, 100, false)
+						ui_sound_mgr.PlaySoundClip("dub/daqiang_nv")  ---打枪提示
+						isPlayed = true
+						coroutine.wait(1.0)
+						ui_sound_mgr.PlaySoundClip("audio/daqiangzhunbei")  ---打枪准备
+						coroutine.wait(0.5)
+					end
+				
+					for j,k in ipairs(shootList) do
+						local shootTargetViewSeat = room_usersdata_center.GetViewSeatByLogicSeatNum(k)
+						-- local shootTargeObj = nil
+						-- shootTargeObj = this.GetPlayer(shootTargetViewSeat).playerObj
+
+						--if shootTargeObj ~= nil then
+							-- animator.transform.parent.localPosition = v.playerObj.transform.localPosition
+							-- animator.transform.parent:LookAt(shootTargeObj.transform)   --把枪指向要打的人的对象
+							
+						    --for i =1 ,3 do --打枪三次
+						--local screenPos =  Utils.WorldPosToScreenPos(shootTargeObj.transform.position)  
+						--screenPos.z = 0
+						-- if this.gun.gameObject.activeSelf == false then
+						-- 	this.gun:SetActive(true)
+						-- end
+						--animator:SetBool("gun_fire", true)
+
+						local shootedPlayer = this.GetPlayer(shootTargetViewSeat)
+						v.PlayDaqiang("qiang")
+						ui_sound_mgr.PlaySoundClip("audio/daqiang")  --枪声
+						coroutine.wait(0.1)
+						shootedPlayer.PlayDaqiang("kong")
+
+						-- coroutine.wait(0.1)
+						-- local anim1 = animations_sys.PlayAnimationByScreenPosition(shisangshui_ui.transform,screenPos.x + tonumber(math.random(-30,30)),screenPos.y + tonumber(math.random(-30,30)),"shisanshui_shoot","Shoot2",100,100,false,callback)
+						-- ui_sound_mgr.PlaySoundClip("audio/daqiang")  --枪声
+						-- coroutine.wait(0.1)
+						-- local anim2 = animations_sys.PlayAnimationByScreenPosition(shisangshui_ui.transform,screenPos.x + tonumber(math.random(-30,30)),screenPos.y + tonumber(math.random(-30,30)),"shisanshui_shoot","Shoot2",100,100,false,callback)
+						-- ui_sound_mgr.PlaySoundClip("audio/daqiang")  --枪声
+						-- coroutine.wait(0.1)
+						-- local anim3 = animations_sys.PlayAnimationByScreenPosition(shisangshui_ui.transform,screenPos.x + tonumber(math.random(-30,30)),screenPos.y + tonumber(math.random(-30,30)),"shisanshui_shoot","Shoot2",100,100,false,callback)
+						-- animator:SetBool("gun_fire", false)
+						-- this.gun:SetActive(false)
+
+						--coroutine.wait(1)
+						-- animations_sys.StopPlayAnimation(anim1)
+						-- animations_sys.StopPlayAnimation(anim2)
+						-- animations_sys.StopPlayAnimation(anim3)
+							
+						--end
+					end
+				end
+			end
+		end
+		--this.gun:SetActive(false)
+		
+		
+		for i, v in ipairs(this.playerList) do
+			if v.compareResult["nSpecialType"] ~= 0 and v.compareResult["nSpecialType"] ~= nil then
+				log("打枪完成, 开始特殊牌型展示")
+				special_card_show.Show(v.compareResult["stCards"], v.compareResult["nSpecialType"], 2)
+				coroutine.wait(2)
+			end
+		end
+
+		if card_data_manage.allShootChairId ~= 0 then
+			log("播放全垒打动画")
+			animations_sys.PlayAnimation(shisangshui_ui.transform,"daqiang_quanleida","homer",100,100,false)
+			ui_sound_mgr.PlaySoundClip("dub/quanleida_nv")  ---全垒打
+			coroutine.wait(2)
+		end
+		
+
+		shisangshui_play_sys.CompareFinish()--告诉服务器
+		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_RESULT)--比牌结束
+		log("====================开始结算=======================")
+		
+		--结算动画处理
+		local totalPoints = {}
+		for i,player in ipairs(this.playerList) do
+			local points = player.compareResult["nTotallScore"]
+			table.insert(totalPoints,points)
+			this.ShowPlayerTotalPoints(player.viewSeat,points)
+		end
+		table.sort(totalPoints)
+		local maxTotalPoint =  totalPoints[#totalPoints]
+		if maxTotalPoint ~= nil then
+			for i,player in ipairs(this.playerList) do
+				if tonumber(maxTotalPoint) == tonumber(player.compareResult["nTotallScore"]) then
+					this.SetPlayerLightFrame(player.viewSeat)
+					coroutine.wait(1)
+					this.DisablePlayerLightFrame()
+					--	coroutine.wait(0.1)
+					break
+				end
+			end
+		end
+	end)
 end

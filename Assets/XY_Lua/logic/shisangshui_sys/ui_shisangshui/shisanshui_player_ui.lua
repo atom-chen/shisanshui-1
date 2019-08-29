@@ -100,6 +100,14 @@ function shisanshui_player_ui.New( transform )
 	    end
 	    this.chat_text_label = child(this.chat_text,"msg")
 
+	    local daqiangObj = child(this.transform,"daqiang")
+	    --if daqiangObj ~= nil then
+			this.daqiang = componentGet(daqiangObj,"SkeletonAnimation")
+			daqiangObj.gameObject:SetActive(false)
+			log("打枪。。。。。。。。。。obj")
+			log(this.daqiang.gameObject.name)
+			--print(this.daqiang.AnimationState.TimeScale)
+		--end
 		-- this.CardList = {}
 	 --    for i = 0, 13 do
 		-- 	local playerComponent = PlayerCard.New(playerTrans)
@@ -299,9 +307,31 @@ function shisanshui_player_ui.New( transform )
 		this.chat_text.gameObject:SetActive(false)
 	end
 	
-		function this.OnTimer_Proc()
+	function this.OnTimer_Proc()
 		--this.chat_img.gameObject:SetActive(false)
 		this.chat_text.gameObject:SetActive(false)
+	end
+
+	function this.PlayDaqiang(animationName)
+		if this.daqiang ~= nil then
+
+			if this.daqiang ~= nil then
+			    coroutine.stop(this.daqiang)
+			    this.daqiang = nil
+			end    
+			this.daqiang = coroutine.start(function()
+				this.daqiang.gameObject:SetActive(true)
+				coroutine.wait(2)
+				this.daqiang.gameObject:SetActive(false)
+			end)
+			-- local sketonAnimState = this.daqiang.AnimationState;
+			-- sketonAnimState:ClearTracks()
+			-- sketonAnimState:SetAnimation(0,animationName,false)
+			-- skeletonAnimComponet.playComPleteCallBack = function(trackEntry)
+			-- 	log("打枪完成")
+			-- 	this.daqiang.gameObject:SetActive(false);			
+			-- end
+		end
 	end
 
 	FindChild()

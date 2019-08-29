@@ -223,9 +223,9 @@ function table_component.create()
 			end
 		end
 		--这里增加一个事件，通知UI更新第一墩的积分数据
-		scoreData.index = 1
-		scoreData.totallScore = 0			
-		Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
+		-- scoreData.index = 1
+		-- scoreData.totallScore = 0			
+		-- Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
 		
 		
 		for j,k in ipairs(secondSort) do
@@ -242,9 +242,9 @@ function table_component.create()
 			end
 		end
 		--这里增加一个事件，通知UI更新第二墩的积分数据
-		scoreData.index = 2
-		scoreData.totallScore = 0
-		Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
+		-- scoreData.index = 2
+		-- scoreData.totallScore = 0
+		-- Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
 
 		
 		for j,k in ipairs(threeSort) do
@@ -262,17 +262,17 @@ function table_component.create()
 		end
 		
 		--这里增加一个事件，通知UI更新第三墩的积分数据
-		scoreData.index = 3
-		scoreData.totallScore = 0
-		Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
+		-- scoreData.index = 3
+		-- scoreData.totallScore = 0
+		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result, scoreData)
 		--总分
 		local myPlayer = this.GetPlayer(1)
 		local totallScore = myPlayer.compareResult["nTotallScore"]
 		log("++++++++++++++++++totallScorefasdfsfsf++++++++++++++++++++++++++++="..tostring(totallScore))
 		
-		scoreData.index = 4
-		scoreData.totallScore = totallScore
-		Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
+		-- scoreData.index = 4
+		-- scoreData.totallScore = totallScore
+		-- Notifier.dispatchCmd(cmdName.Three_Group_Compare_result,scoreData)
 		
 		if compareFinshCallback ~= nil then
 			compareFinshCallback()
@@ -293,18 +293,18 @@ function table_component.create()
 	 ]]
 	function this.CompareStart(compareFinshCallback)
 		log("CompareStart......................")
-		for i ,Player in pairs(this.PlayerList) do
-			Player:SetCardMesh() --设置牌的值
-			--为特殊牌型显示一个展示图标
-			if tonumber(Player.compareResult["nSpecialType"]) > 0 then
-				local data = {}
-				data.viewSeat = Player.viewSeat
-				data.position = Utils.WorldPosToScreenPos(Player.playerObj.transform.position)
-				Notifier.dispatchCmd(cmdName.SpecialCardType, data)
-			end			
-		end
+		-- for i ,Player in pairs(this.PlayerList) do
+		-- 	Player:SetCardMesh() --设置牌的值
+		-- 	--为特殊牌型显示一个展示图标
+		-- 	if tonumber(Player.compareResult["nSpecialType"]) > 0 then
+		-- 		local data = {}
+		-- 		data.viewSeat = Player.viewSeat
+		-- 		data.position = Utils.WorldPosToScreenPos(Player.playerObj.transform.position)
+		-- 		Notifier.dispatchCmd(cmdName.SpecialCardType, data)
+		-- 	end			
+		-- end
 
-		coroutine.start(this.CardCompareHandler)
+--		coroutine.start(this.CardCompareHandler)
 	end
 
 

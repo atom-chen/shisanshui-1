@@ -152,6 +152,7 @@ end
 local function OnGameDeal( tbl )
 	shisangshui_ui.SetAllPlayerReady(false)
 	shisangshui_ui.IsShowBeiShuiBtn(false)
+	shisangshui_ui.ShowCard(0)
 
 	shisangshui_ui.DealCard(nil, function()
 		player_component.CardList = tbl["_para"]["stCards"]
@@ -712,6 +713,7 @@ function this.UInit()
 	Notifier.remove(cmdName.F1_GAME_PLAYSTART,OnPlayStart)--打牌开始
 	Notifier.remove(cmdName.F1_GAME_DEAL,OnGameDeal)--发牌
 
+	Notifier.regist(cmdName.CHOOSE_OK,OnChooseOK)
 	Notifier.remove(cmdName.F1_GAME_GIVECARD,OnGiveCard)--摸牌
 	Notifier.remove(cmdName.F1_GAME_PLAY,OnPlayCard)--出牌
 
@@ -834,3 +836,12 @@ function this.getuserimage(tx,itype,iurl)
     end
     http_request_interface.getimage(imageurl,tx.width,tx.height,function (states,tex)tx.mainTexture=tex end)
 end
+
+local function OnChooseOK(tbl)
+		log("摆牌完成")
+		--需要扣牌
+		local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
+		shisangshui_ui.ShowCard(logicSeat)
+
+		--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
+	end
