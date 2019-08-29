@@ -100,14 +100,33 @@ function shisanshui_player_ui.New( transform )
 	    end
 	    this.chat_text_label = child(this.chat_text,"msg")
 
-	    local daqiangObj = child(this.transform,"daqiang")
-	    --if daqiangObj ~= nil then
-			this.daqiang = componentGet(daqiangObj,"SkeletonAnimation")
-			daqiangObj.gameObject:SetActive(false)
-			log("打枪。。。。。。。。。。obj")
-			log(this.daqiang.gameObject.name)
+	    this.daqiangObj = child(this.transform,"daqiang")
+	    --if this.daqiangObj ~= nil then
+		this.daqiang = componentGet(this.daqiangObj,"SkeletonAnimation")
+		this.daqiangObj.gameObject:SetActive(false)
+		log(this.daqiang.gameObject.name)
 			--print(this.daqiang.AnimationState.TimeScale)
 		--end
+	    this.kongObj = child(this.transform,"kong")
+		this.kongObj.gameObject:SetActive(false)
+	    this.jiqiang = child(this.transform,"jiqiang")
+		this.jiqiang.gameObject:SetActive(false)
+
+		this.qiangTbl = {}
+		table.insert(this.qiangTbl, this.daqiangObj)
+		table.insert(this.qiangTbl, this.kongObj)
+		table.insert(this.qiangTbl, this.jiqiang)
+
+		this.firstScore = subComponentGet(this.transform, "bg/firstScore", typeof(UILabel))
+		this.secondScore = subComponentGet(this.transform, "bg/secondScore", typeof(UILabel))
+		this.thirdScore = subComponentGet(this.transform, "bg/thirdScore", typeof(UILabel))
+		this.scoreTbl = {}
+		table.insert(this.scoreTbl, this.firstScore)
+		table.insert(this.scoreTbl, this.secondScore)
+		table.insert(this.scoreTbl, this.thirdScore)
+		for i = 1, 3 do
+			this.scoreTbl[i].gameObject:SetActive(false)
+		end
 		-- this.CardList = {}
 	 --    for i = 0, 13 do
 		-- 	local playerComponent = PlayerCard.New(playerTrans)
@@ -312,25 +331,31 @@ function shisanshui_player_ui.New( transform )
 		this.chat_text.gameObject:SetActive(false)
 	end
 
-	function this.PlayDaqiang(animationName)
-		if this.daqiang ~= nil then
-
-			if this.daqiang ~= nil then
-			    coroutine.stop(this.daqiang)
-			    this.daqiang = nil
-			end    
-			this.daqiang = coroutine.start(function()
-				this.daqiang.gameObject:SetActive(true)
+	function this.PlayDaqiang(animationName, qiangType)
+		local obj = this.qiangTbl[qiangType]
+		if obj ~= nil then
+			-- if this.corout ~= nil then
+			--     coroutine.stop(this.corout)
+			--     this.corout = nil
+			-- end    
+			this.corout = coroutine.start(function()
+				obj.gameObject:SetActive(true)
 				coroutine.wait(2)
-				this.daqiang.gameObject:SetActive(false)
+				obj.gameObject:SetActive(false)
 			end)
-			-- local sketonAnimState = this.daqiang.AnimationState;
-			-- sketonAnimState:ClearTracks()
-			-- sketonAnimState:SetAnimation(0,animationName,false)
-			-- skeletonAnimComponet.playComPleteCallBack = function(trackEntry)
-			-- 	log("打枪完成")
-			-- 	this.daqiang.gameObject:SetActive(false);			
-			-- end
+			--animations_sys.PlayAnimation(this.transform, "daqiang", animationName, 100, 100, false)
+		end
+	end
+
+	function this.ShowDunScore(isShow, index, scoreType)
+		if not isShow then
+			for i = 1, 3 do
+				this.scoreTbl[i].gameObject:SetActive(false)
+			end
+		else
+			local lbl = this.scoreTbl[index]
+			lbl.gameObject:SetActive(true)
+			lbl.text = GStars_Normal_Type_Name[scoreType]
 		end
 	end
 

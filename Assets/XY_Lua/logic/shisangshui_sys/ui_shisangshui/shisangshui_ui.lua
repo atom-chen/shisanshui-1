@@ -958,6 +958,8 @@ end
 
 --nil 全部显示, 0全部隐藏--其他为1家
 function this.ShowCard(index)
+	log("显示手牌,：nil 全部显示, 0全部隐藏--其他为1家:"..tostring(index))
+		log(tostring(this.peopleNum))
 	if this.peopleNum == nil then
 		local roomData = room_data.GetSssRoomDataInfo()
 		this.peopleNum = roomData.people_num
@@ -1039,6 +1041,12 @@ function this.ClearCards()
 	this.cards = {}
 end
 
+function this.HideDunCardType()
+	for i ,Player in ipairs(this.playerList) do
+		Player.ShowDunScore(false)
+	end
+end
+
 --[[--
  * @Description: 牌形比较处理 
  ]]
@@ -1093,6 +1101,7 @@ function this.CardCompareHandler(callback)
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
 							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
 						end
+						Player.ShowDunScore(true, 1, Player.compareResult["nFirstType"])
 						break
 					end
 				end
@@ -1130,6 +1139,7 @@ function this.CardCompareHandler(callback)
 							end
 							this.cards[i][n] = tran
 						end
+						Player.ShowDunScore(true, 2, Player.compareResult["nSecondType"])
 						break
 					end
 				end
@@ -1163,6 +1173,7 @@ function this.CardCompareHandler(callback)
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
 							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
 						end
+						Player.ShowDunScore(true, 3, Player.compareResult["nThirdType"])
 
 						-- Player:PlayerGroupCard("Group3")
 						-- local cards = Player:showThreeCardByType() ----这里在通知UI界面显示相应排型
@@ -1191,13 +1202,13 @@ function this.CardCompareHandler(callback)
 			callback()
 			callback = nil
 		end
-	end)
-	--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
-	--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
-	--播放打枪动画
-	this.PlayGunAnim()
+		--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
+		--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
+		--播放打枪动画
+		this.PlayGunAnim()
 
-	--播放特殊牌形动画		
+		--播放特殊牌形动画	
+	end)	
 end
 
 --播放打枪动画及以后流程
@@ -1209,15 +1220,15 @@ function this.PlayGunAnim()
 			if v.compareResult["stShoots"] ~= nil then
 				local shootList = v.compareResult["stShoots"]--找出每个人的打枪列表
 				if shootList ~= nil and #shootList > 0 then
-					if isPlayed ==false then
-						--log("打枪全屏动画")
-						animations_sys.PlayAnimation(this.transform, "shisanshui_shoot_kuang", "bomb box", 100, 100, false)
-						ui_sound_mgr.PlaySoundClip("dub/daqiang_nv")  ---打枪提示
-						isPlayed = true
-						coroutine.wait(1.0)
-						ui_sound_mgr.PlaySoundClip("audio/daqiangzhunbei")  ---打枪准备
-						coroutine.wait(0.5)
-					end
+					-- if isPlayed ==false then
+					-- 	--log("打枪全屏动画")
+					-- 	animations_sys.PlayAnimation(this.transform, "shisanshui_shoot_kuang", "bomb box", 100, 100, false)
+					-- 	ui_sound_mgr.PlaySoundClip("dub/daqiang_nv")  ---打枪提示
+					-- 	isPlayed = true
+					-- 	coroutine.wait(1.0)
+					-- 	ui_sound_mgr.PlaySoundClip("audio/daqiangzhunbei")  ---打枪准备
+					-- 	coroutine.wait(0.5)
+					-- end
 				
 					for j,k in ipairs(shootList) do
 						local shootTargetViewSeat = room_usersdata_center.GetViewSeatByLogicSeatNum(k)
@@ -1237,10 +1248,9 @@ function this.PlayGunAnim()
 						--animator:SetBool("gun_fire", true)
 
 						local shootedPlayer = this.GetPlayer(shootTargetViewSeat)
-						v.PlayDaqiang("qiang")
-						ui_sound_mgr.PlaySoundClip("audio/daqiang")  --枪声
+						v.PlayDaqiang("qiang", 1)
 						coroutine.wait(0.1)
-						shootedPlayer.PlayDaqiang("kong")
+						shootedPlayer.PlayDaqiang("kong", 2)
 
 						-- coroutine.wait(0.1)
 						-- local anim1 = animations_sys.PlayAnimationByScreenPosition(shisangshui_ui.transform,screenPos.x + tonumber(math.random(-30,30)),screenPos.y + tonumber(math.random(-30,30)),"shisanshui_shoot","Shoot2",100,100,false,callback)
@@ -1253,7 +1263,8 @@ function this.PlayGunAnim()
 						-- animator:SetBool("gun_fire", false)
 						-- this.gun:SetActive(false)
 
-						--coroutine.wait(1)
+						coroutine.wait(0.5)
+						ui_sound_mgr.PlaySoundClip("audio/daqiang")  --枪声
 						-- animations_sys.StopPlayAnimation(anim1)
 						-- animations_sys.StopPlayAnimation(anim2)
 						-- animations_sys.StopPlayAnimation(anim3)

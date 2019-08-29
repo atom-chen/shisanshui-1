@@ -103,6 +103,7 @@ function play_mode_shisangshui.create(levelID)
 	
 	local function OnCompareResult(tbl)
 		log("比牌结果")
+		if true then return end
 		local myLogicSeat = tbl["_src"]
 		local allCompareData = tbl["_para"]["stAllCompareData"]
 		card_data_manage.allShootChairId = tbl["_para"]["nAllShootChairID"] ----全垒打玩家椅子id, 0表示没有全垒打

@@ -207,6 +207,7 @@ local function OnGameRewards( tbl )
 	
 	log(GetTblData(tbl))
 	shisangshui_ui.DisablePlayerLightFrame()--关闭头像的光圈
+	shisangshui_ui.HideDunCardType()
 	--shisangshui_ui.HideOperTips()
 	log("结算。。。。t")
 	if tbl ~= nil and tbl._para ~= nil then
