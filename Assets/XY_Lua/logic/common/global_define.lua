@@ -22,7 +22,7 @@ this.color =
 ENUM_GAME_TYPE = 
 {
 	TYPE_FUZHOU_MJ = 18,
-	TYPE_SHISHANSHUI = 22,
+	TYPE_SHISHANSHUI = 11,
 }
 
 function  this.GetUrlData( )

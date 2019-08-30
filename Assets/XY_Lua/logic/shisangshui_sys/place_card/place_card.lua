@@ -80,7 +80,7 @@ function this.Awake()
   	--this.registerevent() 
 end
 
-function this.Show(cards, recommendCards)
+function this.Show(cards, recommendCards, isSpecial)
 	table.sort(cards, function(a, b) return GetCardValue(a) < GetCardValue(b)
 		end)
 	recommend_cards = recommendCards
@@ -96,10 +96,19 @@ function this.Show(cards, recommendCards)
 		this.gameObject:SetActive(true)
 	end
 	timeSecond = Time.time + 3
+	this.isSpecial = isSpecial
   	--this.addlistener()
 end
 
+function this.ReShow()
+	this.gameObject:SetActive(true)
+end
+
 function this.Hide()
+	this.gameObject:SetActive(false)
+end
+
+function this.DestoryAll()
 	log("摆牌隐藏")
 	selectUpCard = nil
 	cardPlaceTranList = {}
@@ -312,6 +321,12 @@ function this.registerevent()
 	local thirdBtn = child(this.transform, "Panel_TopLeft/thirdBtn")
 	if thirdBtn ~= nil then
 		UIEventListener.Get(thirdBtn.gameObject).onClick = this.BtnClick
+	end
+
+	local SpecialBtn = child(this.transform, "Panel_Bottom/prepare/SpecialBtn")
+	if SpecialBtn ~= nil then
+		UIEventListener.Get(SpecialBtn.gameObject).onClick = this.BtnClick
+		SpecialBtn.gameObject:SetActive(this.isSpecial)
 	end
 end
 	
@@ -854,14 +869,21 @@ function this.BtnClick(obj)
 	--确定
 	elseif obj.name == "OkBtn" then
 		log("------OkBtn click--")
+		if this.isSpecial then
+			shisangshui_play_sys.ChooseCardTypeReq(1)
+			return
+		end
+		shisangshui_play_sys.ChooseCardTypeReq(0)
 		isXiangGong = this.XiangGong()
 		if isXiangGong then
-			local box= message_box.ShowGoldBox("此牌为相公",nil,1,{function ()message_box:Close()end},{"fonts_01"})
+			local box= message_box.ShowGoldBox("此牌为相公",nil,1,{function ()
+					message_box:Close()
+				end},{"fonts_01"})
 			return
 		end
 		local confirm_cards = this.GetConfirmCard()
 		for i, v in ipairs(confirm_cards) do
-			if confirm_cards[i] > 100 then
+			if confirm_cards[i] > 100 then 
 				confirm_cards[i] = confirm_cards[i] - 100 --加一色的ID为大于100，这里发送给服务器得减去100
 				
 			end
@@ -906,6 +928,8 @@ function this.BtnClick(obj)
 		this.DownCardClick(2)	
 	elseif obj.name == "thirdBtn" then
 		this.DownCardClick(1)
+	elseif obj.name == "SpecialBtn" then
+		this.SpecialPlace()
 	end
 end
 
@@ -1433,4 +1457,41 @@ function this.CardUpSort(srcUpCards)
 		end
 	end
 	return sortUpCards
+end
+
+function this.SpecialPlace()
+	this.SpecialPlace1Card(1)
+	this.SpeicalSelect = true
+end
+
+function this.SpecialPlace1Card()
+	---[[
+	local change_cards = Array.Clone(cardList)
+	change_cards = this.FindSameCard(change_cards)
+	for i = 1, #change_cards do
+		local destOjbPos = cardPlaceTranList[i]
+		local cardNum = change_cards[i]
+		if cardTranTbl[cardNum] == nil then
+			log("推荐的牌有一张找不到："..tostring(cardNum))
+			fast_tip.Show("推荐的牌有一张找不到,推荐牌型错误")
+			return
+		end
+		cardTranTbl[cardNum].tran.transform:DOLocalMove(destOjbPos.tran.transform.localPosition, 0.3, true)
+		--cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
+		local parameterData = UIEventListener.Get(cardTranTbl[cardNum].tran.gameObject).parameter
+		parameterData.cardType = CardType[3]
+		parameterData.up_index = i
+		
+		local dun, dun_no =  this.GetDunNo(i)
+		up_placed_cards[dun][dun_no] = parameterData
+		this.UpdateLeftCard(left_card, parameterData.card)
+	end
+	place_index = 14
+	--]]
+	for i = 1, #cardPlaceTranList do
+		cardPlaceTranList[i].blank = true
+	end
+	this.DunTipShow(true)
+	selectDownCards = {}
+	this.PlaceCardFinish()
 end

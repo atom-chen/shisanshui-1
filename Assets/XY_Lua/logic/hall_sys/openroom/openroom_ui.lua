@@ -624,6 +624,13 @@ function openroom_ui:OnCreateBtnClick()
 		-- 临时处理，中途加入
 		tables.bMidJoin = 1
 
+		tables.rounds = 10
+		tables.maxfan = 1
+		tables.buyhorse = false
+		tables.addColor = 0
+		tables.joker = 0
+		tables.leadership = false
+		tables.pnum = 2
 		if self.clubGameGidList and self.cid then
 			tables.cid = self.cid
 			join_room_ctrl.CreateClubRoom(tables)
