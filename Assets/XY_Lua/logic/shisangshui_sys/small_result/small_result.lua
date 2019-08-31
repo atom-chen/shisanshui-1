@@ -41,6 +41,7 @@ function this.Show(result)
 		GameObject.Destroy(this.gameObject)
         this.gameObject=nil
 	end
+	this.RnoInfo()
 	this.LoadAllResult(stRewards)
 	room_data.GetSssRoomDataInfo().cur_playNum = result["curr_ju"] +  1
 	log("+++++++++++++++++++++++++++当前局++++++++++++++++++++"..tostring(room_data.GetSssRoomDataInfo().cur_playNum))
@@ -83,7 +84,15 @@ function this.Hide()
 	end
 end
 
-
+function this.RnoInfo()
+	local roomInfo = room_data.GetSssRoomDataInfo()
+	local rnoLbl = componentGet(child(this.transform,"Panel/Top/rno"), "UILabel")
+	rnoLbl.text = tostring(roomInfo.rno)
+	local roundLbl = componentGet(child(this.transform,"Panel/Top/round"), "UILabel")
+	roundLbl.text = roomInfo.cur_playNum.."/"..roomInfo.play_num
+	local roundLbl = componentGet(child(this.transform,"Panel/Top/nowTime"), "UILabel")
+	roundLbl.text = ""
+end
 
 
 
@@ -116,13 +125,22 @@ function this.LoadAllResult(result)
 					componentGet(cardObj, "BoxCollider").enabled = false
 					end
 				end
+
+				local gunNum = result[i].nShootNums
+				for k = 1, 6 do
+					if k <= gunNum then
+						child(this.transform,"Panel/Self/user/gun"..k).gameObject:SetActive(true)
+					else
+						child(this.transform,"Panel/Self/user/gun"..k).gameObject:SetActive(false)
+					end
+				end
 				
 				local tex_photo= componentGet(child(this.transform, "Panel/Self/user/picFrame"), "UITexture")
                 log("---------------------------------------------------------------------------") 
                 local number= room_usersdata_center.GetLogicSeatByStr(result[i]._chair)
 				local userData =room_usersdata_center.GetUserByLogicSeat(tonumber(number))
 				
-                hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
+--                hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
                 log("---------------------------------------------------------------------------")
 				NameLbl.text = userData.name
 				
@@ -184,11 +202,21 @@ function this.ShowOthersResult(tbSort)
 					componentGet(cardObj,"BoxCollider").enabled = false
 					end
 				end
+
+				local gunNum = tbSort[i].nShootNums
+				for k = 1, 6 do
+					if k <= gunNum then
+						child(this.transform,"Panel/resultList/userGrid/user"..i.."/gun"..k).gameObject:SetActive(true)
+					else
+						child(this.transform,"Panel/resultList/userGrid/user"..i.."/gun"..k).gameObject:SetActive(false)
+					end
+				end
+
 				local tex_photo= componentGet(child(this.transform, "Panel/resultList/userGrid/user"..i.."/picFrame"), "UITexture")
                 log("---------------------------------------------------------------------------") 
                 local number= room_usersdata_center.GetLogicSeatByStr(tbSort[i]._chair)   
 				local userData =room_usersdata_center.GetUserByLogicSeat(tonumber(number))
-                hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
+--                hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(number).headurl)
                 NameLbl.text = userData.name
   
                 log("---------------------------------------------------------------------------")
@@ -229,20 +257,20 @@ function this.ShowOthersResult(tbSort)
 			end
 		end
 		local userNum = #tbSort
-		local selfPos = child(this.transform, "Panel/Self")
-		local other1Pos = child(this.transform, "Panel/resultList")
-			if userNum == 1 then
-				selfPos.transform.localPosition =  Vector3(330,0,0)	
-				other1Pos.transform.localPosition =  Vector3(634,0,0)	
-			elseif userNum == 2 then
-				selfPos.transform.localPosition =  Vector3(178,0,0)
-				other1Pos.transform.localPosition =  Vector3(483,0,0)
-			elseif userNum == 3 then
-				selfPos.transform.localPosition =  Vector3(30,0,0)
-				other1Pos.transform.localPosition =  Vector3(330,0,0)
-			else
-				other1Pos.gameObject:AddComponent(typeof(ScrollViewMoveFixed))
- 			end
+		-- local selfPos = child(this.transform, "Panel/Self")
+		-- local other1Pos = child(this.transform, "Panel/resultList")
+		-- if userNum == 1 then
+		-- 	selfPos.transform.localPosition =  Vector3(330,0,0)	
+		-- 	other1Pos.transform.localPosition =  Vector3(634,0,0)	
+		-- elseif userNum == 2 then
+		-- 	selfPos.transform.localPosition =  Vector3(178,0,0)
+		-- 	other1Pos.transform.localPosition =  Vector3(483,0,0)
+		-- elseif userNum == 3 then
+		-- 	selfPos.transform.localPosition =  Vector3(30,0,0)
+		-- 	other1Pos.transform.localPosition =  Vector3(330,0,0)
+		-- else
+		-- 	other1Pos.gameObject:AddComponent(typeof(ScrollViewMoveFixed))
+		-- end
 end
 
 

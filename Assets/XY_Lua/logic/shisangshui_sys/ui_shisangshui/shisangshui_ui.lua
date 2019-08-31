@@ -284,7 +284,7 @@ local function InitWidgets()
 	end
 	log("PeopleNum:"..tostring(this.peopleNum))
 	this.CardsTbl = {}
-    for i=1,7 do
+    for i=1,6 do
     	local playerTrans = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i)
     	if playerTrans ~= nil then
 			if i < tonumber(this.peopleNum) or i == tonumber(this.peopleNum) then
@@ -1062,6 +1062,7 @@ end
  * @Description: 牌形比较处理 
  ]]
 function this.CardCompareHandler(callback)
+	place_card.DestoryAll()
 	local scoreData = {}    --积分数据表
 
 	local firstSort = {}    --第一次排序表

@@ -101,6 +101,7 @@ MonoBehaviour:
   calculateTangents: 0
   logErrors: 0
   disableRenderingOnOverride: 1
+  renderQueue: 4000
   _animationName: kaishibipai
   loop: 1
   timeScale: 1
