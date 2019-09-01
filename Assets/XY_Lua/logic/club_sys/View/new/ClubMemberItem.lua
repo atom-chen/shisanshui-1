@@ -113,12 +113,12 @@ end
 
 function ClubMemberItem:OnSureClick()
 	ui_sound_mgr.PlayButtonClick()
-	model_manager:GetModel("ClubModel"):ReqDealClubApply(self.info.cpid, 1)
+	ClubModel:ReqDealClubApply(self.info.cpid, 1)
 end
 
 function ClubMemberItem:OnRefuseClick()
 	ui_sound_mgr.PlayButtonClick()
-	model_manager:GetModel("ClubModel"):ReqDealClubApply(self.info.cpid, 0)
+	ClubModel:ReqDealClubApply(self.info.cpid, 0)
 end
 
 

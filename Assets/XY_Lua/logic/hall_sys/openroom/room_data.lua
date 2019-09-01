@@ -21,6 +21,12 @@ PlayNum = {
 	[3] = 30,
 	[4] = 40
 }
+--局数
+placeCardTime = {
+	[1] = 60,
+	[2] = 120, 
+	[3] = 180
+}
 --人数
 PeopleNum={
 	[1] = 2,
@@ -49,13 +55,20 @@ MaxMultiple={
 	[5] = 5
 }
 
+BuyHorse = {
+	[1] = 0,
+	[2] = 5,
+	[3] = 10,
+	[4] = 14,
+}
+
 --十三水房间配置数据
 local sssroomDataInfo = 
 {
 	--加一色做庄
 	isZhuang=false,
 	--买码
-	isChip=false,
+	nBuyCode=false,
 	--总局数
 	play_num = PlayNum[1],
 	--当前局
@@ -76,7 +89,9 @@ local sssroomDataInfo =
 	
 	ready_time = 0,
 	place_card_time = 0,--截止时间
-	placeCardTime = 180
+	placeCardTime = 180,
+	nChooseCardTypeTimeOut = 60,
+	nReadyTimeOut = 30,
 }
 
 
@@ -130,7 +145,7 @@ function this.ReadSssConfData()
 					end
 				end
 			else
-				sssroomDataInfo.isChip =false
+				sssroomDataInfo.nBuyCode =false
 				sssroomDataInfo.isZhuang =false
 				sssroomDataInfo.add_card =0
 				sssroomDataInfo.add_ghost =0

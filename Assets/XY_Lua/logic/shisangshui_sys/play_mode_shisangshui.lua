@@ -159,8 +159,8 @@ function play_mode_shisangshui.create(levelID)
 		--需要扣牌
 		tableComponent.ChooseOKCard(tbl)
 
-		local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
-		shisangshui_ui.ShowCard(logicSeat)
+		local viewSeat = gvbl(tbl["_src"])
+		shisangshui_ui.ShowCard(viewSeat)
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
 	end
 

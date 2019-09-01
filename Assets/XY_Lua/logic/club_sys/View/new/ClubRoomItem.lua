@@ -40,7 +40,7 @@ function ClubRoomItem:UpdateView()
 	self.numLabel.text = (self.info.cur_pnum or 0) .. "/" .. (self.info.cfg.pnum or 0) .. "人"
 
 	self.selfIconGo:SetActive(self.info.uid == self.model.selfPlayerId)
-	self.icon.spriteName = GameUtil.GetGameIcon(self.info.gid)
+--	self.icon.spriteName = GameUtil.GetGameIcon(self.info.gid)--屏蔽图标
 end
 
 function ClubRoomItem:OnClick()

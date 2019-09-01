@@ -72,8 +72,8 @@ local userInfo =
 local srvUrlType = NetWorkManage.Instance.ServerUrlType
 
 if srvUrlType == HTTPNETTYPE.INTERNET_TEST then 		--外网测试
-	this.url = "wss://huanyingwl.com/wss?uid=%s&token=%s"
-	--this.url = "ws://huanyingwl.com:8001?uid=%s&token=%s"
+	--this.url = "wss://huanyingwl.com/wss?uid=%s&token=%s"
+	this.url = "ws://huanyingwl.com:8001?uid=%s&token=%s"
 	this.shareUrl = "ws://huanyingwl.com"
 elseif srvUrlType == HTTPNETTYPE.LOCAL_FZMJ_TEST then 	--福州麻将内网
 	this.url = "ws://192.168.2.202:8001?uid=%s&token=%s"

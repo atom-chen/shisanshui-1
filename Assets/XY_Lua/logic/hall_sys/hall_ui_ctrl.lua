@@ -29,7 +29,6 @@ function this.HandleLevelLoadComplete()
 	log("gs_mgr.state_main_hall-------------------------------")
   	gs_mgr.ChangeState(gs_mgr.state_main_hall)
   	map_controller.SetIsLoadingMap(false)
-    join_room_ui.Show()
 
 
     --查询游戏重连状态

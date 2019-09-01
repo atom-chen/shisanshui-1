@@ -297,9 +297,17 @@ function ClubInfoView:OnPositionSelected(id)
 end
 
 function ClubInfoView:OnExitBtnClick()
-	MessageBox.ShowYesNoBox(LanguageMgr.GetWord(10043), function () 
-			self.model:ReqQuitClub(self.clubInfo.cid)
-		end)
+	self.model:ReqQuitClub(self.clubInfo.cid)
+	-- message_box.ShowGoldBox("您是否确认要退出俱乐部？",function()
+	-- 	self.model:ReqQuitClub(self.clubInfo.cid)
+	-- end,2,{function ()
+	-- 				message_box:Close()
+	-- 			end},{"fonts_01"})
+
+	-- MessageBox.ShowYesNoBox("您是否确认要退出俱乐部？",--LanguageMgr.GetWord(10043), 
+	-- 	function () 
+	-- 		self.model:ReqQuitClub(self.clubInfo.cid)
+	-- 	end)
 end
 
 

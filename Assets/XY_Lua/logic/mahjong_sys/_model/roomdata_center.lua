@@ -212,7 +212,7 @@ function this.SetShiSangShuiRoomCfgInfo(cfgData)
 	room_data.GetSssRoomDataInfo().rno = param.rno
 	room_data.GetSssRoomDataInfo().uid = param.owner_uid
 	room_data.GetSssRoomDataInfo().isZhuang = param["GameSetting"]["bSupportWaterBanker"]
-	room_data.GetSssRoomDataInfo().isChip = param["GameSetting"]["bSupportBuyCode"]
+	room_data.GetSssRoomDataInfo().nBuyCode = param["GameSetting"]["bSupportBuyCode"]
 	room_data.GetSssRoomDataInfo().add_card =  param["GameSetting"]["nSupportAddColor"]
 	room_data.GetSssRoomDataInfo().add_ghost = param["GameSetting"]["bSupportGhostCard"]
 	room_data.GetSssRoomDataInfo().max_multiple = param["GameSetting"]["nSupportMaxMult"]

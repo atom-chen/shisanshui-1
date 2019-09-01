@@ -195,19 +195,19 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 532
-  mHeight: 36
+  mWidth: 598
+  mHeight: 40
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 14.777778
+  aspectRatio: 14.95
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 114000013685555478, guid: 0551c895b2a94ad439811bd3bc6fcd97, type: 2}
+  mFont: {fileID: 11458222, guid: 552438b608bb5eb4b90e6ac26e52dad6, type: 2}
   mText: "\u6B63\u5728\u4E3A\u60A8\u9886\u53D6\u6551\u6D4E\u91D1\uFF0C\u8BF7\u7A0D\u540E
     ......"
-  mFontSize: 36
+  mFontSize: 40
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -308,7 +308,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 14.473684
-  mType: 1
+  mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114522289374169472, guid: 0249b4e53ca413742a23e06aed2dd180, type: 2}
-  mSpriteName: common_23
+  mAtlas: {fileID: 114000010079483150, guid: d50135e5e1a9e4d46905e60ee873cef5, type: 2}
+  mSpriteName: "\u5171\u7528-\u5185\u90E8\u80CC\u666F\u6837\u5F0F2"
   mFillCenter: 1
 --- !u!114 &114000011507017204
 MonoBehaviour:
@@ -405,7 +405,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3003
+  startingRenderQueue: 3000
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -483,21 +483,21 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0.99215686, g: 0.96862745, b: 0.42745098, a: 1}
+  mColor: {r: 0.8509804, g: 0.6862745, b: 0.42745098, a: 1}
   mPivot: 4
-  mWidth: 538
-  mHeight: 36
+  mWidth: 598
+  mHeight: 40
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 14.944445
+  aspectRatio: 14.95
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11458222, guid: 552438b608bb5eb4b90e6ac26e52dad6, type: 2}
   mText: "\u6B63\u5728\u4E3A\u60A8\u9886\u53D6\u6551\u6D4E\u91D1\uFF0C\u8BF7\u7A0D\u540E
     ......"
-  mFontSize: 36
+  mFontSize: 40
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1

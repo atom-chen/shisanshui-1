@@ -282,7 +282,7 @@ end
 
 function ClubMembersView:SetManagerAction(info)
 	ui_sound_mgr.PlayButtonClick()
-	local msgBox = MessageBox.ShowYesNoBox(LanguageMgr.GetWord(10046, info.nickname),
+	local msgBox = MessageBox.ShowYesNoBox("文字丢失",--LanguageMgr.GetWord(10046, info.nickname),
 	function()
 		self.model:ReqSetManager(self.cid, info.uid, 0)
 	end)

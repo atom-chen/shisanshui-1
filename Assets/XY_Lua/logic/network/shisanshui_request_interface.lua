@@ -15,7 +15,9 @@ function this.EnterGameReq(urlValue, gameData, dst)
   SocketManager:onGameOpenCallBack(function (  )
     log("连上服务器返回")
     log("onGameOpenCallBack-------- EnterGameReq")
+    log(GetTblData(gameData))
     local pkgBuffer = shisanshui_request_protocol.EnterGameReq(urlValue, gameData, dst);
+    log(pkgBuffer)
     network_mgr.sendPkgNoWaitForRsp(net_cmd.CMD_LOGIN_HALL, pkgBuffer)
   end)  
 

@@ -67,6 +67,11 @@ local function Onbtn_readyClick()
 	]]
 end
 
+local function Onbtn_rePlaceClick()
+	this.ShowCard(1, false)
+	place_card.gameObject:SetActive(true)
+end
+
 local function Onbtn_voiceClick()
 	log("Onbtn_voiceClick")
 end
@@ -139,7 +144,7 @@ local gameDataInfo = {}
 
 local function InitVoteView()
 	this.voteView = vote_quit_view.New()
-	this.voteView:SetTransform(child(widgetTbl.panel, "Anchor_TopRight/voteView"))
+	this.voteView:SetTransform(child(widgetTbl.panel, "Anchor_TopLeft/voteView"))
 	this.voteView:Hide()
 end
 
@@ -149,12 +154,12 @@ end
 local function InitWidgets()
 	widgetTbl.panel = child(this.transform, "Panel")
 	--返回大厅按钮
-	widgetTbl.btn_exit = child(widgetTbl.panel, "Anchor_TopLeft/exit")
+	widgetTbl.btn_exit = child(widgetTbl.panel, "Anchor_TopLeft/bg/exit")
 	if widgetTbl.btn_exit~=nil then
        addClickCallbackSelf(widgetTbl.btn_exit.gameObject,Onbtn_exitClick,this)
     end
     --更多按钮
-	widgetTbl.btn_more = child(widgetTbl.panel, "Anchor_TopRight/more")
+	widgetTbl.btn_more = child(widgetTbl.panel, "Anchor_TopLeft/more")
 	if widgetTbl.btn_more~=nil then
        addClickCallbackSelf(widgetTbl.btn_more.gameObject,Onbtn_moreClick,this)
        widgetTbl.btn_more.gameObject:SetActive(true)
@@ -166,18 +171,18 @@ local function InitWidgets()
        widgetTbl.btn_waring.gameObject:SetActive(true)
     end
     --更多面板
-    widgetTbl.panel_more = child(widgetTbl.panel, "Anchor_TopRight/bg")
+    widgetTbl.panel_more = child(widgetTbl.panel, "Anchor_TopLeft/bg")
     if widgetTbl.panel_more~=nil then
        widgetTbl.panel_more.gameObject:SetActive(false)
     end
     --设置按钮
-     widgetTbl.setting = child(widgetTbl.panel, "Anchor_TopRight/bg/setting")
+     widgetTbl.setting = child(widgetTbl.panel, "Anchor_TopLeft/bg/setting")
     if widgetTbl.setting~=nil then
     	addClickCallbackSelf(widgetTbl.setting.gameObject,OnBtn_SettingOnClick,this)
        widgetTbl.setting.gameObject:SetActive(true)
     end
     --战绩按钮
-      widgetTbl.result = child(widgetTbl.panel, "Anchor_TopRight/bg/result")
+      widgetTbl.result = child(widgetTbl.panel, "Anchor_TopLeft/bg/result")
     if widgetTbl.result~=nil then
     	addClickCallbackSelf(widgetTbl.result.gameObject,OnBtn_AchievementOnClick,this)
        widgetTbl.result.gameObject:SetActive(true)
@@ -261,6 +266,13 @@ local function InitWidgets()
      widgetTbl.allScore = child(widgetTbl.panel,"Anchor_Bottom/allScore")
     if widgetTbl.allScore ~= nil then
     	widgetTbl.allScore.gameObject:SetActive(false)
+    end
+
+
+	widgetTbl.btn_rePlace = child(widgetTbl.panel, "Anchor_Center/readyBtns/rePlaceBtn")
+	if widgetTbl.btn_rePlace~=nil then
+       addClickCallbackSelf(widgetTbl.btn_rePlace.gameObject,Onbtn_rePlaceClick,this)
+       widgetTbl.btn_rePlace.gameObject:SetActive(false)
     end
 
     this.xipai = componentGet(child(widgetTbl.panel,"Anchor_Center/xipai"),"UISpriteAnimation")
@@ -434,11 +446,11 @@ end
 
 function this.Start()
 	gameDataInfo = room_data.GetSssRoomDataInfo()
-	if gameDataInfo.isChip then
-		child(this.transform, "Panel/Anchor_TopRight/mapai").gameObject:SetActive(true)
-	else
-		child(this.transform, "Panel/Anchor_TopRight/mapai").gameObject:SetActive(false)
-	end
+	-- if gameDataInfo.nBuyCode then
+	-- 	child(this.transform, "Panel/Anchor_TopLeft/mapai").gameObject:SetActive(true)
+	-- else
+	-- 	child(this.transform, "Panel/Anchor_TopLeft/mapai").gameObject:SetActive(false)
+	-- end
 end
 
 function this.OnDestroy()
@@ -456,6 +468,10 @@ end
 --éšè—å‡†å¤‡æŒ‰é’®
 function  this.HideReadyBtn()
 	widgetTbl.btn_ready.gameObject:SetActive(false)
+end
+
+function  this.SetRePlaceBtnState(state)
+	widgetTbl.btn_rePlace.gameObject:SetActive(state)
 end
 
 
@@ -490,7 +506,7 @@ function  this.SetGameInfo(wanfaStr,RoomNum)
 	end
 --	    0x4F,   --小鬼  79
 --    0x5F,   --大鬼	95
-	if configData.isChip == true then
+	if configData.nBuyCode == true then
 		configStr = configStr.."买码;"
 	else
 		configStr = configStr.."无码;"
@@ -660,50 +676,29 @@ function this.SetGruopScord(index, score ,scoreExt, allScore)
 	local  addExtStr = ""
 	local  positiveColor1 = ""
 	local  positiveColor2 = ""
-	if tonumber(score) > 0 then 
-		addStr = "+" 
-		positiveColor1 = "[ffdd0a]"
-	else
-		positiveColor1 = "[43ccf0]"
-	end
-	if tonumber(scoreExt) > 0 then 
-		addExtStr = "+" 
-		positiveColor2 = "[ffdd0a]"
-	else
-		positiveColor2 = "[43ccf0]"
-	end
 	if tonumber(index) == 1 then
-		str = "[a6f7b2]".."首墩 ".."[-]"..tostring(positiveColor1)..tostring(addStr)..tostring(score).."[-]"..tostring(positiveColor2).." ("..tostring(addExtStr)..tostring(scoreExt)..")".."[-]"
+		str = "首墩 "..tostring(addStr)..tostring(score).." ("..tostring(addExtStr)..tostring(scoreExt)..")"
 		--subComponentGet
 		local labelWidget  = child(widgetTbl.firstGroupScore,"Label")
 		local label = componentGet(labelWidget,"UILabel")
 		label.text = str
 		widgetTbl.firstGroupScore.gameObject:SetActive(true)
 	elseif tonumber(index) == 2 then
-		str = "[a6f7b2]".."中墩 ".."[-]"..tostring(positiveColor1)..tostring(addStr)..tostring(score).."[-]"..tostring(positiveColor2).." ("..tostring(addExtStr)..tostring(scoreExt)..")".."[-]"
+		str = "中墩 "..tostring(addStr)..tostring(score).." ("..tostring(addExtStr)..tostring(scoreExt)..")"
 		--subComponentGet
 		local labelWidget  = child(widgetTbl.secondGroupScore,"Label")
 		local label = componentGet(labelWidget,"UILabel")
 		label.text = str
 		widgetTbl.secondGroupScore.gameObject:SetActive(true)
 	elseif tonumber(index) == 3 then
-		str = "[a6f7b2]".."尾墩 ".."[-]"..tostring(positiveColor1)..tostring(addStr)..tostring(score).."[-]"..tostring(positiveColor2).." ("..tostring(addExtStr)..tostring(scoreExt)..")".."[-]"
+		str = "尾墩 "..tostring(addStr)..tostring(score).." ("..tostring(addExtStr)..tostring(scoreExt)..")"
 		--subComponentGet
 		local labelWidget  = child(widgetTbl.threeGroupScore,"Label")
 		local label = componentGet(labelWidget,"UILabel")
 		widgetTbl.threeGroupScore.gameObject:SetActive(true)
 		label.text = str
 	elseif tonumber(index) == 4 then
-		
-		if allScore ~= nil then
-			if tonumber(allScore) > 0 then
-				addStr = "+" 
-				positiveColor1 = "[ffdd0a]"
-			else
-				positiveColor1 = "[43ccf0]"
-			end
-		end
-		str = "[ffdd0a]".."总分 ".."[-]"..tostring(positiveColor1)..tostring(allScore).."[-]"
+		str = tostring(allScore)
 		--subComponentGet
 		local labelWidget  = child(widgetTbl.allScore,"Label")
 		local label = componentGet(labelWidget,"UILabel")
@@ -966,7 +961,7 @@ function this.InitCards()
 end
 
 --nil 全部显示, 0全部隐藏--其他为1家
-function this.ShowCard(index)
+function this.ShowCard(index, state)
 	log("显示手牌,：nil 全部显示, 0全部隐藏--其他为1家:"..tostring(index))
 		log(tostring(this.peopleNum))
 	if this.peopleNum == nil then
@@ -988,8 +983,15 @@ function this.ShowCard(index)
 			end
 		end
 	else
+		local btnState = false
+		if state == nil or state == true then
+			btnState = true
+		end
+		if index == 1 then
+			this.SetRePlaceBtnState(btnState)
+		end
 		for j = 1, 13 do
-			this.playerList[index].cardObjs[j].gameObject:SetActive(true)
+			this.playerList[index].cardObjs[j].gameObject:SetActive(btnState)
 		end
 	end
 end
@@ -1063,6 +1065,7 @@ end
  ]]
 function this.CardCompareHandler(callback)
 	place_card.DestoryAll()
+	this.SetRePlaceBtnState(false)
 	local scoreData = {}    --积分数据表
 
 	local firstSort = {}    --第一次排序表
@@ -1105,9 +1108,9 @@ function this.CardCompareHandler(callback)
 							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							end
+							-- if card == 40 then
+							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+							-- end
 							this.cards[i][n] = tran
 							--Player:PlayerGroupCard("Group1")
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
@@ -1146,9 +1149,9 @@ function this.CardCompareHandler(callback)
 							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							end
+							-- if card == 40 then
+							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+							-- end
 							this.cards[i][n] = tran
 						end
 						Player.ShowDunScore(true, 2, Player.compareResult["nSecondType"])
@@ -1177,9 +1180,9 @@ function this.CardCompareHandler(callback)
 							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
 							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							if card == 40 then
-								componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							end
+							-- if card == 40 then
+							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+							-- end
 							this.cards[i][n] = tran
 							--Player:PlayerGroupCard("Group1")
 							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
@@ -1216,6 +1219,7 @@ function this.CardCompareHandler(callback)
 		end
 		--摆牌结束，通知UI播入打枪动画跟特殊牌型动画
 		--Notifier.dispatchCmd(cmdName.ShootingPlayerList,this.playerList)
+		coroutine.wait(1)
 		--播放打枪动画
 		this.PlayGunAnim()
 

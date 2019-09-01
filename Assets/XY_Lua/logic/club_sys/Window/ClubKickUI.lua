@@ -10,7 +10,7 @@ function ClubKickUI:ctor()
 end
 
 function ClubKickUI:OnInit()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.reasonConfig = global_define.ClubKickReasonConfig
 	self:InitView()
 end
@@ -47,7 +47,7 @@ function ClubKickUI:InitView()
 end
 
 function ClubKickUI:UpdateView()
-	self.lbl_title.text = LanguageMgr.GetWord(10048,self.info.nickname)
+	self.lbl_title.text = "文字丢失"--LanguageMgr.GetWord(10048,self.info.nickname)
 	self.lbl_title.color = Color.New(1,1,1,1)
 end
 
@@ -57,6 +57,10 @@ function ClubKickUI:ToggleSelect(obj)
 end
 
 function ClubKickUI:CertainClick()
+	log("ClubKickUI:CertainClick")
+	log(self.cid)
+	log(self.info)
+	log(self.reasonType)
 	if self.cid ~= nil and self.info ~= nil and self.reasonType ~= 0 then
 		self.model:ReqKickClubUser(self.cid,self.info.uid,self.reasonType)
 		UIManager:CloseUiForms("ClubKickUI")

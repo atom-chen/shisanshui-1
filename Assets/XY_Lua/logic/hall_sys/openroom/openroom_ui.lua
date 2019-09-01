@@ -613,7 +613,8 @@ function openroom_ui:OnCreateBtnClick()
 	ui_sound_mgr.PlayButtonClick()
 	if self.curGameGid and self.curGameGid~=0 then
 	    local tables,newPanelTable = self.content:GetSelect() 
-	    tables.gid = self.curGameGid
+	    --tables.gid = self.curGameGid
+	    tables.gid = 11
 	    tables.ishide = self:GetHideRidValue()
 	    tables.autocreate = self:GetAutoOpenValue()
 	    -- 待整理

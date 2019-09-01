@@ -442,7 +442,7 @@ function this.LoadAllCard(cards)
 		componentGet(child(card_data.tran.transform, "num"),"UISprite").depth = i * 2 + 5
 		componentGet(child(card_data.tran.transform, "color1"),"UISprite").depth = i * 2 + 5
 		componentGet(child(card_data.tran.transform, "color2"),"UISprite").depth = i * 2 + 5
-		if room_data.GetSssRoomDataInfo().isChip == true and card == 40 then
+		if room_data.GetSssRoomDataInfo().nBuyCode == true and card == 40 then
 			componentGet(child(card_data.tran.transform, "ma"),"UISprite").depth = i * 2 + 4
 		end
 		--UIEventListener.Get(card_data.tran.gameObject).onClick = this.CardClick
@@ -514,9 +514,9 @@ function this.CardClick(obj, fast)
 				local selectCardData = UIEventListener.Get(selectDownCards[1].tran.gameObject).parameter
 				local pos = selectCardData.tran.transform.localPosition
 				obj.transform:DOLocalMove(Vector3.New(pos.x, 0, pos.z), animationTime, true)
-				obj.transform:DOScale(Vector3.New(1, 1, 1), animationTime)
+--				obj.transform:DOScale(Vector3.New(1, 1, 1), animationTime)
 				selectCardData.tran.transform:DOLocalMove(obj.transform.localPosition, animationTime, true)
-				selectCardData.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationTime)
+--				selectCardData.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationTime)
 				
 				local _, dun, dun_no = this.GetDun(cardData.up_index)
 				up_placed_cards[dun][dun_no] = selectCardData
@@ -582,21 +582,22 @@ function this.CardClick(obj, fast)
 end
 
 function this.RankDownCard()
-
 	local downCard = {}
 	for i = 1, 13 do
 		local obj = cardGrid.transform:FindChild(tostring(i))
 		local oneCard = UIEventListener.Get(obj.gameObject).parameter
-		if oneCard.cardType == CardType[1] then
+		if oneCard.cardType == CardType[1] or oneCard.cardType == CardType[2] then
 			table.insert(downCard, oneCard)
 		end
 	end
+	log("重新排牌："..#downCard)
 	local num = math.floor(#downCard / 2)
 	for i = 1, #downCard do
 		local v = downCard[i]
 		local pos = Vector3.New(-93 * num + i * 93, 0, 0)
 		v.tran.transform:DOLocalMove(pos, animationTime, true)
 	end
+	selectDownCards = {}
 end
 
 function this.GetDownCardKey(cardData)
@@ -666,7 +667,7 @@ function this.CardBgClick(obj)
 		local cardData = UIEventListener.Get(v.tran.gameObject).parameter
 		local cardNum = cardData.card
 		v.tran.transform:DOLocalMove(cardPlaceTranList[place_up_index].tran.transform.localPosition, animationTime, true)
-		v.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationSmallTime)
+--		v.tran.transform:DOScale(Vector3.New(0.9, 0.9, 0.9), animationSmallTime)
 		cardData.cardType = CardType[3]
 		cardData.up_index = place_up_index
 		UIEventListener.Get(v.tran.gameObject).parameter = cardData
@@ -1099,7 +1100,7 @@ function this.DownCardClick(dun)
 	log("this.DownCardClick: "..#dun_cards)
 	for i, v in pairs(dun_cards) do
 		v.tran.transform:DOLocalMove(v.pos, 0.3, true)
-		v.tran.transform:DOScale(Vector3.New(1, 1, 1), 0.3)
+--		v.tran.transform:DOScale(Vector3.New(1, 1, 1), 0.3)
 		v.cardType = CardType[1]
 		
 		left_card[#left_card + 1] = v.card
@@ -1116,7 +1117,7 @@ function this.DownCardClick(dun)
 	dunTipSpt[dun].gameObject:SetActive(true)	
 	this.TipsBtnShow(left_card)
 	coroutine.start(function ()
-		coroutine.wait(0.31)
+		coroutine.wait(0.41)
 		this.RankDownCard()
 		--cardGrid:Reposition()
 	end

@@ -73,14 +73,19 @@ function this.JoinRoomByRno(rno)
                     k.nBuyCode = dataTbl.data.cfg.buyhorse
                     k.nWaterBanker = dataTbl.data.cfg.leadership
                     k.nMaxMult = dataTbl.data.cfg.maxfan
+                    k.nChooseCardTypeTimeOut = dataTbl.data.cfg.nChooseCardTypeTimeOut
+                    k.nReadyTimeOut = dataTbl.data.cfg.nReadyTimeOut
+                    log(GetTblData(k))
 					
 					room_data.GetSssRoomDataInfo().isZhuang = k.nWaterBanker
-					room_data.GetSssRoomDataInfo().isChip = k.nBuyCode
+					room_data.GetSssRoomDataInfo().nBuyCode = k.nBuyCode
 					room_data.GetSssRoomDataInfo().play_num = k.rounds
 					room_data.GetSssRoomDataInfo().people_num = k.pnum
 					room_data.GetSssRoomDataInfo().add_card = k.nColorAdd
 					room_data.GetSssRoomDataInfo().add_ghost = k.nGhostAdd
 					room_data.GetSssRoomDataInfo().max_multiple = k.nMaxMult
+                    room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut = k.nChooseCardTypeTimeOut
+                    room_data.GetSssRoomDataInfo().nReadyTimeOut = k.nReadyTimeOut
 					
                     card_data_manage.roomMasterUid = dataTbl.data.uid
                     shisanshui_request_interface.EnterGameReq(messagedefine.chessPath, k)
@@ -132,7 +137,7 @@ function this.CreateClubRoom(data)
 --    UI_Manager:Instance():ShowUiForms("waiting_ui")
     --http_request_interface.createClubRoom(data, function (str)
     local param = {}
-    param.param = data
+    param = data
     http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubCreateClubRoom, param, function(dataTbl)
         --waiting_ui.Hide()
         -- local s = string.gsub(str, "\\/", "/")
@@ -144,7 +149,8 @@ function this.CreateClubRoom(data)
             --     model_manager:GetModel("ClubModel"):CheckMsgRet(dataTbl)
             -- else            
                 --设置当前的gameid
-            data_center.SetCurGameID(dataTbl["roominfo"]["gid"])
+            --data_center.SetCurGameID(dataTbl["data"]["gid"])
+ --           data_center.SetCurGameID(ENUM_GAME_TYPE.TYPE_SHISHANSHUI)
             --根据_dsts来确定是否重连，如果有就重连，木有就不重连
             if dataTbl._dst ~= nil and dataTbl._dst._gid ~= nil then  
                  --重连必须重以_dsts里面的_gid为准。目前暂时只取第一个，其它忽略
@@ -152,11 +158,11 @@ function this.CreateClubRoom(data)
                 this.ReEnterRoomByQuery(dataTbl._dst)            
             else
                 ----十三水水庄玩法直接enter
-                --if dataTbl["roominfo"]["gid"] ~= nil and dataTbl["roominfo"]["gid"] == ENUM_GAME_TYPE.TYPE_ShuiZhuang_SSS then
-                --  this.JoinRoomByRno(dataTbl.roominfo.rno)
-                --else
-                    this.CreateRoomHandler(dataTbl)
-                --end                 
+                --if dataTbl["data"]["gid"] ~= nil and dataTbl["gid"] == ENUM_GAME_TYPE.TYPE_SHISHANSHUI then
+                    this.JoinRoomByRno(dataTbl.data.rno)
+                -- else
+                --     this.CreateRoomHandler(dataTbl)
+                -- end                 
             end
         end        
     end)     

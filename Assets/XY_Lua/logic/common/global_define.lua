@@ -25,6 +25,13 @@ ENUM_GAME_TYPE =
 	TYPE_SHISHANSHUI = 11,
 }
 
+this.ClubKickReasonConfig = {
+  [1] = "牌品极差，人不诚信",
+  [2] = "脏话连篇，辱骂他人",
+  [3] = "频繁广告，拉人进群",
+  [4] = "其他",
+}
+
 function  this.GetUrlData( )
    local t=http_request_interface.GetTable()
    local url= global_define.httpactivity.."?session_key="..t.session_key.."&siteid="..t.siteid.."&version="..t.version

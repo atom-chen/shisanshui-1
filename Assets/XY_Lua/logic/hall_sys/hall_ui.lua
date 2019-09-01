@@ -38,13 +38,11 @@
   log("hall_ui Awake")  
   this.registerevent()  
   this.InitInfo()
-  this.checkIdCard()
   this.checkInviteroom()
   this.InitSettingUI()
   hall_data.register()
   hall_data.Init() 
   this.LoadWebPage()
-  join_room_ui.Show()
 end
 
 function this.checkInviteroom()
@@ -62,25 +60,6 @@ function this.checkInviteroom()
     YX_APIManage.Instance:deleteFile("temp.txt")
   end
 end
-
-function this.checkIdCard()
-    http_request_interface.checkIdCard(nil,function (code,m,str)
-        local s=string.gsub(str,"\\/","/")  
-        local t=ParseJsonStr(s) 
-        local btn_sort = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_renzheng")--认证
-       -- log(t.user.id_no.."dsada1d231232132112321431")
-        if tonumber(t.ret)==0 then 
-            if btn_sort~=nil then
-                btn_sort.gameObject:SetActive(false)
-            end
-        else
-            if btn_sort~=nil then
-                btn_sort.gameObject:SetActive(true)
-            end
-        end
-    end)
-end
-
 
 function this.InitSettingUI()
   ui_sound_mgr.SceneLoadFinish() 
@@ -132,11 +111,6 @@ function this.ui_Top()
      addClickCallbackSelf(btn_s.gameObject,this.shop,this)
    end
 
-   this.btn_sort = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_renzheng")--认证
-   if this.btn_sort~=nil then
-     addClickCallbackSelf(this.btn_sort.gameObject,this.certification,this)
-   end
-
    local btn_sort = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_mail")--邮件
    if btn_sort~=nil then
      addClickCallbackSelf(btn_sort.gameObject,this.announcement,this)
@@ -157,7 +131,7 @@ function this.ui_Top()
    end 
 
 
-   local btn_club = child(this.transform, "Panel_BottomRight/btn_club")--
+   local btn_club = child(this.transform, "Panel_Middle/btn_club")--
    if btn_club~=nil then
      addClickCallbackSelf(btn_club.gameObject,this.OpenClubUI,this)
    end 
@@ -171,24 +145,16 @@ function this.ui_Top()
 --Panel_Middle
 function this.ui_Middle()
 
-  --  local btn_join = child(this.transform, "Panel_Middle/btn_join")--房间1
-  --  if btn_join~=nil then 
-  --    addClickCallbackSelf(btn_join.gameObject, this.joinroom, this)
-  --  end
+   local btn_join = child(this.transform, "Panel_Middle/btn_join")--房间1
+   if btn_join~=nil then 
+     addClickCallbackSelf(btn_join.gameObject, this.joinroom, this)
+   end
 
-  --  local btn_open = child(this.transform, "Panel_Middle/btn_open")--房间2
-  --  if btn_open~=nil then
-  --    addClickCallbackSelf(btn_open.gameObject, this.OpenRoomClick, this)
-  --  end
+   local btn_open = child(this.transform, "Panel_Middle/btn_open")--房间2
+   if btn_open~=nil then
+     addClickCallbackSelf(btn_open.gameObject, this.OpenRoomClick, this)
+   end
    
-  --  local animation1=child(btn_join.transform,"tex_bg") 
-  --  if animation1~=nil then 
-  --   componentGet(animation1.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
-  -- end
-  -- local animation2=child(btn_open.transform,"tex_bg") 
-  -- if animation2~=nil then 
-  --   componentGet(animation2.gameObject,"SkeletonAnimation"):ChangeQueue(3002)
-  -- end
   -- local animation4=child(btn_join.transform,"hudie_2") 
   -- if animation4~=nil then 
   --   local a=componentGet(animation4.gameObject,"SkeletonAnimation")
@@ -474,11 +440,6 @@ end
 function this.joinroom()
   ui_sound_mgr.PlaySoundClip("common/audio_button_click")
   join_room_ui.Show()
-end
-
-function this.certification()
-  ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-  certification_ui.Show()
 end
 
 --------------------------------------更新用户信息-----------------------------------------

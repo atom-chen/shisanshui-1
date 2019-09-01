@@ -110,7 +110,7 @@ function this.LoadAllCard(cards, nSpecialType, dun)
 		componentGet(child(cardTranTbl[v].transform, "num"),"UISprite").depth = i * 2 + 5
 		componentGet(child(cardTranTbl[v].transform, "color1"),"UISprite").depth = i * 2 + 5
 		componentGet(child(cardTranTbl[v].transform, "color2"),"UISprite").depth = i * 2 + 5
-		if room_data.GetSssRoomDataInfo().isChip == true and card == 40 then
+		if room_data.GetSssRoomDataInfo().nBuyCode == true and card == 40 then
 			componentGet(child(cardTranTbl[v].transform, "ma"),"UISprite").depth = i * 2 + 4
 		end
 	end

@@ -88,11 +88,12 @@ function this.OnBtnCreateClick(obj)
 		log(GetTblData(gameDataInfo))
 		config_rule["rounds"] = gameDataInfo.play_num
 		config_rule["pnum"] = gameDataInfo.people_num
-		
+		config_rule["nChooseCardTypeTimeOut"] = gameDataInfo.nChooseCardTypeTimeOut
+		config_rule["nReadyTimeOut"] = gameDataInfo.nReadyTimeOut
 		config_rule["leadership"] = gameDataInfo.isZhuang
 		config_rule["joker"] = gameDataInfo.add_ghost
-		config_rule["addColor"] = gameDataInfo.add_card
-		config_rule["buyhorse"] = gameDataInfo.isChip
+--		config_rule["addColor"] = gameDataInfo.add_card--加色不要了
+		config_rule["buyhorse"] = gameDataInfo.nBuyCode
 		config_rule["maxfan"] = gameDataInfo.max_multiple
 		log("people num : "..gameDataInfo.people_num)
 		

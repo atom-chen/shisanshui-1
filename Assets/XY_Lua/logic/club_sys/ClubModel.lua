@@ -538,11 +538,14 @@ function ClubModel:ReqDealClubApply(cpid, type)
 	local param = {}
 	param.cpid = cpid
 	param.type = type
-	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubDealClubApply, param, 
-	self:SendRequestWithCalback(HttpCmdName.ClubDealClubApply, param, 
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubDealClubApply, param, 
 		function(tab) 
 			self:OnResDealClubApply(tab, cpid, type)
-		end, nil)
+		end)
+	-- self:SendRequestWithCalback(HttpCmdName.ClubDealClubApply, param, 
+	-- 	function(tab) 
+	-- 		self:OnResDealClubApply(tab, cpid, type)
+	-- 	end, nil)
 end
 
 function ClubModel:OnResDealClubApply(msgTab, cpid, type)
@@ -671,10 +674,13 @@ function ClubModel:ReqKickClubUser(cid,uid,kType)
 	param.cid = cid
 	param.k_uid = uid
 	param.type = kType
-	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubKickClubUser, param, function (msgTab)
-	self:SendRequestWithCalback(HttpCmdName.ClubKickClubUser, param, function (msgTab)
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubKickClubUser,param,function(msgTab)
 		self:OnResKickClubUser(msgTab, cid, uid)
 	end)
+	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubKickClubUser, param, function (msgTab)
+	-- self:SendRequestWithCalback(HttpCmdName.ClubKickClubUser, param, function (msgTab)
+	-- 	self:OnResKickClubUser(msgTab, cid, uid)
+	-- end)
 end
 
 function ClubModel:OnResKickClubUser(msgTab, cid, uid)
@@ -707,12 +713,16 @@ end
 function ClubModel:ReqQuitClub(cid)
 	local param = {}
 	param.cid = cid
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubQuitClub,param,function(msgTab)
+		self:OnResQuitClub(cid, msgTab)	end)
 	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubQuitClub, param, function(msgTab) self:OnResQuitClub(cid, msgTab)end, nil)
-	self:SendRequestWithCalback(HttpCmdName.ClubQuitClub, param, function(msgTab) self:OnResQuitClub(cid, msgTab)end)
+	-- self:SendRequestWithCalback(HttpCmdName.ClubQuitClub, param, function(msgTab) 
+	-- 	self:OnResQuitClub(cid, msgTab)
+	-- end)
 end
 
 function ClubModel:OnResQuitClub(cid, msgTab)
-	UIManager:FastTip(LanguageMgr.GetWord(10052))
+	--UIManager:FastTip("您已经成功退出俱乐部")--LanguageMgr.GetWord(10052))
 	self:RemoveClub(cid)
 end
 
@@ -946,10 +956,14 @@ end
 function ClubModel:ReqGetClubInfoByCid(cid, callback)
 	local param = {}
 	param.cid = cid
-	self:SendRequestWithCalback(HttpCmdName.getUserClubByCid, param, 
-	function(msgtab) 
-		self:OnResGetClubInfoByCid(msgtab, cid, callback)
-	end, nil)
+
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.getUserClubByCid, param,function (msgTab)
+		self:OnResGetClubInfoByCid(msgTab, cid, callback)
+	end)
+	-- self:SendRequestWithCalback(HttpCmdName.getUserClubByCid, param, 
+	-- function(msgtab) 
+	-- 	self:OnResGetClubInfoByCid(msgtab, cid, callback)
+	-- end, nil)
 end
 
 ---获取未加入的俱乐部信息
@@ -1386,6 +1400,7 @@ function ClubModel:SendRequestWithCalback(key, param, callback, target, showWait
 	else
 		sendCfg = HttpProxy.DefaultSendCfg
 	end
+
 	HttpProxy.SendRequest(HttpProxy.HttpMode.Club, key, param, callback, target, sendCfg)
 	-- HttpProxy.SendRequestWithCallback(HttpProxy.HttpMode.Club, key, param, callback, target, showWaiting)
 end
