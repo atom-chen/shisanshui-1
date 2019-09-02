@@ -101,11 +101,15 @@ function this.Show(cards, recommendCards, isSpecial)
 end
 
 function this.ReShow()
-	this.gameObject:SetActive(true)
+	if this.gameObject ~= nil then
+		this.gameObject:SetActive(true)
+	end
 end
 
 function this.Hide()
-	this.gameObject:SetActive(false)
+	if this.gameObject ~= nil then
+		this.gameObject:SetActive(false)
+	end
 end
 
 function this.DestoryAll()
@@ -899,6 +903,8 @@ function this.BtnClick(obj)
 			return	
 		end
 		shisangshui_play_sys.PlaceCard(confirm_cards)
+
+		Notifier.dispatchCmd(cmdName.OnPlaceCardOk, confirm_cards)
 		this.Hide()
 	elseif obj.name == "CancelBtn" then
 		if placeCard ~= nil then

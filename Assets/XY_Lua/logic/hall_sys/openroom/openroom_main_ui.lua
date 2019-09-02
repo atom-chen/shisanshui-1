@@ -97,7 +97,7 @@ function this.OnBtnCreateClick(obj)
 		config_rule["maxfan"] = gameDataInfo.max_multiple
 		log("people num : "..gameDataInfo.people_num)
 		
-		log("addghost : "..gameDataInfo.add_ghost)
+		log("addghost : "..tostring(gameDataInfo.add_ghost))
 		config_rule.gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.GetSssRoomDataInfo().gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.RequestSssCreateRoom(config_rule)

@@ -345,6 +345,7 @@ function this.activity(obj1,obj2)
       local sp_nocord=child(this.transform,"Panel_Left/sp_left/sp_norecord")
       componentGet(this.toggle_record,"UIToggle").value=true
       recorddata=t.data
+      record_ui.Show()
       record_ui.UpdateRoomRecordSimpleData(t.data,1)
       log(str)
       if table.getCount(t.data)==0 then

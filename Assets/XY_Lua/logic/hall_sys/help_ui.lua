@@ -121,10 +121,10 @@ function this.addmainlab(m,str,backname)
          lab_message01.transform.parent=lab_message.transform.parent  
          lab_message01.name="lab_main"..tostring(m)
          lab_message01.transform.localScale={x=1,y=1,z=1}  
-         lab_message01.transform.localPosition={x=0,y=this.currentPosy-7,z=0} 
+         lab_message01.transform.localPosition={x=0,y=this.currentPosy-20,z=0} 
          componentGet(lab_message01,"UILabel").text=str
      end   
-     this.currentPosy=lab_message01.transform.localPosition.y-componentGet(lab_message01.gameObject,"UILabel").height-20  
+     this.currentPosy=lab_message01.transform.localPosition.y-componentGet(lab_message01.gameObject,"UILabel").height-30  
      m=m+1   
      return m
 end

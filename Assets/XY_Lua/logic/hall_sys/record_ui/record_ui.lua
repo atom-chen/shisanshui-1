@@ -131,9 +131,9 @@ function this.OnUpdateItem_record(go,index,realindex)
         local lab_type=child(go.transform, "lab_type")--类型
         local lab_reward=child(go.transform, "lab_reward")--盈利 
         addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)   
-        if this.open_roomRecordSimpleData[rindext].gid~=nil then
-           componentGet(lab_type,"UILabel").text="牌局类型:"..this.gid[tonumber(this.open_roomRecordSimpleData[rindext].gid)]
-        end
+        -- if this.open_roomRecordSimpleData[rindext].gid~=nil then
+        --    componentGet(lab_type,"UILabel").text="牌局类型:"..this.gid[tonumber(this.open_roomRecordSimpleData[rindext].gid)]
+        -- end
         if this.open_roomRecordSimpleData[rindext].ts~=nil then
         componentGet(lab_date,"UILabel").text ="日期:".. os.date("%Y.%m.%d",this.open_roomRecordSimpleData[rindext].ts)
         end 

@@ -655,10 +655,23 @@ local function OnSpecialCardType(tbl)
 	shisangshui_ui.ShowSpecialCardIcon(tbl)
 end
 
+
+--[[--
+ * @Description: 更换桌布  
+ ]]
+local function OnChangeDesk(tbl)
+    shisangshui_ui.OnChangeDesk(tbl)
+end
+
+local function OnPlaceMyCardOk(tbl)
+	log("自己的牌摆好了")
+	shisangshui_ui.OnPlaceCardOk(tbl)
+end
+
 function this.Init()
 	log("-----------Start Regist Event UI ---------------!!!!!!!!!!")
-    Notifier.regist(cmdName.MSG_CHANGE_DESK,OnChangeDesk) --更换桌布
-    Notifier.regist(cmdName.OnPlaceCardOk,OnPlaceCardOk) --自己摆好牌了
+    Notifier.regist(cmdName.MSG_CHANGE_DESK,OnChangeDesk)--OnChangeDesk) --更换桌布
+    Notifier.regist(cmdName.OnPlaceCardOk,OnPlaceMyCardOk)--OnPlaceCardOk) --自己摆好牌了
 	Notifier.regist(cmdName.F1_ENTER_GAME, OnPlayerEnter)--玩家进入
 	Notifier.regist(cmdName.F1_GAME_READY,OnPlayerReady)--玩家准备
 	Notifier.regist(cmdName.F1_GAME_START,OnGameStart)--游戏开始
@@ -710,8 +723,8 @@ function this.Init()
 end
 
 function this.UInit()
-    Notifier.remove(cmdName.MSG_CHANGE_DESK) --更换桌布
-    Notifier.remove(cmdName.OnPlaceCardOk) --自己摆好牌了
+    Notifier.remove(cmdName.MSG_CHANGE_DESK, OnChangeDesk) --更换桌布
+    Notifier.remove(cmdName.OnPlaceCardOk, OnPlaceMyCardOk) --自己摆好牌了
 	Notifier.remove(cmdName.F1_ENTER_GAME, OnPlayerEnter)--玩家进入
 	Notifier.remove(cmdName.F1_GAME_READY,OnPlayerReady)--玩家准备
 	Notifier.remove(cmdName.F1_GAME_START,OnGameStart)--游戏开始
@@ -756,18 +769,6 @@ function this.UInit()
 	Notifier.remove(cmdName.FuZhouSSS_ASKMULT,OnAskMult) --等待闲家选择倍数 
 	Notifier.remove(cmdName.FuZhouSSS_MULT, OnMult)  -- 选择倍数通知(回复自己选择倍数)
 	Notifier.remove(cmdName.FuZhouSSS_ALLMULT, OnAllMult)  --选择倍数通知(所有人的选择倍数)
-end
-
-
---[[--
- * @Description: 更换桌布  
- ]]
-local function OnChangeDesk(tbl)
-    shisangshui_ui.OnChangeDesk(tbl)
-end
-
-local function OnPlaceCardOk(tbl)
-	shisangshui_ui.OnPlaceCardOk(tbl)
 end
 
 function this.GetHeadPic(textureComp, url )

@@ -348,6 +348,7 @@ function shisanshui_player_ui.New( transform )
 	end
 
 	function this.ShowDunScore(isShow, index, scoreType)
+		log("显示墩："..tostring(isShow)..tostring(index))
 		if not isShow then
 			for i = 1, 3 do
 				this.scoreTbl[i].gameObject:SetActive(false)

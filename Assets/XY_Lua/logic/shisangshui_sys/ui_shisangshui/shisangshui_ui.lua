@@ -938,14 +938,17 @@ end
 
 function this.OnPlaceCardOk(tbl)
 	log("自己的牌好了")
+	if this.cards == nil then this.cards = {} end
+	this.myCards = {}
 	for n = 1, 13 do
-		local tran = newNormalUI("Prefabs/Card/"..tostring(tbl[n]), this.playerList[1].cardObjs[n])
+		local tran = newNormalUI("Prefabs/Card/"..tostring(tbl[n]), this.playerList[1].cardObjs[14 - n])
 		tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
 		tran.transform.localPosition = Vector3.New(0, 0, 0)
-		componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
-		componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
-		componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
-		componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
+		componentGet(child(tran.transform, "bg"),"UISprite").depth = (14 - n) * 10 + 1
+		componentGet(child(tran.transform, "num"),"UISprite").depth = (14 - n) * 10 + 3
+		componentGet(child(tran.transform, "color1"),"UISprite").depth = (14 - n) * 10 + 3
+		componentGet(child(tran.transform, "color2"),"UISprite").depth = (14 - n) * 10 + 3
+		this.myCards[n] = tran
 	end
 end
 
@@ -1040,7 +1043,8 @@ function this.CompareStart(callback)
 	this.CardCompareHandler(callback)
 end
 
-function this.ClearCards(index)
+function this.ClearCards(index, leave)
+	log("清理所有牌")
 	if index == nil then
 		if this.cards ~= nil then
 			for i, v in pairs(this.cards) do
@@ -1049,7 +1053,11 @@ function this.ClearCards(index)
 				end
 			end
 		end
-		this.cards = {}
+		if leave == nil then
+			for k, v in pairs(this,myCards) do
+				GameObject.Destroy(v.gameObject)
+			end
+		end
 	else
 		for j, k in pairs(this.cards[index]) do
 			GameObject.Destroy(k.gameObject)
@@ -1087,37 +1095,39 @@ function this.CardCompareHandler(callback)
 	table.sort(secondSort)
 	table.sort(threeSort)
 
-	this.ClearCards()
+	this.ClearCards(nil, 1)
 	coroutine.start(function()
 		--比头墩
-		for j,k in ipairs(firstSort) do
+		--for j,k in ipairs(firstSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) and i ~= 1 then
+				--if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
-						for n = 1, 3 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.cardObjs[n])
-							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-							tran.transform.localPosition = Vector3.New(0, 0, 0)
+						if i ~= 1 then
+							for n = 1, 3 do
+								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.cardObjs[n])
+								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+								tran.transform.localPosition = Vector3.New(0, 0, 0)
 
-							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							-- if card == 40 then
-							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							-- end
-							this.cards[i][n] = tran
-							--Player:PlayerGroupCard("Group1")
-							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+								componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
+								componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
+								-- if card == 40 then
+								-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+								-- end
+								this.cards[i][n] = tran
+								--Player:PlayerGroupCard("Group1")
+								--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+								--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+							end
 						end
 						Player.ShowDunScore(true, 1, Player.compareResult["nFirstType"])
-						break
+						--break
 					end
-				end
+				--end
 			end
-		end
+		--end
 		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第一墩的积分数据
 		scoreData.index = 1
@@ -1125,37 +1135,39 @@ function this.CardCompareHandler(callback)
 		Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
 		
 		--比中墩
-		for j,k in ipairs(secondSort) do
+		--for j,k in ipairs(secondSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) and i ~= 1  then
+				--if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k)  then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
 						-- Player:PlayerGroupCard("Group2")
 						-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
 						-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
 
-						for n = 4, 8 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.cardObjs[n])
-							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-							tran.transform.localPosition = Vector3.New(0, 0, 0)
-							--Player:PlayerGroupCard("Group1")
-							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 3
-			
-							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							-- if card == 40 then
-							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							-- end
-							this.cards[i][n] = tran
+						if i ~= 1 then
+							for n = 4, 8 do
+								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.cardObjs[n])
+								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+								tran.transform.localPosition = Vector3.New(0, 0, 0)
+								--Player:PlayerGroupCard("Group1")
+								--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+								--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 2 + 3
+				
+								componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
+								componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
+								-- if card == 40 then
+								-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+								-- end
+								this.cards[i][n] = tran
+							end
 						end
 						Player.ShowDunScore(true, 2, Player.compareResult["nSecondType"])
-						break
+						--break
 					end
-				end
+				--end
 			end
-		end
+		--end
 		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第二墩的积分数据
 		scoreData.index = 2
@@ -1163,26 +1175,29 @@ function this.CardCompareHandler(callback)
 		Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
 
 		--比尾墩
-		for j,k in ipairs(threeSort) do
+		--for j,k in ipairs(threeSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) and i ~= 1  then
+				--if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 
-						for n = 9, 13 do
-							local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.cardObjs[n])
-							tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
-							tran.transform.localPosition = Vector3.New(0, 0, 0)
-							componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
-							componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
-							-- if card == 40 then
-							-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
-							-- end
-							this.cards[i][n] = tran
-							--Player:PlayerGroupCard("Group1")
-							--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
-							--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+						log("显示玩家牌："..i)
+						if i ~= 1 then
+							for n = 9, 13 do
+								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.cardObjs[n])
+								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+								tran.transform.localPosition = Vector3.New(0, 0, 0)
+								componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+								componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
+								-- if card == 40 then
+								-- 	componentGet(child(tran.transform, "ma"),"UISprite").depth = n * 10 + 2
+								-- end
+								this.cards[i][n] = tran
+								--Player:PlayerGroupCard("Group1")
+								--local cards = Player:showFirstCardByType() 					--这里在通知UI界面显示相应排型
+								--Notifier.dispatchCmd(cmdName.ShowPokerCard,cards)
+							end
 						end
 						Player.ShowDunScore(true, 3, Player.compareResult["nThirdType"])
 
@@ -1192,9 +1207,9 @@ function this.CardCompareHandler(callback)
 						--coroutine.wait(1)
 						break
 					end
-				end
+				--end
 			end
-		end
+		--end
 		
 		--这里增加一个事件，通知UI更新第三墩的积分数据
 		scoreData.index = 3
@@ -1329,5 +1344,6 @@ function this.PlayGunAnim()
 				end
 			end
 		end
+		this.ClearCards()
 	end)
 end
