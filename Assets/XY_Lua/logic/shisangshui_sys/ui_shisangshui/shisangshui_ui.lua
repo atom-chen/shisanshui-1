@@ -441,7 +441,7 @@ function this.Awake()
 	
 	shisangshui_ui_sys.Init()
 	msg_dispatch_mgr.SetIsEnterState(true)	
-	this.InitCards()
+	this.OnChangeDesk()
 end
 
 function this.Start()
@@ -936,40 +936,38 @@ function this.GetPlayer(viewSeat)
 	return this.playerList[viewSeat]
 end
 
-function this.InitCards()
-	-- this.peoCardsTbl = {}
-	-- this.peoCardsTbl[2] = {this.CardsTbl[1], this.CardsTbl[5]}
-	-- this.peoCardsTbl[3] = {this.CardsTbl[1], this.CardsTbl[4], this.CardsTbl[6]}
-	-- this.peoCardsTbl[4] = {this.CardsTbl[1], this.CardsTbl[3], this.CardsTbl[5], this.CardsTbl[7]}
-	-- this.peoCardsTbl[5] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[7]}
-	-- this.peoCardsTbl[6] = {this.CardsTbl[1], this.CardsTbl[2], this.CardsTbl[3], this.CardsTbl[4], this.CardsTbl[5], this.CardsTbl[6]}
-	-- this.peoCardsTbl[7] = this.CardsTbl
-	-- if this.peopleNum == nil then
-	-- 	local roomData = room_data.GetSssRoomDataInfo()
-	-- 	this.peopleNum = roomData.people_num
-	-- end
-	--this.curPeoCardsTbl = this.peoCardsTbl[this.peopleNum]
-	--this.cardPosTbl = {}
-	-- for i = 1, this.peopleNum do
-	-- 	this.cardPosTbl[i] = {}
-	-- 	for j = 1, 13 do
-	-- 		this.cardPosTbl[i][j] = child(widgetTbl.panel, "Anchor_Center/Players/Player"..i.."/cards/PlayerCard"..j)
-	-- 		local pos = this.CardsTbl[i][j].transform.localPosition
-	-- 		this.cardPosTbl[i][j] = pos
-	-- 	end
-	-- end
+function this.OnPlaceCardOk(tbl)
+	log("自己的牌好了")
+	for n = 1, 13 do
+		local tran = newNormalUI("Prefabs/Card/"..tostring(tbl[n]), this.playerList[1].cardObjs[n])
+		tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
+		tran.transform.localPosition = Vector3.New(0, 0, 0)
+		componentGet(child(tran.transform, "bg"),"UISprite").depth = n * 10 + 1
+		componentGet(child(tran.transform, "num"),"UISprite").depth = n * 10 + 3
+		componentGet(child(tran.transform, "color1"),"UISprite").depth = n * 10 + 3
+		componentGet(child(tran.transform, "color2"),"UISprite").depth = n * 10 + 3
+	end
+end
+
+function this.OnChangeDesk()
+	local deskBgNum = tonumber(hall_data.GetPlayerPrefs("desk"))
+	if deskBgNum == 1 then
+		child(this.transform, "Panel/Texture1").gameObject:SetActive(true)
+		child(this.transform, "Panel/Texture2").gameObject:SetActive(false)
+	else
+		child(this.transform, "Panel/Texture1").gameObject:SetActive(false)
+		child(this.transform, "Panel/Texture2").gameObject:SetActive(true)
+	end
 end
 
 --nil 全部显示, 0全部隐藏--其他为1家
 function this.ShowCard(index, state)
-	log("显示手牌,：nil 全部显示, 0全部隐藏--其他为1家:"..tostring(index))
 		log(tostring(this.peopleNum))
 	if this.peopleNum == nil then
 		local roomData = room_data.GetSssRoomDataInfo()
 		this.peopleNum = roomData.people_num
 	end
 	if index == nil then--全部显示
-		log("显示出来所有的牌")
 		for i = 1, this.peopleNum do
 			for j = 1, 13 do
 				this.playerList[i].cardObjs[j].gameObject:SetActive(true)
@@ -1002,7 +1000,6 @@ function this.DealCard(data, callback)
 		local roomData = room_data.GetSssRoomDataInfo()
 		this.peopleNum = roomData.people_num
 	end
-	this.InitCards()
 
 	coroutine.start(function()
     	this.xipai.gameObject:SetActive(true)
@@ -1043,15 +1040,21 @@ function this.CompareStart(callback)
 	this.CardCompareHandler(callback)
 end
 
-function this.ClearCards()
-	if this.cards ~= nil then
-		for i, v in pairs(this.cards) do
-			for j, k in pairs(v) do
-				GameObject.Destroy(k.gameObject)
+function this.ClearCards(index)
+	if index == nil then
+		if this.cards ~= nil then
+			for i, v in pairs(this.cards) do
+				for j, k in pairs(v) do
+					GameObject.Destroy(k.gameObject)
+				end
 			end
 		end
+		this.cards = {}
+	else
+		for j, k in pairs(this.cards[index]) do
+			GameObject.Destroy(k.gameObject)
+		end
 	end
-	this.cards = {}
 end
 
 function this.HideDunCardType()
@@ -1084,19 +1087,12 @@ function this.CardCompareHandler(callback)
 	table.sort(secondSort)
 	table.sort(threeSort)
 
-	-- if this.curPeoCardsTbl == nil then this.InitCards() end
-	-- if this.playerList[1].CardsTbl == nil then
-	-- 	for i = 1, this.peopleNum do
-	-- 		this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
-	-- 	end	
-	-- end
-
 	this.ClearCards()
 	coroutine.start(function()
 		--比头墩
 		for j,k in ipairs(firstSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) and i ~= 1 then
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
 						for n = 1, 3 do
@@ -1131,7 +1127,7 @@ function this.CardCompareHandler(callback)
 		--比中墩
 		for j,k in ipairs(secondSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k) and i ~= 1  then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
 						-- Player:PlayerGroupCard("Group2")
 						-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
@@ -1169,7 +1165,7 @@ function this.CardCompareHandler(callback)
 		--比尾墩
 		for j,k in ipairs(threeSort) do
 			for i ,Player in ipairs(this.playerList) do
-				if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
+				if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) and i ~= 1  then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 
 						for n = 9, 13 do

@@ -158,6 +158,7 @@ cmdName.MSG_APP_PAUSE = "MSG_APP_PAUSE"    --切换到后台
 cmdName.MSG_SELFRANK_REFRESH="MSG_SELFRANK_REFRESH"    --刷新自己的排行
 
 cmdName.MSG_CHANGE_DESK = "MSG_CHANGE_DESK"			--更换桌布
+cmdName.OnPlaceCardOk = "OnPlaceCardOk"
 
 --///////////////////////////////////////游戏事件命令end///////////////////////////////////////
 

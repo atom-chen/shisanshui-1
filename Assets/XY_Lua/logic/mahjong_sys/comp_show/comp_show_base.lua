@@ -44,7 +44,7 @@ end
 
 
 function comp_show_base:RegisterEvents()
-    Notifier.regist(cmdName.MSG_CHANGE_DESK,slot(self.OnChangeDesk, self)) --更换桌布
+    --Notifier.regist(cmdName.MSG_CHANGE_DESK,slot(self.OnChangeDesk, self)) --更换桌布
     Notifier.regist(cmdName.F1_ENTER_GAME, slot(self.OnPlayerEnter, self))  --玩家进入
     Notifier.regist(cmdName.F1_GAME_READY, slot(self.OnPlayerReady, self))  --玩家准备    
     Notifier.regist(cmdName.F1_GAME_START, slot(self.OnGameStart, self))    --游戏开始
@@ -71,7 +71,7 @@ function comp_show_base:RegisterEvents()
 end
 
 function comp_show_base:UnRegisterEvents()
-    Notifier.remove(cmdName.MSG_CHANGE_DESK,slot(self.OnChangeDesk, self)) --更换桌布
+    --Notifier.remove(cmdName.MSG_CHANGE_DESK,slot(self.OnChangeDesk, self)) --更换桌布
     Notifier.remove(cmdName.F1_ENTER_GAME, slot(self.OnPlayerEnter, self))  --玩家进入
     Notifier.remove(cmdName.F1_GAME_READY, slot(self.OnPlayerReady, self))  --玩家准备 
     Notifier.remove(cmdName.F1_GAME_START, slot(self.OnGameStart, self))    --游戏开始
@@ -139,9 +139,9 @@ end
 --[[--
  * @Description: 更换桌布  
  ]]
-function comp_show_base:OnChangeDesk(tbl)
-    self.compTable:ChangeDeskCloth()
-end
+-- function comp_show_base:OnChangeDesk(tbl)
+--     self.compTable:ChangeDeskCloth()
+-- end
 
 --[[--
  * @Description: 玩家进入房间  
