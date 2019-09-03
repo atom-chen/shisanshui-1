@@ -68,7 +68,7 @@ function ClubModel:ctor()
 end
 
 function ClubModel:Init()
-	--log(GetTblData(self))
+	--log(self)
 	-- ClubUtil.InitGameType()
 --	self.control = ControlManager:GetCtrl("ClubControl")
 	Notifier.regist(HttpCmdName.ClubBindAgent, self.OnResBindAgent, self)
@@ -452,7 +452,7 @@ function ClubModel:OnResCreateClub(msgTab, that)
 	log("创建俱乐部返回")
 	--log(GetTblData(self))
 	--log(GetTblData(that))
-	log(GetTblData(msgTab))
+	log(msgTab)
 	--self = ClubModel
 	self.isAutoOpenCraeteClub = false
 	--UIManager:CloseUiForms("ClubCreateUI")
@@ -1016,7 +1016,7 @@ end
 
 function ClubModel:OnResGetUserAllClubList(msgTab)
 	--self = ClubModel
-	log(GetTblData(msgTab))
+	log(msgTab)
 	local count = 0
 	if self.clubList ~= nil then
 		count = #self.clubList
@@ -1109,7 +1109,7 @@ function ClubModel:AddOrUpdateClub(clubInfo)
 	if clubInfo == 0 then
 		return
 	end
-	log(GetTblData(clubInfo))
+	log(clubInfo)
 	if self.clubMap[clubInfo.cid] ~= nil then
 		if clubInfo.club_phone == nil then
 			clubInfo.club_phone = ""
@@ -1371,7 +1371,7 @@ function ClubModel:ReqJoinShareClub(cid,shareId,stime,callback)
 end
 
 function ClubModel:CheckMsgRet(msgTab)
-	log(GetTblData(msgTab))
+	log(msgTab)
 	if msgTab.ret ~= 0 then
 		if msgTab.ret >= 100 and msgTab.ret <= 200 then
 			if msgTab.msg ~= nil and msgTab.msg ~= "" then

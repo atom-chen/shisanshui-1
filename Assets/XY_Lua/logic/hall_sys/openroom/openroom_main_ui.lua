@@ -85,7 +85,7 @@ function this.OnBtnCreateClick(obj)
     elseif toggleTbl.shisanshuiToggle.value then
 		local config_rule ={}
 		local gameDataInfo = room_data.GetSssRoomDataInfo()
-		log(GetTblData(gameDataInfo))
+		log(gameDataInfo)
 		config_rule["rounds"] = gameDataInfo.play_num
 		config_rule["pnum"] = gameDataInfo.people_num
 		config_rule["nChooseCardTypeTimeOut"] = gameDataInfo.nChooseCardTypeTimeOut

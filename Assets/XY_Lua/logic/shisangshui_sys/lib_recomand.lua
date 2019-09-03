@@ -1753,8 +1753,6 @@ function libRecomand:Get_Pt_Two_Pair_Laizi_second(cards, nLaziCount)
                         break
                     end 
                 end
-                log(GetTblData(tempResult1))
-                log(GetTblData(tempResult2))
                 
                 bFind = true
                 table.insert(result, tempResult1)
@@ -1762,7 +1760,6 @@ function libRecomand:Get_Pt_Two_Pair_Laizi_second(cards, nLaziCount)
             end
         end
     end
-    log(GetTblData(result))
     return bFind, result
 end
 

@@ -152,7 +152,7 @@ end
 
 function ClubUI.OnCurClubChange()
 	self = this
-	--log(GetTblData(self))
+	--log(self)
 	self:UpdateCurClub()
 	-- 切换俱乐部 刷新
 	if self.viewList[self.curIndex] ~= nil then

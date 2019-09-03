@@ -24,7 +24,7 @@ local gmls = room_usersdata_center.GetMyLogicSeat
 local result_para_data = {}
 
 local function OnPlayerEnter( tbl )
-	log(GetTblData(tbl))
+	log(tbl)
 	local viewSeat = gvbl(tbl["_src"])
 	log("本地座位号："..viewSeat)
 	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
@@ -103,7 +103,7 @@ end
 
 local function OnPlayerReady( tbl )
 --	small_result.Hide()
-	log(GetTblData(tbl))
+	log(tbl)
 	local logicSeat =  room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
 	local viewSeat = gvbl(tbl["_src"])
 	shisangshui_ui.SetLeftCard()--显示房间局数
@@ -172,13 +172,13 @@ local function OnGameDeal( tbl )
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
 	end)
 
-	--log(GetTblData(tbl))
+	--log(tbl)
 	--shisangshui_ui.HideOperTips()
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
 end
 
 local function OnGameLaiZi( tbl )
-	--log(GetTblData(tbl))
+	--log(tbl)
 	ui_sound_mgr.PlaySoundClip("common/laizi")
 	shisangshui_ui.ShowHunPai(tbl["_para"]["laizi"][1])
 end
@@ -205,7 +205,7 @@ local function OnGameRewards( tbl )
 	
 	
 	
-	log(GetTblData(tbl))
+	log(tbl)
 	shisangshui_ui.DisablePlayerLightFrame()--关闭头像的光圈
 	shisangshui_ui.HideDunCardType()
 	--shisangshui_ui.HideOperTips()
@@ -253,7 +253,7 @@ end
 
 local function OnSyncBegin( tbl )
 	log("重连同步开始")
-	log(GetTblData(tbl))
+	log(tbl)
 
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_BEGIN)
 end
@@ -261,7 +261,7 @@ end
 --重连同步
 local function OnSyncTable( tbl )
 	log("重连同步表")
-	log(GetTblData(tbl))
+	log(tbl)
 
 	--[[
 		self.m_stageNext = {
@@ -383,13 +383,13 @@ end
 
 local function OnSyncEnd( tbl )
 	log("重连同步结束")
-	log(GetTblData(tbl))
+	log(tbl)
 
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_SYNC_END)
 end
 
 local function OnLeaveEnd( tbl )
-	log(GetTblData(tbl))
+	log(tbl)
 
 	local viewSeat = gvbl(tbl._src)
 	if roomdata_center.isStart == true then
@@ -402,7 +402,7 @@ local function OnLeaveEnd( tbl )
 end
 
 local function OnPlayerOffline( tbl )
-	log(GetTblData(tbl))
+	log(tbl)
 	
 	local viewSeat = gvbl(tbl._src)
 --	shisangshui_ui.SetPlayerLineState(viewSeat, false)
@@ -566,7 +566,7 @@ end
 
 --聊天
 local function OnPlayerChat( tbl )
-	log(GetTblData(tbl))
+	log(tbl)
 
 	local viewSeat = gvbl(tbl._src)
 	local contentType = tbl["_para"]["contenttype"]

@@ -368,7 +368,7 @@ function this.TipsBtnShow(cards)
 
 		log(bFound)
 		log("二对")
-		log(GetTblData(temp))
+		log(temp)
 	this.BtnGray(cardTipBtn[9],bFound)
 end
 
@@ -865,11 +865,11 @@ function this.BtnClick(obj)
 			return
 		end
 		local normal_cards, nLaziCount, laiziCards = this.GetallCardType(Array.Clone(left_card))
-		log(GetTblData(normal_cards))
+		log(normal_cards)
 		local bFound, temp = libRecomand:Get_Pt_Two_Pair_Laizi_second(normal_cards, nLaziCount)
 		log(bFound)
 		log("二对")
-		log(GetTblData(temp))
+		log(temp)
 		this.CardTypeBottomClick(9, temp, laiziCards)
 	--确定
 	elseif obj.name == "OkBtn" then

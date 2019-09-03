@@ -173,7 +173,7 @@ end
 ]]
 function this.SetRoomCfgInfo(cfgData)
 
-  log(GetTblData(cfgData))
+  log(cfgData)
 	this.chairid = cfgData["_para"].chairID
 	this.roomnumber = cfgData["_para"].rno
 	this.maxplayernum = cfgData["_para"].nPlayerNum
@@ -195,7 +195,7 @@ end
 
 
 function this.SetShiSangShuiRoomCfgInfo(cfgData)
-	log(GetTblData(cfgData))
+	log(cfgData)
 	local param = cfgData["_para"]
 	this.chairid = param.chairID
   log("房间号，看好啦："..param.rno)

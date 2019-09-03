@@ -75,7 +75,7 @@ function this.JoinRoomByRno(rno)
                     k.nMaxMult = dataTbl.data.cfg.maxfan
                     k.nChooseCardTypeTimeOut = dataTbl.data.cfg.nChooseCardTypeTimeOut
                     k.nReadyTimeOut = dataTbl.data.cfg.nReadyTimeOut
-                    log(GetTblData(k))
+                    log(k)
 					
 					room_data.GetSssRoomDataInfo().isZhuang = k.nWaterBanker
 					room_data.GetSssRoomDataInfo().nBuyCode = k.nBuyCode

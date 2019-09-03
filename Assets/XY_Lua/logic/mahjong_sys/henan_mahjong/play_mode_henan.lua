@@ -112,7 +112,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGameDeal(tbl)
-        log(GetTblData(tbl))
+        log(tbl)
 
         local dice_big = tbl["_para"]["dice"][1]
         local dice_small = tbl["_para"]["dice"][2]
@@ -151,7 +151,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGameLaiZi( tbl )
-        log(GetTblData(tbl))
+        log(tbl)
 
         roomdata_center.hun = tbl["_para"]["laizi"][1]
 
@@ -188,7 +188,7 @@ function play_mode_henan.create(levelID)
 
     local function OnPlayCard( tbl )
         --compTable:StopTime()
-        log(GetTblData(tbl))
+        log(tbl)
 
         local src = tbl["_src"]
         local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
@@ -211,7 +211,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnGiveCard( tbl )
-        log(GetTblData(tbl))
+        log(tbl)
 
         local src = tbl["_src"]
         local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
@@ -231,7 +231,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnTriplet( tbl )
-        --log(GetTblData(tbl))
+        --log(tbl)
         compTable:StopTime()
 
         local operPlayViewSeat = gvbl(tbl._src)
@@ -266,7 +266,7 @@ function play_mode_henan.create(levelID)
     end
 
     local function OnQuadruplet( tbl )
-        --log(GetTblData(tbl))
+        --log(tbl)
         compTable:StopTime()
 
         local operPlayViewSeat = gvbl(tbl._src)

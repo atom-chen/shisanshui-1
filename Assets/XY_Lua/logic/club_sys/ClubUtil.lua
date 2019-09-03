@@ -112,11 +112,11 @@ end
 
 function ClubUtil.GetOpenClubGids(clubGids)
 	log("开放的俱乐部列表")
-	log(GetTblData(clubGids))
+	log(clubGids)
 	if type(clubGids) =="number" then 
 		local gids = {}
 		table.insert(gids,clubGids) 
-		log(GetTblData(gids))
+		log(gids)
 		return gids
 	end
 	local legal_gids = {}

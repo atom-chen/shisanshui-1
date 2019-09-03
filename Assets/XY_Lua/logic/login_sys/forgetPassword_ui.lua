@@ -98,7 +98,7 @@ end
 
 function this.RegisterCallBack( data )
 	log("注册成功")
-	loglog(GetTblData(data))
+	loglog(data)
 end
 
 function this.OnClose()
@@ -139,7 +139,7 @@ function this.OnSureClick()
 		end
 		local s=string.gsub(str,"\\/","/")  
         local t=ParseJsonStr(s)
-        log(GetTblData(t))
+        log(t)
 		-- data_center.SetLoginAllInfo(t) 
   --       http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
 		-- if data_center.GetAllInfor().ret == 0 then

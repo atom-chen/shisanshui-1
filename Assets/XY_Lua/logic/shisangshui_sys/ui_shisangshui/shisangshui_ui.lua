@@ -1084,7 +1084,6 @@ end
  ]]
 function this.CardCompareHandler(callback)
 	place_card.DestoryAll()
-	this.SetRePlaceBtnState(false)
 	local scoreData = {}    --积分数据表
 
 	-- local firstSort = {}    --第一次排序表
@@ -1108,7 +1107,7 @@ function this.CardCompareHandler(callback)
 		--比头墩
 		--for j,k in ipairs(firstSort) do
 			for i ,Player in ipairs(this.playerList) do
-					log(GetTblData(Player.compareResult))
+					log(Player.compareResult)
 				--if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌

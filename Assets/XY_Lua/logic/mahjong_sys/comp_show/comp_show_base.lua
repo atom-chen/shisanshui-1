@@ -271,7 +271,7 @@ end
  * @Description: 定癞  
  ]]
 function comp_show_base:OnGameLaiZi(tbl)
-    log(GetTblData(tbl))
+    log(tbl)
     roomdata_center.hun = tbl["_para"]["laizi"][1]
 
     local cardValue = tbl._para.cards[1]
@@ -318,7 +318,7 @@ end
  * @Description: 出牌  
  ]]
 function comp_show_base:OnPlayCard(tbl)
-    log(GetTblData(tbl))
+    log(tbl)
     local src = tbl["_src"]
     local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
 
@@ -345,7 +345,7 @@ end
  * @Description: 弃牌处理
  ]]
 function comp_show_base:OnGiveCard(tbl)
-    log(GetTblData(tbl))
+    log(tbl)
     local src = tbl["_src"]
     local viewSeat = room_usersdata_center.GetViewSeatByLogicSeat(src)
 
@@ -369,7 +369,7 @@ end
  * @Description: 碰牌处理  
  ]]
 function comp_show_base:OnTriplet( tbl )
-    log(GetTblData(tbl))
+    log(tbl)
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = self.gvblnFun(tbl._para.tripletWho)
     local offset = lastPlayViewSeat - operPlayViewSeat 
@@ -409,7 +409,7 @@ end
  * @Description: 杠牌处理  
  ]]
 function comp_show_base:OnQuadruplet( tbl )
-    log(GetTblData(tbl))
+    log(tbl)
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = self.gvblnFun(tbl._para.quadrupletWho)
     local offset = lastPlayViewSeat - operPlayViewSeat 
@@ -456,7 +456,7 @@ function comp_show_base:OnQuadruplet( tbl )
 end
 
 function comp_show_base:OnGameCollect(tbl)
-    log(GetTblData(tbl))
+    log(tbl)
 
     local operPlayViewSeat = self.gvbl(tbl._src)
     local lastPlayViewSeat = operPlayViewSeat-1
@@ -707,7 +707,7 @@ end
 
 -- 牌值  是否为金牌
 function comp_show_base:OnGameOpenGlod(tbl)
-    log(GetTblData(tbl))
+    log(tbl)
     local cardValue = tbl._para.nCard
     local isGold = tbl._para.bGold
 
