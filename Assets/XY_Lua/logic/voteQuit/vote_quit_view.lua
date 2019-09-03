@@ -121,16 +121,16 @@ end
 
 -- 第一个和最后一个
 function vote_quit_view:SetSpecialItemState(go, value, isLeft)
-	go:SetActive(true)
-	local bgSp = go:GetComponent(typeof(UISprite))
-	local iconSp = subComponentGet(go.transform, "icon", typeof(UISprite))
+	-- go:SetActive(true)
+	-- local bgSp = go:GetComponent(typeof(UISprite))
+	-- local iconSp = subComponentGet(go.transform, "icon", typeof(UISprite))
 
-	if isLeft then
-		bgSp.spriteName = (value and "q12") or "q16"
-	else
-		bgSp.spriteName = (value and "q17") or "q18"
-	end
-	iconSp.spriteName = (value and "q10") or "q9"
+	-- if isLeft then
+	-- 	bgSp.spriteName = (value and "q12") or "q16"
+	-- else
+	-- 	bgSp.spriteName = (value and "q17") or "q18"
+	-- end
+	-- iconSp.spriteName = (value and "q10") or "q9"
 end
 
 function vote_quit_view:SetItemState(go, value)
@@ -144,14 +144,14 @@ end
 
 -- 背景图片 左对齐
 function vote_quit_view:UpdateItemWidth(go, width, isRight)
-	local symbol = 1
-	if isRight then
-		symbol = -1
-	end
-	local bgSp = go:GetComponent(typeof(UISprite))
-	bgSp.width = width
-	local iconTr = child(go.transform, "icon")
-	LuaHelper.SetTransformLocalX(iconTr, width / 2 * symbol)
+	-- local symbol = 1
+	-- if isRight then
+	-- 	symbol = -1
+	-- end
+	-- local bgSp = go:GetComponent(typeof(UISprite))
+	-- bgSp.width = width
+	-- local iconTr = child(go.transform, "icon")
+	-- LuaHelper.SetTransformLocalX(iconTr, width / 2 * symbol)
 end
 
 

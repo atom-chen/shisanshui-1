@@ -76,11 +76,11 @@ local bottonSelectCardsBtn = 0
 local isSelectDown = false
 
 function this.Awake() 
-   this.initinfor()   
-  	--this.registerevent() 
+    this.initinfor()   
+  	this.registerevent() 
 end
 
-function this.Show(cards, recommendCards, isSpecial)
+function this.Show(cards, recommendCards, nSpecialType)
 	table.sort(cards, function(a, b) return GetCardValue(a) < GetCardValue(b)
 		end)
 	recommend_cards = recommendCards
@@ -96,7 +96,9 @@ function this.Show(cards, recommendCards, isSpecial)
 		this.gameObject:SetActive(true)
 	end
 	timeSecond = Time.time + 3
-	this.isSpecial = isSpecial
+	this.isSpecial = nSpecialType
+	log("特殊牌型来了kcg :"..tostring(this.isSpecial))
+	this.SpecialBtn.gameObject:SetActive(this.isSpecial ~= nil)
   	--this.addlistener()
 end
 
@@ -137,7 +139,7 @@ end
  * @Description: 逻辑入口  
  ]]
 function this.Start()   
-	this.registerevent()
+	--this.registerevent()
 	
 	--cardList = {21, 53, 37, 6, 5, 7, 22, 9, 10, 11, 12, 13, 14}
 	left_card = Array.Clone(cardList)
@@ -327,10 +329,10 @@ function this.registerevent()
 		UIEventListener.Get(thirdBtn.gameObject).onClick = this.BtnClick
 	end
 
-	local SpecialBtn = child(this.transform, "Panel_Bottom/prepare/SpecialBtn")
-	if SpecialBtn ~= nil then
-		UIEventListener.Get(SpecialBtn.gameObject).onClick = this.BtnClick
-		SpecialBtn.gameObject:SetActive(this.isSpecial)
+	this.SpecialBtn = child(this.transform, "Panel_Bottom/SpecialBtn")
+	if this.SpecialBtn ~= nil then
+		UIEventListener.Get(this.SpecialBtn.gameObject).onClick = this.BtnClick
+		this.SpecialBtn.gameObject:SetActive(this.isSpecial)
 	end
 end
 	
@@ -876,6 +878,7 @@ function this.BtnClick(obj)
 		log("------OkBtn click--")
 		if this.isSpecial then
 			shisangshui_play_sys.ChooseCardTypeReq(1)
+			this.Hide()
 			return
 		end
 		shisangshui_play_sys.ChooseCardTypeReq(0)

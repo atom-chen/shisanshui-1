@@ -38,16 +38,22 @@ function this.Init()
    for k ,v in pairs(this.playerprefs)do
        this.playerprefs[k]=this.GetPlayerPrefs(k)  
    end   
-   if tonumber(this.playerprefs.music)==1 then
-       ui_sound_mgr.controlValue(0.5) 
-   else
-       ui_sound_mgr.controlValue(0)
-   end
-   if tonumber(this.playerprefs.musiceffect)==1 then
-       ui_sound_mgr.ControlCommonAudioValue(0.5) 
-   else
-       ui_sound_mgr.ControlCommonAudioValue(0) 
-   end 
+   -- if tonumber(this.playerprefs.music)==1 then
+   --     ui_sound_mgr.controlValue(0.5) 
+   -- else
+   --     ui_sound_mgr.controlValue(0)
+   -- end
+   -- if tonumber(this.playerprefs.musiceffect)==1 then
+   --     ui_sound_mgr.ControlCommonAudioValue(0.5) 
+   -- else
+   --     ui_sound_mgr.ControlCommonAudioValue(0) 
+   -- end 
+
+
+    local volume = tonumber(hall_data.GetPlayerPrefs("music"))
+    ui_sound_mgr.controlValue(volume)
+    volume = tonumber(hall_data.GetPlayerPrefs("musiceffect"))
+    ui_sound_mgr.ControlCommonAudioValue(volume)
 end
 
 function this.register()

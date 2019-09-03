@@ -70,6 +70,10 @@ function this.registerevent()
 	if endbtn ~= nil then
 		UIEventListener.Get(endbtn.gameObject).onClick = this.EndBtnClick
 	end
+	local continuebtn = child(this.transform, "Panel/continuebtn")
+	if continuebtn ~= nil then
+		UIEventListener.Get(continuebtn.gameObject).onClick = this.EndBtnClick
+	end
     local btn_share=child(this.transform,"Panel/sharebtn")
     if btn_share ~= nil then
 		UIEventListener.Get(btn_share.gameObject).onClick = this.ShareClick
@@ -115,7 +119,7 @@ function this.LoadAllResult(result)
             log("---------------------------------------------------------------------------")    
             log(room_usersdata_center.GetUserByLogicSeat(i).headurl.."room_usersdata_center.GetUserByLogicSeat(number).headurl")
             log(i.."tex_photo.name")
-            hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(i).headurl)
+--暂时先不要头像            hall_data.getuserimage(tex_photo,2,room_usersdata_center.GetUserByLogicSeat(i).headurl)
             log("---------------------------------------------------------------------------")
 			
 			IDLbl.text="ID:"..v.uid
@@ -203,10 +207,10 @@ function this.ShareClick(obj)
 end
 ------最高分加特技------
 function this.ShowHighest(i)
-	local winCrown=componentGet(child(this.transform, "Panel/userGrid/user"..i.."/crown"), "UISprite")
-	local winFrame=componentGet(child(this.transform, "Panel/userGrid/user"..i.."/frame"), "UISprite")
+	local winCrown=child(this.transform, "Panel/userGrid/user"..i.."/crown")
+	--local winFrame=componentGet(child(this.transform, "Panel/userGrid/user"..i.."/frame"), "UISprite")
 	winCrown.gameObject:SetActive(true)
-	winFrame.gameObject:SetActive(true)
+	--winFrame.gameObject:SetActive(true)
 end
 
 function this.ShowOwner(i)

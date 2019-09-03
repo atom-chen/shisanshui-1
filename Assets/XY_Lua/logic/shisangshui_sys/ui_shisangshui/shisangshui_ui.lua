@@ -810,9 +810,11 @@ end
 
 function this.InitSettingBgm()
 	ui_sound_mgr.SceneLoadFinish() 
-    ui_sound_mgr.PlayBgSound("game_bgm")	
-    ui_sound_mgr.controlValue(0.5)
-    ui_sound_mgr.ControlCommonAudioValue(0.5)
+    ui_sound_mgr.PlayBgSound("game_bgm")
+	local volume = tonumber(hall_data.GetPlayerPrefs("music"))
+	ui_sound_mgr.controlValue(volume)
+	volume = tonumber(hall_data.GetPlayerPrefs("musiceffect"))
+    ui_sound_mgr.ControlCommonAudioValue(volume)
 end
 
 local chatTextTab = {"我是一个神枪手，打枪本领强！","今天忘记洗手了，牌敢不敢再臭点！","哎，你慢慢配牌，我去海边吹下风！","颤抖吧，这把要全垒打！","哈喽，快摊牌咯！","特殊牌，我要特殊牌！","嗨，你的枪生锈了！","为什么中枪的总是我，目仔koko滴！","我有事先走了，下次再玩吧！","这牌敢不敢再水一点！"}
@@ -1111,7 +1113,7 @@ function this.CardCompareHandler(callback)
 				--if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
 					this.cards[i] = {}
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then    	--检查是不是特殊牌型,特殊牌型不翻牌
-						if i ~= 1 or App.reconectPlacedCard then
+						if i ~= 1 or Player.cardObjs[1].transform.childCount == 0 then
 							for n = 1, 3 do
 								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 10]), Player.cardObjs[n])
 								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
@@ -1136,11 +1138,11 @@ function this.CardCompareHandler(callback)
 				--end
 			end
 		--end
-		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第一墩的积分数据
 		scoreData.index = 1
 		scoreData.totallScore = 0			
 		Notifier.dispatchCmd(cmdName.First_Group_Compare_result, scoreData)
+		coroutine.wait(1)
 		
 		--比中墩
 		--for j,k in ipairs(secondSort) do
@@ -1151,7 +1153,7 @@ function this.CardCompareHandler(callback)
 						-- local cards = Player:showSecondCardByType() 			--这里在通知UI界面显示相应排型
 						-- Notifier.dispatchCmd(cmdName.ShowPokerCard, cards)
 
-						if i ~= 1 or App.reconectPlacedCard then
+						if i ~= 1 or Player.cardObjs[4].transform.childCount == 0 then
 							for n = 4, 8 do
 								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n + 2]), Player.cardObjs[n])
 								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)
@@ -1176,18 +1178,18 @@ function this.CardCompareHandler(callback)
 				--end
 			end
 		--end
-		coroutine.wait(1)
 		--这里增加一个事件，通知UI更新第二墩的积分数据
 		scoreData.index = 2
 		scoreData.totallScore = 0
 		Notifier.dispatchCmd(cmdName.Second_Group_Compare_result, scoreData)
+		coroutine.wait(1)
 
 		--比尾墩
 		--for j,k in ipairs(threeSort) do
 			for i ,Player in ipairs(this.playerList) do
 				--if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
-						if i ~= 1 or App.reconectPlacedCard then
+						if i ~= 1 or Player.cardObjs[9].transform.childCount == 0 then
 							for n = 9, 13 do
 								local tran = newNormalUI("Prefabs/Card/"..tostring(Player.compareResult.stCards[n - 8]), Player.cardObjs[n])
 								tran.transform.localScale = Vector3.New(0.85, 0.85, 0.85)

@@ -323,7 +323,7 @@ function this.Update()
 		return
 	end
 	if leftTime <= 0 and curTime < timeSecond then
-		timeLbl.text = ("继续（" .. 10 .."s）")
+		timeLbl.text = ("继续")
 		return
 	end
 	if math.floor(leftTime) < 0 then

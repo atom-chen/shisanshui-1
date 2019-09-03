@@ -42,7 +42,7 @@ function this.UpdataInfo()
         slider.onDragFinished = function()
                 this.musicclick(slider)
             end
-        slider.value=tonumber(volume)
+        slider.value=tonumber(volume * 2)
     end
 
     this.toggle_musiceffect=child(this.transform,"setting_panel/panel_middle/toggle/toggle_musiceffect")
@@ -52,7 +52,7 @@ function this.UpdataInfo()
         slider.onDragFinished = function()
                 this.musiceffectclick(slider)
             end
-        slider.value=tonumber(volume)
+        slider.value=tonumber(volume * 2)
     end
 
     this.btn_change=child(this.transform,"setting_panel/panel_middle/toggle/btn_change")
@@ -167,7 +167,7 @@ end
 function this.musicclick(obj)
     local value=componentGet(obj.gameObject,"UISlider").value
     ui_sound_mgr.controlValue(value / 2) 
-    hall_data.SetPlayerPrefs("music",value)
+    hall_data.SetPlayerPrefs("music",value / 2)
 end
 
 function this.musiceffectclick(obj)

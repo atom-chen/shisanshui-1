@@ -2657,7 +2657,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3017
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -4234,13 +4234,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 3
-  mWidth: 184
+  mWidth: 264
   mHeight: 50
   mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.68
+  aspectRatio: 5.28
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114000013685555478, guid: 0551c895b2a94ad439811bd3bc6fcd97, type: 2}
@@ -6290,7 +6290,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3017
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

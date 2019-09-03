@@ -966,7 +966,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11458222, guid: 552438b608bb5eb4b90e6ac26e52dad6, type: 2}
-  mText: "\u53D6\u6D88"
+  mText: "\u786E\u5B9A"
   mFontSize: 48
   mFontStyle: 0
   mAlignment: 0

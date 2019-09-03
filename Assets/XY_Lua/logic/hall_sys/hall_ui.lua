@@ -63,9 +63,11 @@ end
 
 function this.InitSettingUI()
   ui_sound_mgr.SceneLoadFinish() 
-  ui_sound_mgr.PlayBgSound("hall_bgm")  
-  ui_sound_mgr.controlValue(0.5)
-  ui_sound_mgr.ControlCommonAudioValue(0.5)
+  ui_sound_mgr.PlayBgSound("hall_bgm")
+  local volume = tonumber(hall_data.GetPlayerPrefs("music"))
+  ui_sound_mgr.controlValue(volume)
+  volume = tonumber(hall_data.GetPlayerPrefs("musiceffect"))
+  ui_sound_mgr.ControlCommonAudioValue(volume)
 end
 --[[--
  * @Description: 逻辑入口  

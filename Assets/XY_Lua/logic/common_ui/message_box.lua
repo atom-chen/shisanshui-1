@@ -84,13 +84,13 @@ function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,
         if btnname[k]~=nil then
             local btn_sp=child(btn.transform,"Sprite");
             log(btn_sp.name)
-            componentGet(btn_sp.gameObject,"UISprite").spriteName=btnname[k]
-            componentGet(btn_sp.gameObject,"UISprite"):MakePixelPerfect()
-            if btnname[k]=="quding" then
-                componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName="a01"
-            else    
-                componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName="a02"
-            end
+            -- componentGet(btn_sp.gameObject,"UISprite").spriteName=btnname[k]
+            -- componentGet(btn_sp.gameObject,"UISprite"):MakePixelPerfect()
+            -- if btnname[k]=="quding" then
+            --     componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName="a01"
+            -- else    
+            --     componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName="a02"
+            -- end
 
         end 
         if  btnbacksprite~=nil and btnbacksprite[k]~=nil then 

@@ -38,6 +38,9 @@ local function OnPlayerEnter( tbl )
 	local uid = tbl["_para"]["_uid"]	
 
 
+	room_usersdata_center.AddUser(logicSeat,userdata)
+	
+	shisangshui_ui.SetPlayerInfo( viewSeat, userdata)
 --加载头像
 	local param={["uid"]=uid,["type"]=1}
 	http_request_interface.getGameInfo(param,function (code,m,str) 
@@ -166,8 +169,9 @@ local function OnGameDeal( tbl )
 			log("显示摆牌")
 			place_card.Show(player_component.CardList, recommendCards)
 		else
+			place_card.Show(player_component.CardList, recommendCards, isSpecial)
 			log("显示特殊牌型")
-			prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
+			--prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
 		end
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_DEAL)
 	end)
@@ -343,7 +347,8 @@ local function OnSyncTable( tbl )
 				
 				local nSpecialType = ePara.nSpecialType
 				if nSpecialType ~= nil and nSpecialType > 0 then
-					prepare_special.Show(stCards, nSpecialType, 3, ePara.recommendCards)
+					--prepare_special.Show(stCards, nSpecialType, 3, ePara.recommendCards)
+					place_card.Show(stCards, ePara.recommendCards, nSpecialType)
 				else
 					place_card.Show(stCards, ePara.recommendCards)
 				end
