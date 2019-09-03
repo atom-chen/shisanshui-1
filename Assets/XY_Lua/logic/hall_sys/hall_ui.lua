@@ -122,11 +122,14 @@ function this.ui_Top()
    if btn_share~=nil then
      addClickCallbackSelf(btn_share.gameObject,this.share,this)
    end
-   local btn_share = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_help")--玩法
-   if btn_share~=nil then
-     addClickCallbackSelf(btn_share.gameObject,this.help,this)
+   local btn_bindAgeng = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_bindAgeng")--玩法
+   if btn_bindAgeng~=nil then
+     addClickCallbackSelf(btn_bindAgeng.gameObject,this.BindAgeng,this)
    end
-
+   local btn_achievement = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_achievement")--玩法
+   if btn_bindAgeng~=nil then
+     addClickCallbackSelf(btn_achievement.gameObject,this.OpenRecordUI,this)
+   end
    local btn_setting = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_setting")--设置
    if btn_setting~=nil then
      addClickCallbackSelf(btn_setting.gameObject,this.setting,this)
@@ -246,6 +249,9 @@ function this.Onbtn_goldClick()
  function this.share()
   share_ui.Show()
   ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+end
+function this.BindAgeng()
+  UIManager:ShowUiForms("ClubInputUI", nil, nil, ClubInputUIEnum.InputCode)
 end
 function this.activity(obj1,obj2)
   waiting_ui.Show()

@@ -74,7 +74,7 @@ local sssroomDataInfo =
 	--当前局
 	cur_playNum = 8,
 	-- 人数
-	people_num = PeopleNum[1],
+	people_num = PeopleNum[3],
 	-- 加色
 	add_card= AddCard[1],
 	-- 大小鬼

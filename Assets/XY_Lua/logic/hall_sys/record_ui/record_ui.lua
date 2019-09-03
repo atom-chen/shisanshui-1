@@ -45,9 +45,23 @@ function this.Show()
    if WrapContent_openrecord ~= nil then
         WrapContent_openrecord.onInitializeItem = record_ui.OnUpdateItem_openrecord
    end
+    local closeBtn = child(this.transform, "sp_left/AnchorTopRight/closeBtn").gameObject
+   if closeBtn~=nil then
+     addClickCallbackSelf(closeBtn,this.OnCloseBtnClick,this)
+   end 
 
    sp_record=child(this.transform, "sp_left/sv_record/sp_record01")
    sp_openrecord=child(this.transform, "sp_left/sv_openrecord/sp_record01")
+end
+
+function this.OnCloseBtnClick()
+    ui_sound_mgr.PlayCloseClick()
+    if this.gameObject == nil then
+        return
+    else
+        GameObject.Destroy(this.gameObject)
+        this.gameObject = nil
+    end
 end
 
 function this.UpdateRoomRecordSimpleData(data,code) 
