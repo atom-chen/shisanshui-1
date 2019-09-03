@@ -30,6 +30,7 @@ end
  * @Description: 启动事件
  ]]
  function this.Awake()
+ 	App = {}
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);
@@ -52,7 +53,7 @@ function this.Start()
 	
 	--this.InitSettingUI()
 	login_sys.InitPlugins(true)	
-	--login_sys.AutoLogin("1111")	
+	login_sys.AutoLogin()	
 
 	if IS_URL_TEST == true then
 		newNormalUI("Prefabs/UI/testCmd/testUrl")

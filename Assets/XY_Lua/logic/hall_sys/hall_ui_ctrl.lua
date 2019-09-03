@@ -33,9 +33,10 @@ function this.HandleLevelLoadComplete()
 
     --查询游戏重连状态
     if firstLogin then
-        loadDataCor = coroutine.start(function ()
-            http_request_interface.getClientConfig(nil, this.OnGetClientConfig)
-        end)
+        join_room_ctrl.QueryState()--直接QueryState，不获取配置了
+        -- loadDataCor = coroutine.start(function ()
+        --     http_request_interface.getClientConfig(nil, this.OnGetClientConfig)
+        -- end)
         firstLogin = false
     end
 end

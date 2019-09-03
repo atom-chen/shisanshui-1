@@ -304,9 +304,9 @@ function getLogStr(fmt, ...)
     local r = arr[4]
     local times = os.date("%X", os.time())
     local str = string.format("[%s] %s", times, fmt)
-    -- if table.getn(list)>0 then
-    --     str = string.format(str,table.unpack(list))
-    -- end
+    if table.getn(list)>0 then
+        str = string.format(str,unpack(list))
+    end
     for i=4,#arr do 
         str = str  .. "\n" .. arr[i]
     end  
@@ -363,9 +363,11 @@ function log(fmt, ...)
 
 
     --if Setting.setting.isDebug == true then
+    if tostring(Application.platform)  ~= "Android" and tostring(Application.platform) ~= "IPhonePlayer" then
         local msg = getLogStr(fmt, ...) or "nil"
        -- UnityEngine.Debug('[INFO] {0} ')
         UnityEngine.Debug.LogFormat('[INFO] {0} ',msg)
+    end
     --end
 end
 

@@ -138,12 +138,12 @@ local function OnPlayStart( tbl )
 end
 
 local function OnCompareStart(tbl)
+	shisangshui_ui.SetRePlaceBtnState(false)
 	shisangshui_ui.ShowInviteBtn(false)
 	shisangshui_ui.ShowDissolveRoom(false)
 	coroutine.start(function ()
 		 --播放比牌动画
    		shisangshui_ui.PlayerStartGameAnimation()
-    	log("开始播放比牌动画")
     	coroutine.wait(1)
    		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.COMPARE_START)
 	end)
@@ -154,7 +154,7 @@ local function OnGameDeal( tbl )
 	shisangshui_ui.IsShowBeiShuiBtn(false)
 
 	shisangshui_ui.DealCard(nil, function()
-		shisangshui_ui.ShowCard(0)
+		shisangshui_ui.ShowCard(nil, false)
 		player_component.CardList = tbl["_para"]["stCards"]
 		recommendCards = tbl["_para"]["recommendCards"]
 		log("牌的数据"..tostring(player_component.CardList))
@@ -354,7 +354,7 @@ local function OnSyncTable( tbl )
 				for i = 2, #playerList do
 					playerList[i].ShowAllCard(180)
 				end
-				
+				App.reconectPlacedCard = true
 				playerList[1]:SetCardMesh(stCards)
 			end
 		end
@@ -860,7 +860,7 @@ local function OnChooseOK(tbl)
 	log("摆牌完成,妈的还不调用不要你了")
 	--需要扣牌
 	local logicSeat = room_usersdata_center.GetLogicSeatByStr(tbl["_src"])
-	shisangshui_ui.ShowCard(logicSeat)
+	shisangshui_ui.ShowCard(logicSeat, true)
 
 	--Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
 end

@@ -160,7 +160,7 @@ function play_mode_shisangshui.create(levelID)
 		tableComponent.ChooseOKCard(tbl)
 
 		local viewSeat = gvbl(tbl["_src"])
-		shisangshui_ui.ShowCard(viewSeat)
+		shisangshui_ui.ShowCard(viewSeat, true)
 		Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.CHOOSE_OK)
 	end
 
