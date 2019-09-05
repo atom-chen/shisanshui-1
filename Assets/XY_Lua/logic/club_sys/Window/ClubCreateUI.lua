@@ -66,13 +66,13 @@ function ClubCreateUI:OnOpen()
 	self.roomCardLabel.text = "X" .. self.cost
 	self.defaultBtnLabelGo:SetActive(self.cost == 0)
 	if self.model:IsAgent() then
-		self.connection:SetActive(false)
-		self.intro:SetActive(false)
+--		self.connection:SetActive(false)
+--		self.intro:SetActive(false)
 		self.gamesBg.height = 288
 		self.gameLabel.height = 230
 	else
-		self.connection:SetActive(true)
-		self.intro:SetActive(true)
+--		self.connection:SetActive(true)
+--		self.intro:SetActive(true)
 		self.gamesBg.height = 60
 		self.gameLabel.height = 38
 	end
@@ -98,7 +98,7 @@ end
 function ClubCreateUI:ClearContent()
 	self.nameLabel.text = ""
 	self.nameInputLabel.value = ""
-	self.nameInputLabel.defaultText = "11111111111111111111"--LanguageMgr.GetWord(10001)
+	self.nameInputLabel.defaultText = "输入俱乐部名称"--LanguageMgr.GetWord(10001)
 
 	self.locationLabel.text = "11111111111111111111"--LanguageMgr.GetWord(10003)
 	self.gameLabel.text = "11111111111111111111"--LanguageMgr.GetWord(10004)

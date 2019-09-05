@@ -29,8 +29,8 @@ function ClubUI:OnInit()
 	self.togglesList = {}
 	self:InitToggles()
 
-	self.shareBtnGo = child(self.gameObject, "Panel_Top/inviteBtn").gameObject
-	addClickCallbackSelf(self.shareBtnGo, self.OnShareClick, self)
+--	self.shareBtnGo = child(self.gameObject, "Panel_Top/inviteBtn").gameObject
+--	addClickCallbackSelf(self.shareBtnGo, self.OnShareClick, self)
 
 	--self.shareBtnGo:SetActive(not G_isAppleVerifyInvite)
 
@@ -105,11 +105,11 @@ function ClubUI:isShowNonClubView(callback)
 	if isEmpty(self.model.unofficalClubList) then
 		self.Panel_Middle.gameObject:SetActive(false)
 		self.nonClubView:SetActive(true)
-		self.shareBtnGo:SetActive(false)
+--		self.shareBtnGo:SetActive(false)
 	else
 		self.Panel_Middle.gameObject:SetActive(true)
 		self.nonClubView:SetActive(false)
-		self.shareBtnGo:SetActive(true and not G_isAppleVerifyInvite)
+--		self.shareBtnGo:SetActive(true and not G_isAppleVerifyInvite)
 		if callback then
 			callback()
 		end
@@ -155,9 +155,10 @@ function ClubUI.OnCurClubChange()
 	--log(self)
 	self:UpdateCurClub()
 	-- 切换俱乐部 刷新
-	if self.viewList[self.curIndex] ~= nil then
-		self.viewList[self.curIndex]:OnOpen()
-	end
+	--没的刷新了，直接显示了
+	-- if self.viewList[self.curIndex] ~= nil then
+	-- 	self.viewList[self.curIndex]:OnOpen()
+	-- end
 end
 
 function ClubUI:UpdateCurClub()
@@ -250,13 +251,13 @@ function ClubUI:SetToggle(index, force)
 	end
 
 	self.curIndex = index
-	if self.currentToggleSp ~= nil then
-		self.currentToggleSp[1].spriteName = "button_25"
+--	if self.currentToggleSp ~= nil then
+--		self.currentToggleSp[1].spriteName = "button_25"
 --		self.currentToggleSp[2].myFormat = UILabelFormat.F42
 --		self.currentToggleSp[2]:resetMyFormatData(true)
-	end
+--	end
 	self.currentToggleSp = self.togglesList[index]
-	self.currentToggleSp[1].spriteName = "button_26"
+--	self.currentToggleSp[1].spriteName = "button_26"
 --	self.currentToggleSp[2].myFormat = UILabelFormat.F53
 
 	--self.currentToggleSp[2]:resetMyFormatData(true)

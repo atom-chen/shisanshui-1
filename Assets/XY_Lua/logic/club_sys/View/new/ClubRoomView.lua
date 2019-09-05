@@ -151,12 +151,12 @@ function ClubRoomView:OnItemClick(item)
 	-- end)
 	
 	--TER0327-label
-	local title = LanguageMgr.GetWord(10230)
-	local content, contentTbl = ShareStrUtil.GetRoomShareStr(item.info.gid,item.info,true)
+	local title = "文字丢失"--LanguageMgr.GetWord(10230)
+	local content, contentTbl = "文字丢失"--ShareStrUtil.GetRoomShareStr(item.info.gid,item.info,true)
 	if contentTbl then
-		local subTitle = LanguageMgr.GetWord(10049, GameUtil.GetGameName(item.info.gid), string.gsub(contentTbl[1], "、", ""))
+		local subTitle = "文字丢失"--LanguageMgr.GetWord(10049, GameUtil.GetGameName(item.info.gid), string.gsub(contentTbl[1], "、", ""))
 		contentTbl[1] = ""
-		local contentStr = LanguageMgr.GetWord(10231)..table.concat(contentTbl)
+		local contentStr = "文字丢失"--LanguageMgr.GetWord(10231)..table.concat(contentTbl)
 		contentTbl = {title,subTitle,contentStr}
 	end
 	MessageBox.ShowYesNoBox(contentTbl,function()

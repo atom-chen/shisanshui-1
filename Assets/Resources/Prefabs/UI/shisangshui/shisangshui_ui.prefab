@@ -1253,7 +1253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000010591897992
 GameObject:
   m_ObjectHideFlags: 1
@@ -25144,7 +25144,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3024
+  startingRenderQueue: 3026
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -28586,7 +28586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7880bed3e784c4594111ca4a264f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1000010763655526}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -29800,7 +29800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7880bed3e784c4594111ca4a264f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1000011668911332}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -29850,7 +29850,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3023
+  startingRenderQueue: 3025
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

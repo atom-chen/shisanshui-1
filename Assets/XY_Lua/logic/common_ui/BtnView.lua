@@ -19,8 +19,8 @@ function BtnView:SetInfo(info, callback, target)
 	self.label.text = info.text
 	self.callback = callback
 	self.target = target
-	local bgSp = info.bgSp or "button_03"
-	self.bgSp.spriteName = bgSp
+	-- local bgSp = info.bgSp or "button_03"
+	-- self.bgSp.spriteName = bgSp
 	-- if self.bgSp.spriteName == "button_03" then
 	-- 	self.label:SetLabelFormat(UILabelFormat.F53)
 	-- else
