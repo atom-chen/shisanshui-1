@@ -21,11 +21,11 @@ function BtnView:SetInfo(info, callback, target)
 	self.target = target
 	local bgSp = info.bgSp or "button_03"
 	self.bgSp.spriteName = bgSp
-	if self.bgSp.spriteName == "button_03" then
-		self.label:SetLabelFormat(UILabelFormat.F53)
-	else
-		self.label:SetLabelFormat(UILabelFormat.F37)
-	end
+	-- if self.bgSp.spriteName == "button_03" then
+	-- 	self.label:SetLabelFormat(UILabelFormat.F53)
+	-- else
+	-- 	self.label:SetLabelFormat(UILabelFormat.F37)
+	-- end
 end
 
 function BtnView:OnClick()

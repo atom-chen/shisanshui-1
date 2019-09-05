@@ -1,4 +1,4 @@
-local clubModel = model_manager:GetModel("ClubModel")
+local clubModel = ClubModel
 local AutoOpenRoomItem = require("logic/club_sys/View/new/AutoOpenRoomItem")
 local base = require("logic.framework.ui.uibase.ui_window")
 local autoCreateRoom_ui = class("autoCreateRoom_ui",base)
@@ -9,7 +9,7 @@ local addClickCallbackSelf = addClickCallbackSelf
 local isOpen = false
 
 function autoCreateRoom_ui:OnInit()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.notAutoClose = false
 	self.itemList = {}
 	
@@ -119,7 +119,7 @@ function autoCreateRoom_ui:OnRefreshDepth()
 	local uiEffect = child(self.gameObject.transform, "panel/Panel_Top/Title/Effect_youxifenxiang")
 	if uiEffect and self.sortingOrder then
 		local topLayerIndex = self.sortingOrder +self.m_subPanelCount +1
-		Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
+--		Utils.SetEffectSortLayer(uiEffect.gameObject, topLayerIndex)
 	end
 end
 --回调刷新自动开房列表

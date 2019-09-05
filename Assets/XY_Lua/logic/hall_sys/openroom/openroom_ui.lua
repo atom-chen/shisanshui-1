@@ -632,6 +632,9 @@ function openroom_ui:OnCreateBtnClick()
 		tables.joker = 0
 		tables.leadership = false
 		tables.pnum = 2
+		tables.costtype = 1
+		tables.nReadyTimeOut = 5
+		tables.nChooseCardTypeTimeOut = 60		
 		if self.clubGameGidList and self.cid then
 			tables.cid = self.cid
 			join_room_ctrl.CreateClubRoom(tables)

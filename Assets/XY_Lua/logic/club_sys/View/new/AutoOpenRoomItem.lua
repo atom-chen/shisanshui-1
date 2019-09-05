@@ -2,7 +2,7 @@ local base = require "logic/framework/ui/uibase/ui_view_base"
 local AutoOpenRoomItem = class("AutoOpenRoomItem", base)
 
 function AutoOpenRoomItem:InitView()
-	self.model = model_manager:GetModel("ClubModel")
+	self.model = ClubModel
 	self.nameLabel = self:GetComponent("name", typeof(UILabel))
 	self.costtypeLabel = self:GetComponent("costType", typeof(UILabel))
 	self.rulesLabel = self:GetComponent("openRules", typeof(UILabel))

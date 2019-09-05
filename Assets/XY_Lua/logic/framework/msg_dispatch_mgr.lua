@@ -397,6 +397,9 @@ function this.UpdataInfoHandle(msg)
     end
     local t = json.decode(s)
     if t ~= nil then 
+      if t["type"]==10003 then 
+        Notifier.dispatchCmd(cmdName.MSG_EmailMsg,t)
+      end
       if t["type"] == 10004 then
           http_request_interface.getAccount("",function ( code,m,str )
               local t=ParseJsonStr(str) 
@@ -409,5 +412,33 @@ function this.UpdataInfoHandle(msg)
               end
           end)
       end
+      if t["type"] == 10006 then 
+        Notifier.dispatchCmd(cmdName.MSG_HASACTIVITY,t.data.hasact)
+      end
+      if t["type"]==10007 then 
+        if tonumber(t.data.appid) ~= global_define.appConfig.appId then   --验证appid过滤公告
+          return
+        end 
+        -- 推送不做区分
+        -- if tonumber(t.data.dtype)==tonumber(data_center.GetUserInfoTbl().passport.dtype) or tonumber(t.data.dtype)==0 then  --0全部 1安卓 2IOS 
+        --  if tonumber(t.data.ptype)==tonumber(data_center.GetUserInfoTbl()["xlb"].ptype) or tonumber(t.data.ptype)==0 then --0全部 1代理商 2 普通 
+            UIManager:ShowUiForms("global_notice_ui", nil, nil,t.data.msg,5)
+          -- end
+        -- end
+      end
+      if t["type"]==10008 then 
+        game_scene.gotoLogin() 
+        game_scene.GoToLoginHandle() 
+      end
+      
+      if t["type"]==10009 then 
+        Notifier.dispatchCmd(cmdName.MSG_FeedBackMsg,t)
+      end
+
+      if t["type"]==10015 then 
+        model_manager:GetModel("ClubModel"):OnPushBeAgent()
+        -- Notifier.dispatchCmd(HttpCmdName.ClubBindAgent, t)
+      end
+      Notifier.dispatchCmd(GameEvent.OnPushMsg, t)
    end
 end
