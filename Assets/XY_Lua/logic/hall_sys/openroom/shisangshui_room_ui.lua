@@ -303,11 +303,15 @@ function this.AddChip3Click(gameobject)
 end
 
 function this.AddPay0Click()
-	-- body
+	gameDataInfo.costtype = PayType[2]
+	room_data.SetSssRoomDataInfo(gameDataInfo)
+	log("gameDataInfo.costtype: "..tostring(gameDataInfo.costtype))
 end
 
 function this.AddPay1Click()
-	-- body
+	gameDataInfo.costtype = PayType[1]
+	room_data.SetSssRoomDataInfo(gameDataInfo)
+	log("gameDataInfo.costtype: "..tostring(gameDataInfo.costtype))
 end
 
 function this.PlaceTime0Click()

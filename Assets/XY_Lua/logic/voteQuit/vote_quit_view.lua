@@ -138,8 +138,8 @@ function vote_quit_view:SetItemState(go, value)
 	local bgSp = go:GetComponent(typeof(UISprite))
 	local iconSp = subComponentGet(go.transform, "icon", typeof(UISprite))
 
-	bgSp.spriteName = (value and "q15") or "q14"
-	iconSp.spriteName = (value and "q10") or "q9"
+--	bgSp.spriteName = (value and "q15") or "q14"
+--	iconSp.spriteName = (value and "q10") or "q9"
 end
 
 -- 背景图片 左对齐

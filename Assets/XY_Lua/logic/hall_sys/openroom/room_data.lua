@@ -15,6 +15,14 @@ room_data = {}
 local this = room_data 
 
 --局数
+PayType = {
+	[1] = 0,
+	[2] = 1, 
+	[3] = 2,
+	[4] = 3
+}
+
+--局数
 PlayNum = {
 	[1] = 10,
 	[2] = 20, 
@@ -92,6 +100,7 @@ local sssroomDataInfo =
 	placeCardTime = 180,
 	nChooseCardTypeTimeOut = 60,
 	nReadyTimeOut = 30,
+	costtype = PayType[2],
 }
 
 
@@ -221,12 +230,17 @@ function this.OnGetSssCreateRoomData(code, m, str)
 	log(s)
 	local t=ParseJsonStr(s)
 	
-	log("dataTbl.data------------------------------"..str)
-
-	card_data_manage.roomMasterUid = room_data.GetUid()   ------创建房间获取房主uid
-	if t["data"]["rno"] ~= nil then
-		join_room_ctrl.JoinRoomByRno(t["data"]["rno"])
-	end	
+    if tonumber(t.ret) == 102 then
+        local box= message_box.ShowGoldBox("钻石不足",nil,1,{function ()
+                message_box:Close()
+            end},{"fonts_01"})
+    else
+		log("dataTbl.data------------------------------"..str)
+		card_data_manage.roomMasterUid = room_data.GetUid()   ------创建房间获取房主uid
+		if t["data"]["rno"] ~= nil then
+			join_room_ctrl.JoinRoomByRno(t["data"]["rno"])
+		end	
+	end
 end
 
 --在open_room_data根据房号查找房间后调用 PHP返回的数据，然后进入C++服务器请求

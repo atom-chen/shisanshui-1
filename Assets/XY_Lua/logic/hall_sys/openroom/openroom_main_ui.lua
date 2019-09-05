@@ -89,6 +89,7 @@ function this.OnBtnCreateClick(obj)
 		config_rule["rounds"] = gameDataInfo.play_num
 		config_rule["pnum"] = gameDataInfo.people_num
 		config_rule["nChooseCardTypeTimeOut"] = gameDataInfo.nChooseCardTypeTimeOut
+		config_rule["costtype"] = gameDataInfo.costtype
 		config_rule["nReadyTimeOut"] = gameDataInfo.nReadyTimeOut
 		config_rule["leadership"] = gameDataInfo.isZhuang
 		config_rule["joker"] = gameDataInfo.add_ghost

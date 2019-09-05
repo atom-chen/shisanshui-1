@@ -56,6 +56,7 @@ function this.EnterGameReq(urlValue, gameData, dst)
 	cfgTbl["nWaterBanker"] = gameData["nWaterBanker"]
 	cfgTbl["nMaxMult"] = gameData["nMaxMult"]
 	cfgTbl["nChooseCardTypeTimeOut"] = gameData["nChooseCardTypeTimeOut"]
+	cfgTbl["costtype"] = gameData["costtype"]
 	cfgTbl["nReadyTimeOut"] = gameData["nReadyTimeOut"]
 	configTbl["clog"] = {}
 	configTbl["cost"] = "2"

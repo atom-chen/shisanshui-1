@@ -293,17 +293,18 @@ local function OnSyncTable( tbl )
 	local player_state = ePara.stPlayerState 	-- 玩家状态
 	local player_UID = ePara.stPlayerUid 	-- 玩家状态
 	
-	local play_mshisangshui = play_mode_shisangshui.GetInstance()
-	local tableCtl = play_mshisangshui.GetTabComponent()
-	local playerList = tableCtl.PlayerList
+	--local play_mshisangshui = play_mode_shisangshui.GetInstance()
+	local playerList = shisangshui_ui.playerList
+	--local playerList = tableCtl.PlayerList
 	
 	local stCards = ePara.stCards
 	roomdata_center.isStart = true
 	if game_state == "prepare" then  
 		--牌隐藏
-		for i = 1, #playerList do
-			playerList[i].playerObj:SetActive(false)
-		end		--准备阶段
+		--for i = 1, #playerList do
+			--playerList[i].playerObj:SetActive(false)
+		--end		--准备阶段
+		shisangshui_ui.ShowCard(nil, true)
 		--显示准备提示准备
 		for i=1,#player_state do
 			--准备按扭
@@ -331,9 +332,10 @@ local function OnSyncTable( tbl )
 	else
 		shisangshui_ui.HideReadyBtn()
 		shisangshui_ui.SetAllPlayerReady(false)
-		for i = 1, #playerList do
-			playerList[i].playerObj:SetActive(true)
-		end
+		--for i = 1, #playerList do
+			--playerList[i].playerObj:SetActive(true)
+		--end
+		shisangshui_ui.ShowCard(nil, true)
 		--摆牌阶段
 		if (game_state == "deal" or game_state == "choose") then
 			if stCards == nil then
@@ -355,28 +357,34 @@ local function OnSyncTable( tbl )
 			--已摆牌
 			elseif ePara.nChoose == 1 or  ePara.nChoose == 2 then
 				place_card.Hide()
-				playerList[1].ShowAllCard(0)
-				for i = 2, #playerList do
-					playerList[i].ShowAllCard(180)
-				end
-				App.reconectPlacedCard = true
-				playerList[1]:SetCardMesh(stCards)
+				--playerList[1].ShowAllCard(0)
+
+				shisangshui_ui.OnPlaceCardOk(stCards)
+				-- for i = 2, #playerList do
+				-- 	playerList[i].ShowAllCard(180)
+				-- end
+				--playerList[1]:SetCardMesh(stCards)
 			end
 		end
 		
 		if game_state == "compare" then 
 			place_card.Hide()
-			for i = 1, #playerList do
-				playerList[i].playerObj:SetActive(true)
-			end
+			--牌隐藏
+			--for i = 1, #playerList do
+				--playerList[i].playerObj:SetActive(false)
+			--end
+			shisangshui_ui.ShowCard(nil, true)
+			-- for i = 1, #playerList do
+			-- 	playerList[i].playerObj:SetActive(true)
+			-- end
 			local stCompare = ePara.stCompare
 			local stAllCompareData = stCompare.stAllCompareData
-			for i = 1, #playerList do
-				playerList[i].ShowAllCard(0)
-				local _, logicId = room_usersdata_center.GetUserByViewSeat(i)
-				local comp_cards = stAllCompareData[i].stCards
-				playerList[logicId]:SetCardMesh(comp_cards)
-			end
+			-- for i = 1, #playerList do
+			-- 	playerList[i].ShowAllCard(0)
+			-- 	local _, logicId = room_usersdata_center.GetUserByViewSeat(i)
+			-- 	local comp_cards = stAllCompareData[i].stCards
+			-- 	playerList[logicId]:SetCardMesh(comp_cards)
+			-- end
 			
 		end
 

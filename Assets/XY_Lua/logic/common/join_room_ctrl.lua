@@ -74,6 +74,7 @@ function this.JoinRoomByRno(rno)
                     k.nWaterBanker = dataTbl.data.cfg.leadership
                     k.nMaxMult = dataTbl.data.cfg.maxfan
                     k.nChooseCardTypeTimeOut = dataTbl.data.cfg.nChooseCardTypeTimeOut
+                    k.costtype = dataTbl.data.cfg.costtype
                     k.nReadyTimeOut = dataTbl.data.cfg.nReadyTimeOut
                     log(k)
 					
@@ -85,6 +86,7 @@ function this.JoinRoomByRno(rno)
 					room_data.GetSssRoomDataInfo().add_ghost = k.nGhostAdd
 					room_data.GetSssRoomDataInfo().max_multiple = k.nMaxMult
                     room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut = k.nChooseCardTypeTimeOut
+                    room_data.GetSssRoomDataInfo().costtype = k.costtype
                     room_data.GetSssRoomDataInfo().nReadyTimeOut = k.nReadyTimeOut
 					
                     card_data_manage.roomMasterUid = dataTbl.data.uid

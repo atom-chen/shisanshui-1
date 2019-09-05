@@ -512,7 +512,7 @@ function this.CardClick(obj, fast)
 		table.remove(selectDownCards, indexKey)
 	else
 		if obj.transform.localScale ~= Vector3.New(0.9, 0.9, 0.9) then
-			Trace("换牌错误")
+			log("换牌错误")
 			return
 		end
 		if selectUpCard == nil then
@@ -682,13 +682,14 @@ function this.CardBgClick(obj)
 		
 		local dun, dun_no = this.GetDunNo(place_up_index)
 		up_placed_cards[dun][dun_no] = cardData
+		log("显示已经摆上去牌的数量"..place_index)
 		place_index = place_index + 1
 		if place_index == 14 then
 			this.PlaceCardFinish()
 			break
 		end
 		place_up_index = place_up_index + 1
-		 	end
+ 	end
 	for k,v in ipairs(selectDownCards) do
 		selectDownCards[k] = nil
 	end
@@ -1203,6 +1204,7 @@ end
 
 function this.XiangGongTip()
 	isXiangGong = this.XiangGong()
+	log("相公检查"..tostring(isXiangGong))
 	local errorTipLbl = child(this.transform, "Panel_Bottom/prepare/errorTipLbl")
 	if errorTipLbl ~= nil then
 		if isXiangGong then
@@ -1214,11 +1216,56 @@ function this.XiangGongTip()
 end
 
 function this.XiangGong()
-	local xianggong = LibLaiziCardLogic:CompareCards_Laizi(this.CardGroup(1), this.CardGroup(2))
-	log("isXianggong: "..tostring(xianggong))
+	local xianggong = LibLaiziCardLogic:CompareCards_Laizi(this.CardGroup(2), this.CardGroup(3))
+	log(this.CardGroup(1))
+	log(this.CardGroup(2))
+	log(this.CardGroup(3))
 	if xianggong >= 0 then
-		xianggong = LibLaiziCardLogic:CompareCards_Laizi(this.CardGroup(2), this.CardGroup(3))
+		log(xianggong)
+		xianggong = LibLaiziCardLogic:CompareCards_Laizi(this.CardGroup(1), this.CardGroup(2))
 		if xianggong >= 0 then
+			return false
+		else
+			log("自动替换中，后墩造成的相公")
+			--自动替换中，后墩造成的相公	
+			local confirmCards = {}
+			for i = 1, 5 do
+				confirmCards[i + 5] = up_placed_cards[1][i].card
+			end
+			for i = 1, 5 do
+				confirmCards[i] = up_placed_cards[2][i].card
+			end
+			for i = 1, 3 do
+				confirmCards[i + 10] = up_placed_cards[3][i].card
+			end
+
+			local change_cards = this.FindSameCard(confirmCards)
+			for i = 1, #change_cards do
+				local destOjbPos = cardPlaceTranList[i]
+				local cardNum = change_cards[i]
+				if cardTranTbl[cardNum] == nil then
+					log("推荐的牌有一张找不到："..tostring(cardNum))
+					fast_tip.Show("推荐的牌有一张找不到,推荐牌型错误")
+					return
+				end
+				cardTranTbl[cardNum].tran.transform:DOLocalMove(destOjbPos.tran.transform.localPosition, 0.3, true)
+				--cardTranTbl[cardNum].tran.transform:DOScale(Vector3.New(0.65, 0.65, 0.65), 0.5)
+				local parameterData = UIEventListener.Get(cardTranTbl[cardNum].tran.gameObject).parameter
+				parameterData.cardType = CardType[3]
+				parameterData.up_index = i
+				
+				local dun, dun_no =  this.GetDunNo(i)
+				up_placed_cards[dun][dun_no] = parameterData
+				this.UpdateLeftCard(left_card, parameterData.card)
+			end
+			place_index = 14
+			--]]
+			for i = 1, #cardPlaceTranList do
+				cardPlaceTranList[i].blank = true
+			end
+			this.DunTipShow(true)
+			selectDownCards = {}
+			--this.PlaceCardFinish()		
 			return false
 		end
 	end
