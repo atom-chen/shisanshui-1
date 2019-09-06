@@ -68,7 +68,8 @@ local function Onbtn_readyClick()
 end
 
 local function Onbtn_rePlaceClick()
-	this.ShowCard(1, false)
+	this.ClearCards(1)
+	--this.ShowCard(1, false)
 	place_card.gameObject:SetActive(true)
 end
 
@@ -621,7 +622,7 @@ function this.SetPlayerLineState(viewSeat, isOnLine )
 end
 
 function this.SetHideTotaPoints()
-	for i,v in ipairs(this.playerList) do
+	for i,v in pairs(this.playerList) do
 		v.HideTotalPoints()
 	end
 end
@@ -642,7 +643,7 @@ function this.SetPlayerReady( viewSeat,isReady )
 end
 
 function this.SetAllPlayerReady(isReady)
-	for i,v in ipairs(this.playerList) do
+	for i,v in pairs(this.playerList) do
 		v.SetReady(isReady)
 	end
 end
@@ -729,11 +730,12 @@ end
 
 --é‡ç½®æ‰€æœ‰çŠ¶æ€ï¼Œç”¨äºŽæ¸¸æˆç»“æŸåŽ
 function this.ResetAll()
-	for i=1,#this.playerList do
-		
-	if room_data.GetSssRoomDataInfo().isZhuang == false then
-		this.playerList[i].SetBanker(false)
-	end
+	log(#this.playerList)
+	for i, v in pairs(this.playerList) do
+		log(i)
+		if room_data.GetSssRoomDataInfo().isZhuang == false then
+			this.playerList[i].SetBanker(false)
+		end
 		this.playerList[i].HideTotalPoints()
 	end
 	
@@ -972,7 +974,7 @@ function this.ShowCard(index, state)
 	print(index)
 	print(state)
 	if index == nil then--全部显示
-		for i = 1, #this.playerList do
+		for i, v in pairs(this.playerList) do
 			for j = 1, 13 do
 				this.playerList[i].cardObjs[j].gameObject:SetActive(state)
 			end
@@ -1006,7 +1008,7 @@ function this.DealCard(data, callback)
 		this.xipai:Play()
 		coroutine.wait(1.8)
     	this.xipai.gameObject:SetActive(false)
-		for i = 1, #this.playerList do
+		for i , v in pairs(this.playerList) do
 			--this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]
 			for j = 1, 13 do
 				this.playerList[i].cardObjs[j].gameObject:SetActive(true)
@@ -1042,7 +1044,7 @@ function this.CompareStart(callback)
 end
 
 function this.ClearCards(index, leave)
-	log("清理所有牌")
+	log("清理所有牌"..tostring(index))
 	if index == nil then
 		if this.cards ~= nil then
 			for i, v in pairs(this.cards) do
@@ -1065,18 +1067,28 @@ function this.ClearCards(index, leave)
 			this.myCards = {}
 		end
 	else
-		for j, k in pairs(this.cards[index]) do
-			if k ~= nil then
-				GameObject.Destroy(k.gameObject)
-				k = nil
+		if index == 1 then
+			for j, k in pairs(this.myCards) do
+				if k ~= nil then
+					GameObject.Destroy(k.gameObject)
+					k = nil
+				end
 			end
+			this.myCards = {}
+		else
+			for j, k in pairs(this.cards[index]) do
+				if k ~= nil then
+					GameObject.Destroy(k.gameObject)
+					k = nil
+				end
+			end
+			this.cards[index] = {}
 		end
-		this.cards[index] = {}
 	end
 end
 
 function this.HideDunCardType()
-	for i ,Player in ipairs(this.playerList) do
+	for i ,Player in pairs(this.playerList) do
 		Player.ShowDunScore(false)
 	end
 end
@@ -1108,7 +1120,7 @@ function this.CardCompareHandler(callback)
 	coroutine.start(function()
 		--比头墩
 		--for j,k in ipairs(firstSort) do
-			for i ,Player in ipairs(this.playerList) do
+			for i ,Player in pairs(this.playerList) do
 					log(Player.compareResult)
 				--if tonumber(Player.compareResult["nOpenFirst"]) == tonumber(k) then
 					this.cards[i] = {}
@@ -1146,7 +1158,7 @@ function this.CardCompareHandler(callback)
 		
 		--比中墩
 		--for j,k in ipairs(secondSort) do
-			for i ,Player in ipairs(this.playerList) do
+			for i ,Player in pairs(this.playerList) do
 				--if tonumber(Player.compareResult["nOpenSecond"]) == tonumber(k)  then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then 	--检查是不是特殊牌型,特殊牌型不翻牌
 						-- Player:PlayerGroupCard("Group2")
@@ -1186,7 +1198,7 @@ function this.CardCompareHandler(callback)
 
 		--比尾墩
 		--for j,k in ipairs(threeSort) do
-			for i ,Player in ipairs(this.playerList) do
+			for i ,Player in pairs(this.playerList) do
 				--if tonumber(Player.compareResult["nOpenThird"]) == tonumber(k) then
 					if tonumber(Player.compareResult["nSpecialType"]) < 1 then --检查是不是特殊牌型,特殊牌型不翻牌
 						if i ~= 1 or Player.cardObjs[9].transform.childCount == 0 then
@@ -1312,7 +1324,7 @@ function this.PlayGunAnim()
 		--this.gun:SetActive(false)
 		
 		
-		for i, v in ipairs(this.playerList) do
+		for i, v in pairs(this.playerList) do
 			if v.compareResult["nSpecialType"] ~= 0 and v.compareResult["nSpecialType"] ~= nil then
 				log("打枪完成, 开始特殊牌型展示")
 				special_card_show.Show(v.compareResult["stCards"], v.compareResult["nSpecialType"], 2)
@@ -1334,7 +1346,7 @@ function this.PlayGunAnim()
 		
 		--结算动画处理
 		local totalPoints = {}
-		for i,player in ipairs(this.playerList) do
+		for i,player in pairs(this.playerList) do
 			local points = player.compareResult["nTotallScore"]
 			table.insert(totalPoints,points)
 			this.ShowPlayerTotalPoints(player.viewSeat,points)

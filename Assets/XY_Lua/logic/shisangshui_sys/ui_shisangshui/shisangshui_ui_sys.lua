@@ -344,6 +344,7 @@ local function OnSyncTable( tbl )
 			end
 			--未摆牌
 			if ePara.nChoose == 0 then
+				shisangshui_ui.ShowCard(nil, false)
 				local timeo = ePara.nleftTime
 				room_data.SetPlaceCardSerTime(timeo)
 				
@@ -542,6 +543,7 @@ end
 local function OnVoteEnd()
 	vote_quit_ui.Hide()
 	shisangshui_ui.voteView:Hide()
+	message_box.ShowGoldBox("打完本局自动解散",{function ()message_box:Close()end},{"fonts_01"})
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.OnVoteEnd)
 end
 

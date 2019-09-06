@@ -61,6 +61,7 @@ function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,
     this.lb_content_g=componentGet(lb_content_gt.gameObject,"UILabel") 
     this.lb_content_g.text=content  
 
+    if btnNumber == nil then btnNumber = 1 end
     for k = 1, btnNumber do
         local btn=child(this.transform,"bg/sv_gold/btn_grid/btn_0"..tostring(k)) 
         if btn~=nil then
@@ -81,9 +82,9 @@ function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,
             addClickCallbackSelf(btn.gameObject,btnCallback[k],this) 
         end
         btn.gameObject:SetActive(true)
-        if btnname[k]~=nil then
-            local btn_sp=child(btn.transform,"Sprite");
-            log(btn_sp.name)
+ --       if btnname[k]~=nil then
+ --           local btn_sp=child(btn.transform,"Sprite");
+--            log(btn_sp.name)
             -- componentGet(btn_sp.gameObject,"UISprite").spriteName=btnname[k]
             -- componentGet(btn_sp.gameObject,"UISprite"):MakePixelPerfect()
             -- if btnname[k]=="quding" then
@@ -92,10 +93,10 @@ function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,
             --     componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName="a02"
             -- end
 
-        end 
-        if  btnbacksprite~=nil and btnbacksprite[k]~=nil then 
-            componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName=btnbacksprite[k]
-        end
+ --       end 
+        -- if  btnbacksprite~=nil and btnbacksprite[k]~=nil then 
+        --     componentGet(child(btn.transform,"Background").gameObject,"UISprite").spriteName=btnbacksprite[k]
+        -- end
 	end 
 end
  
