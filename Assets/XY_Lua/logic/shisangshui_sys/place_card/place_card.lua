@@ -648,7 +648,7 @@ function this.CardBgClick(obj)
 		local CanPlaceMaxPos = this.GetMaxPosInDun (place_up_index)
 		if select_num > CanPlaceMaxPos then
 			print("select_num: "..tostring(select_num).." PosNUM: "..tostring(CanPlaceMaxPos))
-			local box= message_box.ShowGoldBox(GetDictString(6035),{function ()message_box:Close()end},{"fonts_01"})
+			local box= message_box.ShowGoldBox(GetDictString(6035),nil,1,{function ()message_box:Close()end},{"fonts_01"})
 			return
 		else
 			place_up_index = this.GetMinDun(place_up_index)
@@ -881,6 +881,8 @@ function this.BtnClick(obj)
 			shisangshui_play_sys.ChooseCardTypeReq(1)
 			this.Hide()
 			return
+		else
+			shisangshui_play_sys.ChooseCardTypeReq(0)
 		end
 		shisangshui_play_sys.ChooseCardTypeReq(0)
 		isXiangGong = this.XiangGong()

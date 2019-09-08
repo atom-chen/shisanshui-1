@@ -543,7 +543,7 @@ end
 local function OnVoteEnd()
 	vote_quit_ui.Hide()
 	shisangshui_ui.voteView:Hide()
-	message_box.ShowGoldBox("打完本局自动解散",{function ()message_box:Close()end},{"fonts_01"})
+	message_box.ShowGoldBox("打完本局自动解散",nil,1,{function ()message_box:Close()end},{"fonts_01"})
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.OnVoteEnd)
 end
 

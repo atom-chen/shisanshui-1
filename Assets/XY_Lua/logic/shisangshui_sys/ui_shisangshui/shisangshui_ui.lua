@@ -23,6 +23,14 @@ local operTipEX = nil
 
 this.timerAlarm = nil
 
+local widgetTbl = {}
+local compTbl = {}
+
+local special_card_type = {}
+
+
+local gameDataInfo = {}
+
 local function Onbtn_exitClick()
 	
 	
@@ -70,6 +78,8 @@ end
 local function Onbtn_rePlaceClick()
 	this.ClearCards(1)
 	--this.ShowCard(1, false)
+	App.RePlaceCard = true
+	log("App.RePlaceCard:"..tostring(App.RePlaceCard))
 	place_card.gameObject:SetActive(true)
 end
 
@@ -104,6 +114,19 @@ local function Onbtn_chatClick()
 	]]
 end
 
+local function Onbtn_chatSendClick()
+	local str = widgetTbl.btn_chat_input.value
+	log("聊天内容："..tostring(str))
+
+	-- local tItemName = obj.gameObject.name
+	-- tItemName = string.sub(tItemName,string.len("item")+1)
+	-- local tIndex = tonumber(tItemName)
+	-- log(chatTextTab[tIndex])
+	shisangshui_play_sys.ChatReq(1,str,nil)
+	widgetTbl.btn_chat_input.value = ""
+
+end
+
 local function Onbtn_guoClick()
 	log("Onbtn_guoClick")
 end
@@ -134,13 +157,6 @@ end
 function this.OnBtn_SendVoiceMessageOnClick()
 end
 
-local widgetTbl = {}
-local compTbl = {}
-
-local special_card_type = {}
-
-
-local gameDataInfo = {}
 
 
 local function InitVoteView()
@@ -197,12 +213,23 @@ local function InitWidgets()
 	widgetTbl.btn_voice = child(widgetTbl.panel, "Anchor_Right/voice")
 	if widgetTbl.btn_voice~=nil then
        addClickCallbackSelf(widgetTbl.btn_voice.gameObject,Onbtn_voiceClick,this)
-       widgetTbl.btn_voice.gameObject:SetActive(true)
+       --widgetTbl.btn_voice.gameObject:SetActive(true)
     end
     --聊天按钮
 	widgetTbl.btn_chat = child(widgetTbl.panel, "Anchor_Right/chat")
 	if widgetTbl.btn_chat~=nil then
        addClickCallbackSelf(widgetTbl.btn_chat.gameObject,Onbtn_chatClick,this)
+       widgetTbl.btn_chat.gameObject:SetActive(true)
+    end
+
+	widgetTbl.btn_chat_send = child(widgetTbl.panel, "Anchor_Center/chatPanel/panel/SendBtn")
+	widgetTbl.btn_chat_input = componentGet(child(widgetTbl.panel, "Anchor_Center/chatPanel/panel/Input"),"UIInput")
+	if widgetTbl.btn_chat_send~=nil then
+       addClickCallbackSelf(widgetTbl.btn_chat_send.gameObject,Onbtn_chatSendClick,this)
+    end
+    widgetTbl.btn_chat_close = child(widgetTbl.panel, "Anchor_Center/chatPanel/panel/chatCloseBtn")
+	if widgetTbl.btn_chat_close~=nil then
+       addClickCallbackSelf(widgetTbl.btn_chat_close.gameObject,Onbtn_chatClick,this)
        widgetTbl.btn_chat.gameObject:SetActive(true)
     end
 	
@@ -233,12 +260,12 @@ local function InitWidgets()
     end
 
 	--聊天面板
-    widgetTbl.panel_chatPanel = child(widgetTbl.panel, "Anchor_Right/chatPanel")
+    widgetTbl.panel_chatPanel = child(widgetTbl.panel, "Anchor_Center/chatPanel")
     if widgetTbl.panel_chatPanel~=nil then
        widgetTbl.panel_chatPanel.gameObject:SetActive(false)
     end
     --聊天面板蒙板
-    widgetTbl.panel_chatContainer = child(widgetTbl.panel, "Anchor_Right/chatPanel/Container")
+    widgetTbl.panel_chatContainer = child(widgetTbl.panel, "Anchor_Center/chatPanel/Container")
     if widgetTbl.panel_chatContainer~=nil then
        addClickCallbackSelf(widgetTbl.panel_chatContainer.gameObject,Onbtn_chatContainerClick,this)
    	end
@@ -473,7 +500,9 @@ function  this.HideReadyBtn()
 end
 
 function  this.SetRePlaceBtnState(state)
-	widgetTbl.btn_rePlace.gameObject:SetActive(state)
+	if widgetTbl ~= nil and widgetTbl.btn_rePlace ~= nil then
+		widgetTbl.btn_rePlace.gameObject:SetActive(state)
+	end
 end
 
 
@@ -842,14 +871,14 @@ end
 local chatImgTab = {"1","2","3","4","5","6","7","8","9"}
 function this.SetChatImgInfo()
 	for i=1,table.getCount(chatImgTab),1 do       
-       local good = child(widgetTbl.panel_chatPanel,"panel/ScrollView/grid_img/item"..tostring(i))     
+       local good = child(widgetTbl.panel_chatPanel,"panel/ScrollViewImg/grid_img/item"..tostring(i))     
 	   if good==nil then 
-		    local o_good = child(widgetTbl.panel_chatPanel,"panel/ScrollView/grid_img/item"..tostring(i-1)) 
+		    local o_good = child(widgetTbl.panel_chatPanel,"panel/ScrollViewImg/grid_img/item"..tostring(i-1)) 
 		    good = GameObject.Instantiate(o_good.gameObject)
 		    good.transform.parent=o_good.transform.parent 
             good.name="item"..tostring(i)
             good.transform.localScale={x=1,y=1,z=1}    
-            local grid=child(widgetTbl.panel_chatPanel,"panel/ScrollView/grid_img")
+            local grid=child(widgetTbl.panel_chatPanel,"panel/ScrollViewImg/grid_img")
             componentGet(grid,"UIGrid"):Reposition()   
 	   end    
 	   addClickCallbackSelf(good.gameObject,this.Onbtn_chatImgClick,this)  
@@ -1028,6 +1057,7 @@ function this.DealCard(data, callback)
 end
 
 function this.CompareStart(callback)
+	App.RePlaceCard = false
 	this.ShowCard(nil, true)
 	-- for i ,Player in pairs(this.PlayerList) do
 	-- 	Player:SetCardMesh() --设置牌的值

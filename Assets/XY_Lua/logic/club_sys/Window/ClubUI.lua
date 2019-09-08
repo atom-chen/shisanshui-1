@@ -59,6 +59,10 @@ function ClubUI:OnInit()
 	self.Panel_Middle = child(self.gameObject,"Panel_Middle").gameObject
 	self.nonClubView = ClubNonView:create(child(self.gameObject, "Panel_NonClub"))
 	self.nonClubView:SetActive(false)
+	self.chgClubBtn = child(self.gameObject, "Panel_Middle/chgClubBtn")
+	if self.chgClubBtn ~= nil then
+		addClickCallbackSelf(self.chgClubBtn.gameObject, self.OnClubChgClick, self)
+	end
 	
 	
 	self.createBtnGo = child(self.gameObject, "Panel_Bottom/createBtn").gameObject
@@ -98,6 +102,7 @@ function ClubUI:OnOpen()
 		self.clubListView:UpdateList(true)
 		self:UpdateCurClub()
 		self:SetToggle(1, true)
+		self:SetToggle(2, true)
 	end)
 end
 
@@ -121,6 +126,18 @@ function ClubUI:OnClose()
 	self:CallViewsFunc("OnClose")
 end
 
+function ClubUI:OnClubChgClick()
+	log("ClubUI:OnClubChgClick:"..tostring(self.isShowClub))
+	if self.isShowClub then
+		self.clubListView.gameObject:SetActive(false)
+		self.isShowClub = false
+	else
+		self.clubListView.gameObject:SetActive(true)
+		--self:OnClubListNumUpdate()
+		self.isShowClub = true
+	end
+end
+
 function ClubUI:RegistEvent()
 	Notifier.regist(GameEvent.OnCurrentClubChange, self.OnCurClubChange, self)
 	Notifier.regist(GameEvent.OnSelfClubNumUpdate, self.OnClubListNumUpdate, self)
@@ -142,7 +159,9 @@ function ClubUI:RefreshClubList()
 end
 
 function ClubUI:OnClubListNumUpdate()
-	self:isShowNonClubView(function() self:SetToggle(1, true) end)
+	self:isShowNonClubView(function() 
+			self:SetToggle(1, true) 
+		end)
 	self.clubListView:UpdateList(true)
 	self.clubList = self.model.unofficalClubList
 	if not self.clubList or #self.clubList == 0 then
@@ -246,9 +265,9 @@ function ClubUI:OnToggleClick(index)
 end
 
 function ClubUI:SetToggle(index, force)
-	if index == self.curIndex and not force then
-		return
-	end
+	-- if index == self.curIndex and not force then
+	-- 	return
+	-- end
 
 	self.curIndex = index
 --	if self.currentToggleSp ~= nil then

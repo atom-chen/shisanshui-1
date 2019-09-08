@@ -25,6 +25,7 @@ function this.Show()
 	--his.LoadAllResult()
 	require "logic/hall_sys/openroom/room_data"
 	log("总结算")
+	this.RnoInfo()
 	if room_data.GetRid() == nil then
 		log("---room_data.rid == nil-----")
     else
@@ -34,6 +35,17 @@ function this.Show()
 	roomdata_center.isStart = false
   	--this.addlistener()
 end
+
+function this.RnoInfo()
+	local roomInfo = room_data.GetSssRoomDataInfo()
+	local rnoLbl = componentGet(child(this.transform,"Panel/Top/rno"), "UILabel")
+	rnoLbl.text = tostring(roomInfo.rno)
+	local roundLbl = componentGet(child(this.transform,"Panel/Top/round"), "UILabel")
+	roundLbl.text = tostring(roomInfo.play_num)
+	local roundLbl = componentGet(child(this.transform,"Panel/Top/nowTime"), "UILabel")
+	roundLbl.text = ""
+end
+
 
 --[[--
  * @Description: 逻辑入口  

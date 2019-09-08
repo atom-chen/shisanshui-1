@@ -328,16 +328,19 @@ function this.PlaceTime2Click()
 end
 
 function this.ReadyTime0Click()
-	gameDataInfo.nReadyTimeOut = 5--BuyCode[4]
+	gameDataInfo.nReadyTimeOut = ReadyTimeOut[1]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
+	log("gameDataInfo.nReadyTimeOut: "..tostring(gameDataInfo.nReadyTimeOut))
 end
 function this.ReadyTime1Click()
-	gameDataInfo.nReadyTimeOut = 10--BuyCode[4]
+	gameDataInfo.nReadyTimeOut = ReadyTimeOut[2]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
+	log("gameDataInfo.nReadyTimeOut: "..tostring(gameDataInfo.nReadyTimeOut))
 end
 function this.ReadyTime2Click()
-	gameDataInfo.nReadyTimeOut = 30--BuyCode[4]
+	gameDataInfo.nReadyTimeOut = ReadyTimeOut[3]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
+	log("gameDataInfo.nReadyTimeOut: "..tostring(gameDataInfo.nReadyTimeOut))
 end
 ---------------------------点击事件END-------------------------
 

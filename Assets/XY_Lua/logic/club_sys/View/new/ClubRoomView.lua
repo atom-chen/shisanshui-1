@@ -21,7 +21,9 @@ function ClubRoomView:InitView()
 	self:InitItems()
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
 	self.wrap:InitUI(109)
-	self.wrap.OnUpdateItemInfo = function(go, rindex, index)self:OnItemUpdate(go, index, rindex) end
+	self.wrap.OnUpdateItemInfo = function(go, rindex, index)
+			self:OnItemUpdate(go, index, rindex) 
+		end
 	self.wrap:InitWrap(0)
 	
 end
@@ -40,6 +42,23 @@ function ClubRoomView:InitItems()
 		item:SetActive(false)
 		self.itemList[i]:SetCallback(self.OnItemClick, self)
 	end
+	-- coroutine.start(function()
+	-- 		coroutine.wait(0.2)
+	-- 		local grid = self:GetGameObject("container/scrollview/ui_wrapcontent")
+	-- 		componentGet(grid,"UIGrid"):Reposition()
+	-- 	end)
+	self:Reposition()
+end
+
+function ClubRoomView:Reposition()
+	coroutine.start(function()
+			coroutine.wait(0.2)
+			self:GetGameObject("container/scrollview").transform.localPosition = Vector3.New(0, 0, 0)
+			local grid = componentGet(self:GetGameObject("container/scrollview/ui_wrapcontent"),"UIGrid")
+			if grid ~= nil then
+				grid:Reposition()
+			end
+		end)
 end
 
 function ClubRoomView:RegistEvent()
@@ -52,6 +71,7 @@ end
 
 function ClubRoomView:OnOpen()
 	self.wrap:ResetPosition()
+	self:Reposition()
 end
 
 function ClubRoomView:OnClose()

@@ -70,6 +70,12 @@ BuyHorse = {
 	[4] = 14,
 }
 
+ReadyTimeOut = {
+	[1] = 5,
+	[2] = 10, 
+	[3] = 60
+}
+
 --十三水房间配置数据
 local sssroomDataInfo = 
 {
@@ -99,7 +105,7 @@ local sssroomDataInfo =
 	place_card_time = 0,--截止时间
 	placeCardTime = 180,
 	nChooseCardTypeTimeOut = 60,
-	nReadyTimeOut = 30,
+	nReadyTimeOut = ReadyTimeOut[1],
 	costtype = PayType[2],
 }
 

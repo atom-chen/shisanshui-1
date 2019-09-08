@@ -357,9 +357,11 @@ function this.activity(obj1,obj2)
       record_ui.UpdateRoomRecordSimpleData(t.data,1)
       log(str)
       if table.getCount(t.data)==0 then
-       sp_nocord.gameObject:SetActive(true)
+       --sp_nocord.gameObject:SetActive(true)
+       record_ui.SetNoRecord(false)
      else
-       sp_nocord.gameObject:SetActive(false)
+       record_ui.SetNoRecord(true)
+       --sp_nocord.gameObject:SetActive(false)
      end
      end)
     http_request_interface.getRoomSimpleList(nil,99,0,function (code,m,str)
@@ -392,9 +394,11 @@ function this.OpenRecordUI()
         record_ui.UpdateRoomRecordSimpleData(t.data,1)
         log(str)
         if table.getCount(t.data)==0 then
-            sp_nocord.gameObject:SetActive(true)
+            --sp_nocord.gameObject:SetActive(true)
+            record_ui.SetNoRecord(false)
         else
-            sp_nocord.gameObject:SetActive(false)
+            --sp_nocord.gameObject:SetActive(false)
+            record_ui.SetNoRecord(true)
         end
    end)
       --开房记录

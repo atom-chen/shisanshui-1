@@ -73,7 +73,11 @@ function this.UpdateRoomRecordSimpleData(data,code)
 	this.InitPanelRecord(this.maxCount,code)  
 end
 
-
+function this.SetNoRecord(hasRecord)
+    log("是否有战绩呀"..tostring(hasRecord))
+    local obj = child(this.transform, "sp_left/sp_norecord")
+    obj.gameObject:SetActive(not hasRecord)
+end
 
 function this.InitPanelRecord(count,code) 
 	if code==1 then--历史记录
@@ -149,20 +153,43 @@ function this.OnUpdateItem_record(go,index,realindex)
         --    componentGet(lab_type,"UILabel").text="牌局类型:"..this.gid[tonumber(this.open_roomRecordSimpleData[rindext].gid)]
         -- end
         if this.open_roomRecordSimpleData[rindext].ts~=nil then
-        componentGet(lab_date,"UILabel").text ="日期:".. os.date("%Y.%m.%d",this.open_roomRecordSimpleData[rindext].ts)
+            componentGet(lab_date,"UILabel").text =os.date("%Y-%m-%d %X",this.open_roomRecordSimpleData[rindext].ts)
         end 
+        componentGet(child(go.transform, "no"),"UILabel").text =tostring(index)
 
-        local lab_bnumber=componentGet(child(go.transform,"lab_bnumber"),"UILabel")
-        local lab_gnumber=componentGet(child(go.transform,"lab_gnumber"),"UILabel") 
-        if  tonumber(this.open_roomRecordSimpleData[rindext].all_score) >=0  then
-            lab_gnumber.gameObject:SetActive(true)
-            lab_bnumber.gameObject:SetActive(false)  
-            lab_gnumber.text="+"..this.open_roomRecordSimpleData[rindext].all_score
-        else 
-            lab_bnumber.gameObject:SetActive(true)
-            lab_gnumber.gameObject:SetActive(false)
-            lab_bnumber.text=this.open_roomRecordSimpleData[rindext].all_score
+        local playerList = this.open_roomRecordSimpleData[rindext].all_user_info
+
+        for i = 1, 6 do
+            local obj = child(go.transform, "playerGrid/player"..i)
+            if i <= #playerList then
+                obj.gameObject:SetActive(true)
+                local nameLbl = componentGet(child(go.transform, "playerGrid/player"..i.."/nameLbl"),"UILabel")
+                local addScoreLbl = componentGet(child(go.transform, "playerGrid/player"..i.."/addScoreLbl"),"UILabel")
+                local redScoreLbl = componentGet(child(go.transform, "playerGrid/player"..i.."/redScoreLbl"),"UILabel")
+                nameLbl.text = playerList[i].nickname
+                if playerList[i].all_score > 0 then
+                    addScoreLbl.text = tostring(playerList[i].all_score)
+                    redScoreLbl.text = ""
+                else
+                    addScoreLbl.text = ""
+                    redScoreLbl.text = playerList[i].all_score
+                end
+            else
+                obj.gameObject:SetActive(false)
+            end
         end
+
+        -- local lab_bnumber=componentGet(child(go.transform,"lab_bnumber"),"UILabel")
+        -- local lab_gnumber=componentGet(child(go.transform,"lab_gnumber"),"UILabel") 
+        -- if  tonumber(this.open_roomRecordSimpleData[rindext].all_score) >=0  then
+        --     lab_gnumber.gameObject:SetActive(true)
+        --     lab_bnumber.gameObject:SetActive(false)  
+        --     lab_gnumber.text="+"..this.open_roomRecordSimpleData[rindext].all_score
+        -- else 
+        --     lab_bnumber.gameObject:SetActive(true)
+        --     lab_gnumber.gameObject:SetActive(false)
+        --     lab_bnumber.text=this.open_roomRecordSimpleData[rindext].all_score
+        -- end
     end 
     if rindext==this.maxCount and this.maxCount>5 then   
         http_request_interface.getRoomSimpleByUid(nil,2,this.recordpage,function (code,m,str)
