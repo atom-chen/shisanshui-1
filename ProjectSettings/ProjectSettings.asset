@@ -10,13 +10,14 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: XYHY
-  productName: "\u6709\u95F2\u68CB\u724C"
+  companyName: dstars
+  productName: "\u5C82\u6B62\u5341\u4E09\u6C34"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
   m_ShowUnitySplashScreen: 0
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 066d3df94b8bce24dad49b3ca1f83a48,
+    type: 3}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
@@ -96,7 +97,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.juuding.hjhljmj
+  bundleIdentifier: com.dstars.qzsss
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -172,9 +173,9 @@ PlayerSettings:
   appleEnableAutomaticSigning: 0
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: F:/fuzhouGame_branch_01/fuzhouGame_branch_01/keystore/hljmj.keystore
-  AndroidKeyaliasName: hljmj
+  androidSplashScreen: {fileID: 2800000, guid: 066d3df94b8bce24dad49b3ca1f83a48, type: 3}
+  AndroidKeystoreName: F:/fuzhouGame_branch_01/shisanshui/keystore/qzsss.keystore
+  AndroidKeyaliasName: qzsss
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -188,7 +189,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 794109cfa71a18140a79b6c699950486, type: 3}
+      m_Icon: {fileID: 2800000, guid: d05c37b3df9c3ca43be55e5136ce501e, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching:
@@ -373,7 +374,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: ASYNC_MODE
     4: ASYNC_MODE
-    7: ASYNC_MODE
+    7: 
   metroPackageName: SimpleFramework
   metroPackageVersion: 
   metroCertificatePath: 

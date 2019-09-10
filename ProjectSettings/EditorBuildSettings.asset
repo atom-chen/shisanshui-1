@@ -10,8 +10,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/XY_Scenes/xyhy_login.unity
   - enabled: 1
-    path: Assets/XY_Scenes/xyhy_hall.unity
-  - enabled: 1
     path: Assets/XY_Scenes/xyhy_loading.unity
+  - enabled: 1
+    path: Assets/XY_Scenes/xyhy_hall.unity
   - enabled: 1
     path: Assets/XY_Scenes/xyhy_game.unity

@@ -65,8 +65,14 @@ function this.InitSettingUI()
   ui_sound_mgr.SceneLoadFinish() 
   ui_sound_mgr.PlayBgSound("hall_bgm")
   local volume = tonumber(hall_data.GetPlayerPrefs("music"))
+  if volume == nil then
+    volume = 0.5
+  end
   ui_sound_mgr.controlValue(volume)
   volume = tonumber(hall_data.GetPlayerPrefs("musiceffect"))
+  if volume == nil then
+    volume = 0.5
+  end
   ui_sound_mgr.ControlCommonAudioValue(volume)
 end
 --[[--
