@@ -120,7 +120,11 @@ function this.OpetionClickEvent()
 	end
 	local btn_buy_ghost2 = child(this.transform, "AddGhost/2")
 	if btn_buy_ghost2 ~= nil then
-		UIEventListener.Get(btn_buy_ghost2.gameObject).onClick = this.Ghost2Click
+		if App.versionType ~= Version.Release then
+			UIEventListener.Get(btn_buy_ghost2.gameObject).onClick = this.Ghost2Click
+		else
+			btn_buy_ghost2.gameObject:SetActive(false)
+		end
 	end
 	
 	local btn_add_chip = child(this.transform, "AddChip/0")

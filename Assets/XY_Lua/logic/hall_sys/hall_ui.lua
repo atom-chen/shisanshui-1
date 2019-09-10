@@ -143,7 +143,7 @@ function this.ui_Top()
 
 
    local btn_club = child(this.transform, "Panel_Middle/btn_club")--
-   if btn_club~=nil then
+   if btn_club~=nil and App.versionType ~= Version.Release then
      addClickCallbackSelf(btn_club.gameObject,this.OpenClubUI,this)
    end 
 
@@ -253,6 +253,9 @@ function this.Onbtn_goldClick()
    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
  end
  function this.share()
+  if App.versionType == Version.Release then
+      return
+  end 
   share_ui.Show()
   ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end

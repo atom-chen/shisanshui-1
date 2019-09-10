@@ -148,7 +148,9 @@ function this.OnUpdateItem_record(go,index,realindex)
         local lab_date=child(go.transform, "lab_date")--日期
         local lab_type=child(go.transform, "lab_type")--类型
         local lab_reward=child(go.transform, "lab_reward")--盈利 
-        addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)   
+        if App.versionType ~= Version.Release then
+            addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)  
+        end 
         -- if this.open_roomRecordSimpleData[rindext].gid~=nil then
         --    componentGet(lab_type,"UILabel").text="牌局类型:"..this.gid[tonumber(this.open_roomRecordSimpleData[rindext].gid)]
         -- end
@@ -218,7 +220,9 @@ function this.OnUpdateItem_openrecord(go,index,realindex)
         local sp_reward=child(go.transform,"sp_reward")
         componentGet(sp_reward,"UISprite").spriteName=this.sp_room[this.roomstatus[this.open_roomRecordSimpleData[rindext].status+1]]  
         componentGet(lab_status,"UILabel").text=this.roomstatus[this.open_roomRecordSimpleData[rindext].status+1]
-        addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)
+        if App.versionType ~= Version.Release then
+            addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)
+        end
         componentGet(lab_type,"UILabel").text="房号:"..this.open_roomRecordSimpleData[rindext].rno
         componentGet(lab_date,"UILabel").text ="日期:".. os.date("%Y.%m.%d",this.open_roomRecordSimpleData[rindext].ctime)  
         

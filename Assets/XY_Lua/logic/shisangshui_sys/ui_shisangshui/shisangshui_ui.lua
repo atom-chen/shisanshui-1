@@ -213,7 +213,7 @@ local function InitWidgets()
 	widgetTbl.btn_voice = child(widgetTbl.panel, "Anchor_Right/voice")
 	if widgetTbl.btn_voice~=nil then
        addClickCallbackSelf(widgetTbl.btn_voice.gameObject,Onbtn_voiceClick,this)
-       --widgetTbl.btn_voice.gameObject:SetActive(true)
+       widgetTbl.btn_voice.gameObject:SetActive(false)
     end
     --聊天按钮
 	widgetTbl.btn_chat = child(widgetTbl.panel, "Anchor_Right/chat")
@@ -237,7 +237,7 @@ local function InitWidgets()
 	widgetTbl.btn_invite = child(widgetTbl.panel, "Anchor_Center/readyBtns/invite")
 	if widgetTbl.btn_invite~=nil then
 	   addClickCallbackSelf(widgetTbl.btn_invite.gameObject,Onbtn_inviteFriend,this)
-	   widgetTbl.btn_invite.gameObject:SetActive(true)
+	   widgetTbl.btn_invite.gameObject:SetActive(false)
 	end	
 	
 	--解散按钮
@@ -500,6 +500,9 @@ function  this.HideReadyBtn()
 end
 
 function  this.SetRePlaceBtnState(state)
+	if App.versionType == Version.Release then
+		return
+	end
 	if widgetTbl ~= nil and widgetTbl.btn_rePlace ~= nil then
 		widgetTbl.btn_rePlace.gameObject:SetActive(state)
 	end
@@ -629,7 +632,9 @@ function this.IsShowBeiShuiBtn(isShow)
 end
 
 function this.ShowInviteBtn(isShow)
-	widgetTbl.btn_invite.gameObject:SetActive(isShow)
+	if App.versionType ~= Version.Release then
+		widgetTbl.btn_invite.gameObject:SetActive(isShow)
+	end
 end
 
 function this.ShowDissolveRoom(isShow)

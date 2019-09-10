@@ -12,6 +12,11 @@ local toggle
 
 local logoCoroutine = nil
 
+Version = {
+	Dev = 1,
+	Test = 2,
+	Release = 3,
+}
 --[[--
 * @Description: 显示登陆ui
 ]]
@@ -31,6 +36,7 @@ end
  ]]
  function this.Awake()
  	App = {}
+ 	App.versionType = Version.Release
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);
@@ -53,7 +59,9 @@ function this.Start()
 	
 	--this.InitSettingUI()
 	login_sys.InitPlugins(true)	
-	login_sys.AutoLogin()	
+	if App.versionType == Version.Dev then
+		login_sys.AutoLogin()
+	end	
 
 	if IS_URL_TEST == true then
 		newNormalUI("Prefabs/UI/testCmd/testUrl")
@@ -133,6 +141,10 @@ function this.RegisterEvents()
 	
 	this.account = subComponentGet(this.transform, "loingPanel/account", typeof(UIInput))
 	this.password = subComponentGet(this.transform, "loingPanel/password", typeof(UIInput))
+	if App.versionType == Version.Release then
+		this.account.gameObject:SetActive(false)
+		this.password.gameObject:SetActive(false)
+	end
     --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
 end
@@ -227,13 +239,14 @@ function this.OnBtnWeiXinClick()
 	if tostring(Application.platform) ==  "WindowsEditor"   then
 		log(this.account.value)
 		if this.account.value == nil or this.account.value == "" then
-			login_sys.OnPlatLoginOK(nil, nil, "1234")
+			login_sys.OnPlatLoginOK(nil, nil, nil)
 		else
 			login_sys.OnPlatLoginOK(nil, nil, this.account.value)
 		end
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
-
-		if this.account.value == nil or this.account.value == "" then
+		if App.versionType == Version.Release then
+			login_sys.OnPlatLoginOK(nil, nil, nil)
+		elseif this.account.value == nil or this.account.value == "" then
 			login_sys.WeiXinLogin()
 		else
 			login_sys.OnPlatLoginOK(nil, nil, this.account.value)

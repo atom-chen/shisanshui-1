@@ -1028,7 +1028,7 @@ GameObject:
   - 4: {fileID: 4000013539812482}
   - 114: {fileID: 114000013534931642}
   m_Layer: 5
-  m_Name: PlayerCard13
+  m_Name: PlayerCard9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2098,7 +2098,7 @@ GameObject:
   - 4: {fileID: 4000011089448598}
   - 114: {fileID: 114000010335858866}
   m_Layer: 5
-  m_Name: PlayerCard12
+  m_Name: PlayerCard10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2914,7 +2914,7 @@ GameObject:
   - 4: {fileID: 4000014111278534}
   - 114: {fileID: 114000014044830622}
   m_Layer: 5
-  m_Name: PlayerCard10
+  m_Name: PlayerCard12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5794,7 +5794,7 @@ GameObject:
   - 4: {fileID: 4000010307532258}
   - 114: {fileID: 114000010752005656}
   m_Layer: 5
-  m_Name: PlayerCard9
+  m_Name: PlayerCard13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37173,7 +37173,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
