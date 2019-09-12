@@ -36,7 +36,7 @@ end
  ]]
  function this.Awake()
  	App = {}
- 	App.versionType = Version.Release
+ 	App.versionType = Version.Test
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);
@@ -144,6 +144,9 @@ function this.RegisterEvents()
 	if App.versionType == Version.Release then
 		this.account.gameObject:SetActive(false)
 		this.password.gameObject:SetActive(false)
+	else
+		this.account.gameObject:SetActive(true)
+		this.password.gameObject:SetActive(true)
 	end
     --subComponentGet(this.transform, "btn_grid", typeof(UIGrid)):Reposition()
 
@@ -247,6 +250,7 @@ function this.OnBtnWeiXinClick()
 		if App.versionType == Version.Release then
 			login_sys.OnPlatLoginOK(nil, nil, nil)
 		elseif this.account.value == nil or this.account.value == "" then
+			log("微信登录")
 			login_sys.WeiXinLogin()
 		else
 			login_sys.OnPlatLoginOK(nil, nil, this.account.value)

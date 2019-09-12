@@ -54,9 +54,9 @@ this.sss_path = Application.persistentDataPath.."/games/gamerule/PuXian_ShiSangS
 
 this.fzmj_path = Application.persistentDataPath.."/games/gamerule/FuZhouMJ.json"
 
-this.hallShareTitle = "福州人自己的棋牌游戏"
-this.hallShareFriendContent = "有闲你就来！最有榕城特色的福州麻将，最真实的在线十三水！就在有闲棋牌！"
-this.hallShareFriendQContent = "有闲你就来！玩地道福州麻将和十三水，就来有闲棋牌，呀厉害！"
+this.hallShareTitle = "玩地道十三水"
+this.hallShareFriendContent = "最具特色的十三水，最真实的在线十三水！就在岂止十三水！"
+this.hallShareFriendQContent = "玩地道十三水，就来岂止十三水，呀厉害！"
 this.hallShareSubUrl = "/gamewap/youxianqipai/view/youxixiazai.html?uid=%s"
 
 this.gameShareTitle = "开房打%s，速来：房间号[%s]"

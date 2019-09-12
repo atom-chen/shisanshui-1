@@ -323,6 +323,21 @@ function  this.otherLogin(rtype,openid,access_token,logintime,subrtype,share_uid
     end) 
 end
 
+function this.getFreshToken( code , callback)
+    local rt = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx066fcebf5c777f09&secret=9af1fcaff5152062529ea91356146888&code="..code.."&grant_type=authorization_code"
+
+    log(rt)
+    NetWorkManage.Instance:HttpPostRequestWithData(rt,nil,function (code,m,str)
+        log("收到返回")
+        log(str)
+        if code == -1 then
+            fast_tip.Show("您的网络状态不好，请稍后再试")
+        else 
+            callback(code,m,str)
+        end 
+    end) 
+end
+
 --{"share_uid":"分享用户ID","rtype":第三方注册类型(2微信 3QQ 4ucgame 5ysdk微信 6ysdkQQ 7笨手机 8富豪 9游客 10奇酷),"openid":微信code,"access_token":token,"logintime":登陆时间,"subrtype":"code 或者 openid"}
 function  this.PhoneLogin(rtype,openid,access_token,logintime,subrtype,share_uid,uno,verify,pwd,callback)
     log("第三方注册登录")
