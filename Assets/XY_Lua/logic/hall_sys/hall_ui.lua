@@ -141,6 +141,10 @@ function this.ui_Top()
      addClickCallbackSelf(btn_setting.gameObject,this.setting,this)
    end 
 
+    local btn_copyWx = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_copyWx")--设置
+   if btn_copyWx~=nil then
+     addClickCallbackSelf(btn_copyWx.gameObject,this.CopyKefu,this)
+   end 
 
    local btn_club = child(this.transform, "Panel_Middle/btn_club")--
    if btn_club~=nil and App.versionType ~= Version.Release then
@@ -339,6 +343,14 @@ function this.activity(obj1,obj2)
       shop_ui.productlist=t.productlist
       shop_ui.Show()
       waiting_ui.Hide()
+      end)
+  end
+
+  function this.CopyKefu()
+    log("复制客服微信号")
+    YX_APIManage.Instance:onCopy("sorrysz121",function()
+        log("复制客服微信号成功")
+        UI_Manager:Instance():FastTip("复制客服微信号成功")--LanguageMgr.GetWord(6043))
       end)
   end
 
