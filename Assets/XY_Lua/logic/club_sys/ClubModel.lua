@@ -521,7 +521,7 @@ end
 
 -- 获得俱乐部申请列表
 function ClubModel:ReqGetClubApplyList(cid)
-
+	log("获得俱乐部申请列表")
 	local param = {}
 	param.cid = cid 
 	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetApplyList, param)
@@ -1123,6 +1123,8 @@ function ClubModel:AddOrUpdateClub(clubInfo)
 		ClubUtil.CopyClubInfo(self.clubMap[clubInfo.cid], clubInfo)
 		if self.currentClubInfo ~= nil and self.currentClubInfo.cid == clubInfo.cid then
 			self.currentClubInfo = self.clubMap[clubInfo.cid]
+			log("设置当前俱乐部信息")
+			log(self.currentClubInfo)
 		end
 		Notifier.dispatchCmd(GameEvent.OnClubInfoUpdate, clubInfo.cid)
 	else
@@ -1146,15 +1148,19 @@ end
 
 function ClubModel:SetCurrentClubInfo(info, needRefresh ,force)
 	if info == nil then
+		log("info == nil")
 		return
 	end
 	if not force and self.currentClubInfo ~= nil and info.cid == self.currentClubInfo.cid then
+		log("not force and self.currentClubInfo ~= nil and info.cid == self.currentClubInfo.cid")
 		return
 	end
 	if self.currentClubInfo ~= nil and info.cid ~= self.currentClubInfo.cid  then
 		self:ClearCurrentClubInfo()
 	end
 	self.currentClubInfo = info
+	log("设置当前俱乐部信息")
+	log(self.currentClubInfo)
 	self:SortClubList()
 	self:SaveLastClubId(info.cid)
 	--self:ReqGetAllRoomList(true)

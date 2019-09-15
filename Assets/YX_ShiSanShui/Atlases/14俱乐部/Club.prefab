@@ -54,8 +54,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: fe868828047bc20449488ba442b501c4, type: 2}
   mSprites:
   - name: "\u4E0D\u5728\u7EBF-\u6807\u7B7E"
-    x: 218
-    y: 41
+    x: 769
+    y: 497
     width: 108
     height: 34
     borderLeft: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5207\u6362\u4EB2\u53CB\u5708"
     x: 218
-    y: 265
+    y: 206
     width: 274
     height: 80
     borderLeft: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: "\u5207\u6362\u4FF1\u4E50\u90E8-\u6807\u9898"
     x: 218
-    y: 591
+    y: 532
     width: 550
     height: 58
     borderLeft: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u521B\u5EFA\u4FF1\u4E50\u90E8-\u6807\u9898"
     x: 218
-    y: 532
+    y: 473
     width: 550
     height: 58
     borderLeft: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
     paddingBottom: 4
   - name: "\u521B\u5EFA\u623F\u95F4-\u6309\u94AE"
     x: 218
-    y: 439
+    y: 380
     width: 297
     height: 92
     borderLeft: 0
@@ -157,9 +157,22 @@ MonoBehaviour:
     paddingRight: 3
     paddingTop: 3
     paddingBottom: 0
+  - name: "\u52A0\u5165\u623F\u95F4-\u6807\u9898"
+    x: 218
+    y: 591
+    width: 550
+    height: 58
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 8
+    paddingBottom: 4
   - name: "\u540C\u610F-\u6309\u94AE"
     x: 218
-    y: 76
+    y: 17
     width: 109
     height: 95
     borderLeft: 0
@@ -250,7 +263,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: "\u5FEB\u901F\u52A0\u5165-\u6309\u94AE"
     x: 218
-    y: 346
+    y: 287
     width: 297
     height: 92
     borderLeft: 0
@@ -302,7 +315,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u62D2\u7EDD-\u6309\u94AE"
     x: 328
-    y: 76
+    y: 17
     width: 109
     height: 95
     borderLeft: 0
@@ -379,8 +392,8 @@ MonoBehaviour:
     paddingTop: 3
     paddingBottom: 0
   - name: "\u7B49\u5F85\u4E2D-\u6807\u7B7E"
-    x: 218
-    y: 6
+    x: 878
+    y: 497
     width: 108
     height: 34
     borderLeft: 0
@@ -419,7 +432,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u8BE6\u60C5\u6309\u94AE"
     x: 516
-    y: 471
+    y: 412
     width: 149
     height: 60
     borderLeft: 0
@@ -445,7 +458,7 @@ MonoBehaviour:
     paddingBottom: 7
   - name: "\u8FDB\u5165\u623F\u95F4-\u6309\u94AE"
     x: 218
-    y: 172
+    y: 113
     width: 237
     height: 92
     borderLeft: 0

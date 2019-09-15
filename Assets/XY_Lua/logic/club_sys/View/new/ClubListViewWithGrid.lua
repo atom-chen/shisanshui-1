@@ -108,6 +108,7 @@ end
 function ClubListViewWithGrid:OnItemClick(item)
 	ui_sound_mgr.PlayButtonClick()
 	if item.clubInfo.cid == self.curCid then
+		log("相同俱乐部")
 		return
 	end
 	self:Select(item)

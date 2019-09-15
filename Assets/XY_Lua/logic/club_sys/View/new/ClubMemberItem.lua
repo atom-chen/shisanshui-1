@@ -69,10 +69,10 @@ function ClubMemberItem:UpdateView()
 	-- end
 
 	if self.info.uid == self.model.selfPlayerId then
-		self.bgSp.spriteName = "common_54"
+--		self.bgSp.spriteName = "common_54"
 --		self:SetLabelsFormat(UILabelFormat.F10)
 	else
-		self.bgSp.spriteName = "common_11"
+--		self.bgSp.spriteName = "common_11"
 --		self:SetLabelsFormat(UILabelFormat.F12)
 	end
 

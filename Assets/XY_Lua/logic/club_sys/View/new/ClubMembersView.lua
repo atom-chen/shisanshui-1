@@ -3,6 +3,7 @@ local ClubMembersView = class("ClubMembersView", base)
 local ui_wrap = require "logic/framework/ui/uibase/ui_wrap"
 local ButtonInfo = require("logic/club_sys/Data/ButtonInfo")
 local ClubMemberItem = require("logic/club_sys/View/new/ClubMemberItem")
+local ClubApplyUINew = require "logic/club_sys/Window/ClubApplyUINew"
 --local UIManager = UI_Manager:Instance() 
 
 
@@ -18,10 +19,11 @@ function ClubMembersView:InitView()
 	self.redGo = child(self.gameObject,"panel_bottom/bottom/redPoint").gameObject
 	self.redNumLabel = subComponentGet(self.transform,"panel_bottom/bottom/redPoint/Label", typeof(UILabel))
 
+	self.applyView = ClubApplyUINew:create(child(self.gameObject.transform.parent, "club_apply_ui"))
 	self.btnsView:SetLimit(-208, 600, 330, -330)
 	self.btnsView:SetActive(false)
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
-	self.wrap:InitUI(106)
+	self.wrap:InitUI(160)
 	self.wrap.OnUpdateItemInfo = function(go, rindex, index)  self:OnItemUpdate(go, index, rindex)  end
 	self.wrap:InitWrap(0)
 	self:InitApplyBtn()
@@ -36,6 +38,7 @@ end
 function ClubMembersView:OnApplyBtnClick()
 	ui_sound_mgr.PlayButtonClick()
 	if isClicked == true then
+		--UIManager:CloseUiForms("ClubApplyUI")
 		UI_Manager:Instance():FastTip(LanguageMgr.GetWord(10100))
 		return
     else
@@ -43,11 +46,13 @@ function ClubMembersView:OnApplyBtnClick()
 		Timer.New(function() isClicked = false end,1,1):Start()
     end
 	
-	ui_sound_mgr.PlayButtonClick()
+	--ui_sound_mgr.PlayButtonClick()
 	--ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
 	--数据上报
 	report_sys.EventUpload(1)
-	UI_Manager:Instance():ShowUiForms("ClubApplyUI",UiCloseType.UiCloseType_CloseNothing,nil,self.cid)
+	self.applyView:SetActive(true)
+	self.applyView:OnOpen(self.cid)
+	--UI_Manager:Instance():ShowUiForms("ClubApplyUI",UiCloseType.UiCloseType_CloseNothing,nil,self.cid)
 end
 
 function ClubMembersView:RefreshApplyAndRed()
@@ -141,14 +146,14 @@ function ClubMembersView:UpdateView()
 	--是否在成员列表中显示申请列表按钮
 	if self.model:CheckCanSeeApplyList(self.cid) and (self.model:CheckIsClubCreater(self.cid,self.model.selfPlayerId) or self.clubInfo.cfg.mcactuser == 1 ) then--会长或管理员
 		self.bottom.gameObject:SetActive(true)
-		self.panel:SetRect(0,45,804,362)
+--		self.panel:SetRect(0,45,804,362)
 		self.applyBtn.gameObject:SetActive(true)
 		self:RefreshApplyAndRed()
 
 	else
 
 		self.bottom.gameObject:SetActive(false)
-		self.panel:SetRect(0,3,804,446)
+--		self.panel:SetRect(0,3,804,446)
 	end
 	--更新俱乐部人数
 	componentGet(self.membernum,"UILabel").text = tostring(count).."/"..tostring(self.clubInfo.maxusernum)

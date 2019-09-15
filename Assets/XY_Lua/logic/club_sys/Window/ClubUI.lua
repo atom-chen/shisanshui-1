@@ -24,7 +24,7 @@ function ClubUI:OnInit()
 	self.closeBtnGo = child(self.gameObject, "Panel_Top/backBtn").gameObject
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
 
-	self.bg1Go = child(self.gameObject, "Panel_Top/bg1").gameObject
+--	self.bg1Go = child(self.gameObject, "Panel_Top/bg1").gameObject
 	self.redGo = child(self.gameObject, "Panel_Middle/btns/redPoint").gameObject
 	self.togglesList = {}
 	self:InitToggles()
@@ -104,6 +104,13 @@ function ClubUI:OnOpen()
 		self:SetToggle(1, true)
 		self:SetToggle(2, true)
 	end)
+
+	self.viewList[1]:SetActive(true)
+	self.viewList[1]:OnOpen()
+
+
+	self.viewList[2]:SetActive(true)
+	self.viewList[2]:OnOpen()
 end
 
 function ClubUI:isShowNonClubView(callback)
@@ -165,7 +172,7 @@ function ClubUI:OnClubListNumUpdate()
 	self.clubListView:UpdateList(true)
 	self.clubList = self.model.unofficalClubList
 	if not self.clubList or #self.clubList == 0 then
-		self.bg1Go:SetActive(false)
+--		self.bg1Go:SetActive(false)
 	end
 end	
 
@@ -268,6 +275,7 @@ function ClubUI:SetToggle(index, force)
 	-- if index == self.curIndex and not force then
 	-- 	return
 	-- end
+	if true then return end
 
 	self.curIndex = index
 --	if self.currentToggleSp ~= nil then
@@ -295,7 +303,7 @@ function ClubUI:SetToggle(index, force)
 		end
 	end
 
-	self.bg1Go:SetActive( index ~= 4)
+--	self.bg1Go:SetActive( index ~= 4)
 end
 
 -- function ClubUI:

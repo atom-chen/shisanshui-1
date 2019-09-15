@@ -29,6 +29,7 @@ function ClubSelfItemView:SetCallback(callback, target)
 end
 
 function ClubSelfItemView:OnClick()
+	log("俱乐部切换")
 	if self.callback ~= nil then
 		self.callback(self.target, self)
 	end

@@ -20,7 +20,7 @@ function ClubRoomView:InitView()
 	self.wrapTr = child(self.transform,"container/scrollview/ui_wrapcontent")
 	self:InitItems()
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
-	self.wrap:InitUI(109)
+	self.wrap:InitUI(350)
 	self.wrap.OnUpdateItemInfo = function(go, rindex, index)
 			self:OnItemUpdate(go, index, rindex) 
 		end
@@ -53,11 +53,11 @@ end
 function ClubRoomView:Reposition()
 	coroutine.start(function()
 			coroutine.wait(0.2)
-			self:GetGameObject("container/scrollview").transform.localPosition = Vector3.New(0, 0, 0)
-			local grid = componentGet(self:GetGameObject("container/scrollview/ui_wrapcontent"),"UIGrid")
-			if grid ~= nil then
-				grid:Reposition()
-			end
+			--self:GetGameObject("container/scrollview").transform.localPosition = Vector3.New(0, -100, 0)
+			-- local grid = componentGet(self:GetGameObject("container/scrollview/ui_wrapcontent"),"UIGrid")
+			-- if grid ~= nil then
+			-- 	grid:Reposition()
+			-- end
 		end)
 end
 
