@@ -528,7 +528,8 @@ end
  * @return:      nil
  ]]
 function  this.SetGameInfo(wanfaStr,RoomNum)
-	local str = wanfaStr..RoomNum
+	--local str = wanfaStr..RoomNum
+	local str = RoomNum
 	if widgetTbl.label_gameinfo_comp == nil then
 		widgetTbl.label_gameinfo_comp = widgetTbl.label_gameinfo.gameObject:GetComponent(typeof(UILabel))
 	end
