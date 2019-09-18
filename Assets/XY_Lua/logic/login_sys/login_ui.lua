@@ -36,7 +36,7 @@ end
  ]]
  function this.Awake()
  	App = {}
- 	App.versionType = Version.Test
+ 	App.versionType = Version.Release
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);
