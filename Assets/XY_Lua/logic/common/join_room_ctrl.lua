@@ -56,6 +56,8 @@ function this.JoinRoomByRno(rno)
                         fast_tip.Show("房间不存在")
                     elseif tonumber(dataTbl.ret) == 101 then
                         fast_tip.Show("房间已开局")
+                    else
+                        fast_tip.Show(s)
                     end
                     return
                 end

@@ -10,6 +10,10 @@ function ClubRoomItem:InitView()
 	self.leaderNameLabel = subComponentGet(self.transform, "name", typeof(UILabel))
 	self.selfIconGo = child(self.gameObject, "selfIcon").gameObject
 	self.selfIconGo:SetActive(false)
+	self.headList = {}
+	for i = 1, 6 do
+		self.headList[i] = subComponentGet(self.transform, "head"..i, typeof(UITexture))
+	end
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
 end
 
@@ -40,6 +44,14 @@ function ClubRoomItem:UpdateView()
 	self.numLabel.text = (self.info.cur_pnum or 0) .. "/" .. (self.info.cfg.pnum or 0) .. "人"
 
 	self.selfIconGo:SetActive(self.info.uid == self.model.selfPlayerId)
+
+	for i = 1, 6 do
+		if i <= #self.info.imageurls then
+			self.headList[i].gameObject:SetActive(true)
+		else
+			self.headList[i].gameObject:SetActive(false)
+		end
+	end
 --	self.icon.spriteName = GameUtil.GetGameIcon(self.info.gid)--屏蔽图标
 end
 
