@@ -37,6 +37,12 @@ end
  function this.Awake()
  	App = {}
  	App.versionType = Version.Release
+    local go = GameObject.Find("reporter");
+    if go ~= nil then--and App.versionType ~= Version.Release then 
+    	go:SetActive(true) 
+    	go:GetComponent("Reporter").enabled = true
+    end
+
 	local s= YX_APIManage.Instance:read("temp.txt")
 	if s~=nil then
       log("login_ui temp.txt str-----" .. s);
