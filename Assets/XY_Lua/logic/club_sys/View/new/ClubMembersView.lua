@@ -143,6 +143,9 @@ function ClubMembersView:UpdateView()
 		count = #self.memberList 
 	end
 	self.wrap:InitWrap(count)
+	if self.clubInfo == nil or #self.clubInfo == 0 then
+		return
+	end
 	--是否在成员列表中显示申请列表按钮
 	if self.model:CheckCanSeeApplyList(self.cid) and (self.model:CheckIsClubCreater(self.cid,self.model.selfPlayerId) or self.clubInfo.cfg.mcactuser == 1 ) then--会长或管理员
 		self.bottom.gameObject:SetActive(true)

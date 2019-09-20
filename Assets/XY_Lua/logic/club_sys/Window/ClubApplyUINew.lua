@@ -86,15 +86,16 @@ function ClubApplyUI:UpdateView(checkClose)
 	end
 
 	local clubInfo = self.model.clubMap[self.cid] or self.model.currentClubInfo
-	if clubInfo.applyNum == nil or clubInfo.applyNum == 0 then
-		self.noApplyTip.gameObject:SetActive(true)
-		self.wrap:InitWrap(0)
-		self.top_Bg.gameObject:SetActive(false)
-		return
+	if clubInfo ~= nil then
+		if clubInfo.applyNum == nil or clubInfo.applyNum == 0 then
+			self.noApplyTip.gameObject:SetActive(true)
+			self.wrap:InitWrap(0)
+			self.top_Bg.gameObject:SetActive(false)
+			return
+		end
+		self.top_Bg.gameObject:SetActive(true)
+		self.wrap:InitWrap(count)
 	end
-	self.top_Bg.gameObject:SetActive(true)
-	self.wrap:InitWrap(count)
-
 end
 
 
