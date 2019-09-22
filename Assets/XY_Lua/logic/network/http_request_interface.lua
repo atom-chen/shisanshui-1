@@ -296,6 +296,7 @@ end
 
 --获得用户头像[用户id,用户id,用户id.....][6,7,8]
 function  this.getImage(param,callback) 
+    log("获得用户头像")
     local t=this.GetTable("GameMember.getImage",param)
     local rt=json.encode(t)
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
@@ -508,6 +509,7 @@ end
 
 -- 根据房号查找房间信息{"gid":游戏id,"rno":房号}
 function  this.getRoomByRno(rno, callback)
+    log("this.getRoomByRno")
     local param={["rno"]=rno}
     local t=this.GetTable("GameSAR.getRoomByRno", param) 
     local rt=json.encode(t)
@@ -693,7 +695,7 @@ end
 function this.GetPayOrder( stype,pid,num,callback)
     if not stype or not pid or not num then return end
 
-     local param={["pid"]=pid,["stype"]=stype,["num"]=num} 
+     local param={["pid"]=pid,["stype"]=stype,["num"]=num,["openid"] = App.openid} 
     local t=this.GetTable("GameStore.prepay",param) 
     local rt=json.encode(t)
      log("-----------GetPayOrder--------" .. rt )

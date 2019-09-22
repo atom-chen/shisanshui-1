@@ -363,11 +363,11 @@ function log(fmt, ...)
 
 
     --if Setting.setting.isDebug == true then
-    --if tostring(Application.platform)  ~= "Android" and tostring(Application.platform) ~= "IPhonePlayer" then
---        local msg = getLogStr(fmt, ...) or "nil"
+    if tostring(Application.platform)  ~= "Android" and tostring(Application.platform) ~= "IPhonePlayer" then
+        local msg = getLogStr(fmt, ...) or "nil"
        -- UnityEngine.Debug('[INFO] {0} ')
---        UnityEngine.Debug.LogFormat('[INFO] {0} ',msg)
-   -- end
+        UnityEngine.Debug.LogFormat('[INFO] {0} ',msg)
+    end
     --end
 end
 

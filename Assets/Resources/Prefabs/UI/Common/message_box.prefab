@@ -1133,7 +1133,7 @@ MonoBehaviour:
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2000
-  mSortingOrder: 0
+  mSortingOrder: 2000
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &114000013702324200
 MonoBehaviour:

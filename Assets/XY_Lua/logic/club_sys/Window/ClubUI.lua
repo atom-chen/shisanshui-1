@@ -63,7 +63,8 @@ function ClubUI:OnInit()
 	if self.chgClubBtn ~= nil then
 		addClickCallbackSelf(self.chgClubBtn.gameObject, self.OnClubChgClick, self)
 	end
-	
+	self.nameLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/nameLbl" , typeof(UILabel))
+	self.idLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/idLbl" , typeof(UILabel))
 	
 	self.createBtnGo = child(self.gameObject, "Panel_Bottom/createBtn").gameObject
 	addClickCallbackSelf(self.createBtnGo, self.OnClubCreateClick, self)
@@ -134,15 +135,14 @@ function ClubUI:OnClose()
 end
 
 function ClubUI:OnClubChgClick()
-	log("ClubUI:OnClubChgClick:"..tostring(self.isShowClub))
-	if self.isShowClub then
-		self.clubListView.gameObject:SetActive(false)
-		self.isShowClub = false
-	else
-		self.clubListView.gameObject:SetActive(true)
-		--self:OnClubListNumUpdate()
-		self.isShowClub = true
-	end
+	local activeSelf = self.clubListView.gameObject.activeSelf
+	log("ClubUI:OnClubChgClick:"..tostring(activeSelf))
+	self.clubListView.gameObject:SetActive(not activeSelf)
+end
+
+function ClubUI:SetClubInfo(clubInfo)
+	self.nameLbl.text = clubInfo.cname
+	self.idLbl.text = tostring(clubInfo.shid)
 end
 
 function ClubUI:RegistEvent()
@@ -198,6 +198,7 @@ function ClubUI:UpdateCurClub()
 	self:RefreshApplyAndRed()
 	self:RefreshMemberToggle()
 	self:RefreshManagerBtn()
+	self:SetClubInfo(clubInfo)
 end
 
 function ClubUI:RefreshApplyAndRed()

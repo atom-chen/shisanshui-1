@@ -106,7 +106,7 @@ end
 * @Description: 平台登陆成功回调
 * @param:       平台登陆信息
 ]]
-function this.OnPlatLoginOK(accInfo, isReconnet,account)	
+function this.OnPlatLoginOK(accInfo, isReconnet,openid)	
 	if this.isAgreeContract == false then
 		--弹出提示框没有同意服务条款
 		fast_tip.Show("请选择同意服务条款")
@@ -119,8 +119,9 @@ function this.OnPlatLoginOK(accInfo, isReconnet,account)
 	--平台成功回调后开始连接服务器并登陆服务器 
 	log("this.share_uid=="..this.share_uid)
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
-    if account == nil then account = NetWorkManage.Instance:GetMacAddress() end
-    http_request_interface.otherLogin(this.loginType, account,--NetWorkManage.Instance:GetMacAddress(),
+    if openid == nil then openid = NetWorkManage.Instance:GetMacAddress() end
+    App.openid = openid
+    http_request_interface.otherLogin(this.loginType, openid,--NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
 		if code then
 			
@@ -219,6 +220,7 @@ function this.WeiXinLogin()
 		data_center.SetLoginRetInfo(msgTable)
 
 		log("Unity_WeiXinLogin=="..tostring(msgTable.access_token));
+		App.openid = msgTable.access_token
 		if msgTable.result == 0 then
 			log("this.share_uid=="..this.share_uid)
 			http_request_interface.otherLogin(this.loginType, msgTable.access_token, msgTable.access_token, 0, "code", this.share_uid, function (code,m,str)

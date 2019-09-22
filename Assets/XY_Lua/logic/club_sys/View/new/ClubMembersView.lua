@@ -20,7 +20,7 @@ function ClubMembersView:InitView()
 	self.redNumLabel = subComponentGet(self.transform,"panel_bottom/bottom/redPoint/Label", typeof(UILabel))
 
 	self.applyView = ClubApplyUINew:create(child(self.gameObject.transform.parent, "club_apply_ui"))
-	self.btnsView:SetLimit(-208, 600, 330, -330)
+--	self.btnsView:SetLimit(-208, 600, 330, -330)
 	self.btnsView:SetActive(false)
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
 	self.wrap:InitUI(160)
@@ -39,7 +39,7 @@ function ClubMembersView:OnApplyBtnClick()
 	ui_sound_mgr.PlayButtonClick()
 	if isClicked == true then
 		--UIManager:CloseUiForms("ClubApplyUI")
-		UI_Manager:Instance():FastTip(LanguageMgr.GetWord(10100))
+		UI_Manager:Instance():FastTip("语言丢失")--LanguageMgr.GetWord(10100))
 		return
     else
 		isClicked = true

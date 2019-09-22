@@ -13,9 +13,15 @@ function ClubListViewWithGrid:InitView()
 	self.itemList[1]:SetCallback(self.OnItemClick, self)
 
 	self.grid = subComponentGet(self.transform, "container/scrollview/ui_wrapcontent", typeof(UIGrid))
+	
+	local closeBtn = child(self.gameObject, "closeBtn")
+	addClickCallbackSelf(child(self.gameObject, "closeBtn"), self.OnCloseClick, self)
 end
 
-
+function ClubListViewWithGrid:OnCloseClick(item)
+	log("ClubListView:OnCloseClick")
+	self.gameObject:SetActive(false)
+end
 
 function ClubListViewWithGrid:UpdateList(force)
 	local lastCount = 0
