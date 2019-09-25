@@ -82,7 +82,8 @@ function this.buy()
         if tonumber( t.ret)==0 then
              require "logic/recharge/recharge_sys"
             local pid =t.productlist[1].pid
-             recharge_sys.requestIAppPayOrder(rechargeConfig.IAppPay,pid,tonumber(componentGet(this.lab_number.gameObject,"UILabel").text))
+            --爱贝改成微信
+             recharge_sys.requestIAppPayOrder(rechargeConfig.WeChat,pid,tonumber(componentGet(this.lab_number.gameObject,"UILabel").text))
             
         end   
     end)

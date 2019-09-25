@@ -50,7 +50,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     private static bool applicationIsQuitting = false;
 
-    public void OnDestroy()
+    public virtual void OnDestroy()
     {
         applicationIsQuitting = true;
     }
