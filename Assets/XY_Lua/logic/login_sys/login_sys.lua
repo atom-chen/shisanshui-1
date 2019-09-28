@@ -227,21 +227,21 @@ function this.WeiXinLogin()
 		end
 		log("Unity_WeiXinLogin=="..tostring(access_token));
 		App.openid = access_token
-		if msgTable.result == 0 then
+		if msgTable.result == 0 or msgTable.errCode == 0 or msgTable.errCode == "0" then
 			log("this.share_uid=="..this.share_uid)
 			http_request_interface.otherLogin(this.loginType, access_token, access_token, 0, "code", this.share_uid, function (code,m,str)
-			-- this.share_uid = ""
-			log("Unity_WeiXin1=="..str)
-			log("Unity_WeiXin1=="..tostring(code))
-			log("Unity_WeiXin1=="..m)
-			this.isClicked = false
-			local s=string.gsub(str,"\\/","/")
-			log("Unity_WeiXin2=="..s)
+				-- this.share_uid = ""
+				log("Unity_WeiXin1=="..str)
+				log("Unity_WeiXin1=="..tostring(code))
+				log("Unity_WeiXin1=="..m)
+				this.isClicked = false
+				local s=string.gsub(str,"\\/","/")
+				log("Unity_WeiXin2=="..s)
 
-			local t=ParseJsonStr(s)
-			LogW("ttttttttttttttt---",t)
-			data_center.SetLoginAllInfo(t)
-			http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
+				local t=ParseJsonStr(s)
+				LogW("ttttttttttttttt---",t)
+				data_center.SetLoginAllInfo(t)
+				http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
 				if data_center.GetAllInfor().ret == 0 then
 		-- 			network_mgr.SetNetChnl(NetEngine.Instance:GetGameChnl())
 		-- 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().uid)
