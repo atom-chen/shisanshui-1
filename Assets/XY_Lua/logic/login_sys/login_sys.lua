@@ -216,7 +216,9 @@ function this.WeiXinLogin()
 	
 --	YX_APIManage.Instance:WeiXinLogin(this.LoginAndJumintoLobby(msg))
 	YX_APIManage.Instance:WeiXinLogin(function(msg)	
+		log(msg)
 		local msgTable = ParseJsonStr(msg)
+		log(msgTable)
 		data_center.SetLoginRetInfo(msgTable)
 
 		log("Unity_WeiXinLogin=="..tostring(msgTable.access_token));
