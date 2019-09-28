@@ -7,6 +7,16 @@ using XYHY;
 using System.IO.Compression;
 using System.Text;
 
+public enum BuildPlatform
+{
+    WebGL,
+    Standalones,
+    IOS,
+    Android,
+    WP8,
+    uwp
+}
+
 public class FileUtils
 {
     public static VersionInfo GetCurrentVerNo()
@@ -459,5 +469,59 @@ public class FileUtils
         string[] tmpStringArray = fileName.Split('\\');
         fileName = tmpStringArray[tmpStringArray.Length - 1];
         return fileName;
+    }
+
+
+
+
+
+
+
+    static FileUtils s_sharedFileUtils;
+    private List<string> _searchPathArray = new List<string>();
+    private Dictionary<string, string> _pathCache = new Dictionary<string, string>();
+    private string streamingAssetsPath;
+    private string persistentDataPath;
+    public FileUtils()
+    {
+        streamingAssetsPath = Application.streamingAssetsPath;
+        persistentDataPath = Application.persistentDataPath;
+    }
+    static public FileUtils getInstance()
+    {
+        if (s_sharedFileUtils == null) s_sharedFileUtils = new FileUtils();
+        return s_sharedFileUtils;
+    }
+
+    /// <summary>
+    /// 判断文件是否存在
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    public bool isFileExist(string filePath)
+    {
+#if !UNITY_EDITOR && UNITY_ANDROID
+        return isFileExistsAndroid(filePath);
+#else
+        return File.Exists(filePath);
+#endif
+    }
+
+    /// <summary>
+    /// 从文件读字符串
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    public string getString(string fileName)
+    {
+        if (!isFileExist(fileName))
+        {
+            return null;
+        }
+#if !UNITY_EDITOR && UNITY_ANDROID
+        return getStringAndroid(fileName);
+#else
+        return File.ReadAllText(fileName);
+#endif
     }
 }
