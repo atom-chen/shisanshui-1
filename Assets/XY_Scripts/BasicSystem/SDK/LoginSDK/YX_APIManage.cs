@@ -130,15 +130,15 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public void InitPlugins(bool isTest)
     {
 #if UNITY_IOS && !UNITY_EDITOR
-			IOSInterface.Init("appid",isTest, this.gameObject.name);
-        WeChatInit("wx066fcebf5c777f09", "qzsss")
+			//IOSInterface.Init("appid",isTest, this.gameObject.name);
+        WeChatInit("wx066fcebf5c777f09", "qzsss");
 #elif UNITY_ANDROID && !UNITY_EDITOR
 			androidInterface.InitPlugins(isTest, this.gameObject.name);
 #endif
     }
 
     static WeChatTool weChatTool;
-    public static void WeChatInit(string App_ID, string Schemes)
+    public void WeChatInit(string App_ID, string Schemes)
     {
         WeChatTool.AppID = App_ID;
         WeChatTool.Schemes = Schemes;
@@ -173,22 +173,23 @@ public class YX_APIManage : Singleton<YX_APIManage>
     ///
     public void WeiXinShare(int shareType, int type, string title, string filePath, string url, string description)
     {
-        Action shareCallback = () =>
+        Action<int> shareCallback = (int s) =>
         {
-            Debug.Log("分享返回");
+            Debug.Log("分享返回" + s);
         };
 #if UNITY_ANDROID && !UNITY_EDITOR
         androidInterface.WeiXinShare(shareType, type, title,filePath,url,description);
 #elif UNITY_IOS && !UNITY_EDITOR
-		//IOSInterface.WeiXinShare(shareType, type, title, filePath, url, description);
-        if (type == 1){
-            weChatTool.ShareText(description, shareType, shareCallback);
+        //IOSInterface.WeiXinShare(shareType, type, title, filePath, url, description);
+        if (type == 1)
+        {
+            weChatTool.ShareText(description, (ShareType)shareType, shareCallback);
         }
-        elseif (type == 2){
-            weChatTool.ShareImage(filePath, null, type, callback);
+        else if(type == 2){
+            weChatTool.ShareImage(filePath, null, (ShareType)shareType, shareCallback);
         }
-        elseif( type == 5){
-            weChatTool.ShareWepPage(url, title, description, filePath, shareType, callback);
+        else if(type == 5){
+            weChatTool.ShareWepPage(url, title, description, filePath, (ShareType)shareType, shareCallback);
         }
 #endif
     }
@@ -303,11 +304,15 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public DelegateIAppPayResp delegateIAppPayResp;
     public void startIAppPay(string msg, DelegateIAppPayResp resp)
     {
-        delegateIAppPayResp = resp;
 #if UNITY_ANDROID && !UNITY_EDITOR
         androidInterface.WeiXinPay(msg);
 #elif UNITY_IOS && !UNITY_EDITOR
-        weChatTool.Payment(msg, 1, resp);
+        Action<int> callBack = (int s) =>
+        {
+            resp(s.ToString());
+        };
+        weChatTool.Payment(msg, 1, callBack);
+        delegateIAppPayResp = resp;
 #endif
 
     }
