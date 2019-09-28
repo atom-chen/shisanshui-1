@@ -524,4 +524,48 @@ public class FileUtils
         return File.ReadAllText(fileName);
 #endif
     }
+
+    public bool writeFileWithCode(string filepath, string data, Encoding code)
+    {
+        try
+        {
+            string path = Path.GetDirectoryName(filepath);
+            createDirectory(path);
+
+            if (code != null)
+            {
+                File.WriteAllText(filepath, data, code);
+            }
+            else
+            {
+                File.WriteAllText(filepath, data);
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("writeFIle fail. " + filepath);
+            throw e;
+        }
+    }
+    public bool writeString(string filepath, string data)
+    {
+        return writeFileWithCode(filepath, data, Encoding.UTF8);
+    }
+
+    public void createDirectory(string path)
+    {
+        if (!isDirectoryExist(path))
+            Directory.CreateDirectory(path);
+    }
+
+    /// <summary>
+    /// 判断目录是否存在
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <returns></returns>
+    public bool isDirectoryExist(string dir)
+    {
+        return Directory.Exists(dir);
+    }
 }
