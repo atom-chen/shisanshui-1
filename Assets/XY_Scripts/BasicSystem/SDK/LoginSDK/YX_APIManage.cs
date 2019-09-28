@@ -7,7 +7,6 @@ using System;
 using System.Threading;
 using UnityEngine;
 using LuaInterface;
-using Native;
 
 public class YX_APIManage : Singleton<YX_APIManage>
 {
