@@ -17,11 +17,13 @@ public class YX_APIManageWrap
 		L.RegFunction("QQLogin", QQLogin);
 		L.RegFunction("YX_IsEnableBattery", YX_IsEnableBattery);
 		L.RegFunction("YX_GetPhoneStreng", YX_GetPhoneStreng);
-		L.RegFunction("onCopyCallBack", onCopyCallBack);
 		L.RegFunction("onPluginsInitFinsh", onPluginsInitFinsh);
 		L.RegFunction("onWeiXinLoginCallBack", onWeiXinLoginCallBack);
 		L.RegFunction("onQQLoginCallBack", onQQLoginCallBack);
+		L.RegFunction("onCopyCallBack", onCopyCallBack);
 		L.RegFunction("onCopy", onCopy);
+		L.RegFunction("getCopyCallBack", getCopyCallBack);
+		L.RegFunction("getCopy", getCopy);
 		L.RegFunction("onPhoneBattery", onPhoneBattery);
 		L.RegFunction("onPhoneSignal", onPhoneSignal);
 		L.RegFunction("startIAppPay", startIAppPay);
@@ -29,6 +31,7 @@ public class YX_APIManageWrap
 		L.RegFunction("onGetStoragePath", onGetStoragePath);
 		L.RegFunction("read", read);
 		L.RegFunction("deleteFile", deleteFile);
+		L.RegFunction("nowTime", nowTime);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", Lua_ToString);
 		L.RegVar("delegateNetHallCallBack", get_delegateNetHallCallBack, set_delegateNetHallCallBack);
@@ -36,12 +39,14 @@ public class YX_APIManageWrap
 		L.RegVar("batteryCallBack", get_batteryCallBack, set_batteryCallBack);
 		L.RegVar("delegateLoginResp", get_delegateLoginResp, set_delegateLoginResp);
 		L.RegVar("oncopyCallback", get_oncopyCallback, set_oncopyCallback);
+		L.RegVar("getcopyCallback", get_getcopyCallback, set_getcopyCallback);
 		L.RegVar("delegateIAppPayResp", get_delegateIAppPayResp, set_delegateIAppPayResp);
 		L.RegVar("CurrentReachability", get_CurrentReachability, set_CurrentReachability);
 		L.RegFunction("DelegateNetHallCallBack", YX_APIManage_DelegateNetHallCallBack);
 		L.RegFunction("DelegateNetGameCallBack", YX_APIManage_DelegateNetGameCallBack);
 		L.RegFunction("DelegateLoginResp", YX_APIManage_DelegateLoginResp);
 		L.RegFunction("onCopyCall", YX_APIManage_onCopyCall);
+		L.RegFunction("getCopyCall", YX_APIManage_getCopyCall);
 		L.RegFunction("DelegateIAppPayResp", YX_APIManage_DelegateIAppPayResp);
 		L.RegFunction("BatteryCallBack", YX_APIManage_BatteryCallBack);
 		L.EndClass();
@@ -268,23 +273,6 @@ public class YX_APIManageWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int onCopyCallBack(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			YX_APIManage obj = (YX_APIManage)ToLua.CheckObject(L, 1, typeof(YX_APIManage));
-			string arg0 = ToLua.CheckString(L, 2);
-			obj.onCopyCallBack(arg0);
-			return 0;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int onPluginsInitFinsh(IntPtr L)
 	{
 		try
@@ -336,6 +324,23 @@ public class YX_APIManageWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int onCopyCallBack(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			YX_APIManage obj = (YX_APIManage)ToLua.CheckObject(L, 1, typeof(YX_APIManage));
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.onCopyCallBack(arg0);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int onCopy(IntPtr L)
 	{
 		try
@@ -357,6 +362,52 @@ public class YX_APIManageWrap
 			}
 
 			obj.onCopy(arg0, arg1);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int getCopyCallBack(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			YX_APIManage obj = (YX_APIManage)ToLua.CheckObject(L, 1, typeof(YX_APIManage));
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.getCopyCallBack(arg0);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int getCopy(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			YX_APIManage obj = (YX_APIManage)ToLua.CheckObject(L, 1, typeof(YX_APIManage));
+			YX_APIManage.getCopyCall arg0 = null;
+			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
+
+			if (funcType2 != LuaTypes.LUA_TFUNCTION)
+			{
+				 arg0 = (YX_APIManage.getCopyCall)ToLua.CheckObject(L, 2, typeof(YX_APIManage.getCopyCall));
+			}
+			else
+			{
+				LuaFunction func = ToLua.ToLuaFunction(L, 2);
+				arg0 = DelegateFactory.CreateDelegate(typeof(YX_APIManage.getCopyCall), func) as YX_APIManage.getCopyCall;
+			}
+
+			obj.getCopy(arg0);
 			return 0;
 		}
 		catch(Exception e)
@@ -499,6 +550,23 @@ public class YX_APIManageWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int nowTime(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			YX_APIManage obj = (YX_APIManage)ToLua.CheckObject(L, 1, typeof(YX_APIManage));
+			long o = obj.nowTime();
+			LuaDLL.lua_pushnumber(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int op_Equality(IntPtr L)
 	{
 		try
@@ -625,6 +693,25 @@ public class YX_APIManageWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index oncopyCallback on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_getcopyCallback(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			YX_APIManage obj = (YX_APIManage)o;
+			YX_APIManage.getCopyCall ret = obj.getcopyCallback;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index getcopyCallback on a nil value" : e.Message);
 		}
 	}
 
@@ -822,6 +909,37 @@ public class YX_APIManageWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_getcopyCallback(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			YX_APIManage obj = (YX_APIManage)o;
+			YX_APIManage.getCopyCall arg0 = null;
+			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
+
+			if (funcType2 != LuaTypes.LUA_TFUNCTION)
+			{
+				 arg0 = (YX_APIManage.getCopyCall)ToLua.CheckObject(L, 2, typeof(YX_APIManage.getCopyCall));
+			}
+			else
+			{
+				LuaFunction func = ToLua.ToLuaFunction(L, 2);
+				arg0 = DelegateFactory.CreateDelegate(typeof(YX_APIManage.getCopyCall), func) as YX_APIManage.getCopyCall;
+			}
+
+			obj.getcopyCallback = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index getcopyCallback on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_delegateIAppPayResp(IntPtr L)
 	{
 		object o = null;
@@ -926,6 +1044,22 @@ public class YX_APIManageWrap
 		{
 			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
 			Delegate arg1 = DelegateFactory.CreateDelegate(typeof(YX_APIManage.onCopyCall), func);
+			ToLua.Push(L, arg1);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int YX_APIManage_getCopyCall(IntPtr L)
+	{
+		try
+		{
+			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
+			Delegate arg1 = DelegateFactory.CreateDelegate(typeof(YX_APIManage.getCopyCall), func);
 			ToLua.Push(L, arg1);
 			return 1;
 		}

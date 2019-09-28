@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System;
 using System.Threading;
 using UnityEngine;
 using LuaInterface;
+using Native;
 
 public class YX_APIManage : Singleton<YX_APIManage>
 {
@@ -130,10 +131,21 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public void InitPlugins(bool isTest)
     {
 #if UNITY_IOS && !UNITY_EDITOR
-            //IOSInterface.Init(this.gameObject.name, isTest, "");
+			IOSInterface.Init("appid",isTest, this.gameObject.name);
+        WeChatInit("wx066fcebf5c777f09", "qzsss")
 #elif UNITY_ANDROID && !UNITY_EDITOR
 			androidInterface.InitPlugins(isTest, this.gameObject.name);
 #endif
+    }
+
+    static WeChatTool weChatTool;
+    public static void WeChatInit(string App_ID, string Schemes)
+    {
+        WeChatTool.AppID = App_ID;
+        WeChatTool.Schemes = Schemes;
+        weChatTool = WeChatTool.getInstance();
+
+        SugramTool.Schemes = Schemes;
     }
     /// <summary>
     /// 微信登录
@@ -148,6 +160,8 @@ public class YX_APIManage : Singleton<YX_APIManage>
 #if UNITY_ANDROID && !UNITY_EDITOR
         androidInterface.WeiXinLogin();
 #elif UNITY_IOS && !UNITY_EDITOR
+		//IOSInterface.WeiXinLogin();
+        weChatTool.Login(resp);
 #endif
     }
 
@@ -160,8 +174,23 @@ public class YX_APIManage : Singleton<YX_APIManage>
     ///
     public void WeiXinShare(int shareType, int type, string title, string filePath, string url, string description)
     {
+        Action shareCallback = () =>
+        {
+            Debug.Log("分享返回");
+        };
 #if UNITY_ANDROID && !UNITY_EDITOR
         androidInterface.WeiXinShare(shareType, type, title,filePath,url,description);
+#elif UNITY_IOS && !UNITY_EDITOR
+		//IOSInterface.WeiXinShare(shareType, type, title, filePath, url, description);
+        if (type == 1){
+            weChatTool.ShareText(description, shareType, shareCallback);
+        }
+        elseif (type == 2){
+            weChatTool.ShareImage(filePath, null, type, callback);
+        }
+        elseif( type == 5){
+            weChatTool.ShareWepPage(url, title, description, filePath, shareType, callback);
+        }
 #endif
     }
     public void QQLogin(DelegateLoginResp resp)
@@ -227,13 +256,36 @@ public class YX_APIManage : Singleton<YX_APIManage>
     }
     public void onCopy(string msg, onCopyCall delegateCallback)
     {
-        oncopyCallback = delegateCallback; 
+        oncopyCallback = delegateCallback;
 #if UNITY_ANDROID && !UNITY_EDITOR
         string callbackname="";
         androidInterface.onCopy(msg);
 #elif UNITY_IOS && !UNITY_EDITOR
+		//IOSInterface.CopyToClipboard(msg);
+        
+        weChatTool.CopyToClipboard(json);
 #endif
     }
+
+    public delegate void getCopyCall(string msg);
+    public getCopyCall getcopyCallback;
+    public void getCopyCallBack(string msg)
+    {
+        //Debug.Log("getCopyCallback----------------"+ msg);
+        msg = msg.Replace("\\", "\\\\");
+        if (getcopyCallback != null)
+            getcopyCallback(msg);
+    }
+    public void getCopy(getCopyCall delegateCallback)
+    {
+        getcopyCallback = delegateCallback;
+#if UNITY_ANDROID && !UNITY_EDITOR
+        //androidInterface.getCopyText();
+#elif UNITY_IOS && !UNITY_EDITOR
+		//IOSInterface.GetCopyText();
+#endif
+    }
+
     public void onPhoneBattery(string msg)
     {
         //Debug.Log("onPhoneBattery" + msg);
@@ -253,9 +305,10 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public void startIAppPay(string msg, DelegateIAppPayResp resp)
     {
         delegateIAppPayResp = resp;
-        //Debug.Log("YX_APIManager startIAppPay ");
 #if UNITY_ANDROID && !UNITY_EDITOR
-        androidInterface.startIAppPay(msg);
+        androidInterface.WeiXinPay(msg);
+#elif UNITY_IOS && !UNITY_EDITOR
+        weChatTool.Payment(msg, 1, resp);
 #endif
 
     }
@@ -267,6 +320,15 @@ public class YX_APIManage : Singleton<YX_APIManage>
             delegateIAppPayResp(msg);
         }
     }
+    public void onWeiXinPayCallBack(string msg)
+    {
+        Debug.Log("onIAppPayCallBack" + msg);
+        if (delegateIAppPayResp != null)
+        {
+            delegateIAppPayResp(msg);
+        }
+    }
+
     public string onGetStoragePath()
     {
         
@@ -311,6 +373,15 @@ public class YX_APIManage : Singleton<YX_APIManage>
             //Debug.Log("deleteFile  filePath " + filePath);
             System.IO.File.Delete(filePath);
         }
+    }
+
+    public long nowTime()
+    {
+        //return System.DateTime.Now.ToFileTime();
+        TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
+        long ret = Convert.ToInt64(ts.TotalMilliseconds * 0.001);
+        Debug.Log(ret);
+        return ret;
     }
 }
 
