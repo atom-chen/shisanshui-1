@@ -501,7 +501,8 @@ public class FileUtils
     public bool isFileExist(string filePath)
     {
 #if !UNITY_EDITOR && UNITY_ANDROID
-        return isFileExistsAndroid(filePath);
+        //return isFileExistsAndroid(filePath);
+        return true;
 #else
         return File.Exists(filePath);
 #endif
@@ -519,7 +520,8 @@ public class FileUtils
             return null;
         }
 #if !UNITY_EDITOR && UNITY_ANDROID
-        return getStringAndroid(fileName);
+        //return getStringAndroid(fileName);
+        return "";
 #else
         return File.ReadAllText(fileName);
 #endif
