@@ -221,11 +221,15 @@ function this.WeiXinLogin()
 		log(msgTable)
 		data_center.SetLoginRetInfo(msgTable)
 
-		log("Unity_WeiXinLogin=="..tostring(msgTable.access_token));
-		App.openid = msgTable.access_token
+		local access_token = msgTable.access_token
+		if access_token == nil then--苹果手机返回code,安卓返回access_token
+			access_token = msgTable.code
+		end
+		log("Unity_WeiXinLogin=="..tostring(access_token));
+		App.openid = access_token
 		if msgTable.result == 0 then
 			log("this.share_uid=="..this.share_uid)
-			http_request_interface.otherLogin(this.loginType, msgTable.access_token, msgTable.access_token, 0, "code", this.share_uid, function (code,m,str)
+			http_request_interface.otherLogin(this.loginType, access_token, access_token, 0, "code", this.share_uid, function (code,m,str)
 			-- this.share_uid = ""
 			log("Unity_WeiXin1=="..str)
 			log("Unity_WeiXin1=="..tostring(code))
