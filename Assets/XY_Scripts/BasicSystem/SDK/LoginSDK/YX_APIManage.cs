@@ -160,7 +160,11 @@ public class YX_APIManage : Singleton<YX_APIManage>
         androidInterface.WeiXinLogin();
 #elif UNITY_IOS && !UNITY_EDITOR
 		//IOSInterface.WeiXinLogin();
-        weChatTool.Login(resp);
+        Action<string> callBack = (string s) =>
+        {
+            resp(s);
+        };
+        weChatTool.Login(callBack);
 #endif
     }
 
@@ -262,8 +266,7 @@ public class YX_APIManage : Singleton<YX_APIManage>
         androidInterface.onCopy(msg);
 #elif UNITY_IOS && !UNITY_EDITOR
 		//IOSInterface.CopyToClipboard(msg);
-        
-        weChatTool.CopyToClipboard(json);
+        weChatTool.CopyToClipboard(msg);
 #endif
     }
 
