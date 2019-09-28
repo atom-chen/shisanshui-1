@@ -110,11 +110,11 @@ using System.Collections.Generic;
                         string query = uri.Call<string>("getQuery");
                         if (!string.IsNullOrEmpty(path))
                         {
-                            jo.Call("setIntent",new AndroidJavaObject("android.content.Intent"));
-                            TinyJSON.Node node = TinyJSON.Node.NewTable();
-                            node["path"] = path;
-                            node["query"] = query;
-                            return TinyJSON.JSON.stringify(node);
+                            //jo.Call("setIntent",new AndroidJavaObject("android.content.Intent"));
+                            //TinyJSON.Node node = TinyJSON.Node.NewTable();
+                            //node["path"] = path;
+                            //node["query"] = query;
+                            //return TinyJSON.JSON.stringify(node);
                         }
                     }
                 }
@@ -129,7 +129,7 @@ using System.Collections.Generic;
         [AOT.MonoPInvokeCallback(typeof(StringCallBack))]
         static public void loginCallback(string data)
         {
-            Debug.Log("登录返回");
+            Debug.Log("登录返回" + data);
             if (mLoginCallBack != null)
             {
                 UnityThreadHelper.Dispatcher.Dispatch(() =>
