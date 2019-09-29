@@ -223,47 +223,64 @@ function this.WeiXinLogin()
 
 		local access_token = msgTable.access_token
 		if access_token == nil then--苹果手机返回code,安卓返回access_token
-			access_token = msgTable.code
-		end
-		log("Unity_WeiXinLogin=="..tostring(access_token));
-		App.openid = access_token
-		if msgTable.result == 0 or msgTable.errCode == 0 or msgTable.errCode == "0" then
-			log("this.share_uid=="..this.share_uid)
-			http_request_interface.otherLogin(this.loginType, access_token, access_token, 0, "code", this.share_uid, function (code,m,str)
-				-- this.share_uid = ""
-				log("Unity_WeiXin1=="..str)
-				log("Unity_WeiXin1=="..tostring(code))
-				log("Unity_WeiXin1=="..m)
-				this.isClicked = false
-				local s=string.gsub(str,"\\/","/")
-				log("Unity_WeiXin2=="..s)
-
-				local t=ParseJsonStr(s)
-				LogW("ttttttttttttttt---",t)
-				data_center.SetLoginAllInfo(t)
-				http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
-				if data_center.GetAllInfor().ret == 0 then
-		-- 			network_mgr.SetNetChnl(NetEngine.Instance:GetGameChnl())
-		-- 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().uid)
-		-- 			network_mgr.Connect(urlStr)
-		-- --		majong_request_interface.HeartBeatReq()
-					PlayerPrefs.SetInt("LoginType", this.loginType)
-					PlayerPrefs.SetString("AccessToken", t["access_token"])
-					PlayerPrefs.SetString("OpenID", t["openid"])
-
-
-					this.EnterHallRsp("")
-					local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
-					SocketManager:createSocket("hall",urlStr,"online", 1)	  
-				else
-					log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
-				end
-			end)
+			local url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx066fcebf5c777f09&secret=9af1fcaff5152062529ea91356146888&code="..msgTable.code.."&grant_type=authorization_code"
+			NetWorkManage.Instance:HttpPostUrlRequest(url,function (code,m,str)
+		        log("收到返回")
+		        log(str)
+				local tbl = ParseJsonStr(str)
+				log(tbl)
+		        if code == -1 then
+		            fast_tip.Show("您的网络状态不好，请稍后再试")
+		        else 
+					App.openid = tbl.openid
+					this.LoginSer(tbl.access_token, tbl.openid)
+		        end 
+		    end) 
 		else
-			log("Login Failed"..tostring(msgTable))
+			log("Unity_WeiXinLogin=="..tostring(access_token));
+			App.openid = msgTable.openid
+			if msgTable.result == 0 or msgTable.errCode == 0 or msgTable.errCode == "0" then
+				log("this.share_uid=="..this.share_uid)
+				this.LoginSer(access_token, msgTable.openid)
+			else
+				log("Login Failed"..tostring(msgTable))
+			end
 		end
 	end)
 	
+end
+
+function this.LoginSer(access_token, openid)
+	http_request_interface.otherLogin(this.loginType, openid, access_token, 0, "code", this.share_uid, function (code,m,str)
+			-- this.share_uid = ""
+			log("Unity_WeiXin1=="..str)
+			log("Unity_WeiXin1=="..tostring(code))
+			log("Unity_WeiXin1=="..m)
+			this.isClicked = false
+			local s=string.gsub(str,"\\/","/")
+			log("Unity_WeiXin2=="..s)
+
+			local t=ParseJsonStr(s)
+			LogW("ttttttttttttttt---",t)
+			data_center.SetLoginAllInfo(t)
+			http_request_interface.setUserInfo(t["user"]["uid"],t["session_key"],t["user"]["deviceid"],1,t["passport"]["siteid"],1) --初始化赋值
+			if data_center.GetAllInfor().ret == 0 then
+	-- 			network_mgr.SetNetChnl(NetEngine.Instance:GetGameChnl())
+	-- 			local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().uid)
+	-- 			network_mgr.Connect(urlStr)
+	-- --		majong_request_interface.HeartBeatReq()
+				PlayerPrefs.SetInt("LoginType", this.loginType)
+				PlayerPrefs.SetString("AccessToken", t["access_token"])
+				PlayerPrefs.SetString("OpenID", t["openid"])
+
+
+				this.EnterHallRsp("")
+				local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
+				SocketManager:createSocket("hall",urlStr,"online", 1)	  
+			else
+				log("LoginError:"..data_center.GetAllInfor().msg..tostring(data_center.GetAllInfor().ret));
+			end
+		end)
 end
 
 function this.QQLogin()
