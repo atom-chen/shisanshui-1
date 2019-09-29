@@ -165,7 +165,38 @@ public class NetWorkManage : Singleton<NetWorkManage>
         });
     }
 
-   public void HttpRequestByMothdType(HTTPMethods methodType, string param, bool isKeepAlive,bool disableCache, Action<int, string, string> callBack)
+    public void HttpPostUrlRequest(string url, Action<int, string, string> callBack)
+    {
+        Debug.Log("请求：" + url);
+        HTTPManager.SendRequest(url, HTTPMethods.Post, (HTTPRequest originalRequest, HTTPResponse response) => {
+
+            if (response == null)
+            {
+                callBack(-1, "", "");
+                return;
+            }
+            string responseStr = "";
+            int result = 0;
+            string msg = "";
+            if (response.IsSuccess)
+            {
+                responseStr = Encoding.UTF8.GetString(response.Data);
+            }
+            else
+            {
+                result = response.StatusCode;
+                msg = response.Message;
+            }
+            if (callBack != null)
+            {
+                Debug.Log("错误码：" + result + " 返回：" + msg);
+                Debug.Log("responseStr：" + responseStr);
+                callBack(result, msg, responseStr);
+            }
+        });
+    }
+
+    public void HttpRequestByMothdType(HTTPMethods methodType, string param, bool isKeepAlive,bool disableCache, Action<int, string, string> callBack)
     {
         string url = BaseUrl + SubPath + param;
         HTTPManager.SendRequest(url, methodType,isKeepAlive, disableCache, (HTTPRequest originalRequest, HTTPResponse response) =>
