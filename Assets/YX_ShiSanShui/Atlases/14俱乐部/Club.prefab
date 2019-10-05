@@ -305,10 +305,10 @@ MonoBehaviour:
     y: 600
     width: 155
     height: 49
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 72
+    borderRight: 69
+    borderTop: 15
+    borderBottom: 13
     paddingLeft: 5
     paddingRight: 0
     paddingTop: 0

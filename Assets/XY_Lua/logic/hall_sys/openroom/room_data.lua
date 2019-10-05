@@ -226,8 +226,8 @@ end
 --[[--
  * @Description: 十三水房间创建请求 
  ]]
-function this.RequestSssCreateRoom(data)	
-	http_request_interface.createRoom(data, this.OnGetSssCreateRoomData)
+function this.RequestSssCreateRoom(data, method)	
+	http_request_interface.createRoom(data, this.OnGetSssCreateRoomData, method)
 end
 
 function this.OnGetSssCreateRoomData(code, m, str)	

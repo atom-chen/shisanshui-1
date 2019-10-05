@@ -474,9 +474,9 @@ end
 
 
 --开房{"gid":游戏id,"rounds":局数,"pnum",人数,"hun",混牌,"hutype":胡牌,"wind":风牌,"lowrun":下跑,"gangrun":杠跑,"dealeradd":庄家加底,"gfadd":杠上花加倍,"spadd":七对加倍}
-function  this.createRoom(param, callback) 
+function  this.createRoom(param, callback, method) 
    -- local param={["gid"]=gid,["rounds"]=rounds,["pnum"]=pnum,["hun"]=hun,["hutype"]=hutype,["wind"]=wind,["lowrun"]=lowrun,["gangrun"]=gangrun,["dealeradd"]=dealeradd,["gfadd"]=gfadd,["spadd"]=spadd} 
-    local t=this.GetTable("GameSAR.createRoom",param)  
+    local t=this.GetTable(method,param)  
     local rt=json.encode(t)
 	print ("createroom:  "..tostring(rt))
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)

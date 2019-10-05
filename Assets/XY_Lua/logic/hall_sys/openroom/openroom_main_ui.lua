@@ -1,6 +1,6 @@
 --[[--
  * @Description: 开房主界面逻辑处理
- * @Author:      shine
+ * @Author:      
  * @FileName:    openroom_main_ui.lua
  * @DateTime:    2017-07-13 19:11:00
  ]]
@@ -12,7 +12,14 @@ local this = openroom_main_ui
 
 local toggleTbl = {}
 
-function this.Show()
+RoomType = {
+	Normal = 0,
+	ClubRoom = 1
+}
+
+function this.Show(data)
+	log(data)
+	this.roomType = data
 	room_data.InitData()
 	log("加载创建房间界面")
 	if this.gameObject==nil then
@@ -101,7 +108,14 @@ function this.OnBtnCreateClick(obj)
 		log("addghost : "..tostring(gameDataInfo.add_ghost))
 		config_rule.gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.GetSssRoomDataInfo().gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
-		room_data.RequestSssCreateRoom(config_rule)
+		if this.roomType == RoomType.Normal then
+			room_data.RequestSssCreateRoom(config_rule, "GameSAR.createRoom")
+		elseif this.roomType == RoomType.ClubRoom then
+			config_rule["cid"] = ClubModel.currentClubInfo.cid
+			config_rule["ishide"] = false
+			config_rule["autocreate"] = false
+			room_data.RequestSssCreateRoom(config_rule, "GameClub.CreateClubRoom")
+		end
     end
 
     --测试使用

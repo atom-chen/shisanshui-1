@@ -20,11 +20,11 @@ function ClubRoomView:InitView()
 	self.wrapTr = child(self.transform,"container/scrollview/ui_wrapcontent")
 	self:InitItems()
 	self.wrap = ui_wrap:create(self:GetGameObject("container"))
-	self.wrap:InitUI(350)
+	self.wrap:InitUI(585)
 	self.wrap.OnUpdateItemInfo = function(go, rindex, index)
 			self:OnItemUpdate(go, index, rindex) 
 		end
-	self.wrap:InitWrap(0)
+	self.wrap:InitWrap(0, 2, 350, true)
 	
 end
 
@@ -34,7 +34,7 @@ function ClubRoomView:InitItems()
 	self.itemList[1] = item
 	item:SetCallback(self.OnItemClick, self)
 
-	for i = 2, 5 do
+	for i = 2, 10 do
 		local go = newobject(itemGo)
 		go.transform:SetParent(self.wrapTr, false)
 		item = ClubRoomItem:create(go)
@@ -123,9 +123,9 @@ function ClubRoomView:UpdateDatas()
 	end
 	self.dataList = self.model:GetRoomListByCid()
 	if self.dataList == nil then
-		self.wrap:InitWrap(0)
+		self.wrap:InitWrap(0, 2, 350, true)
 	else
-		self.wrap:InitWrap(#self.dataList)
+		self.wrap:InitWrap(self:GetRoomsNum(#self.dataList),2, 350, true)
 	end
 
 	if self.dataList == nil or #self.dataList == 0 then
@@ -137,12 +137,22 @@ function ClubRoomView:UpdateDatas()
 	self:InitAutoBtn()
 end
 
-
+function ClubRoomView:GetRoomsNum(num)
+	if num < 6 then
+		return 6
+	else
+		return num
+	end
+end
 
 function ClubRoomView:OnItemUpdate(go, index, rindex)
 	if self.itemList[index] ~= nil then
 		self.itemList[index]:SetActive(true)
-		self.itemList[index]:SetInfo(self.dataList[rindex])
+		if rindex > #self.dataList then
+			self.itemList[index]:SetInfo(nil)
+		else
+			self.itemList[index]:SetInfo(self.dataList[rindex])
+		end
 	end
 end
 

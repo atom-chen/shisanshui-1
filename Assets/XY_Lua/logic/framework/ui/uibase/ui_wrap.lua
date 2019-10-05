@@ -51,18 +51,19 @@ function ui_wrap:Initdate(data)
     end  
 end
 
-function ui_wrap:InitWrap(count)     
+function ui_wrap:InitWrap(count, nums, wide, Vertical)     
     self.wrap.minIndex = -count+1
     self.maxCount = count
 	self.wrap.maxIndex = 0     
-    self.wrap.enabled =false    
+    self.wrap.enabled =false   
+    self.Vertical =  Vertical
     for i=0 ,self.wrap.transform.childCount-1 do  
         self.wrap.transform:GetChild(i).gameObject:SetActive(false)  
         self.wrap.transform:GetChild(i).name=i+1 
     end  
 	if count >=0 and count <=self.wrap.transform.childCount then 
 		for i=0, count-1 do
-		   local go= self:InitItem(i)  
+		   local go= self:InitItem(i, nums, wide)  
            self:OnUpdateItem(go,i,-i) 
 		end 
 	elseif count>self.wrap.transform.childCount then
@@ -86,11 +87,23 @@ function ui_wrap:ResetPosition()
     componentGet(self.scrollview,"UIScrollView"):ResetPosition()
 end
 
-function ui_wrap:InitItem(i) 
+function ui_wrap:InitItem(i,nums, wide) 
     local item  
     item=child(self.wrap.transform,tostring(i+1)) 
     item.gameObject:SetActive(true)
-    item.transform.localPosition = Vector3.New(0,-i*(self.itemheight),0)     
+    if nums == nil then
+        item.transform.localPosition = Vector3.New(0,-i*(self.itemheight),0)    
+    else
+        if self.Vertical then
+            local y = -1 * math.floor(i % nums) * wide
+            local x = math.floor(i / nums) * self.itemheight
+            item.transform.localPosition = Vector3.New(x,y,0)   
+        else
+            local x = math.floor(i % nums) * wide
+            local y = -1 * math.floor(i / nums) * self.itemheight
+            item.transform.localPosition = Vector3.New(x,y,0)   
+        end
+    end 
     return item
 end
 

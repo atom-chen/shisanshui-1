@@ -36,6 +36,7 @@ end
 
 function this.HandlerEnterGame()
     map_controller.LoadLevelScene(900003, shisangshui_play_sys)
+	UIManager:CloseUiForms("ClubUI")
 	sessionData = player_data.GetSessionData()	
 end
 
