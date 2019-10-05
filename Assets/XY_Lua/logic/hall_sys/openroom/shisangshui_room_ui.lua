@@ -26,6 +26,12 @@ local addChipTbl = {}
 --最大倍数按扭
 local multplyTbl = {}
 
+local roundTbl = {}
+local chooseCardTypeTbl = {}
+local costtypeTbl = {}
+local readyTimeTbl = {}
+local addGhostTbl = {}
+
 
 function this.Awake()
    this.InitWidgets()   
@@ -39,7 +45,31 @@ function this.Start()
 	gameDataInfo = room_data.GetSssRoomDataInfo()
 	log("-----13水创建房间")
 	this.TglSelect(0, addCardTbl)
+	this.GetSaveParas()
 --	multplyTbl[1].value = false
+end
+
+function this.GetSaveParas(  )
+	room_data.GetSssRoomDataInfo().play_num = tonumber(PlayerPrefs.GetString("rounds", "10"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().play_num, roundTbl)
+	room_data.GetSssRoomDataInfo().people_num = tonumber(PlayerPrefs.GetString("pnum", "6"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().people_num, peopleTbl)
+	room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut = tonumber(PlayerPrefs.GetString("nChooseCardTypeTimeOut", "30"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut, chooseCardTypeTbl)
+
+	room_data.GetSssRoomDataInfo().costtype = tonumber(PlayerPrefs.GetString("costtype", "1"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().costtype, costtypeTbl)
+
+	room_data.GetSssRoomDataInfo().nReadyTimeOut = tonumber(PlayerPrefs.GetString("nReadyTimeOut", "5"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().nReadyTimeOut, readyTimeTbl)
+	-- room_data.GetSssRoomDataInfo().isZhuang = tonumber(PlayerPrefs.GetString("leadership", "0"))
+	-- this.TglSelect(room_data.GetSssRoomDataInfo().isZhuang, iszh)
+	room_data.GetSssRoomDataInfo().add_ghost = tonumber(PlayerPrefs.GetString("joker", "0"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().add_ghost, addGhostTbl)
+
+	room_data.GetSssRoomDataInfo().nBuyCode = tonumber(PlayerPrefs.GetString("buyhorse", "0"))
+	this.TglSelect(room_data.GetSssRoomDataInfo().nBuyCode, addChipTbl)
+	--room_data.GetSssRoomDataInfo().max_multiple = PlayerPrefs.GetString("maxfan", gameDataInfo.max_multiple);
 end
 
 --[[--
@@ -68,18 +98,27 @@ end
 function this.OpetionClickEvent()
 	--opetion Event register
 	local btn_4play = child(this.transform, "PlayNum/4")--金币添加 
+	roundTbl[10] = btn_4play.gameObject:GetComponent(typeof(UIToggle))
     if btn_4play~=nil then
        addClickCallbackSelf(btn_4play.gameObject,this.Play4Click,this)
     end
 
 	local btn_8Play = child(this.transform, "PlayNum/8")
+	roundTbl[20] = btn_8Play.gameObject:GetComponent(typeof(UIToggle))
 	if btn_8Play ~= nil then
 		addClickCallbackSelf(btn_8Play.gameObject, this.Play8Click, this)
 	end
 	
 	local btn_16Play = child(this.transform, "PlayNum/16")
+	roundTbl[30] = btn_16Play.gameObject:GetComponent(typeof(UIToggle))
 	if btn_16Play ~= nil then
 		addClickCallbackSelf(btn_16Play.gameObject, this.Play16Click, this)
+	end
+
+	local btn_50Play = child(this.transform, "PlayNum/50")
+	roundTbl[40] = btn_50Play.gameObject:GetComponent(typeof(UIToggle))
+	if btn_16Play ~= nil then
+		addClickCallbackSelf(btn_50Play.gameObject, this.Play40Click, this)
 	end
 
 	local btn_4people = child(this.transform, "PeopleNum/4")
@@ -101,25 +140,30 @@ function this.OpetionClickEvent()
 	end
 
 	local Pay0 = child(this.transform, "Pay/0")
+	costtypeTbl[1] = Pay0.gameObject:GetComponent(typeof(UIToggle))
 	if Pay0 ~= nil then
 		addClickCallbackSelf(Pay0.gameObject, function() this.AddPay0Click(gameobject) end, this)
 	end
 	
 	local Pay1 = child(this.transform, "Pay/1")
+	costtypeTbl[0] = Pay1.gameObject:GetComponent(typeof(UIToggle))
 	if Pay1 ~= nil then
 		addClickCallbackSelf(Pay1.gameObject, function() this.AddPay1Click(gameobject) end, this)
 	end
 
 	local btn_buy_ghost0 = child(this.transform, "AddGhost/0")
 	if btn_buy_ghost0 ~= nil then
+		addGhostTbl[0] = btn_buy_ghost0.gameObject:GetComponent(typeof(UIToggle))
 		UIEventListener.Get(btn_buy_ghost0.gameObject).onClick = this.Ghost0Click
 	end
 	local btn_buy_ghost1 = child(this.transform, "AddGhost/1")
 	if btn_buy_ghost1 ~= nil then
+		addGhostTbl[1] = btn_buy_ghost1.gameObject:GetComponent(typeof(UIToggle))
 		UIEventListener.Get(btn_buy_ghost1.gameObject).onClick = this.Ghost1Click
 	end
 	local btn_buy_ghost2 = child(this.transform, "AddGhost/2")
 	if btn_buy_ghost2 ~= nil then
+		addGhostTbl[2] = btn_buy_ghost2.gameObject:GetComponent(typeof(UIToggle))
 		if App.versionType ~= Version.Release then
 			UIEventListener.Get(btn_buy_ghost2.gameObject).onClick = this.Ghost2Click
 		else
@@ -134,19 +178,19 @@ function this.OpetionClickEvent()
 	end
 	
 	local btn_buy_chip = child(this.transform, "AddChip/1")
-	addChipTbl[1] = btn_buy_chip.gameObject:GetComponent(typeof(UIToggle))
+	addChipTbl[5] = btn_buy_chip.gameObject:GetComponent(typeof(UIToggle))
 	if btn_buy_chip ~= nil then
 		addClickCallbackSelf(btn_buy_chip.gameObject, function() this.AddChip1Click(gameobject) end, this)
 	end
 
 	local btn_buy_chip2 = child(this.transform, "AddChip/2")
-	addChipTbl[2] = btn_buy_chip2.gameObject:GetComponent(typeof(UIToggle))
+	addChipTbl[10] = btn_buy_chip2.gameObject:GetComponent(typeof(UIToggle))
 	if btn_buy_chip2 ~= nil then
 		addClickCallbackSelf(btn_buy_chip2.gameObject, function() this.AddChip2Click(gameobject) end, this)
 	end
 
 	local btn_buy_chip3 = child(this.transform, "AddChip/3")
-	addChipTbl[3] = btn_buy_chip3.gameObject:GetComponent(typeof(UIToggle))
+	addChipTbl[14] = btn_buy_chip3.gameObject:GetComponent(typeof(UIToggle))
 	if btn_buy_chip3 ~= nil then
 		addClickCallbackSelf(btn_buy_chip3.gameObject, function() this.AddChip3Click(gameobject) end, this)
 	end
@@ -155,32 +199,38 @@ function this.OpetionClickEvent()
 
 
 	local PlaceTime0 = child(this.transform, "PlaceTime/0")
+	chooseCardTypeTbl[60] = PlaceTime0.gameObject:GetComponent(typeof(UIToggle))
 	if PlaceTime0 ~= nil then
 		addClickCallbackSelf(PlaceTime0.gameObject, function() this.PlaceTime0Click(gameobject) end, this)
 	end
 	
 	local PlaceTime1 = child(this.transform, "PlaceTime/1")
+	chooseCardTypeTbl[120] = PlaceTime1.gameObject:GetComponent(typeof(UIToggle))
 	if PlaceTime1 ~= nil then
 		addClickCallbackSelf(PlaceTime1.gameObject, function() this.PlaceTime1Click(gameobject) end, this)
 	end
 
 	local PlaceTime2 = child(this.transform, "PlaceTime/2")
+	chooseCardTypeTbl[180] = PlaceTime2.gameObject:GetComponent(typeof(UIToggle))
 	if PlaceTime2 ~= nil then
 		addClickCallbackSelf(PlaceTime2.gameObject, function() this.PlaceTime2Click(gameobject) end, this)
 	end
 
-		local ReadyTime0 = child(this.transform, "ReadyTime/0")
+	local ReadyTime0 = child(this.transform, "ReadyTime/0")
 	if ReadyTime0 ~= nil then
+		readyTimeTbl[ReadyTimeOut[1]] = ReadyTime0.gameObject:GetComponent(typeof(UIToggle))
 		addClickCallbackSelf(ReadyTime0.gameObject, function() this.ReadyTime0Click(gameobject) end, this)
 	end
 	
 	local ReadyTime1 = child(this.transform, "ReadyTime/1")
 	if ReadyTime1 ~= nil then
+		readyTimeTbl[ReadyTimeOut[2]] = ReadyTime1.gameObject:GetComponent(typeof(UIToggle))
 		addClickCallbackSelf(ReadyTime1.gameObject, function() this.ReadyTime1Click(gameobject) end, this)
 	end
 
 	local ReadyTime2 = child(this.transform, "ReadyTime/2")
 	if ReadyTime2 ~= nil then
+		readyTimeTbl[ReadyTimeOut[3]] = ReadyTime2.gameObject:GetComponent(typeof(UIToggle))
 		addClickCallbackSelf(ReadyTime2.gameObject, function() this.ReadyTime2Click(gameobject) end, this)
 	end
 end
@@ -198,7 +248,7 @@ function this.TglSelect(addCardNum, btnTbl)
 	end
 	--TODO
 	--gameDataInfo.add_card = addCardNum
-	room_data.SetSssRoomDataInfo(gameDataInfo)
+	--room_data.SetSssRoomDataInfo(gameDataInfo)
 end
 
 ---------------------------点击事件-------------------------
@@ -218,6 +268,11 @@ function this.Play16Click()
 	gameDataInfo.play_num = PlayNum[3]
 	room_data.SetSssRoomDataInfo(gameDataInfo)
 	log("gameDataInfo.play_num: "..gameDataInfo.play_num)
+end
+
+function this.Play40Click()
+	gameDataInfo.play_num = PlayNum[4]
+	room_data.SetSssRoomDataInfo(gameDataInfo)
 end
 
 function this.People4Click()

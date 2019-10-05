@@ -1,5 +1,6 @@
 local base = require "logic/framework/ui/uibase/ui_view_base"
 local ClubRoomItem = class("ClubRoomItem", base)
+require "logic/common_ui/PreRoom"
 
 function ClubRoomItem:InitView()
 	self.model = ClubModel
@@ -11,12 +12,14 @@ function ClubRoomItem:InitView()
 	self.selfIconGo = child(self.gameObject, "selfIcon").gameObject
 	self.selfIconGo:SetActive(false)
 	self.enterBtn = child(self.gameObject, "enterBtn").gameObject
+	self.detailBtn = child(self.gameObject, "detailBtn").gameObject
 	self.headList = {}
 	for i = 1, 6 do
 		self.headList[i] = subComponentGet(self.transform, "head"..i, typeof(UITexture))
 	end
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
 	addClickCallbackSelf(self.enterBtn, self.OnEnterClick, self)
+	addClickCallbackSelf(self.detailBtn, self.OnDetailClick, self)
 end
 
 function ClubRoomItem:SetCallback(callback, target)
@@ -46,11 +49,13 @@ function ClubRoomItem:UpdateView()
 		self.nameLabel.text = ""
 		self.leaderNameLabel.text = ""
 		self.enterBtn:SetActive(true)
+		self.detailBtn:SetActive(false)
 		return
 	end
 	self.enterBtn:SetActive(false)
+	self.detailBtn:SetActive(true)
 	local name = GameUtil.GetGameName(self.info.gid)
-	self.nameLabel.text = "【" .. self.info.rno .. "】"
+	self.nameLabel.text = tostring(self.info.rno)
 	self.leaderNameLabel.text = self.info.homenickname or ""
 
 	if self.info.cfg == nil then
@@ -83,14 +88,51 @@ function ClubRoomItem:OnClick()
 end
 
 function ClubRoomItem:OnEnterClick()
-	--UIManager:ShowUiForms("openroom_ui", nil, nil,nil)
-
-
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-    if openroom_main_ui ~= nil then 
-      --open_room_data.RequesetClientConfig()
-      openroom_main_ui.Show(1)
-  end
+  --   if openroom_main_ui ~= nil then 
+  --     --open_room_data.RequesetClientConfig()
+  --     openroom_main_ui.Show(1)
+	 -- end
+	 local str = "经典"
+	room_data.GetSssRoomDataInfo().people_num = tonumber(PlayerPrefs.GetString("pnum", "6"))
+	str = str..room_data.GetSssRoomDataInfo().people_num.."人；"
+	room_data.GetSssRoomDataInfo().play_num = tonumber(PlayerPrefs.GetString("rounds", "10"))
+	str = str..room_data.GetSssRoomDataInfo().play_num.."局；"
+	room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut = tonumber(PlayerPrefs.GetString("nChooseCardTypeTimeOut", "30"))
+	str = str..room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut.."秒摆牌；"
+	room_data.GetSssRoomDataInfo().nReadyTimeOut = tonumber(PlayerPrefs.GetString("nReadyTimeOut", "5"))
+	str = str..room_data.GetSssRoomDataInfo().nReadyTimeOut.."秒准备；"
+	room_data.GetSssRoomDataInfo().add_ghost = tonumber(PlayerPrefs.GetString("joker", "0"))
+	if room_data.GetSssRoomDataInfo().add_ghost == 0 then
+		str = str.."无大小王；"
+	elseif room_data.GetSssRoomDataInfo().add_ghost == 1 then
+		str = str.."双王；"
+	else
+
+	end
+	room_data.GetSssRoomDataInfo().costtype = tonumber(PlayerPrefs.GetString("costtype", "1"))
+	if room_data.GetSssRoomDataInfo().costtype == 0 then
+		str = str.."房主支付；"
+	else
+		str = str.."AA支付；"
+	end
+	room_data.GetSssRoomDataInfo().nBuyCode = tonumber(PlayerPrefs.GetString("buyhorse", "0"))
+	if room_data.GetSssRoomDataInfo().nBuyCode == 0 then
+		str = str.."没马牌；"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 5 then
+		str = str.."马牌方块5"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 10 then
+		str = str.."马牌方块10"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 14 then
+		str = str.."马牌方块A"
+	end
+
+
+	PreRoom.Show(str)
+end
+
+function ClubRoomItem:OnDetailClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end
 
 return ClubRoomItem

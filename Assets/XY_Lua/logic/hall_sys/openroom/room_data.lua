@@ -14,10 +14,9 @@ require "logic/common/global_define"
 room_data = {}
 local this = room_data 
 
---局数
 PayType = {
-	[1] = 0,
-	[2] = 1, 
+	[1] = 0,--房主支付
+	[2] = 1, --AA支付
 	[3] = 2,
 	[4] = 3
 }
@@ -226,7 +225,7 @@ end
 --[[--
  * @Description: 十三水房间创建请求 
  ]]
-function this.RequestSssCreateRoom(data, method)	
+function this.RequestSssCreateRoom(data, method)
 	http_request_interface.createRoom(data, this.OnGetSssCreateRoomData, method)
 end
 

@@ -478,7 +478,7 @@ function  this.createRoom(param, callback, method)
    -- local param={["gid"]=gid,["rounds"]=rounds,["pnum"]=pnum,["hun"]=hun,["hutype"]=hutype,["wind"]=wind,["lowrun"]=lowrun,["gangrun"]=gangrun,["dealeradd"]=dealeradd,["gfadd"]=gfadd,["spadd"]=spadd} 
     local t=this.GetTable(method,param)  
     local rt=json.encode(t)
-	print ("createroom:  "..tostring(rt))
+	log ("createroom:  "..tostring(rt))
     NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
         log(str)
         callback(code,m,str) 

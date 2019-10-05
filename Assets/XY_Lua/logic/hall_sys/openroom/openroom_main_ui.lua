@@ -19,7 +19,10 @@ RoomType = {
 
 function this.Show(data)
 	log(data)
-	this.roomType = data
+	this.roomType = RoomType.Normal
+	if data ~= nil then
+		this.roomType = data
+	end
 	room_data.InitData()
 	log("加载创建房间界面")
 	if this.gameObject==nil then
@@ -106,6 +109,15 @@ function this.OnBtnCreateClick(obj)
 		log("people num : "..gameDataInfo.people_num)
 		
 		log("addghost : "..tostring(gameDataInfo.add_ghost))
+		PlayerPrefs.SetString("rounds", tostring(gameDataInfo.play_num))
+		PlayerPrefs.SetString("pnum", tostring(gameDataInfo.people_num))
+		PlayerPrefs.SetString("nChooseCardTypeTimeOut", tostring(gameDataInfo.nChooseCardTypeTimeOut))
+		PlayerPrefs.SetString("costtype", tostring(gameDataInfo.costtype))
+		PlayerPrefs.SetString("nReadyTimeOut", tostring(gameDataInfo.nReadyTimeOut))
+		--PlayerPrefs.SetString("leadership", tostring(gameDataInfo.isZhuang))
+		PlayerPrefs.SetString("joker", tostring(gameDataInfo.add_ghost))
+		PlayerPrefs.SetString("buyhorse", tostring(gameDataInfo.nBuyCode))
+--		PlayerPrefs.SetString("maxfan", gameDataInfo.max_multiple);
 		config_rule.gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		room_data.GetSssRoomDataInfo().gid = ENUM_GAME_TYPE.TYPE_SHISHANSHUI
 		if this.roomType == RoomType.Normal then
