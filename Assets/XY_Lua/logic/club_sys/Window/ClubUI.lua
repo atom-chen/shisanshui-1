@@ -81,8 +81,18 @@ function ClubUI:InitToggles()
 		addClickCallbackSelf(go, function() self:OnToggleClick(index) end, self)
 		self.togglesList[i] = {sp, lbl}
 	end
+	local go = child(self.gameObject, "Panel_Middle/btns/toggle4").gameObject
+	--local sp = subComponentGet(self.transform, "Panel_Middle/btns/toggle4", typeof(UISprite))
+	--local lbl = subComponentGet(self.transform, "Panel_Middle/btns/toggle" .. i .. "/Label", typeof(UILabel))
+	--local index = i
+	addClickCallbackSelf(go, function() self:SettingClick(index) end, self)
 end
 
+function ClubUI:SettingClick(index, force)
+	log("ClubUI:SetToggle")
+	self.viewList[4]:SetActive(true)
+	self.viewList[4]:OnOpen()
+end
 
 function ClubUI:OnShareClick()
 	-- self.clubInviteBtnsView:Show(self.model.currentClubInfo)
@@ -276,7 +286,10 @@ function ClubUI:SetToggle(index, force)
 	-- if index == self.curIndex and not force then
 	-- 	return
 	-- end
-	if true then return end
+	log("ClubUI:SetToggle"..index)
+	if true then 
+		return
+	end
 
 	self.curIndex = index
 --	if self.currentToggleSp ~= nil then

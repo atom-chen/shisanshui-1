@@ -2,10 +2,10 @@ local base = require "logic/framework/ui/uibase/ui_view_base"
 local Item = class("Item", base)
 
 function Item:InitView()
-	self.titleLabel = subComponentGet(self.transform,"title", typeof(UILabel))
-	self.desLabel = subComponentGet(self.transform,"des", typeof(UILabel))
-	self.iconGo = child(self.gameObject, "icon").gameObject
-	addClickCallbackSelf(self.gameObject, self.OnClick, self)
+	-- self.titleLabel = subComponentGet(self.transform,"title", typeof(UILabel))
+	-- self.desLabel = subComponentGet(self.transform,"des", typeof(UILabel))
+	-- self.iconGo = child(self.gameObject, "icon").gameObject
+	-- addClickCallbackSelf(self.gameObject, self.OnClick, self)
 end
 
 function Item:OnClick()
@@ -56,74 +56,93 @@ function ClubManageView:SetAgent(_isAgent)
 end
 
 function ClubManageView:RefreshView()
+	log("ClubManageView:RefreshView")
 	if self.clubInfo ~= ClubModel.currentClubInfo then
 		self.clubInfo =  ClubModel.currentClubInfo 
 	end
 	if self.clubInfo == nil then
 		return
 	end
-	for i = 1, 4 do
-		if self.clubInfo.cfg == nil then
-			self.itemList[i]:SetSelect(false)
-		else
-			self.itemList[i]:SetSelect(self.clubInfo.cfg[cfg[i][4]])
-		end
+	log(self.clubInfo)
+	self.content.text = "亲友圈ID："..self.clubInfo.shid
+	-- for i = 1, 4 do
+	-- 	if self.clubInfo.cfg == nil then
+	-- 		self.itemList[i]:SetSelect(false)
+	-- 	else
+	-- 		self.itemList[i]:SetSelect(self.clubInfo.cfg[cfg[i][4]])
+	-- 	end
 
-		--代理商隐藏“展示俱乐部”
-		local item = self.itemList[i]
-		if item then
-			self.moveUpTbl = self.moveUpTbl or {}
-			if i==1 then
-				item.gameObject:SetActive(not self._isAgent)
-				self.firstItemPos = item.transform.localPosition
-			elseif self.firstItemPos then
-				local itemPos = item.transform.localPosition
-				self.itemMoveY = self.itemMoveY or (self.firstItemPos.y -itemPos.y)
+	-- 	--代理商隐藏“展示俱乐部”
+	-- 	local item = self.itemList[i]
+	-- 	if item then
+	-- 		self.moveUpTbl = self.moveUpTbl or {}
+	-- 		if i==1 then
+	-- 			item.gameObject:SetActive(not self._isAgent)
+	-- 			self.firstItemPos = item.transform.localPosition
+	-- 		elseif self.firstItemPos then
+	-- 			local itemPos = item.transform.localPosition
+	-- 			self.itemMoveY = self.itemMoveY or (self.firstItemPos.y -itemPos.y)
 
-				local managerLabel = self:GetGameObject("scroll/managerLabel")
-				if managerLabel then
-					local curValue = managerLabel.transform.localPosition
-					if self._isAgent then
-						--上移
-						if not self.moveUpTbl[10] then
-							self.moveUpTbl[10] = true
-							managerLabel.transform.localPosition = Vector3(curValue.x, curValue.y +self.itemMoveY, curValue.z)
-						end
-					elseif self.moveUpTbl[10] then
-						--恢复
-						self.moveUpTbl[10] = false
-						managerLabel.transform.localPosition = Vector3(curValue.x, curValue.y -self.itemMoveY, curValue.z)
-					end
-				end
+	-- 			local managerLabel = self:GetGameObject("scroll/managerLabel")
+	-- 			if managerLabel then
+	-- 				local curValue = managerLabel.transform.localPosition
+	-- 				if self._isAgent then
+	-- 					--上移
+	-- 					if not self.moveUpTbl[10] then
+	-- 						self.moveUpTbl[10] = true
+	-- 						managerLabel.transform.localPosition = Vector3(curValue.x, curValue.y +self.itemMoveY, curValue.z)
+	-- 					end
+	-- 				elseif self.moveUpTbl[10] then
+	-- 					--恢复
+	-- 					self.moveUpTbl[10] = false
+	-- 					managerLabel.transform.localPosition = Vector3(curValue.x, curValue.y -self.itemMoveY, curValue.z)
+	-- 				end
+	-- 			end
 
-				if self._isAgent then
-					--上移
-					if not self.moveUpTbl[i] then
-						self.moveUpTbl[i] = true
-						item.transform.localPosition = Vector3(itemPos.x, itemPos.y +self.itemMoveY, itemPos.z)
-					end
-				elseif self.moveUpTbl[i] then
-					--恢复
-					self.moveUpTbl[i] = false
-					item.transform.localPosition = Vector3(itemPos.x, itemPos.y -self.itemMoveY, itemPos.z)
-				end
-			end
-		end
-	end
+	-- 			if self._isAgent then
+	-- 				--上移
+	-- 				if not self.moveUpTbl[i] then
+	-- 					self.moveUpTbl[i] = true
+	-- 					item.transform.localPosition = Vector3(itemPos.x, itemPos.y +self.itemMoveY, itemPos.z)
+	-- 				end
+	-- 			elseif self.moveUpTbl[i] then
+	-- 				--恢复
+	-- 				self.moveUpTbl[i] = false
+	-- 				item.transform.localPosition = Vector3(itemPos.x, itemPos.y -self.itemMoveY, itemPos.z)
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
 end
 
 
 function ClubManageView:InitView()
 	self.model = ClubModel
 	self.itemList = {}
-	for i = 1, 4 do
-		local go = child(self.gameObject,"scroll/item" .. i).gameObject
-		local item = Item:create(go)
-		item:SetInfo(i, cfg[i][1], cfg[i][2])
-		item:SetSelect(false)
-		item:SetCallback(self.OnItemClick, self)
-		self.itemList[i] = item
-	end
+	-- for i = 1, 4 do
+	-- 	local go = child(self.gameObject,"scroll/item" .. i).gameObject
+	-- 	local item = Item:create(go)
+	-- 	item:SetInfo(i, cfg[i][1], cfg[i][2])
+	-- 	item:SetSelect(false)
+	-- 	item:SetCallback(self.OnItemClick, self)
+	-- 	self.itemList[i] = item
+	-- end
+
+	self.content = subComponentGet(self.transform,"content", typeof(UILabel))
+	local closeBtn = child(self.gameObject, "closeBtn").gameObject
+	addClickCallbackSelf(closeBtn, self.OnCloseClick, self)
+	local exitBtn = child(self.gameObject, "exitBtn").gameObject
+	addClickCallbackSelf(exitBtn, self.OnExitClubClick, self)
+end
+
+function ClubManageView:OnCloseClick()
+	self:OnClose();
+	self.gameObject:SetActive(false)
+end
+
+function ClubManageView:OnExitClubClick()
+	--self.gameObject:SetActive(false)
+	self.model:ReqQuitClub(self.clubInfo.cid)
 end
 
 function ClubManageView:OnItemClick(item)
@@ -162,9 +181,11 @@ end
 
 
 function ClubManageView:OnOpen()
+	log("ClubManageView:OnOpen")
 end
 
 function ClubManageView:OnClose()
+	log("ClubManageView:OnClose")
 end
 
 function ClubManageView:RegistEvent()
