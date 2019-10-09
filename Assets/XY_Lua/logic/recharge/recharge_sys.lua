@@ -36,8 +36,8 @@ function this.requestIAppPayOrder( stype,pid,num )
                 tbl.partnerid = result.mch_id
                 tbl.prepayid = result.prepay_id
                 tbl.noncestr = result.nonce_str
-                --tbl.timestamp = result.stamp
-                tbl.timestamp = YX_APIManage.Instance:nowTime()
+                tbl.timestamp = result.stamp
+                --tbl.timestamp = YX_APIManage.Instance:nowTime()
                 tbl.sign = result.sign
                 local jsonStr = json.encode(tbl)
                 log(jsonStr)
