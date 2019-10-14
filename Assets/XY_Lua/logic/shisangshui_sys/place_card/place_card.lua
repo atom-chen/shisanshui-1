@@ -81,7 +81,7 @@ function this.Awake()
 end
 
 function this.Show(cards, recommendCards, nSpecialType)
-	table.sort(cards, function(a, b) return GetCardValue(a) < GetCardValue(b)
+	table.sort(cards, function(a, b) return GetCardValue(a) > GetCardValue(b)
 		end)
 	recommend_cards = recommendCards
 	ui_sound_mgr.PlaySoundClip("dub/chupai_nv")
@@ -597,7 +597,7 @@ function this.RankDownCard()
 		end
 	end
 	log("重新排牌："..#downCard)
-	local num = math.floor(#downCard / 2)
+	local num = math.floor(#downCard / 2) + 1
 	for i = 1, #downCard do
 		local v = downCard[i]
 		local pos = Vector3.New(-93 * num + i * 93, 0, 0)
@@ -1061,42 +1061,42 @@ function this.AutoPlace1Click(index)
 end
 
 function this.DunBtnShow(placing_index)
-	local dun_max_index, dun = this.GetDun(placing_index)
-	log(placing_index.."  dun_max_index:..  "..dun_max_index.."   dun: "..dun)
-	if dun ~= 3 then
-		for i = dun_max_index, dun_max_index - 4, -1 do
-			if cardPlaceTranList[i].blank == true then
-				dunDownBtn[dun].gameObject:SetActive(false)
-				dunTipSpt[dun].gameObject:SetActive(true)
-				return
-			end
-		end
-		dunDownBtn[dun].gameObject:SetActive(true)
-		dunTipSpt[dun].gameObject:SetActive(false)
-	else
-		for i = dun_max_index, 11, -1 do
-			if cardPlaceTranList[i].blank == true then
-				dunDownBtn[dun].gameObject:SetActive(false)
-				dunTipSpt[dun].gameObject:SetActive(true)
-				return
-			end
-		end
-		dunDownBtn[dun].gameObject:SetActive(true)
-		dunTipSpt[dun].gameObject:SetActive(false)
-	end
+	-- local dun_max_index, dun = this.GetDun(placing_index)
+	-- log(placing_index.."  dun_max_index:..  "..dun_max_index.."   dun: "..dun)
+	-- if dun ~= 3 then
+	-- 	for i = dun_max_index, dun_max_index - 4, -1 do
+	-- 		if cardPlaceTranList[i].blank == true then
+	-- 			dunDownBtn[dun].gameObject:SetActive(false)
+	-- 			dunTipSpt[dun].gameObject:SetActive(true)
+	-- 			return
+	-- 		end
+	-- 	end
+	-- 	dunDownBtn[dun].gameObject:SetActive(true)
+	-- 	dunTipSpt[dun].gameObject:SetActive(false)
+	-- else
+	-- 	for i = dun_max_index, 11, -1 do
+	-- 		if cardPlaceTranList[i].blank == true then
+	-- 			dunDownBtn[dun].gameObject:SetActive(false)
+	-- 			dunTipSpt[dun].gameObject:SetActive(true)
+	-- 			return
+	-- 		end
+	-- 	end
+	-- 	dunDownBtn[dun].gameObject:SetActive(true)
+	-- 	dunTipSpt[dun].gameObject:SetActive(false)
+	-- end
 end
 
 function this.DunTipShow(isShowBtn)
-	for i = 1, 3 do
-		dunDownBtn[i].gameObject:SetActive(isShowBtn)
-	end
-	local isShowSpt = true
-	if isShowBtn then
-		isShowSpt = false
-	end
-	for i = 1, 3 do
-		dunTipSpt[i].gameObject:SetActive(isShowSpt)
-	end
+	-- for i = 1, 3 do
+	-- 	dunDownBtn[i].gameObject:SetActive(isShowBtn)
+	-- end
+	-- local isShowSpt = true
+	-- if isShowBtn then
+	-- 	isShowSpt = false
+	-- end
+	-- for i = 1, 3 do
+	-- 	dunTipSpt[i].gameObject:SetActive(isShowSpt)
+	-- end
 end
 	
 function this.DownCardClick(dun)
@@ -1125,8 +1125,8 @@ function this.DownCardClick(dun)
 		place_index = place_index - 3
 	end
 	up_placed_cards[dun] = {}
-	dunDownBtn[dun].gameObject:SetActive(false)
-	dunTipSpt[dun].gameObject:SetActive(true)	
+--	dunDownBtn[dun].gameObject:SetActive(false)
+--	dunTipSpt[dun].gameObject:SetActive(true)	
 	this.TipsBtnShow(left_card)
 	coroutine.start(function ()
 		coroutine.wait(0.41)
