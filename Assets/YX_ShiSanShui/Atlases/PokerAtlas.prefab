@@ -54,36 +54,36 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: a39f0d8f159bd4246a049f071403fbeb, type: 2}
   mSprites:
   - name: b_10
-    x: 145
-    y: 5
-    width: 57
-    height: 45
+    x: 859
+    y: 415
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: b_2
-    x: 931
-    y: 468
-    width: 32
-    height: 44
+    x: 952
+    y: 415
+    width: 29
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 2
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: b_3
-    x: 898
-    y: 468
-    width: 32
-    height: 44
+    x: 764
+    y: 464
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -93,23 +93,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b_4
-    x: 544
-    y: 84
-    width: 37
-    height: 44
+    x: 921
+    y: 415
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 1
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: b_5
-    x: 798
-    y: 467
-    width: 33
-    height: 45
+    x: 668
+    y: 415
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -119,36 +119,36 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b_6
-    x: 588
-    y: 466
-    width: 34
-    height: 46
+    x: 921
+    y: 464
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: b_7
-    x: 865
-    y: 468
-    width: 32
-    height: 44
+    x: 593
+    y: 316
+    width: 28
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 2
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: b_8
-    x: 728
-    y: 468
-    width: 34
-    height: 44
+    x: 732
+    y: 415
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -158,23 +158,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b_9
-    x: 623
-    y: 466
-    width: 34
-    height: 46
+    x: 828
+    y: 415
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 1
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: b_A
-    x: 497
-    y: 38
-    width: 46
-    height: 44
+    x: 764
+    y: 415
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -184,23 +184,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b_J
-    x: 556
-    y: 302
+    x: 983
+    y: 464
     width: 29
-    height: 44
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 2
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: b_K
-    x: 344
-    y: 18
-    width: 38
-    height: 44
+    x: 700
+    y: 464
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -210,23 +210,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b_Q
-    x: 497
-    y: 129
-    width: 46
-    height: 45
+    x: 828
+    y: 464
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: b-J
-    x: 0
-    y: 1
-    width: 113
-    height: 125
+    x: 292
+    y: 227
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -236,10 +236,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b-K
-    x: 145
-    y: 198
-    width: 131
-    height: 127
+    x: 153
+    y: 40
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -249,10 +249,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: b-Q
-    x: 384
-    y: 10
-    width: 111
-    height: 123
+    x: 397
+    y: 370
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -262,10 +262,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Club
-    x: 497
-    y: 347
-    width: 71
-    height: 64
+    x: 502
+    y: 212
+    width: 90
+    height: 98
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -275,8 +275,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Club-01
-    x: 284
-    y: 164
+    x: 397
+    y: 5
     width: 90
     height: 100
     borderLeft: 0
@@ -288,21 +288,21 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Diamond
-    x: 497
-    y: 283
-    width: 58
-    height: 63
+    x: 593
+    y: 414
+    width: 74
+    height: 98
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 9
+    paddingRight: 7
     paddingTop: 0
     paddingBottom: 0
   - name: Diamond-01
-    x: 284
-    y: 63
+    x: 0
+    y: 3
     width: 90
     height: 100
     borderLeft: 0
@@ -314,20 +314,20 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Heart
-    x: 497
-    y: 230
-    width: 58
-    height: 52
+    x: 502
+    y: 113
+    width: 84
+    height: 98
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 3
+    paddingRight: 3
     paddingTop: 0
     paddingBottom: 0
   - name: Heart-01
-    x: 497
+    x: 502
     y: 412
     width: 90
     height: 100
@@ -340,23 +340,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: joker01
-    x: 284
-    y: 366
-    width: 99
-    height: 146
+    x: 397
+    y: 106
+    width: 94
+    height: 131
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 30
     paddingRight: 0
-    paddingTop: 0
+    paddingTop: 51
     paddingBottom: 0
   - name: joker01-1
-    x: 245
-    y: 52
-    width: 17
-    height: 145
+    x: 258
+    y: 49
+    width: 28
+    height: 133
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -364,25 +364,25 @@ MonoBehaviour:
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
-    paddingBottom: 0
+    paddingBottom: 3
   - name: joker02
-    x: 145
-    y: 51
-    width: 99
-    height: 146
+    x: 397
+    y: 238
+    width: 97
+    height: 131
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 27
     paddingRight: 0
-    paddingTop: 0
+    paddingTop: 51
     paddingBottom: 0
   - name: joker02-1
-    x: 263
-    y: 52
-    width: 17
-    height: 145
+    x: 258
+    y: 192
+    width: 28
+    height: 133
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -390,10 +390,10 @@ MonoBehaviour:
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
-    paddingBottom: 0
+    paddingBottom: 3
   - name: ma
-    x: 497
-    y: 175
+    x: 91
+    y: 49
     width: 47
     height: 54
     borderLeft: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: poker_back_1
-    x: 145
+    x: 153
     y: 326
     width: 138
     height: 186
@@ -419,9 +419,9 @@ MonoBehaviour:
     paddingBottom: 0
   - name: Pokerface
     x: 0
-    y: 127
-    width: 138
-    height: 186
+    y: 303
+    width: 152
+    height: 209
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: Pokerface01
     x: 0
-    y: 314
+    y: 104
     width: 144
     height: 198
     borderLeft: 0
@@ -444,36 +444,36 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r_10
-    x: 203
-    y: 6
-    width: 54
-    height: 44
+    x: 890
+    y: 464
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: r_2
-    x: 964
-    y: 468
-    width: 32
-    height: 44
+    x: 982
+    y: 415
+    width: 29
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 2
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: r_3
-    x: 832
-    y: 468
-    width: 32
-    height: 44
+    x: 732
+    y: 464
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -483,23 +483,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r_4
-    x: 544
-    y: 38
-    width: 37
-    height: 44
+    x: 890
+    y: 415
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 1
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: r_5
-    x: 588
-    y: 421
-    width: 32
-    height: 44
+    x: 700
+    y: 415
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -509,36 +509,36 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r_6
-    x: 658
-    y: 468
-    width: 34
-    height: 44
+    x: 796
+    y: 415
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: r_7
-    x: 114
-    y: 82
-    width: 30
-    height: 44
+    x: 593
+    y: 267
+    width: 28
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 2
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: r_8
-    x: 763
-    y: 468
-    width: 34
-    height: 44
+    x: 668
+    y: 464
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -548,49 +548,49 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r_9
-    x: 693
-    y: 468
-    width: 34
-    height: 44
+    x: 952
+    y: 464
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 1
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: r_A
-    x: 545
-    y: 186
-    width: 42
-    height: 43
+    x: 91
+    y: 2
+    width: 31
+    height: 46
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
+    paddingTop: 1
+    paddingBottom: 1
   - name: r_J
-    x: 114
-    y: 37
+    x: 593
+    y: 365
     width: 29
-    height: 44
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
+    paddingLeft: 2
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: r_K
-    x: 544
-    y: 130
-    width: 38
-    height: 44
+    x: 796
+    y: 464
+    width: 31
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -600,23 +600,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r_Q
-    x: 497
-    y: 83
-    width: 46
-    height: 45
+    x: 859
+    y: 464
+    width: 30
+    height: 48
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
-    paddingRight: 0
+    paddingRight: 1
     paddingTop: 0
     paddingBottom: 0
   - name: r-J
-    x: 384
-    y: 259
-    width: 112
-    height: 125
+    x: 292
+    y: 84
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -626,10 +626,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r-K
-    x: 384
-    y: 385
-    width: 112
-    height: 127
+    x: 153
+    y: 183
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -639,10 +639,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: r-Q
-    x: 384
-    y: 134
-    width: 112
-    height: 124
+    x: 292
+    y: 370
+    width: 104
+    height: 142
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -652,21 +652,21 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Spade
-    x: 284
-    y: 2
-    width: 59
-    height: 60
+    x: 502
+    y: 14
+    width: 84
+    height: 98
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 3
+    paddingRight: 3
     paddingTop: 0
     paddingBottom: 0
   - name: Spade-01
-    x: 284
-    y: 265
+    x: 502
+    y: 311
     width: 90
     height: 100
     borderLeft: 0
@@ -677,6 +677,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u8868\u60C5-\u56FE\u6807"
+    x: 292
+    y: 4
+    width: 81
+    height: 79
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 4
+    paddingRight: 3
+    paddingTop: 4
+    paddingBottom: 5
   mPixelSize: 1
   mReplacement: {fileID: 0}
   mCoordinates: 0
