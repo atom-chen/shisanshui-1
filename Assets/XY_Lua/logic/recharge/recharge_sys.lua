@@ -50,6 +50,7 @@ function this.requestIAppPayOrder( stype,pid,num )
                             local t=ParseJsonStr(s)
                             if t.ret == 0 then
                               -- 刷新当前携带货币数量
+                              hall_data.UpdateInfo(t.account.card)
                             end
                         end)
                         local msgT=ParseJsonStr(msg)

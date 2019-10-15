@@ -503,13 +503,18 @@ function this.InitInfo()
   end
   local lab_card=child(this.transform,"Panel_TopLeft/btn_photo/sp_fkBackground/lab_id")
   if lab_card~=nil then
-    componentGet(lab_card.gameObject,"UILabel").text=data_center.GetLoginRetInfo().card
+    this.fangka = componentGet(lab_card.gameObject,"UILabel")
+    this.fangka.text=data_center.GetLoginRetInfo().card
   end
   local tx_photo=child(this.transform,"Panel_TopLeft/btn_photo/sp_photo/tex_photo")
   if lab_name~=nil then 
     hall_data.getuserimage(componentGet(tx_photo,"UITexture"))
   end
 
+end
+
+function this.UpdateFangka( num )
+    this.fangka.text=data_center.GetLoginRetInfo().card
 end
 
 function  this.LoadWebPage()

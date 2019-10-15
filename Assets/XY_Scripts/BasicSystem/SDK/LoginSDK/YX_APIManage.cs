@@ -143,8 +143,6 @@ public class YX_APIManage : Singleton<YX_APIManage>
         WeChatTool.AppID = App_ID;
         WeChatTool.Schemes = Schemes;
         weChatTool = WeChatTool.getInstance();
-
-        SugramTool.Schemes = Schemes;
     }
     /// <summary>
     /// 微信登录
@@ -241,6 +239,11 @@ public class YX_APIManage : Singleton<YX_APIManage>
 
     }
 
+    public void onWeiXinShareCallBack(string msg)
+    {
+        Debug.Log("onWeiXinShareCallBack:" + msg);
+    }
+
     public void onQQLoginCallBack(string msg)
     {
         //Debug.Log("onQQLoginCallBack" + msg);
@@ -307,6 +310,7 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public DelegateIAppPayResp delegateIAppPayResp;
     public void startIAppPay(string msg, DelegateIAppPayResp resp)
     {
+        delegateIAppPayResp = resp;
 #if UNITY_ANDROID && !UNITY_EDITOR
         androidInterface.WeiXinPay(msg);
 #elif UNITY_IOS && !UNITY_EDITOR
@@ -315,7 +319,6 @@ public class YX_APIManage : Singleton<YX_APIManage>
             resp(s.ToString());
         };
         weChatTool.Payment(msg, 1, callBack);
-        delegateIAppPayResp = resp;
 #endif
 
     }
