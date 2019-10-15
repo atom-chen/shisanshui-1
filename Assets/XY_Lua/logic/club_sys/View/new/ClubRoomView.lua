@@ -128,11 +128,11 @@ function ClubRoomView:UpdateDatas()
 		self.wrap:InitWrap(self:GetRoomsNum(#self.dataList),2, 350, true)
 	end
 
-	if self.dataList == nil or #self.dataList == 0 then
-		self.tipGo:SetActive(true)
-	else
-		self.tipGo:SetActive(false)
-	end
+	-- if self.dataList == nil or #self.dataList == 0 then
+	-- 	self.tipGo:SetActive(true)
+	-- else
+	-- 	self.tipGo:SetActive(false)
+	-- end
 
 	self:InitAutoBtn()
 end

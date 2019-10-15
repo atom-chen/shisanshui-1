@@ -58,8 +58,10 @@ end
 function ClubMembersView:RefreshApplyAndRed()
 	local clubInfo = self.model.currentClubInfo
 	local canSeeApply = self.model:CheckCanSeeApplyList(clubInfo.cid)
+	log("刷新申请按扭红点")
 	if canSeeApply and clubInfo.applyNum ~= nil and clubInfo.applyNum > 0 then
 		self.redGo:SetActive(true)
+		log("显示申请按扭红点")
 		self.redNumLabel.text = clubInfo.applyNum
 	else
 		self.redGo:SetActive(false)

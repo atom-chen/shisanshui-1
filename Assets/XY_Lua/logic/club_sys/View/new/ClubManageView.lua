@@ -137,7 +137,6 @@ end
 
 function ClubManageView:OnCloseClick()
 	self:OnClose();
-	self.gameObject:SetActive(false)
 end
 
 function ClubManageView:OnExitClubClick()
@@ -182,9 +181,11 @@ end
 
 function ClubManageView:OnOpen()
 	log("ClubManageView:OnOpen")
+	self.gameObject:SetActive(true)
 end
 
 function ClubManageView:OnClose()
+	self.gameObject:SetActive(false)
 	log("ClubManageView:OnClose")
 end
 
