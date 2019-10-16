@@ -450,6 +450,10 @@ end
 
 function ClubModel:OnResCreateClub(msgTab, that)
 	log("创建俱乐部返回")
+	if msgTab.ret ~= 0 then
+		fast_tip.Show(msgTab.msg)
+		return
+	end
 	--log(GetTblData(self))
 	--log(GetTblData(that))
 	log(msgTab)

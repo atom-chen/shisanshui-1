@@ -201,12 +201,11 @@ function ClubCreateUI:OnCreateBtnClick()
 
 		log("-------------------3")
 	if self.gameIds == nil or #self.gameIds == 0 then
-		fast_tip.Show("请输入6~15位数字或者字母的密码")
+		--fast_tip.Show("请输入6~15位数字或者字母的密码")
 		--UIManager:FastTip(LanguageMgr.GetWord(10013))
 		--return
 		self.gameIds = 22
 	end
-		log("111111111111111")
 	if self.cost > 0 then
 		log("111111111111111")
 		--TER0327-label
