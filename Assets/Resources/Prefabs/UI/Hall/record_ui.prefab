@@ -2246,12 +2246,12 @@ MonoBehaviour:
   mColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
   mPivot: 3
   mWidth: 208
-  mHeight: 30
+  mHeight: 68
   mDepth: 11
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.9333334
+  aspectRatio: 3.0588236
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11458222, guid: 552438b608bb5eb4b90e6ac26e52dad6, type: 2}
@@ -2467,31 +2467,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000013893591994}
     relative: 0
-    absolute: 0
+    absolute: 26
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000013893591994}
     relative: 1
-    absolute: 0
+    absolute: -28
   bottomAnchor:
     target: {fileID: 0}
-    relative: 0
+    relative: 0.64981455
     absolute: 0
   topAnchor:
     target: {fileID: 0}
     relative: 1
-    absolute: 0
+    absolute: -24
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1689
+  mWidth: 1688
   mHeight: 269
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.2788105
+  aspectRatio: 7.8327136
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -2711,31 +2711,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000010260213872}
     relative: 0
-    absolute: 0
+    absolute: 89
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000010260213872}
     relative: 1
-    absolute: 0
+    absolute: -87
   bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000010260213872}
     relative: 0
-    absolute: 0
+    absolute: 71
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000010260213872}
     relative: 1
-    absolute: 0
+    absolute: -171
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1746
+  mWidth: 1744
   mHeight: 838
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.0835323
+  aspectRatio: 2.0811455
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -2841,7 +2841,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -5589,13 +5589,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3003
+  startingRenderQueue: 3004
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: -2, y: 40, z: 1744, w: 830}
+  mClipRange: {x: -2, y: 40, z: 2205.49, w: 830}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 16
   mSortingOrder: 0
