@@ -91,7 +91,8 @@ function ClubRoomItem:OnEnterClick()
   --     --open_room_data.RequesetClientConfig()
   --     openroom_main_ui.Show(1)
 	 -- end
-	 local str = "经典"
+	local msg = {}
+	local str = "经典"
 	room_data.GetSssRoomDataInfo().people_num = tonumber(PlayerPrefs.GetString("pnum", "6"))
 	str = str..room_data.GetSssRoomDataInfo().people_num.."人；"
 	room_data.GetSssRoomDataInfo().play_num = tonumber(PlayerPrefs.GetString("rounds", "10"))
@@ -125,8 +126,8 @@ function ClubRoomItem:OnEnterClick()
 		str = str.."马牌方块A"
 	end
 
-
-	PreRoom.Show(str)
+	msg.content = str
+	PreRoom.Show(msg)
 end
 
 function ClubRoomItem:OnDetailClick()
