@@ -66,11 +66,11 @@ function this.StartGame()
 	end
 end
 
-
+--请求电池容量
 function this.InitPlugins(istest)
 	YX_APIManage.Instance:InitPlugins(istest)
-	YX_APIManage.Instance:YX_IsEnableBattery(true);
-	YX_APIManage.Instance:YX_GetPhoneStreng();
+	-- YX_APIManage.Instance:YX_IsEnableBattery(true);
+	-- YX_APIManage.Instance:YX_GetPhoneStreng();
 end
 
 

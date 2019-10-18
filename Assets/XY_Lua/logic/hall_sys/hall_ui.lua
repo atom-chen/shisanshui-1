@@ -348,9 +348,9 @@ function this.activity(obj1,obj2)
 
   function this.CopyKefu()
     log("复制客服微信号")
+    fast_tip.Show("复制客服微信号成功")
     YX_APIManage.Instance:onCopy("sorrysz121",function()
         log("复制客服微信号成功")
-        fast_tip.Show("复制客服微信号成功")
         UI_Manager:Instance():FastTip("复制客服微信号成功")--LanguageMgr.GetWord(6043))
       end)
   end

@@ -9,10 +9,10 @@ public class AndroidInterface
 		{
 			using (AndroidJavaClass jpushClass = new AndroidJavaClass("com.yaoxing.android.api.YX_APIManage"))
 			{
-            m_JavaObject = jpushClass.CallStatic<AndroidJavaObject>("Instance");
+            m_JavaObject = jpushClass.CallStatic<AndroidJavaObject>("Create", "wx066fcebf5c777f09");
 
-			}
-        activiy = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        }
+        //activiy = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
     }
 
 	    //初始化接口

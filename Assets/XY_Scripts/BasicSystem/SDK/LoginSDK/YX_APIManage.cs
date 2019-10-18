@@ -224,13 +224,13 @@ public class YX_APIManage : Singleton<YX_APIManage>
    
     public void onPluginsInitFinsh(string msg)
     {
-        //Debug.Log("收到回调啦啦啦");
+        Debug.Log("收到回调啦啦啦");
         string dataPath = Application.dataPath;
         //Debug.Log("Application.dataPath -------" + dataPath);
     }
     public void onWeiXinLoginCallBack(string msg)
     {
-        //Debug.Log("LoginCallBack:" + msg);
+        Debug.Log("LoginCallBack:" + msg);
         if (delegateLoginResp != null)
         {
             delegateLoginResp(msg);
@@ -265,8 +265,14 @@ public class YX_APIManage : Singleton<YX_APIManage>
     {
         oncopyCallback = delegateCallback;
 #if UNITY_ANDROID && !UNITY_EDITOR
-        string callbackname="";
-        androidInterface.onCopy(msg);
+        //string callbackname="";
+        //androidInterface.onCopy(msg);
+        
+        AndroidJavaObject androidObject = new AndroidJavaObject("com.util.ClipboardTools");
+        AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        if (activity == null) return;
+        // 复制到剪贴板
+        androidObject.Call("copyTextToClipboard", activity, msg);
 #elif UNITY_IOS && !UNITY_EDITOR
 		//IOSInterface.CopyToClipboard(msg);
         weChatTool.CopyToClipboard(msg);
@@ -286,9 +292,16 @@ public class YX_APIManage : Singleton<YX_APIManage>
     {
         getcopyCallback = delegateCallback;
 #if UNITY_ANDROID && !UNITY_EDITOR
+        AndroidJavaObject androidObject = new AndroidJavaObject("com.util.ClipboardTools");   
+        AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+        if (activity == null) return "";
+        // 从剪贴板中获取文本
+        String text = androidObject.Call<String>("getTextFromClipboard", activity);
+        return text;
         //androidInterface.getCopyText();
 #elif UNITY_IOS && !UNITY_EDITOR
 		//IOSInterface.GetCopyText();
+        return weChatTool.getTextFromClipboard();
 #endif
     }
 
@@ -324,7 +337,7 @@ public class YX_APIManage : Singleton<YX_APIManage>
     }
     public void onIAppPayCallBack(string msg)
     {
-        //Debug.Log("onIAppPayCallBack" + msg);
+        Debug.Log("支付返回：" + msg);
         if (delegateIAppPayResp != null)
         {
             delegateIAppPayResp(msg);

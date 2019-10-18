@@ -60,19 +60,19 @@ namespace Framework
 
             if (IsOpenBugly)
             {
-                // 开启SDK的日志打印，发布版本请务必关闭
-                BuglyAgent.ConfigDebugMode(true);
-                // 注册日志回调，替换使用 'Application.RegisterLogCallback(Application.LogCallback)'注册日志回调的方式：BuglyAgent.RegisterLogCallback (CallbackDelegate.Instance.OnApplicationLogCallbackHandler);
-#if UNITY_IPHONE || UNITY_IOS
-        BuglyAgent.InitWithAppId ("fa367c7db7");
-#elif UNITY_ANDROID
-                //QQ_APIManage.Instance.loadSoLib();
-                BuglyAgent.InitWithAppId("d5389d0e62");
+//                // 开启SDK的日志打印，发布版本请务必关闭
+//                BuglyAgent.ConfigDebugMode(true);
+//                // 注册日志回调，替换使用 'Application.RegisterLogCallback(Application.LogCallback)'注册日志回调的方式：BuglyAgent.RegisterLogCallback (CallbackDelegate.Instance.OnApplicationLogCallbackHandler);
+//#if UNITY_IPHONE || UNITY_IOS
+//        BuglyAgent.InitWithAppId ("fa367c7db7");
+//#elif UNITY_ANDROID
+//                //QQ_APIManage.Instance.loadSoLib();
+//                BuglyAgent.InitWithAppId("d5389d0e62");
 
-#endif
-                // 如果你确认已在对应的iOS工程或Android工程中初始化SDK，那么在脚本中只需启动C#异常捕获上报功能即可
-                BuglyAgent.EnableExceptionHandler();
-                BuglyAgent.ConfigAutoReportLogLevel(LogLevel);
+//#endif
+//                // 如果你确认已在对应的iOS工程或Android工程中初始化SDK，那么在脚本中只需启动C#异常捕获上报功能即可
+//                BuglyAgent.EnableExceptionHandler();
+//                BuglyAgent.ConfigAutoReportLogLevel(LogLevel);
             }
         }
 

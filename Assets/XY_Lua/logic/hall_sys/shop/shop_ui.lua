@@ -24,6 +24,15 @@ end
 
 
 function this.Hide()  
+    http_request_interface.getAccount("",function ( code,m,str )
+        local s=string.gsub(str,"\\/","/")
+        log("getAccount callback =="..s)
+        local t=ParseJsonStr(s)
+        if t.ret == 0 then
+          -- 刷新当前携带货币数量
+          hall_data.UpdateInfo(t.account.card)
+        end
+    end)
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 	if this.gameObject==nil then 
         return
