@@ -291,18 +291,18 @@ public class YX_APIManage : Singleton<YX_APIManage>
     public void getCopy(getCopyCall delegateCallback)
     {
         getcopyCallback = delegateCallback;
-#if UNITY_ANDROID && !UNITY_EDITOR
-        AndroidJavaObject androidObject = new AndroidJavaObject("com.util.ClipboardTools");   
-        AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
-        if (activity == null) return "";
-        // 从剪贴板中获取文本
-        String text = androidObject.Call<String>("getTextFromClipboard", activity);
-        return text;
-        //androidInterface.getCopyText();
-#elif UNITY_IOS && !UNITY_EDITOR
-		//IOSInterface.GetCopyText();
-        return weChatTool.getTextFromClipboard();
-#endif
+//#if UNITY_ANDROID && !UNITY_EDITOR
+//        AndroidJavaObject androidObject = new AndroidJavaObject("com.util.ClipboardTools");   
+//        AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+//        if (activity == null) return "";
+//        // 从剪贴板中获取文本
+//        String text = androidObject.Call<String>("getTextFromClipboard", activity);
+//        return text;
+//        //androidInterface.getCopyText();
+//#elif UNITY_IOS && !UNITY_EDITOR
+//		//IOSInterface.GetCopyText();
+//        return weChatTool.getTextFromClipboard();
+//#endif
     }
 
     public void onPhoneBattery(string msg)
