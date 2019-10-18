@@ -42,9 +42,7 @@ function ClubRoomItem:UpdateView()
 		log("刷新俱乐部房间信息")
 		for k = 1, 6 do
 			self.headList[k].gameObject:SetActive(false)
-			log(self.headList[k].gameObject.name)
 		end
-		log("刷新俱乐部房间信息2")
 		self.selfIconGo:SetActive(false)
 		self.nameLabel.text = ""
 		self.leaderNameLabel.text = ""

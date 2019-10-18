@@ -276,6 +276,10 @@ function this.LoginSer(access_token)
 				PlayerPrefs.SetString("OpenID", t["openid"])
 
 
+				--俱乐部请求
+				ClubModel:ctor()
+				ClubModel:Init()
+				Notifier.dispatchCmd(GameEvent.LoginSuccess)
 				this.EnterHallRsp("")
 				local urlStr = string.format(data_center.url,data_center.GetLoginRetInfo().uid,data_center.GetLoginRetInfo().session_key)
 				SocketManager:createSocket("hall",urlStr,"online", 1)	  
