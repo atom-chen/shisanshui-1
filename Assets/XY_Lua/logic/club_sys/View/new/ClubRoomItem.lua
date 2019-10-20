@@ -80,6 +80,11 @@ function ClubRoomItem:UpdateView()
 end
 
 function ClubRoomItem:OnClick()
+	log(self.info)
+	if self.info == nil then
+		self:OnEnterClick()
+		return
+	end
 	if self.callback ~= nil then
 		self.callback(self.target, self)
 	end

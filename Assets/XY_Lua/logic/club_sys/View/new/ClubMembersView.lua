@@ -174,21 +174,21 @@ end
 
 
 function ClubMembersView:OnItemClick(item)
-	local info = item.info
-	self.info = info
-	-- 非管理员
-	if not self.model:CheckCanSeeApplyList(self.cid) then
-		self:PlayerInfoAction(info)
-		return
-	end
-	local buttonInfoTab = {}
+	-- local info = item.info
+	-- self.info = info
+	-- -- 非管理员
+	-- if not self.model:CheckCanSeeApplyList(self.cid) then
+	-- 	self:PlayerInfoAction(info)
+	-- 	return
+	-- end
+	-- local buttonInfoTab = {}
 
-	if self.model:IsClubCreater(self.cid) then
-		buttonInfoTab = self:GetCreaterBtnInfos(info)
-	else
-		buttonInfoTab = self:GetManagerBtnInfo(info)
-	end
-	self.btnsView:Show(buttonInfoTab)
+	-- if self.model:IsClubCreater(self.cid) then
+	-- 	buttonInfoTab = self:GetCreaterBtnInfos(info)
+	-- else
+	-- 	buttonInfoTab = self:GetManagerBtnInfo(info)
+	-- end
+	-- self.btnsView:Show(buttonInfoTab)
 end
 
 function ClubMembersView:tickClick(item)
