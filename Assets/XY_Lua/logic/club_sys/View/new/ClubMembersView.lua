@@ -111,7 +111,7 @@ function ClubMembersView:InitItem()
 			go.transform:SetParent(parent.transform,false)
 		end
 		local item = ClubMemberItem:create(go)
-		item:SetCallback(self.OnItemClick, self)
+		item:SetCallback(self.OnItemClick, self.tickClick, self)
 		item:SetActive(false)
 		table.insert(self.itemList, item)
 	end
@@ -189,6 +189,19 @@ function ClubMembersView:OnItemClick(item)
 		buttonInfoTab = self:GetManagerBtnInfo(info)
 	end
 	self.btnsView:Show(buttonInfoTab)
+end
+
+function ClubMembersView:tickClick(item)
+	local info = item.info
+	self.info = info
+	-- 非管理员
+	message_box.ShowGoldBox("是否确定踢出成员", nil, 2, {function ()
+            message_box:Close()
+			self.model:ReqKickClubUser(self.cid,self.info.uid,4)
+        end, function ()
+            message_box:Close()
+        end}, {"fonts_02", "fonts_01"})
+	--self:QuitClubAction(info)
 end
 
 

@@ -32,9 +32,9 @@ function this.GetTable(method,param)
         siteid = 1001
     end
     local t={["appid"]=4,["uid"]=uid,["session_key"]=session_key,["siteid"]=siteid,["version"]=version,["method"]=method,["deviceid"]=deviceid,["devicetype"]=devicetype,["param"]=param} 
-    if ClubModel.agentInfo ~= nil and ClubModel.agentInfo.naid  ~= nil then
-        t.naid = ClubModel.agentInfo.naid
-    end
+    -- if ClubModel.agentInfo ~= nil and ClubModel.agentInfo.naid  ~= nil then
+    --     t.naid = ClubModel.agentInfo.naid
+    -- end
     return t
 end 
 
@@ -644,6 +644,10 @@ function this.getTask(param,callback)
 end
 
 function this.getimage(url,width,height,callback)
+    if string.len(url) < 10 then
+        log("图片地址太短："..url)
+        return
+    end
     NetWorkManage.Instance:HttpDownImage(url,width,height,function (states,tex)
         callback(states,tex)
     end)

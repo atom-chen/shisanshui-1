@@ -65,6 +65,7 @@ function ClubUI:OnInit()
 	end
 	self.nameLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/nameLbl" , typeof(UILabel))
 	self.idLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/idLbl" , typeof(UILabel))
+	self.icon = subComponentGet(self.transform, "Panel_Middle/clubInfo/cion" , typeof(UITexture))
 	
 	self.createBtnGo = child(self.gameObject, "Panel_Bottom/createBtn").gameObject
 	addClickCallbackSelf(self.createBtnGo, self.OnClubCreateClick, self)
@@ -153,6 +154,9 @@ end
 function ClubUI:SetClubInfo(clubInfo)
 	self.nameLbl.text = clubInfo.cname
 	self.idLbl.text = tostring(clubInfo.shid)
+	log(clubInfo)
+	hall_data.getuserimage(self.icon, nil, clubInfo.icon)
+
 end
 
 function ClubUI:RegistEvent()

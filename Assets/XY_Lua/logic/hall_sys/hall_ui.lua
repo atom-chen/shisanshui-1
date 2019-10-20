@@ -546,6 +546,7 @@ function  this.LoadWebPage()
 
   function this.UpdateAgent(msg)
       log("服务器返回邀请码")
+      log(msg)
     local invicode = subComponentGet(this.transform, "Panel_TopRight/Grid_TopRight/inviteCode","UILabel")
     invicode.text = "邀请码："..msg.exid
     child(this.transform, "Panel_TopLeft/btn_photo/btn_bindAgeng").gameObject:SetActive(false)

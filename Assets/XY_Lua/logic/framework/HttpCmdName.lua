@@ -3,6 +3,7 @@ HttpCmdName = {}
 -- 俱乐部相关  club
 HttpCmdName.ClubBindAgent = "GameClub.bindAgent"  -- 绑定代理商
 HttpCmdName.ClubGetAgentInfo = "GameClub.getAgentInfo" -- 获得自己代理身份
+--HttpCmdName.ClubGetAgentInfo = "ClubAgent.getAgentInfo" -- 获得自己代理身份
 HttpCmdName.ClubCreate  = "GameClub.createClub"  -- 创建俱乐部
 HttpCmdName.ClubApply = "GameClub.clubApply"  -- 加入俱乐部
 HttpCmdName.ClubGetApplyList = "GameClub.getClubApplyList" --获得俱乐部申请列表
@@ -29,6 +30,7 @@ HttpCmdName.DissolutionClub = "GameClub.delClub" --解散俱乐部
 HttpCmdName.CheckTransferClub = "GameClub.checkMoveClub" --获取是否可以转让俱乐部
 HttpCmdName.TransferClub = "GameClub.moveClub" --转让俱乐部
 HttpCmdName.createExid = "ClubAgent.createExid" --转让俱乐部
+HttpCmdName.getUnuseExids = "ClubAgent.getUnuseExids" --转让俱乐部
 
 
 -- room

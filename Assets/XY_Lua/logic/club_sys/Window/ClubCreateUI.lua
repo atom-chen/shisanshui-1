@@ -206,6 +206,7 @@ function ClubCreateUI:OnCreateBtnClick()
 		--return
 		self.gameIds = 22
 	end
+	self.selectIconId = data_center.GetLoginRetInfo().imageurl
 	if self.cost > 0 then
 		log("111111111111111")
 		--TER0327-label

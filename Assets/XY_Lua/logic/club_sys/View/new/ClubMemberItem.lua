@@ -22,9 +22,14 @@ function ClubMemberItem:InitView()
 
 	self.iconSp = self:GetComponent("icon", typeof(UISprite))
 
+	self.tickBtn = self:GetGameObject("tickBtn")
+
 	if self.sureBtnGo and self.refuseBtnGo then
 	 	addClickCallbackSelf(self.sureBtnGo, self.OnSureClick, self)
 	 	addClickCallbackSelf(self.refuseBtnGo, self.OnRefuseClick, self)
+	end
+	if self.tickBtn then
+		addClickCallbackSelf(self.tickBtn, self.tickClick, self)
 	end
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
 
@@ -51,8 +56,9 @@ function ClubMemberItem:SetTipBtnCallback(isMisdeed,callback)
  	end
 end
 
-function ClubMemberItem:SetCallback(callback, target)
+function ClubMemberItem:SetCallback(callback, tickCallback, target)
 	self.callback = callback
+	self.tickBtnClick = tickCallback
 	self.target = target
 end
 
@@ -79,11 +85,14 @@ function ClubMemberItem:UpdateView()
 	if self.model:CheckIsClubCreater(self.model.currentClubInfo.cid, self.info.uid) then
 		self.iconSp.spriteName = "club_52"
 		self.iconSp.gameObject:SetActive(true)
+		self.tickBtn.gameObject:SetActive(false)
 	elseif self.model:IsClubManager(nil, self.info.uid) then
 		self.iconSp.spriteName = "club_53"
 		self.iconSp.gameObject:SetActive(true)
+		self.tickBtn.gameObject:SetActive(false)
 	else
 		self.iconSp.gameObject:SetActive(false)
+		self.tickBtn.gameObject:SetActive(true)
 	end
 end
 
@@ -121,7 +130,12 @@ function ClubMemberItem:OnRefuseClick()
 	ClubModel:ReqDealClubApply(self.info.cpid, 0)
 end
 
-
+function ClubMemberItem:tickClick()
+	ui_sound_mgr.PlayButtonClick()
+	if self.tickBtnClick then
+		self.tickBtnClick(self.target, self)
+	end
+end
 
 
 return ClubMemberItem

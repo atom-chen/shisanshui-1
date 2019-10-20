@@ -399,11 +399,25 @@ end
 
 --生成邀请码
 function ClubModel:CreateExid()
-	-- local param = {}
-	-- param.naid = self.agentInfo.naid
-	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.createExid, nil,function (msgTab)
+	local param = {}
+	param.naid = self.agentInfo.naid
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.createExid, param,function (msgTab)
 		log(msgTab)
 		hall_ui.UpdateAgent(msgTab)
+	end)
+end
+
+--获取邀请码
+function ClubModel:GetExid()
+	local param = {}
+	param.naid = self.agentInfo.naid
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.getUnuseExids, param,function (msgTab)
+		log(msgTab)
+		if msgTab.ret ~= 0 then
+			self:CreateExid()
+		else
+			hall_ui.UpdateAgent(msgTab.unuseexids[1])
+		end
 	end)
 end
 
@@ -418,7 +432,7 @@ function ClubModel:OnResGetAgentInfo(msgTab)
 		self.agentInfo = nil
 	else
 		self.agentInfo = msgTab.agent
-		self:CreateExid(function(msg)
+		self:GetExid(function(msg)
 			log("服务器返回邀请码")
 			hall_ui.UpdateAgent(msg)
 		end)
@@ -568,15 +582,16 @@ function ClubModel:ReqDealClubApply(cpid, type)
 	-- 	end, nil)
 end
 
-function ClubModel:exchangeClub(name, banker, branchBanker, phone, moneyNum, func)
+function ClubModel:exchangeClub(name, banker, branchBanker, phone, moneyNum, cashtype, func)
 	local param = {}
 	param.name = name
 	param.pno = phone
 	param.cardno = banker
 	param.bankname = branchBanker
 	param.amount = moneyNum
-	param.cashtype = ""
-	http_request_interface.SendHttpRequestWithCallback("GameClub.applyWithdraw", param, 
+	param.naid = self.agentInfo.naid
+	param.cashtype = cashtype
+	http_request_interface.SendHttpRequestWithCallback("ClubAgent.applyWithdraw", param, 
 		function(tab) 
 			func(tab)
 		end)
@@ -1385,7 +1400,7 @@ function ClubModel:GetCreateClubCost()
 	if not self:IsAgent() then
 		return self.noagentclubcost
 	else
-		local list = model_manager:GetModel("ClubModel"):GetClubListByType(ClubMemberState.agent)
+		local list = self:GetClubListByType(ClubMemberState.agent)
 		if list == nil or #list == 0  then
 			return 0
 		else

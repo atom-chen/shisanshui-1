@@ -8,7 +8,7 @@ function ClubSelfItemView:InitView()
 	self.model = ClubModel
 	self.nameLabel = subComponentGet(self.transform, "name", typeof(UILabel))
 	self.IdLabel = subComponentGet(self.transform, "id", typeof(UILabel))
-	self.icon = subComponentGet(self.transform, "icon", typeof(UISprite))
+	self.icon = subComponentGet(self.transform, "icon", typeof(UITexture))
 	self.newIconGo = child(self.transform,"newIcon").gameObject
 	self.selfIconGo = child(self.transform,"selfIcon").gameObject
 	self.redIconGo = child(self.transform,"redPoint").gameObject
@@ -39,7 +39,8 @@ function ClubSelfItemView:SetInfo(clubInfo)
 	self.clubInfo = clubInfo
 	self.IdLabel.text = "ID:" .. self.clubInfo.shid
 	self.nameLabel.text = self.clubInfo.cname
-	self.icon.spriteName = ClubUtil.GetClubIconName(self.clubInfo.icon)
+	--self.icon.spriteName = ClubUtil.GetClubIconName(self.clubInfo.icon)
+	hall_data.getuserimage(self.icon, nil, self.clubInfo.icon)
 	self.newIconGo:SetActive(self.model:CheckClubIsNew(self.clubInfo.cid))
 	self.selfIconGo:SetActive(self.model:IsClubCreater(self.clubInfo.cid))
 	self.redIconGo:SetActive(self.model:CheckCanSeeApplyList(self.clubInfo.cid) and self.clubInfo.applyNum ~= nil 

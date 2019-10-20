@@ -60,6 +60,12 @@ function ClubManageView:RefreshView()
 	local isManager = self.model.currentClubInfo.nickname == data_center.GetLoginRetInfo().nickname and ClubModel.agentInfo.agent ~= 0
 	self.member:SetActive(not isManager)
 	self.own:SetActive(isManager)
+	if isManager then
+		log(ClubModel.agentInfo)
+		subComponentGet(self.transform,"own/total", typeof(UILabel)).text = "总额："..ClubModel.agentInfo.income
+		subComponentGet(self.transform,"own/cash", typeof(UILabel)).text = "已提取额："..ClubModel.agentInfo.casha
+		subComponentGet(self.transform,"own/left", typeof(UILabel)).text = "余额："..(ClubModel.agentInfo.income - ClubModel.agentInfo.casha)
+	end
 	if self.clubInfo ~= ClubModel.currentClubInfo then
 		self.clubInfo =  ClubModel.currentClubInfo 
 	end
@@ -174,11 +180,11 @@ function ClubManageView:tixiantBtnClick()
 		return
 	end
 	local moneyNumInput = subComponentGet(self.transform,"own/moneyNumInput", typeof(UIInput))
-	if moneyNumInput.value == "" or not tonumber(moneyNumInput.value) or tonumber(moneyNumInput.value) < 100 then
+	if moneyNumInput.value == "" or not tonumber(moneyNumInput.value) or tonumber(moneyNumInput.value) < 9 then
 		fast_tip.Show("请输入正确的提现金额")
 		return
 	end
-	self.model:exchangeClub(nameInput.value, bankInput.value,branchBankInput.value,phoneInput.value,moneyNumInput.value, function(msg)
+	self.model:exchangeClub(nameInput.value, bankInput.value,branchBankInput.value,phoneInput.value,moneyNumInput.value, 3, function(msg)
 		if msg.ret == 0 then
 			fast_tip.Show("提交成功,请等待管理员审核")
 		else

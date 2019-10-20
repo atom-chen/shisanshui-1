@@ -122,15 +122,16 @@ end
 
 
 function ClubInputUI:CheckCodeValide()
-	local count = #self.inputView:GetNumList()
-	if count < 6 then
-		if self.type == ClubInputUIEnum.InputClubID then
-			UIManager:FastTip(LanguageMgr.GetWord(10041))
-		else
-			UIManager:FastTip(LanguageMgr.GetWord(10031))
-		end
-		return false
-	end
+	--检查是否6位数
+	-- local count = #self.inputView:GetNumList()
+	-- if count < 6 then
+	-- 	if self.type == ClubInputUIEnum.InputClubID then
+	-- 		UIManager:FastTip(LanguageMgr.GetWord(10041))
+	-- 	else
+	-- 		UIManager:FastTip(LanguageMgr.GetWord(10031))
+	-- 	end
+	-- 	return false
+	-- end
 	return true
 end
 

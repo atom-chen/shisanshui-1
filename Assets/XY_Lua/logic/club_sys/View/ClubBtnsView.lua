@@ -66,18 +66,18 @@ function ClubBtnsView:HideOthers()
 end
 
 function ClubBtnsView:FormatPos(pos)
-	if self.limitBottom > pos.y then
-		pos.y = self.limitBottom
-	end
-	if self.limitTop < pos.y + self.height then 
-		pos.y = self.limitTop - self.height
-	end
-	if self.limitLeft > pos.x then
-		pos.x = self.limitLeft
-	end
-	if self.limitRight < pos.x + width then
-		pos.x = self.limitRight - width
-	end
+	-- if self.limitBottom > pos.y then
+	-- 	pos.y = self.limitBottom
+	-- end
+	-- if self.limitTop < pos.y + self.height then 
+	-- 	pos.y = self.limitTop - self.height
+	-- end
+	-- if self.limitLeft > pos.x then
+	-- 	pos.x = self.limitLeft
+	-- end
+	-- if self.limitRight < pos.x + width then
+	-- 	pos.x = self.limitRight - width
+	-- end
 end
 
 
