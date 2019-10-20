@@ -367,7 +367,7 @@ function ClubModel:OnResBindAgent(msgTab)
 	if not self:CheckMsgRet(msgTab) then
 		return
 	end
-	UIManager:FastTip(LanguageMgr.GetWord(10045))
+	UIManager:FastTip("绑定代理成功")--LanguageMgr.GetWord(10045))
 	UIManager:CloseUiForms("ClubInputUI")
 	self:CheckClearFristState()
 	if msgTab.agent == 0 then
@@ -428,7 +428,7 @@ function ClubModel:OnResGetAgentInfo(msgTab)
 	if not self:CheckMsgRet(msgTab) then
 		return
 	end
-	if msgTab.agentInfo == 0 then
+	if msgTab.agentInfo == 0 or msgTab.agent == 0 then
 		self.agentInfo = nil
 	else
 		self.agentInfo = msgTab.agent

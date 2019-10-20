@@ -57,7 +57,7 @@ end
 
 function ClubManageView:RefreshView()
 	log("ClubManageView:RefreshView")
-	local isManager = self.model.currentClubInfo.nickname == data_center.GetLoginRetInfo().nickname and ClubModel.agentInfo.agent ~= 0
+	local isManager = ClubModel.agentInfo ~= nil and self.model.currentClubInfo.nickname == data_center.GetLoginRetInfo().nickname and ClubModel.agentInfo.agent ~= 0
 	self.member:SetActive(not isManager)
 	self.own:SetActive(isManager)
 	if isManager then
