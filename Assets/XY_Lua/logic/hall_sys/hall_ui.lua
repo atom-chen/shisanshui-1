@@ -147,7 +147,7 @@ function this.ui_Top()
    end 
 
    local btn_club = child(this.transform, "Panel_Middle/btn_club")--
-   if btn_club~=nil and App.versionType ~= Version.Release then
+   if btn_club~=nil then
      addClickCallbackSelf(btn_club.gameObject,this.OpenClubUI,this)
    end 
 
