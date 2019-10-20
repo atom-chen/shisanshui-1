@@ -367,7 +367,8 @@ function ClubModel:OnResBindAgent(msgTab)
 	if not self:CheckMsgRet(msgTab) then
 		return
 	end
-	UIManager:FastTip("绑定代理成功")--LanguageMgr.GetWord(10045))
+	fast_tip.Show("绑定代理成功")
+	--UIManager:FastTip("绑定代理成功")--LanguageMgr.GetWord(10045))
 	UIManager:CloseUiForms("ClubInputUI")
 	self:CheckClearFristState()
 	if msgTab.agent == 0 then
@@ -377,15 +378,15 @@ function ClubModel:OnResBindAgent(msgTab)
 	end
 	Notifier.dispatchCmd(GameEvent.OnClubAgentChange)
 	-- 显示俱乐部创建界面
-	UIManager:ShowUiForms("ClubCreateUI")
-	self:ReqBacksiteFlag()
+	--UIManager:ShowUiForms("ClubCreateUI")
+	--self:ReqBacksiteFlag()
 end
 
 function ClubModel:OnPushBeAgent()
-	UIManager:FastTip(LanguageMgr.GetWord(10045))
+	--UIManager:FastTip(LanguageMgr.GetWord(10045))
 	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubGetAgentInfo, nil,function (msgTab)
 		self:OnResGetAgentInfo(msgTab)
-		UI_Manager:Instance():ShowUiForms("ClubCreateUI")
+		--UI_Manager:Instance():ShowUiForms("ClubCreateUI")
 	end)
 	self:ReqBacksiteFlag()
 end
@@ -401,6 +402,7 @@ end
 function ClubModel:CreateExid()
 	local param = {}
 	param.naid = self.agentInfo.naid
+	param.agtype = self.agentInfo.agtype
 	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.createExid, param,function (msgTab)
 		log(msgTab)
 		hall_ui.UpdateAgent(msgTab)
@@ -411,9 +413,10 @@ end
 function ClubModel:GetExid()
 	local param = {}
 	param.naid = self.agentInfo.naid
+	param.agtype = self.agentInfo.agtype
 	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.getUnuseExids, param,function (msgTab)
 		log(msgTab)
-		if msgTab.ret ~= 0 then
+		if msgTab.ret ~= 0 or msgTab.unuseexids[1] == nil then
 			self:CreateExid()
 		else
 			hall_ui.UpdateAgent(msgTab.unuseexids[1])
@@ -1428,7 +1431,8 @@ function ClubModel:CheckMsgRet(msgTab)
 	if msgTab.ret ~= 0 then
 		if msgTab.ret >= 100 and msgTab.ret <= 200 then
 			if msgTab.msg ~= nil and msgTab.msg ~= "" then
-				UIManager:FastTip(msgTab.msg)
+				--UIManager:FastTip(msgTab.msg)
+				fast_tip.Show(msgTab.msg)
 			end
 		end
 		return false

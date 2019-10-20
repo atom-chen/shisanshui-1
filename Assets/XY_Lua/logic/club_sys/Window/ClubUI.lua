@@ -247,12 +247,12 @@ end
 
 
 function ClubUI:RefreshManagerBtn()
-	local clubInfo = self.model.currentClubInfo
-	local isCreater = self.model:IsClubCreater(clubInfo.cid)
-	self.togglesList[4][1].gameObject:SetActive(isCreater)
-	if not isCreater and self.curIndex == 4 then
-		self:SetToggle(1)
-	end
+	-- local clubInfo = self.model.currentClubInfo
+	-- local isCreater = self.model:IsClubCreater(clubInfo.cid)
+	-- self.togglesList[4][1].gameObject:SetActive(isCreater)
+	-- if not isCreater and self.curIndex == 4 then
+	-- 	self:SetToggle(1)
+	-- end
 end
 
 

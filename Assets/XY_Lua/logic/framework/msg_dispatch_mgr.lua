@@ -436,7 +436,7 @@ function this.UpdataInfoHandle(msg)
       end
 
       if t["type"]==10015 then 
-        model_manager:GetModel("ClubModel"):OnPushBeAgent()
+          ClubModel:OnPushBeAgent()
         -- Notifier.dispatchCmd(HttpCmdName.ClubBindAgent, t)
       end
       Notifier.dispatchCmd(GameEvent.OnPushMsg, t)
