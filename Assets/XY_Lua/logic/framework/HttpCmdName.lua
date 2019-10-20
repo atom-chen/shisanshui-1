@@ -28,6 +28,8 @@ HttpCmdName.setClubCfg = "GameClub.setClubCfg" -- 设置俱乐部权限
 HttpCmdName.DissolutionClub = "GameClub.delClub" --解散俱乐部
 HttpCmdName.CheckTransferClub = "GameClub.checkMoveClub" --获取是否可以转让俱乐部
 HttpCmdName.TransferClub = "GameClub.moveClub" --转让俱乐部
+HttpCmdName.createExid = "ClubAgent.createExid" --转让俱乐部
+
 
 -- room
 HttpCmdName.GetRoomByRno = "GetRoomByRno"

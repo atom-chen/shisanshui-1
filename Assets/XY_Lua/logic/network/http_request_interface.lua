@@ -31,7 +31,10 @@ function this.GetTable(method,param)
     elseif tostring(Application.platform) == "IPhonePlayer" then
         siteid = 1001
     end
-    local t={["appid"]=4,["uid"]=uid,["session_key"]=session_key,["siteid"]=siteid,["version"]=version,["method"]=method,["deviceid"]=deviceid,["devicetype"]=devicetype,["param"]=param}   
+    local t={["appid"]=4,["uid"]=uid,["session_key"]=session_key,["siteid"]=siteid,["version"]=version,["method"]=method,["deviceid"]=deviceid,["devicetype"]=devicetype,["param"]=param} 
+    if ClubModel.agentInfo ~= nil and ClubModel.agentInfo.naid  ~= nil then
+        t.naid = ClubModel.agentInfo.naid
+    end
     return t
 end 
 

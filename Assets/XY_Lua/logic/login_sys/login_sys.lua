@@ -121,6 +121,10 @@ function this.OnPlatLoginOK(accInfo, isReconnet,openid)
     --http_request_interface.otherLogin(this.loginType, NetWorkManage.Instance:GetMacAddress(),
     if openid == nil then openid = NetWorkManage.Instance:GetMacAddress() end
     App.openid = openid
+
+	this.loginType = 2
+	-- this.LoginSer(openid, openid)
+	-- if true then return end
     http_request_interface.otherLogin(this.loginType, openid,--NetWorkManage.Instance:GetMacAddress(),
     		0,0,0,this.share_uid,function (code,m,str)
 		if code then

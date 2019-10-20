@@ -397,7 +397,19 @@ function ClubModel:ReqGetAgentInfo()
 	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetAgentInfo, nil)
 end
 
+--生成邀请码
+function ClubModel:CreateExid()
+	-- local param = {}
+	-- param.naid = self.agentInfo.naid
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.createExid, nil,function (msgTab)
+		log(msgTab)
+		hall_ui.UpdateAgent(msgTab)
+	end)
+end
+
 function ClubModel:OnResGetAgentInfo(msgTab)
+	log("代理商信息处理")
+	log(msgTab)
 	local check = self:CheckMsgRet(msgTab)
 	if not self:CheckMsgRet(msgTab) then
 		return
@@ -406,6 +418,10 @@ function ClubModel:OnResGetAgentInfo(msgTab)
 		self.agentInfo = nil
 	else
 		self.agentInfo = msgTab.agent
+		self:CreateExid(function(msg)
+			log("服务器返回邀请码")
+			hall_ui.UpdateAgent(msg)
+		end)
 	end
 	if self:IsAgent() and msgTab.hasClub and msgTab.hasClub == 0 then
 		-- UI_Manager:Instance():ShowUiForms("ClubCreateUI")
@@ -550,6 +566,20 @@ function ClubModel:ReqDealClubApply(cpid, type)
 	-- 	function(tab) 
 	-- 		self:OnResDealClubApply(tab, cpid, type)
 	-- 	end, nil)
+end
+
+function ClubModel:exchangeClub(name, banker, branchBanker, phone, moneyNum, func)
+	local param = {}
+	param.name = name
+	param.pno = phone
+	param.cardno = banker
+	param.bankname = branchBanker
+	param.amount = moneyNum
+	param.cashtype = ""
+	http_request_interface.SendHttpRequestWithCallback("GameClub.applyWithdraw", param, 
+		function(tab) 
+			func(tab)
+		end)
 end
 
 function ClubModel:OnResDealClubApply(msgTab, cpid, type)
@@ -1240,7 +1270,6 @@ function ClubModel:ClearCurrentClubInfo()
 end
 
 function ClubModel:HasClub()
-	log("是否有俱乐部")
 	return self.clubList ~= nil and #self.clubList > 0  
 end
 
@@ -1381,7 +1410,6 @@ function ClubModel:ReqJoinShareClub(cid,shareId,stime,callback)
 end
 
 function ClubModel:CheckMsgRet(msgTab)
-	log(msgTab)
 	if msgTab.ret ~= 0 then
 		if msgTab.ret >= 100 and msgTab.ret <= 200 then
 			if msgTab.msg ~= nil and msgTab.msg ~= "" then

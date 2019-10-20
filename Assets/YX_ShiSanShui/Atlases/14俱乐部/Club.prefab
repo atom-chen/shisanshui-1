@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebd2e0fe8fa5534486602b7b88e97f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: cb8ed4c58a4d7184aa5ec62f1469e81a, type: 2}
+  material: {fileID: 2100000, guid: fe868828047bc20449488ba442b501c4, type: 2}
   mSprites:
   - name: "\u4E0D\u5728\u7EBF-\u6807\u7B7E"
     x: 769

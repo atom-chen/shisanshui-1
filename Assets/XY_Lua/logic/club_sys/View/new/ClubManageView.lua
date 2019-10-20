@@ -57,6 +57,9 @@ end
 
 function ClubManageView:RefreshView()
 	log("ClubManageView:RefreshView")
+	local isManager = self.model.currentClubInfo.nickname == data_center.GetLoginRetInfo().nickname and ClubModel.agentInfo.agent ~= 0
+	self.member:SetActive(not isManager)
+	self.own:SetActive(isManager)
 	if self.clubInfo ~= ClubModel.currentClubInfo then
 		self.clubInfo =  ClubModel.currentClubInfo 
 	end
@@ -128,11 +131,15 @@ function ClubManageView:InitView()
 	-- 	self.itemList[i] = item
 	-- end
 
-	self.content = subComponentGet(self.transform,"content", typeof(UILabel))
+	self.member = child(self.gameObject, "member").gameObject
+	self.own = child(self.gameObject, "own").gameObject
+	self.content = subComponentGet(self.transform,"member/content", typeof(UILabel))
 	local closeBtn = child(self.gameObject, "closeBtn").gameObject
 	addClickCallbackSelf(closeBtn, self.OnCloseClick, self)
-	local exitBtn = child(self.gameObject, "exitBtn").gameObject
+	local exitBtn = child(self.gameObject, "member/exitBtn").gameObject
 	addClickCallbackSelf(exitBtn, self.OnExitClubClick, self)
+	local exitBtn = child(self.gameObject, "own/tixiantBtn").gameObject
+	addClickCallbackSelf(exitBtn, self.tixiantBtnClick, self)
 end
 
 function ClubManageView:OnCloseClick()
@@ -142,6 +149,42 @@ end
 function ClubManageView:OnExitClubClick()
 	--self.gameObject:SetActive(false)
 	self.model:ReqQuitClub(self.clubInfo.cid)
+end
+
+function ClubManageView:tixiantBtnClick()
+	ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	local nameInput = subComponentGet(self.transform,"own/nameInput", typeof(UIInput))
+	if nameInput.value == "" then
+		fast_tip.Show("请输入姓名")
+		return
+	end
+	local bankInput = subComponentGet(self.transform,"own/bankInput", typeof(UIInput))
+	if bankInput.value == "" or not tonumber(bankInput.value) or tonumber(bankInput.value) < 100000000000 then
+		fast_tip.Show("请输入正确的银行卡号")
+		return
+	end
+	local branchBankInput = subComponentGet(self.transform,"own/branchBankInput", typeof(UIInput))
+	if branchBankInput.value == "" then
+		fast_tip.Show("请输入正确的银行分行")
+		return
+	end
+	local phoneInput = subComponentGet(self.transform,"own/phoneInput", typeof(UIInput))
+	if phoneInput.value == "" or not tonumber(phoneInput.value) or tonumber(phoneInput.value) < 10000000000 then
+		fast_tip.Show("请输入正确的手机号码")
+		return
+	end
+	local moneyNumInput = subComponentGet(self.transform,"own/moneyNumInput", typeof(UIInput))
+	if moneyNumInput.value == "" or not tonumber(moneyNumInput.value) or tonumber(moneyNumInput.value) < 100 then
+		fast_tip.Show("请输入正确的提现金额")
+		return
+	end
+	self.model:exchangeClub(nameInput.value, bankInput.value,branchBankInput.value,phoneInput.value,moneyNumInput.value, function(msg)
+		if msg.ret == 0 then
+			fast_tip.Show("提交成功,请等待管理员审核")
+		else
+			fast_tip.Show(msg.msg)
+		end	
+	end)
 end
 
 function ClubManageView:OnItemClick(item)

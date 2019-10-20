@@ -128,7 +128,7 @@ function this.ui_Top()
    if btn_share~=nil then
      addClickCallbackSelf(btn_share.gameObject,this.share,this)
    end
-   local btn_bindAgeng = child(this.transform, "Panel_TopRight/Grid_TopRight/btn_bindAgeng")--玩法
+   local btn_bindAgeng = child(this.transform, "Panel_TopLeft/btn_photo/btn_bindAgeng")--玩法
    if btn_bindAgeng~=nil then
      addClickCallbackSelf(btn_bindAgeng.gameObject,this.BindAgeng,this)
    end
@@ -543,4 +543,11 @@ function  this.LoadWebPage()
      share_ui.Show()
    end
  end
+
+  function this.UpdateAgent(msg)
+      log("服务器返回邀请码")
+    local invicode = subComponentGet(this.transform, "Panel_TopRight/Grid_TopRight/inviteCode","UILabel")
+    invicode.text = "邀请码："..msg.exid
+    child(this.transform, "Panel_TopLeft/btn_photo/btn_bindAgeng").gameObject:SetActive(false)
+  end
 end

@@ -105,8 +105,8 @@ function ClubInputUI:OnSureBtnClick()
 end
 
 function ClubInputUI:RefreshUI()
-	self.titleSp.spriteName = TitleNameMap[self.type]
-	self.titleSp:MakePixelPerfect()
+	-- self.titleSp.spriteName = TitleNameMap[self.type]
+	-- self.titleSp:MakePixelPerfect()
 	self.sureBtnLabel.text = BtnNameMap[self.type]
 
 	self.costLabel.text = tonumber(self.model:GetCreateClubCost()) .. "钻石创建个人俱乐部"
