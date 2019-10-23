@@ -9,8 +9,8 @@ function ClubRoomView:InitView()
 	addClickCallbackSelf(self.createBtnGo, self.OnCreateBtnClick, self)
 	self.joinBtnGo = child(self.transform,"Grid/joinRoomBtn").gameObject
 	addClickCallbackSelf(self.joinBtnGo, self.OnJoinBtnClick, self)
-	self.autoOpenBtnGo = child(self.transform,"Grid/autoCreateRoomBtn").gameObject
-	addClickCallbackSelf(self.autoOpenBtnGo,self.OnautoOpenBtnClick,self)
+	-- self.autoOpenBtnGo = child(self.transform,"Grid/autoCreateRoomBtn").gameObject
+	-- addClickCallbackSelf(self.autoOpenBtnGo,self.OnautoOpenBtnClick,self)
 	self.Grid = child(self.transform,"Grid").gameObject
 	self.cid = nil
 	self.tipGo = child(self.transform,"tips").gameObject
@@ -81,12 +81,59 @@ end
 
 function ClubRoomView:OnCreateBtnClick()
 	ui_sound_mgr.PlayButtonClick()
-	UIManager:ShowUiForms("openroom_ui", nil, nil,nil)
+	--UIManager:ShowUiForms("openroom_ui", nil, nil,nil)
+
+	local msg = {}
+	local str = "经典"
+	room_data.GetSssRoomDataInfo().people_num = tonumber(PlayerPrefs.GetString("pnum", "6"))
+	str = str..room_data.GetSssRoomDataInfo().people_num.."人；"
+	room_data.GetSssRoomDataInfo().play_num = tonumber(PlayerPrefs.GetString("rounds", "10"))
+	str = str..room_data.GetSssRoomDataInfo().play_num.."局；"
+	room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut = tonumber(PlayerPrefs.GetString("nChooseCardTypeTimeOut", "30"))
+	str = str..room_data.GetSssRoomDataInfo().nChooseCardTypeTimeOut.."秒摆牌；"
+	room_data.GetSssRoomDataInfo().nReadyTimeOut = tonumber(PlayerPrefs.GetString("nReadyTimeOut", "5"))
+	str = str..room_data.GetSssRoomDataInfo().nReadyTimeOut.."秒准备；"
+	room_data.GetSssRoomDataInfo().add_ghost = tonumber(PlayerPrefs.GetString("joker", "0"))
+	if room_data.GetSssRoomDataInfo().add_ghost == 0 then
+		str = str.."无大小王；"
+	elseif room_data.GetSssRoomDataInfo().add_ghost == 1 then
+		str = str.."双王；"
+	else
+
+	end
+	room_data.GetSssRoomDataInfo().costtype = tonumber(PlayerPrefs.GetString("costtype", "1"))
+	if room_data.GetSssRoomDataInfo().costtype == 0 then
+		str = str.."房主支付；"
+	else
+		str = str.."AA支付；"
+	end
+	room_data.GetSssRoomDataInfo().nBuyCode = tonumber(PlayerPrefs.GetString("buyhorse", "0"))
+	if room_data.GetSssRoomDataInfo().nBuyCode == 0 then
+		str = str.."没马牌；"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 5 then
+		str = str.."马牌方块5"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 10 then
+		str = str.."马牌方块10"
+	elseif room_data.GetSssRoomDataInfo().nBuyCode == 14 then
+		str = str.."马牌方块A"
+	end
+
+	msg.content = str
+	PreRoom.Show(msg)
 end
 
 function ClubRoomView:OnJoinBtnClick()
-	ui_sound_mgr.PlayButtonClick()
-	UI_Manager:Instance():ShowUiForms("joinRoom_ui",UiCloseType.UiCloseType_CloseNothing)
+	-- ui_sound_mgr.PlayButtonClick()
+	--self.OnItemClick()
+	--UI_Manager:Instance():ShowUiForms("joinRoom_ui",UiCloseType.UiCloseType_CloseNothing)
+	for i = 1, #self.dataList do
+		if self.dataList[i] ~= nil then
+			local item = {}
+			item.info = self.dataList[i]
+			self:OnItemClick(item)
+			break
+		end
+	end
 end
 
 function ClubRoomView:OnautoOpenBtnClick()
@@ -104,14 +151,14 @@ function ClubRoomView:InitAutoBtn()
 	local useinfo = data_center.GetLoginUserInfo()
 	if clubInfo == nil then return end
 	self.cid = clubInfo.cid
-	if clubInfo.uid == useinfo.uid then
-		self.autoOpenBtnGo.gameObject:SetActive(true)
-		self.Grid.transform.localPosition = Vector3(-281,-206,0)
-	else
-		self.autoOpenBtnGo.gameObject:SetActive(false)
-		self.Grid.transform.localPosition = Vector3(-137,-206,0)
-	end
-	componentGet(self.Grid,"UIGrid"):Reposition()
+	-- if clubInfo.uid == useinfo.uid then
+	-- 	self.autoOpenBtnGo.gameObject:SetActive(true)
+	-- 	self.Grid.transform.localPosition = Vector3(-281,-206,0)
+	-- else
+	-- 	self.autoOpenBtnGo.gameObject:SetActive(false)
+	-- 	self.Grid.transform.localPosition = Vector3(-137,-206,0)
+	-- end
+	--componentGet(self.Grid,"UIGrid"):Reposition()
 end
 
 function ClubRoomView:UpdateDatas()
@@ -189,6 +236,7 @@ function ClubRoomView:OnItemClick(item)
 	-- 	local contentStr = "文字丢失"--LanguageMgr.GetWord(10231)..table.concat(contentTbl)
 	-- 	contentTbl = {title,subTitle,contentStr}
 	-- end
+	log(item)
 	MessageBox.ShowYesNoBox("是否确定加入俱乐部房间",function()
 		join_room_ctrl.JoinRoomByRno(item.info.rno)
 	end)

@@ -59,6 +59,7 @@ function ClubUI:OnInit()
 	self.Panel_Middle = child(self.gameObject,"Panel_Middle").gameObject
 	self.nonClubView = ClubNonView:create(child(self.gameObject, "Panel_NonClub"))
 	self.nonClubView:SetActive(false)
+	self.bottom = child(self.gameObject, "Panel_Bottom").gameObject
 	self.chgClubBtn = child(self.gameObject, "Panel_Middle/chgClubBtn")
 	if self.chgClubBtn ~= nil then
 		addClickCallbackSelf(self.chgClubBtn.gameObject, self.OnClubChgClick, self)
@@ -129,10 +130,12 @@ function ClubUI:isShowNonClubView(callback)
 	if isEmpty(self.model.unofficalClubList) then
 		self.Panel_Middle.gameObject:SetActive(false)
 		self.nonClubView:SetActive(true)
+		self.bottom:SetActive(true)
 --		self.shareBtnGo:SetActive(false)
 	else
 		self.Panel_Middle.gameObject:SetActive(true)
 		self.nonClubView:SetActive(false)
+		self.bottom:SetActive(false)
 --		self.shareBtnGo:SetActive(true and not G_isAppleVerifyInvite)
 		if callback then
 			callback()
