@@ -43,7 +43,7 @@ using System.Collections.Generic;
                 schemes = mSugramTool.CallStatic<AndroidJavaObject>("Create", AppID);
             }
 #elif UNITY_IOS
-            SugramInit(AppID,Schemes);
+            //SugramInit(AppID,Schemes);
 #endif
 
         }
@@ -59,7 +59,8 @@ using System.Collections.Generic;
         static public bool isSugramInstalled()
         {
 #if !UNITY_EDITOR && UNITY_IOS
-            return isInstallSugram();
+            //return isInstallSugram();
+            return true;
 #else
             return true;
 #endif
@@ -87,7 +88,7 @@ using System.Collections.Generic;
             IntPtr fn = Marshal.GetFunctionPointerForDelegate((StringCallBack)loginCallback);            
             schemes.Call("login", (int)fn);
 #elif UNITY_IOS
-            SugramLogin(loginCallback);
+            //SugramLogin(loginCallback);
 #endif
         }
 
@@ -114,7 +115,7 @@ using System.Collections.Generic;
             schemes.Call("ShareText", text, (int)type, (int)fn);
            
 #elif UNITY_IOS
-            SugramShareText(text,(int)type, shareCallback);
+            //SugramShareText(text,(int)type, shareCallback);
 #endif
         }
 
@@ -129,7 +130,7 @@ using System.Collections.Generic;
             schemes.Call("ShareImage", img_path, icon_path, (int)type, (int)fn);
            
 #elif UNITY_IOS
-            SugramShareImage(img_path, icon_path, (int)type, shareCallback);
+            //SugramShareImage(img_path, icon_path, (int)type, shareCallback);
 #endif
 
         }
@@ -144,7 +145,7 @@ using System.Collections.Generic;
             schemes.Call("ShareWebPage", url, title, des, icon_path, (int)type, (int)fn);
            
 #elif UNITY_IOS
-            SugramShareWebPage(url, title, des, icon_path, (int)type, shareCallback);
+            //SugramShareWebPage(url, title, des, icon_path, (int)type, shareCallback);
 #endif
 
         }
@@ -159,38 +160,38 @@ using System.Collections.Generic;
             schemes.Call("ShareGameRoom", url, title, des, roomId, roomToken, icon_path, (int)type, (int)fn);
            
 #elif UNITY_IOS
-            SugramShareGameRoom(url, title, des, roomId, roomToken, icon_path, (int)type, shareCallback);
+            //SugramShareGameRoom(url, title, des, roomId, roomToken, icon_path, (int)type, shareCallback);
 #endif
         }
 
 #if UNITY_IOS
         #region IOS Native
 
-        private const string Native = "__Internal";
+        // private const string Native = "__Internal";
 
-        [DllImport(Native)]
-        private static extern void SugramInit(string app_id,string schemes);
+        // [DllImport(Native)]
+        // private static extern void SugramInit(string app_id,string schemes);
         
-        [DllImport(Native)]
-        private static extern bool isInstallSugram();
+        // [DllImport(Native)]
+        // private static extern bool isInstallSugram();
 
-        [DllImport(Native)]
-        private static extern bool SugramLogin(StringCallBack cb);
+        // [DllImport(Native)]
+        // private static extern bool SugramLogin(StringCallBack cb);
 
-        [DllImport(Native)]
-        private static extern void SugramShareText(string text, int type, IntCallBack cb);
+        // [DllImport(Native)]
+        // private static extern void SugramShareText(string text, int type, IntCallBack cb);
 
-        [DllImport(Native)]
-        private static extern void SugramShareImage(string img_path, string icon_path, int type, IntCallBack cb);
+        // [DllImport(Native)]
+        // private static extern void SugramShareImage(string img_path, string icon_path, int type, IntCallBack cb);
 
-        [DllImport(Native)]
-        private static extern void SugramShareWebPage(string url, string title, string desc, string icon_path, int type, IntCallBack cb);
+        // [DllImport(Native)]
+        // private static extern void SugramShareWebPage(string url, string title, string desc, string icon_path, int type, IntCallBack cb);
 
-        [DllImport(Native)]
-        private static extern void SugramShareGameRoom(string url, string title, string desc, string roomId, string roomToken, string icon_path, int type, IntCallBack cb);
+        // [DllImport(Native)]
+        // private static extern void SugramShareGameRoom(string url, string title, string desc, string roomId, string roomToken, string icon_path, int type, IntCallBack cb);
         
-        [DllImport(Native)]
-        private static extern void SugramGamePay(string json, int type, IntCallBack cb);
+        // [DllImport(Native)]
+        // private static extern void SugramGamePay(string json, int type, IntCallBack cb);
 
         #endregion
 #endif
@@ -224,7 +225,7 @@ using System.Collections.Generic;
             schemes.Call("GamePay", json, type, (int)fn);
 #elif UNITY_IOS
             //string json = SimpleJson.SimpleJson.SerializeObject(obj);
-            SugramGamePay(json, type, gamePayCallback);
+            //SugramGamePay(json, type, gamePayCallback);
 #endif
         }
 
