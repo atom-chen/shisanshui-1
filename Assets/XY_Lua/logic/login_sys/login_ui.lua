@@ -36,7 +36,7 @@ end
  ]]
  function this.Awake()
  	App = {}
- 	App.versionType = Version.Release
+ 	App.versionType = Version.Test
     local go = GameObject.Find("reporter");
     if go ~= nil then--and App.versionType ~= Version.Release then 
     	go:SetActive(true) 
