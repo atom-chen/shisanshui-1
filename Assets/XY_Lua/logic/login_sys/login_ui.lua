@@ -254,7 +254,7 @@ function this.OnBtnWeiXinClick()
 		end
 	elseif  tostring(Application.platform) == "Android" or  tostring(Application.platform) == "IPhonePlayer" then
 		if App.versionType == Version.Release then
-			login_sys.OnPlatLoginOK(nil, nil, nil)
+			login_sys.WeiXinLogin()
 		elseif this.account.value == nil or this.account.value == "" then
 			log("微信登录")
 			login_sys.WeiXinLogin()
