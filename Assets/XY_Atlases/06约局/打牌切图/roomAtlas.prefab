@@ -53,6 +53,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: df3938829593ae04da522704a8a94de2, type: 2}
   mSprites:
+  - name: btn_riffle_normal
+    x: 656
+    y: 273
+    width: 108
+    height: 56
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 8
+    paddingRight: 6
+    paddingTop: 5
+    paddingBottom: 31
   - name: "\u4E2D\u9053"
     x: 818
     y: 330

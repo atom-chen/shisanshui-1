@@ -174,6 +174,15 @@ function this.getGameInfo(param,callback)
 end) 
     log("-----------Finish_getGameInfo--------") 
 end
+
+function this.costMoney(param,callback) 
+    local t=this.GetTable("GameSAR.decUserCards",param) 
+    local rt=json.encode(t)
+    NetWorkManage.Instance:HttpPOSTRequest(rt,function (code,m,str)
+    callback(code,m,str)
+end) 
+    log("-----------Finish_getGameInfo--------") 
+end
   
 
 --设置游戏配置 param:	(string)	"1|1|1"

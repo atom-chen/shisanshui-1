@@ -81,6 +81,11 @@ local function Onbtn_rePlaceClick()
 	App.RePlaceCard = true
 	log("App.RePlaceCard:"..tostring(App.RePlaceCard))
 	place_card.gameObject:SetActive(true)
+    local param={}
+    param.cost = 1
+	http_request_interface.costMoney(param,function (code,m,str) 
+	        log("扣费："..str)
+	    end)
 end
 
 local function Onbtn_voiceClick()
@@ -589,6 +594,19 @@ function this.SetPlayerInfo( viewSeat, usersdata)
 end
 
 function this.DealChat(viewSeat,contentType,content,givewho)
+
+	if content == "洗牌请求" and App.xipai == -1 then 
+		App.xipai = viewSeat
+		log("下局洗牌"..viewSeat)
+		if viewSeat == 1 then
+		    local param={}
+		    param.cost = 1
+			http_request_interface.costMoney(param,function (code,m,str) 
+			        log("洗牌扣费1房卡："..str)
+			    end)
+		end
+		return 
+	end
 	if contentType == 1 then
 		--文字聊天
 		--fast_tip.Show(content)
@@ -1039,9 +1057,12 @@ end
 --发牌
 function this.DealCard(data, callback)
 	coroutine.start(function()
-    	this.xipai.gameObject:SetActive(true)
-		this.xipai:Play()
-		coroutine.wait(1.8)
+		if App.xipai ~= -1 then
+	    	this.xipai.gameObject:SetActive(true)
+			this.xipai:Play()
+			App.xipai = -1
+			coroutine.wait(1.8)
+		end
     	this.xipai.gameObject:SetActive(false)
 		for i , v in pairs(this.playerList) do
 			--this.playerList[i].CardsTbl = this.curPeoCardsTbl[i]

@@ -163,6 +163,8 @@ function this.LoadAllResult(result)
 					ScoreLbl.gameObject:SetActive(false)
 					negScoreLbl.text ="得分:"..tostring(totalScores)
 				else
+					local btn_ready = child(this.transform, "Panel/xipai")
+					btn_ready.gameObject:SetActive(false)
 					negScoreLbl.gameObject:SetActive(false)
 					ScoreLbl.gameObject:SetActive(true)
 					ScoreLbl.text ="得分:+"..tostring(totalScores)
@@ -291,6 +293,10 @@ function this.BtnClickEvent()
 	if btn_ready ~= nil then
 		addClickCallbackSelf(btn_ready.gameObject, this.ReadyClick, this)
 	end
+	local btn_ready = child(this.transform, "Panel/xipai")
+	if btn_ready ~= nil then
+		addClickCallbackSelf(btn_ready.gameObject, this.XipaiClick, this)
+	end
 end
 
 ---------------------------点击事件-------------------------
@@ -303,6 +309,10 @@ function this.ReadyClick(obj)
 		this.reset()
 	end
 	log("-----ReadyClick-----")
+end
+
+function this.XipaiClick(obj)
+	shisangshui_play_sys.ChatReq(1,"洗牌请求",nil)
 end
 
 function this.reset()
