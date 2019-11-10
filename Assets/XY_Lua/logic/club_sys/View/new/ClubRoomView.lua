@@ -185,11 +185,11 @@ function ClubRoomView:UpdateDatas()
 end
 
 function ClubRoomView:GetRoomsNum(num)
-	if num < 6 then
-		return 6
-	else
+	-- if num < 6 then
+	-- 	return 6
+	-- else
 		return num
-	end
+	--end
 end
 
 function ClubRoomView:OnItemUpdate(go, index, rindex)
