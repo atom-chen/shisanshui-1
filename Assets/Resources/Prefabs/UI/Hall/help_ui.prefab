@@ -1013,7 +1013,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 52
+  mDepth: 4000
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &114000010432477070
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   mClipping: 3
   mClipRange: {x: 128, y: -68.1, z: 864.69, w: 632.7}
   mClipSoftness: {x: 0, y: 0}
-  mDepth: 53
+  mDepth: 4001
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &114000011084741946

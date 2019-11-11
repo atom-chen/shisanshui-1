@@ -85,12 +85,14 @@ local function OnPlayerEnter( tbl )
 --	shisangshui_ui.SetPlayerInfo( viewSeat, userdata)
 	
 	shisangshui_ui.ShowDissolveRoom(false)
+	shisangshui_ui.SetDisDiss(false)
 	shisangshui_ui.ShowInviteBtn(true)
 	--金币场不显示，以后处理
 	if viewSeat == 1 then
 		shisangshui_ui.SetGameInfo("房号", roomdata_center.roomnumber)
 		shisangshui_ui.SetLeftCard()--显示房间局数
 		shisangshui_ui.ShowDissolveRoom(true)--显有房主可以解散房间
+		shisangshui_ui.SetDisDiss(true)
 	end
 	
 	--是否选择加一色坐庄，如果是，显示庄的头像
@@ -124,6 +126,7 @@ local function OnGameStart( tbl )
 	shisangshui_ui.ShowInviteBtn(false)
 	shisangshui_ui.ShowDissolveRoom(false)
 	shisangshui_ui.IsShowBeiShuiBtn(false)
+	shisangshui_ui.SetDisDiss(false)
 	roomdata_center.isStart = true
 	ui_sound_mgr.PlaySoundClip("common/duijukaishi")
 
@@ -144,6 +147,7 @@ local function OnCompareStart(tbl)
 	shisangshui_ui.SetRePlaceBtnState(false)
 	shisangshui_ui.ShowInviteBtn(false)
 	shisangshui_ui.ShowDissolveRoom(false)
+	shisangshui_ui.SetDisDiss(false)
 	coroutine.start(function ()
 		 --播放比牌动画
    		shisangshui_ui.PlayerStartGameAnimation()
@@ -168,8 +172,10 @@ local function OnGameDeal( tbl )
 		if isSpecial == 0 then
 			log("显示摆牌")
 			place_card.Show(player_component.CardList, recommendCards)
+			shisangshui_ui.HideOtherPanel()
 		else
 			place_card.Show(player_component.CardList, recommendCards, isSpecial)
+			shisangshui_ui.HideOtherPanel()
 			log("显示特殊牌型")
 			--prepare_special.Show(player_component.CardList, isSpecial, 3, recommendCards)
 		end
@@ -352,8 +358,10 @@ local function OnSyncTable( tbl )
 				if nSpecialType ~= nil and nSpecialType > 0 then
 					--prepare_special.Show(stCards, nSpecialType, 3, ePara.recommendCards)
 					place_card.Show(stCards, ePara.recommendCards, nSpecialType)
+					shisangshui_ui.HideOtherPanel()
 				else
 					place_card.Show(stCards, ePara.recommendCards)
+					shisangshui_ui.HideOtherPanel()
 				end
 			--已摆牌
 			elseif ePara.nChoose == 1 or  ePara.nChoose == 2 then

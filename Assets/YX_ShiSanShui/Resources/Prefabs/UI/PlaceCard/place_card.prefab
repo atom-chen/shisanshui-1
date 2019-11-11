@@ -305,13 +305,15 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011045019126}
   - 114: {fileID: 114000011212947140}
+  - 65: {fileID: 65000010810438332}
+  - 65: {fileID: 65000012457567770}
   m_Layer: 5
   m_Name: bg (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000010554609320
 GameObject:
   m_ObjectHideFlags: 1
@@ -4313,6 +4315,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 130, y: 200, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65000010810438332
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010553528084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1920, y: 900, z: 1}
+  m_Center: {x: 0, y: 228.05, z: 0}
 --- !u!65 &65000010845643780
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4493,6 +4507,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 130, y: 200, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65000012457567770
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010553528084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 154.2, y: 300, z: 1}
+  m_Center: {x: 925.7, y: -379.3, z: 0}
 --- !u!65 &65000012514044926
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -5611,7 +5637,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3002
+  startingRenderQueue: 3004
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -6783,7 +6809,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 91490725fb138714d8ebcfcde9ace7fd, type: 3}
+  mTexture: {fileID: 2800000, guid: 3ec7cd0fb079d2240ae1a935497378fa, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -9153,7 +9179,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3001
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -10291,7 +10317,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3007
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -12201,7 +12227,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3007
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

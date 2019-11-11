@@ -52,6 +52,23 @@ local function Onbtn_moreClick()
 	this.SetMorePanle()
 end
 
+local function BgClick()
+	widgetTbl.panel_more.gameObject:SetActive(false)
+end
+
+local function ShopClick()
+    --waiting_ui.Show()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+    http_request_interface.getProductCfg(0,function(code,m,str)
+      log(str)
+      local s=string.gsub(str,"\\/","/")  
+      local t=ParseJsonStr(s) 
+      shop_ui.productlist=t.productlist
+      shop_ui.Show()
+      waiting_ui.Hide()
+      end)
+end
+
 local function OnBtn_WarningClick()
 	
 	help_ui.Show("rules/shisanshui")
@@ -186,6 +203,24 @@ local function InitWidgets()
        addClickCallbackSelf(widgetTbl.btn_more.gameObject,Onbtn_moreClick,this)
        widgetTbl.btn_more.gameObject:SetActive(true)
     end
+
+	widgetTbl.textureBg = child(widgetTbl.panel, "Texture1")
+	if widgetTbl.textureBg~=nil then
+       addClickCallbackSelf(widgetTbl.textureBg.gameObject,BgClick,this)
+    end
+	widgetTbl.textureBg2 = child(widgetTbl.panel, "Texture2")
+	if widgetTbl.textureBg2~=nil then
+       addClickCallbackSelf(widgetTbl.textureBg2.gameObject,BgClick,this)
+    end
+
+	widgetTbl.btn_shop = child(widgetTbl.panel, "Anchor_TopLeft/bg/shop")
+	if widgetTbl.btn_shop~=nil then
+       addClickCallbackSelf(widgetTbl.btn_shop.gameObject,ShopClick,this)
+    end
+	widgetTbl.btnDisMiss = child(widgetTbl.panel, "Anchor_TopLeft/bg/dismiss")
+	if widgetTbl.btnDisMiss~=nil then
+       addClickCallbackSelf(widgetTbl.btnDisMiss.gameObject,Onbtn_dimissRoom,this)
+    end
 	--提示按钮
     widgetTbl.btn_waring = child(widgetTbl.panel, "Anchor_TopRight/warning")
 	if widgetTbl.btn_waring~=nil then
@@ -203,6 +238,8 @@ local function InitWidgets()
     	addClickCallbackSelf(widgetTbl.setting.gameObject,OnBtn_SettingOnClick,this)
        widgetTbl.setting.gameObject:SetActive(true)
     end
+    
+     widgetTbl.topBg = componentGet(child(widgetTbl.panel, "Anchor_TopLeft/bg/BG"),"UISprite")
     --战绩按钮
       widgetTbl.result = child(widgetTbl.panel, "Anchor_TopLeft/bg/result")
     if widgetTbl.result~=nil then
@@ -249,7 +286,7 @@ local function InitWidgets()
 	widgetTbl.btn_dismiss = child(widgetTbl.panel, "Anchor_Center/readyBtns/dismiss")
 	if widgetTbl.btn_dismiss~=nil then
 	   addClickCallbackSelf(widgetTbl.btn_dismiss.gameObject,Onbtn_dimissRoom,this)
-	   widgetTbl.btn_dismiss.gameObject:SetActive(true)
+	   widgetTbl.btn_dismiss.gameObject:SetActive(false)
 	end	
 
     --房号
@@ -657,7 +694,23 @@ function this.ShowInviteBtn(isShow)
 end
 
 function this.ShowDissolveRoom(isShow)
-	widgetTbl.btn_dismiss.gameObject:SetActive(isShow)
+	--widgetTbl.btn_dismiss.gameObject:SetActive(isShow)
+end
+
+function this.SetDisDiss(state)
+	widgetTbl.btnDisMiss.gameObject:SetActive(state)
+	if state then
+		widgetTbl.topBg.height = 390
+	else
+		widgetTbl.topBg.height = 300
+	end
+end
+
+function this.HideOtherPanel()
+	widgetTbl.panel_chatPanel.gameObject:SetActive(false)
+	widgetTbl.panel_more.gameObject:SetActive(false)
+	help_ui.Hide()
+	this.bgBoxcollider(false)
 end
 
 --è®¾ç½®æ‰˜ç®¡çŠ¶æ€
@@ -997,6 +1050,7 @@ end
 
 function this.OnPlaceCardOk(tbl)
 	log("自己的牌好了")
+	this.bgBoxcollider(true)
 	this.myCards = {}
 	for n = 1, 13 do
 		local tran = newNormalUI("Prefabs/Card/"..tostring(tbl[n]), this.playerList[1].cardObjs[14 - n])
@@ -1019,6 +1073,11 @@ function this.OnChangeDesk()
 		child(this.transform, "Panel/Texture1").gameObject:SetActive(false)
 		child(this.transform, "Panel/Texture2").gameObject:SetActive(true)
 	end
+end
+
+function this.bgBoxcollider(state)
+	componentGet(widgetTbl.textureBg, "BoxCollider").enabled = state;
+	componentGet(widgetTbl.textureBg2, "BoxCollider").enabled = state;
 end
 
 --nil 全部显示, 0全部隐藏--其他为1家
