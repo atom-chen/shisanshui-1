@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: dee7ff7621075064180bb7e7fef1b6f3
 labels:
 - ETC+Alpha using R channel for common_atlas.png
-timeCreated: 1497325026
+timeCreated: 1573543216
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -31,7 +31,7 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 1
     aniso: 16
     mipBias: -1
     wrapMode: 1
