@@ -9,7 +9,7 @@ function this.requestIAppPayOrder( stype,pid,num,uid)
     http_request_interface.GetPayOrder(stype,pid,num,uid,function ( code,m,str )
         local s=string.gsub(str,"\\/","/")  
         local t=ParseJsonStr(s)
-        log("requestIAppPayOrder  callback ==".. s);
+        log("requestIAppPayOrder  callback ==".. s)
         if t.ret == 0 then -- 下单成功
             if stype == rechargeConfig.IAppPay then
                 if t.transid then
@@ -59,7 +59,7 @@ function this.requestIAppPayOrder( stype,pid,num,uid)
                         end
                     end)
             end      
-        else if t.ret == 99999 then -- 下单成功 
+        elseif t.ret == 99999 then -- 下单成功 
             fast_tip.Show("请输入正确的代充值的玩家id")       
         end
     end)
