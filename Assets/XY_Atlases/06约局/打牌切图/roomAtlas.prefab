@@ -53,9 +53,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: df3938829593ae04da522704a8a94de2, type: 2}
   mSprites:
+  - name: btn_again_normal
+    x: 421
+    y: 300
+    width: 189
+    height: 83
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 6
+    paddingRight: 5
+    paddingTop: 4
+    paddingBottom: 3
   - name: btn_riffle_normal
-    x: 656
-    y: 273
+    x: 693
+    y: 193
     width: 108
     height: 56
     borderLeft: 0
@@ -66,9 +79,35 @@ MonoBehaviour:
     paddingRight: 6
     paddingTop: 5
     paddingBottom: 31
+  - name: btn_wechatyq_normal
+    x: 421
+    y: 217
+    width: 188
+    height: 82
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 7
+    paddingRight: 5
+    paddingTop: 4
+    paddingBottom: 4
+  - name: ready 1
+    x: 611
+    y: 304
+    width: 190
+    height: 79
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 1
   - name: "\u4E2D\u9053"
-    x: 818
-    y: 330
+    x: 815
+    y: 250
     width: 119
     height: 53
     borderLeft: 0
@@ -120,7 +159,7 @@ MonoBehaviour:
     paddingBottom: 4
   - name: "\u52A0\u53F7-btn"
     x: 421
-    y: 198
+    y: 31
     width: 85
     height: 84
     borderLeft: 0
@@ -223,7 +262,7 @@ MonoBehaviour:
     paddingTop: 12
     paddingBottom: 5
   - name: "\u5C3E\u9053"
-    x: 574
+    x: 802
     y: 330
     width: 121
     height: 53
@@ -236,8 +275,8 @@ MonoBehaviour:
     paddingTop: 12
     paddingBottom: 5
   - name: "\u5E2E\u52A9-btn"
-    x: 421
-    y: 115
+    x: 507
+    y: 33
     width: 82
     height: 82
     borderLeft: 0
@@ -249,8 +288,8 @@ MonoBehaviour:
     paddingTop: 3
     paddingBottom: 5
   - name: "\u603B\u5206"
-    x: 696
-    y: 330
+    x: 693
+    y: 250
     width: 121
     height: 53
     borderLeft: 0
@@ -328,7 +367,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u724C\u578B-\u6309\u94AE-\u5DF2\u9009"
     x: 421
-    y: 283
+    y: 116
     width: 152
     height: 100
     borderLeft: 50
@@ -444,8 +483,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u83DC\u5355-btn"
-    x: 421
-    y: 33
+    x: 611
+    y: 222
     width: 81
     height: 81
     borderLeft: 0
@@ -457,8 +496,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 5
   - name: "\u8868\u60C5-btn"
-    x: 574
-    y: 250
+    x: 924
+    y: 304
     width: 81
     height: 79
     borderLeft: 0

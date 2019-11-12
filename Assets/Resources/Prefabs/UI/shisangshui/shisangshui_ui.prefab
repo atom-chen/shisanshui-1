@@ -4016,7 +4016,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010328343834}
-  - 114: {fileID: 114000013671630166}
   m_Layer: 5
   m_Name: readyBtns
   m_TagString: Untagged
@@ -4187,7 +4186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012295267010
 GameObject:
   m_ObjectHideFlags: 1
@@ -6111,7 +6110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013176938716
 GameObject:
   m_ObjectHideFlags: 1
@@ -7388,7 +7387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013743446148
 GameObject:
   m_ObjectHideFlags: 1
@@ -10886,7 +10885,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010092862696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 197, y: -84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -12722,7 +12721,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012314023116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 393.8, y: -0, z: 0}
+  m_LocalPosition: {x: 197, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -15372,8 +15371,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014155859816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 590.69995, y: -0, z: 0}
-  m_LocalScale: {x: 0.999, y: 0.999, z: 0.999}
+  m_LocalPosition: {x: 420, y: -82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010888518300}
@@ -16592,7 +16591,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 250, y: 100, z: 0}
+  m_Size: {x: 190, y: 80, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000010159334808
 BoxCollider:
@@ -16700,7 +16699,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 250, y: 100, z: 0}
+  m_Size: {x: 190, y: 80, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000010646121350
 BoxCollider:
@@ -18364,14 +18363,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 250
-  mHeight: 100
+  mWidth: 190
+  mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5
-  mType: 1
+  aspectRatio: 2.375
+  mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -18384,8 +18383,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011675705008, guid: 7269457956c37b74a9298bf99b2472bd, type: 2}
-  mSpriteName: "\u8FDB\u5165-btn\u80CC\u666F"
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: btn_wechatyq_normal
   mFillCenter: 1
 --- !u!114 &114000010366223266
 MonoBehaviour:
@@ -25053,13 +25052,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
-  mHeight: 100
+  mWidth: 344
+  mHeight: 150
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: 2.2933333
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -25073,8 +25072,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000011323265460, guid: a8b13c8262f28cb4fb8aac1a1203c990, type: 2}
-  mSpriteName: xipai_1_1
+  mAtlas: {fileID: 114000011999554336, guid: a6900331d6915d249b0202c7ccf4cb16, type: 2}
+  mSpriteName: xipai_01
   mFillCenter: 1
 --- !u!114 &114000011458868876
 MonoBehaviour:
@@ -26507,7 +26506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4eed0cda0471384db797227619067a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mFPS: 10
+  mFPS: 15
   mPrefix: 
   mLoop: 0
   mSnap: 1
@@ -38248,28 +38247,6 @@ MonoBehaviour:
   mAtlas: {fileID: 114000012146977238, guid: 8a163221b0b664c4eb3d47452baa383f, type: 2}
   mSpriteName: paiju_23
   mFillCenter: 1
---- !u!114 &114000013671630166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012137968722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18f82ab21f0c0a419eed81e19cb5f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrangement: 0
-  sorting: 0
-  pivot: 0
-  maxPerLine: 0
-  cellWidth: 196.9
-  cellHeight: 200
-  animateSmoothly: 0
-  hideInactive: 0
-  scaleInactive: 0
-  keepWithinPanel: 0
-  sorted: 0
 --- !u!114 &114000013673894968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41630,8 +41607,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000010079483150, guid: d50135e5e1a9e4d46905e60ee873cef5, type: 2}
-  mSpriteName: "\u5171\u7528-\u6309\u94AE\u80CC\u666F"
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: btn_again_normal
   mFillCenter: 1
 --- !u!114 &114000014140990814
 MonoBehaviour:
@@ -41781,13 +41758,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 250
-  mHeight: 100
+  mWidth: 190
+  mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5
+  aspectRatio: 2.375
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -41801,8 +41778,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 114000010079483150, guid: d50135e5e1a9e4d46905e60ee873cef5, type: 2}
-  mSpriteName: "\u5171\u7528-\u6309\u94AE\u80CC\u666F"
+  mAtlas: {fileID: 114000010714391712, guid: 0fe4511cc1ffc9e4e91b2b37474ce4c2, type: 2}
+  mSpriteName: ready 1
   mFillCenter: 1
 --- !u!114 &114000014159688110
 MonoBehaviour:

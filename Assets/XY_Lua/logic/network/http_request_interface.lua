@@ -708,10 +708,10 @@ end
 -- "stype":支付平台类型(1微信2支付宝3爱贝4UC5腾讯6笨手机8百度),
 -- "dpid":钻石价格id,
 -- "orderid":百度支付单号
-function this.GetPayOrder( stype,pid,num,callback)
+function this.GetPayOrder( stype,pid,num,uid,callback)
     if not stype or not pid or not num then return end
 
-     local param={["pid"]=pid,["stype"]=stype,["num"]=num,["openid"] = App.openid} 
+     local param={["pid"]=pid,["stype"]=stype,["num"]=num,["openid"] = App.openid, ["adduid"] = uid} 
     local t=this.GetTable("GameStore.prepay",param) 
     local rt=json.encode(t)
      log("-----------GetPayOrder--------" .. rt )

@@ -3,10 +3,10 @@ recharge_sys = {}
 local this = recharge_sys
 -- "stype":支付平台类型(1微信2支付宝3爱贝4UC5腾讯6笨手机8百度),
 
-function this.requestIAppPayOrder( stype,pid,num )
+function this.requestIAppPayOrder( stype,pid,num,uid)
     if not stype or not pid then return end
     log("准备发送预付单")
-    http_request_interface.GetPayOrder(stype,pid,num,function ( code,m,str )
+    http_request_interface.GetPayOrder(stype,pid,num,uid,function ( code,m,str )
         local s=string.gsub(str,"\\/","/")  
         local t=ParseJsonStr(s)
         log("requestIAppPayOrder  callback ==".. s);
@@ -59,7 +59,8 @@ function this.requestIAppPayOrder( stype,pid,num )
                         end
                     end)
             end      
-        else
+        else if t.ret == 99999 then -- 下单成功 
+            fast_tip.Show("请输入正确的代充值的玩家id")       
         end
     end)
 end

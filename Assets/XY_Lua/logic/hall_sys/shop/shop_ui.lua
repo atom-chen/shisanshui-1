@@ -84,6 +84,22 @@ end
 function this.buy()
     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
     log("buy")
+    local uidInput = subComponentGet(this.transform, "panel_shop/panel_buy/buy_panel/Panel_Middle/uidInput", typeof(UIInput))
+    local uid = nil
+    if uidInput.value == nil or uidInput.value == "" then
+        uid = App.uid
+    else
+        local uidStr = tonumber(uidInput.value)
+        if not uidStr then
+            fast_tip.Show("请输入正确的代充值的玩家id")
+            return
+        end
+        if uidStr < 9999 or uidStr > 10000000 then
+            fast_tip.Show("请输入正确的代充值的玩家id")
+            return
+        end
+        uid = uidStr
+    end
     http_request_interface.getProductCfg({["ptype"]=1},function (code,m,str) 
         log(str)
         local s=string.gsub(str,"\\/","/")  
@@ -92,7 +108,7 @@ function this.buy()
              require "logic/recharge/recharge_sys"
             local pid =t.productlist[1].pid
             --爱贝改成微信
-             recharge_sys.requestIAppPayOrder(rechargeConfig.WeChat,pid,tonumber(componentGet(this.lab_number.gameObject,"UILabel").text))
+             recharge_sys.requestIAppPayOrder(rechargeConfig.WeChat,pid,tonumber(componentGet(this.lab_number.gameObject,"UILabel").text),uid)
             
         end   
     end)

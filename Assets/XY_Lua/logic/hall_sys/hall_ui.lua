@@ -497,6 +497,7 @@ function this.InitInfo()
   if lab_name~=nil then
     componentGet(lab_name.gameObject,"UILabel").text=data_center.GetLoginRetInfo().nickname
   end
+  App.uid = tonumber(data_center.GetLoginRetInfo().uid)
   local lab_id=child(this.transform,"Panel_TopLeft/btn_photo/sp_nameBackground/lab_id")
   if lab_id~=nil then
     componentGet(lab_id.gameObject,"UILabel").text="ID:"..data_center.GetLoginRetInfo().uid

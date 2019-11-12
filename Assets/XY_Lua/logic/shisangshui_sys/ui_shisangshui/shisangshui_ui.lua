@@ -1120,7 +1120,7 @@ function this.DealCard(data, callback)
 	    	this.xipai.gameObject:SetActive(true)
 			this.xipai:Play()
 			App.xipai = -1
-			coroutine.wait(1.8)
+			coroutine.wait(3.3)
 		end
     	this.xipai.gameObject:SetActive(false)
 		for i , v in pairs(this.playerList) do
