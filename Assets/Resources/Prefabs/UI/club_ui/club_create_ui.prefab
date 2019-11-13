@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000010640394344
 GameObject:
   m_ObjectHideFlags: 1
@@ -3644,7 +3644,7 @@ MonoBehaviour:
     relative: 1
     absolute: -1
   updateAnchors: 0
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 0.78431374}
   mPivot: 4
   mWidth: 1922
   mHeight: 1078
@@ -3653,7 +3653,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.7829313
-  mType: 0
+  mType: 1
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
@@ -3672,7 +3672,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: e7167ff6c0a3b0f44bcc2deb97dda594, type: 3}
+  mTexture: {fileID: 2800000, guid: 80a7922bacf488d4a905e600c8c8bb0b, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}

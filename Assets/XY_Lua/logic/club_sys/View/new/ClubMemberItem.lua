@@ -20,7 +20,7 @@ function ClubMemberItem:InitView()
 	self.sureBtnGo = self:GetGameObject("sureBtn")
 	self.refuseBtnGo = self:GetGameObject("refuseBtn")
 
-	self.iconSp = self:GetComponent("icon", typeof(UISprite))
+	self.iconSp = self:GetComponent("icon", typeof(UITexture))
 
 	self.tickBtn = self:GetGameObject("tickBtn")
 
@@ -83,13 +83,13 @@ function ClubMemberItem:UpdateView()
 	end
 
 	if self.model:CheckIsClubCreater(self.model.currentClubInfo.cid, self.info.uid) then
-		self.iconSp.spriteName = "club_52"
+--		self.iconSp.spriteName = "club_52"
 		self.iconSp.gameObject:SetActive(true)
 		if self.tickBtn then
 			self.tickBtn.gameObject:SetActive(false)
 		end
 	elseif self.model:IsClubManager(nil, self.info.uid) then
-		self.iconSp.spriteName = "club_53"
+--		self.iconSp.spriteName = "club_53"
 		self.iconSp.gameObject:SetActive(true)
 		if self.tickBtn then
 			self.tickBtn.gameObject:SetActive(false)

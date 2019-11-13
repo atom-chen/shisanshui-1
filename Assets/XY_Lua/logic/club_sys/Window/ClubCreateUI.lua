@@ -62,9 +62,9 @@ function ClubCreateUI:OnOpen()
 	self.selectIconId = 1
 	self:ClearContent()
 	self.cost = tonumber(self.model:GetCreateClubCost())
-	self.roomCardGo:SetActive(self.cost ~= 0)
-	self.roomCardLabel.text = "X" .. self.cost
-	self.defaultBtnLabelGo:SetActive(self.cost == 0)
+	--self.roomCardGo:SetActive(self.cost ~= 0)
+	--self.roomCardLabel.text = "X" .. self.cost
+	--self.defaultBtnLabelGo:SetActive(self.cost == 0)
 	if self.model:IsAgent() then
 --		self.connection:SetActive(false)
 --		self.intro:SetActive(false)
@@ -193,7 +193,7 @@ function ClubCreateUI:OnCreateBtnClick()
 
 		log("-------------------2")
 	if self.locationId == nil or self.locationId == 0 then
-		fast_tip.Show("请输入6~15位数字或者字母的密码")
+		--fast_tip.Show("请输入6~15位数字或者字母的密码")
 		--UIManager:FastTip(LanguageMgr.GetWord(10012))
 		--return
 		--self.nameInputLabel.value = "1111"

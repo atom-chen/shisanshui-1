@@ -74,6 +74,7 @@ function ClubManageView:RefreshView()
 	end
 	log(self.clubInfo)
 	self.content.text = "亲友圈ID："..self.clubInfo.shid
+	self.content0.text = ""..self.clubInfo.shid
 	-- for i = 1, 4 do
 	-- 	if self.clubInfo.cfg == nil then
 	-- 		self.itemList[i]:SetSelect(false)
@@ -140,6 +141,7 @@ function ClubManageView:InitView()
 	self.member = child(self.gameObject, "member").gameObject
 	self.own = child(self.gameObject, "own").gameObject
 	self.content = subComponentGet(self.transform,"member/content", typeof(UILabel))
+	self.content0 = subComponentGet(self.transform,"member/content0", typeof(UILabel))
 	local closeBtn = child(self.gameObject, "closeBtn").gameObject
 	addClickCallbackSelf(closeBtn, self.OnCloseClick, self)
 	local exitBtn = child(self.gameObject, "member/exitBtn").gameObject

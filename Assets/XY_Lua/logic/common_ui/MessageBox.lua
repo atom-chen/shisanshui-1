@@ -12,6 +12,7 @@ function MessageBox:OnInit()
 	self.contentLabel = self:GetComponent("bg/sv_gold/lab_content", typeof(UILabel))
 	self.closeBtnGo = self:GetGameObject("bg/sv_gold/btn_close")
 	addClickCallbackSelf(self.closeBtnGo, self.OnCloseBtnClick, self)
+	self.grid = self:GetComponent("bg/sv_gold/btn_grid", typeof(UIGrid))
 
 	self.btnList = {}
 	for i = 1, 2 do
@@ -28,6 +29,7 @@ function MessageBox:OnOpen(content, btnInfoList, closeCallback, autoClose)
 		autoClose = true
 	end
 	UI_Manager:CloseUiForms("activity_ui")
+	self.grid:Reposition()
 	-- self.contentLabel.text = content
 	--支持subTitle
 	if type(content) =="table" then
@@ -93,8 +95,8 @@ function MessageBox:UpdateBtnPos( count )
 	if count == 1 then
 		LuaHelper.SetTransformLocalX(self.btnList[1].transform, 0)
 	else
-		LuaHelper.SetTransformLocalX(self.btnList[1].transform, 150)
-		LuaHelper.SetTransformLocalX(self.btnList[2].transform, -150)
+		LuaHelper.SetTransformLocalX(self.btnList[1].transform, -210)
+		LuaHelper.SetTransformLocalX(self.btnList[2].transform, 210)
 	end
 
 end

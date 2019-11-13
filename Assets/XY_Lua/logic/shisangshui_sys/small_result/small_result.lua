@@ -121,8 +121,20 @@ function this.LoadAllResult(result)
 				for k, v in ipairs(result[i].stCards) do
 					local cardObj =  newNormalUI("Prefabs/Card/"..tostring(v), cardGrid)
 					if cardObj ~= nil then
-					cardObj.transform.localScale = Vector3(0.3,0.3,0.3)
-					componentGet(cardObj, "BoxCollider").enabled = false
+						cardObj.transform.localScale = Vector3(0.5,0.5,0.5)
+						componentGet(cardObj, "BoxCollider").enabled = false
+						local depth = 0
+						if k <= 5 then 
+							depth = k + 10 
+						elseif k <= 10 then
+							depth = k
+						elseif k > 10 then
+							depth = k - 10 
+						end
+						componentGet(child(cardObj.transform, "bg"),"UISprite").depth = depth * 2 + 3
+						componentGet(child(cardObj.transform, "num"),"UISprite").depth = depth * 2 + 5
+						componentGet(child(cardObj.transform, "color1"),"UISprite").depth = depth * 2 + 5
+						componentGet(child(cardObj.transform, "color2"),"UISprite").depth = depth * 2 + 5
 					end
 				end
 
@@ -200,8 +212,22 @@ function this.ShowOthersResult(tbSort)
 				for k, v in ipairs(tbSort[i].stCards) do
 					local cardObj =  newNormalUI("Prefabs/Card/"..tostring(v), cardGrid)
 					if cardObj ~= nil then
-					cardObj.transform.localScale = Vector3(0.3,0.3,0.3)
-					componentGet(cardObj,"BoxCollider").enabled = false
+						cardObj.transform.localScale = Vector3(0.5,0.5,0.5)
+						componentGet(cardObj,"BoxCollider").enabled = false
+
+
+						local depth = 0
+						if k <= 5 then 
+							depth = k + 10 
+						elseif k <= 10 then
+							depth = k
+						elseif k > 10 then
+							depth = k - 10 
+						end
+						componentGet(child(cardObj.transform, "bg"),"UISprite").depth = depth * 2 + 3
+						componentGet(child(cardObj.transform, "num"),"UISprite").depth = depth * 2 + 5
+						componentGet(child(cardObj.transform, "color1"),"UISprite").depth = depth * 2 + 5
+						componentGet(child(cardObj.transform, "color2"),"UISprite").depth = depth * 2 + 5
 					end
 				end
 

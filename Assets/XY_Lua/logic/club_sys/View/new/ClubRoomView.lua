@@ -32,7 +32,14 @@ function ClubRoomView:InitItems()
 	local itemGo = self:GetGameObject("container/scrollview/ui_wrapcontent/item")
 	local item = ClubRoomItem:create(itemGo)
 	self.itemList[1] = item
-	item:SetCallback(self.OnItemClick, self)
+	item:SetCallback(function(item)
+		local title = "加入房间"--LanguageMgr.GetWord(10230)
+		local content, contentTbl = "是否确定加入房间"--ShareStrUtil.GetRoomShareStr(item.info.gid,item.info,true)
+		log(item)
+		MessageBox.ShowYesNoBox("是否确定加入俱乐部房间",function()
+			join_room_ctrl.JoinRoomByRno(item.rno)
+		end)
+	end, self)
 
 	for i = 2, 10 do
 		local go = newobject(itemGo)
@@ -40,7 +47,14 @@ function ClubRoomView:InitItems()
 		item = ClubRoomItem:create(go)
 		self.itemList[i] = item
 		item:SetActive(false)
-		self.itemList[i]:SetCallback(self.OnItemClick, self)
+		self.itemList[i]:SetCallback(function(item)
+				local title = "加入房间"--LanguageMgr.GetWord(10230)
+				local content, contentTbl = "是否确定加入房间"--ShareStrUtil.GetRoomShareStr(item.info.gid,item.info,true)
+				log(item)
+				MessageBox.ShowYesNoBox("是否确定加入俱乐部房间",function()
+					join_room_ctrl.JoinRoomByRno(item.rno)
+				end)
+			end, self)
 	end
 	-- coroutine.start(function()
 	-- 		coroutine.wait(0.2)
@@ -205,6 +219,7 @@ end
 
 
 function ClubRoomView:OnItemClick(item)
+	log("加入房间")
 	ui_sound_mgr.PlayButtonClick()
 	-- local content = LanguageMgr.GetWord(10049, GameUtil.GetGameName(item.info.gid))
 	-- content = content.."\n"..ShareStrUtil.GetRoomShareStr(item.info.gid, item.info, true)

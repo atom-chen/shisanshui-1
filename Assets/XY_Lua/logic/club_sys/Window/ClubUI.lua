@@ -64,6 +64,10 @@ function ClubUI:OnInit()
 	if self.chgClubBtn ~= nil then
 		addClickCallbackSelf(self.chgClubBtn.gameObject, self.OnClubChgClick, self)
 	end
+	self.shareBtn = child(self.gameObject, "Panel_Middle/shareBtn")
+	if self.shareBtn ~= nil then
+		addClickCallbackSelf(self.shareBtn.gameObject, self.OnShareClick, self)
+	end
 	self.nameLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/nameLbl" , typeof(UILabel))
 	self.idLbl = subComponentGet(self.transform, "Panel_Middle/clubInfo/idLbl" , typeof(UILabel))
 	self.icon = subComponentGet(self.transform, "Panel_Middle/clubInfo/cion" , typeof(UITexture))
@@ -152,6 +156,19 @@ function ClubUI:OnClubChgClick()
 	local activeSelf = self.clubListView.gameObject.activeSelf
 	log("ClubUI:OnClubChgClick:"..tostring(activeSelf))
 	self.clubListView.gameObject:SetActive(not activeSelf)
+end
+
+function ClubUI:OnShareClick()
+    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+    local shareType = 0--0微信好友，1朋友圈，2微信收藏
+    local contentType = 5 --1文本，2图片，3声音，4视频，5网页
+    local title = global_define.hallShareTitle
+    local filePath = ""
+    local subUrl = string.format(global_define.hallShareSubUrl,data_center.GetLoginRetInfo().uid)
+    local url = data_center.shareUrl .. subUrl
+    log("sharefriend----" .. url)
+    local description = global_define.hallShareFriendContent
+    YX_APIManage.Instance:WeiXinShare(shareType,contentType,title,filePath,url,description)
 end
 
 function ClubUI:SetClubInfo(clubInfo)

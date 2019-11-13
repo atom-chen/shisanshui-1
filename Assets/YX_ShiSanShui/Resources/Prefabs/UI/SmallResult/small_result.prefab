@@ -7124,8 +7124,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0
@@ -7764,8 +7764,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0
@@ -8018,8 +8018,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0
@@ -8643,8 +8643,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0
@@ -9001,8 +9001,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0
@@ -9266,8 +9266,8 @@ MonoBehaviour:
   sorting: 0
   pivot: 6
   maxPerLine: 5
-  cellWidth: 46
-  cellHeight: -58
+  cellWidth: 40
+  cellHeight: -50
   animateSmoothly: 0
   hideInactive: 0
   scaleInactive: 0

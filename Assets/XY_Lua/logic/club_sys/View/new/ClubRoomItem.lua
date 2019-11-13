@@ -50,8 +50,8 @@ function ClubRoomItem:UpdateView()
 		self.detailBtn:SetActive(false)
 		return
 	end
-	self.enterBtn:SetActive(false)
-	self.detailBtn:SetActive(true)
+	self.enterBtn:SetActive(true)
+	self.detailBtn:SetActive(false)
 	local name = GameUtil.GetGameName(self.info.gid)
 	self.nameLabel.text = tostring(self.info.rno)
 	self.leaderNameLabel.text = self.info.homenickname or ""
@@ -86,7 +86,7 @@ function ClubRoomItem:OnClick()
 		return
 	end
 	if self.callback ~= nil then
-		self.callback(self.target, self)
+		self.callback(self.info)
 	end
 end
 
