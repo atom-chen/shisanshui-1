@@ -17,6 +17,7 @@ function ClubMembersView:InitView()
 	self.membernum = child(self.gameObject,"panel_bottom/bottom/num").gameObject--人数
 	self.bottom = child(self.gameObject,"panel_bottom").gameObject
 	self.redGo = child(self.gameObject,"panel_bottom/bottom/redPoint").gameObject
+	self.redGo:SetActive(false)
 	self.redNumLabel = subComponentGet(self.transform,"panel_bottom/bottom/redPoint/Label", typeof(UILabel))
 
 	self.applyView = ClubApplyUINew:create(child(self.gameObject.transform.parent, "club_apply_ui"))

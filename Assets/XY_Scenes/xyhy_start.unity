@@ -105,7 +105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7076699
 Transform:
   m_ObjectHideFlags: 0
@@ -1105,6 +1105,63 @@ MonoBehaviour:
   mDepth: 0
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
+--- !u!1001 &1319645713
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1941814640}
+    m_Modifications:
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011327575496, guid: c60adef52ba7f1c4ba2d5a02bd214e5e,
+        type: 2}
+      propertyPath: mType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011327575496, guid: c60adef52ba7f1c4ba2d5a02bd214e5e,
+        type: 2}
+      propertyPath: mSpriteName
+      value: UI-SCMJ-YXN-tishidi
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c60adef52ba7f1c4ba2d5a02bd214e5e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1319645714 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010101564148, guid: c60adef52ba7f1c4ba2d5a02bd214e5e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1319645713}
 --- !u!1 &1383609023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1604,7 @@ Transform:
   - {fileID: 743649941}
   - {fileID: 164383500}
   - {fileID: 482004204}
+  - {fileID: 1319645714}
   m_Father: {fileID: 1053598828}
   m_RootOrder: 0
 --- !u!81 &1941814641

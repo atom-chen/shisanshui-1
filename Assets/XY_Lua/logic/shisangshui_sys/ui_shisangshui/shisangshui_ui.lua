@@ -632,15 +632,20 @@ end
 
 function this.DealChat(viewSeat,contentType,content,givewho)
 
-	if content == "洗牌请求" and App.xipai == -1 then 
-		App.xipai = viewSeat
-		log("下局洗牌"..viewSeat)
-		if viewSeat == 1 then
-		    local param={}
-		    param.cost = 1
-			http_request_interface.costMoney(param,function (code,m,str) 
-			        log("洗牌扣费1房卡："..str)
-			    end)
+	if content == "洗牌请求" then 
+		if App.xipai == -1 then
+			App.xipai = viewSeat
+			log("下局洗牌"..viewSeat)
+			if viewSeat == 1 then
+			    local param={}
+			    param.cost = 1
+				http_request_interface.costMoney(param,function (code,m,str) 
+				        log("洗牌扣费1房卡："..str)
+				        fast_tip.Show("下局您洗牌")
+				    end)
+			end
+		else
+			fast_tip.Show("下局已经有人洗牌")
 		end
 		return 
 	end

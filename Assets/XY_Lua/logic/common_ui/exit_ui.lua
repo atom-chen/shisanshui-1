@@ -11,8 +11,8 @@ local this = exit_ui
 function this.Show()
 	message_box.ShowGoldBox("是否确定退出游戏？", nil, 2, {function ()
 	        message_box:Close()
-	    end, function ()
 	    	Application.Quit()
+	    end, function ()
 	        message_box:Close()
 	    end}, {"fonts_02", "fonts_01"})	
 end
