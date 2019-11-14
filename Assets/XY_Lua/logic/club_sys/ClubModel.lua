@@ -409,6 +409,15 @@ function ClubModel:CreateExid()
 	end)
 end
 
+function ClubModel:QuickEnter(cid,callback)
+	local param = {}
+	param.cid = cid 
+	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.getFastEnterRoomRno, param,function (msgTab)
+		log(msgTab)
+		callback(msgTab)
+	end)
+end
+
 --获取邀请码
 function ClubModel:GetExid()
 	local param = {}

@@ -140,14 +140,24 @@ function ClubRoomView:OnJoinBtnClick()
 	-- ui_sound_mgr.PlayButtonClick()
 	--self.OnItemClick()
 	--UI_Manager:Instance():ShowUiForms("joinRoom_ui",UiCloseType.UiCloseType_CloseNothing)
-	for i = 1, #self.dataList do
-		if self.dataList[i] ~= nil then
-			local item = {}
-			item.info = self.dataList[i]
-			self:OnItemClick(item)
-			break
+	ClubModel:QuickEnter(self.model.currentClubInfo.cid, function(msgtab )
+		if msgtab.ret == 0 then
+			MessageBox.ShowYesNoBox("是否确定加入俱乐部房间",function()
+				join_room_ctrl.JoinRoomByRno(msgtab.roomRno)
+			end)
+		else
+			fast_tip.Show("没有合适的房间，请自己创建房间")
 		end
-	end
+	end)
+	-- for i = 1, #self.dataList do
+	-- 	if self.dataList[i] ~= nil then
+	-- 		local item = {}
+	-- 		item.info = self.dataList[i]
+	-- 		self:OnItemClick(item)
+	-- 		return
+	-- 	end
+	-- end
+	-- fast_tip.Show("没有合适的房间，请自己创建房间")
 end
 
 function ClubRoomView:OnautoOpenBtnClick()

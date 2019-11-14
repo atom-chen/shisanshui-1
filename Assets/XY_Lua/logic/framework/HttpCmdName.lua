@@ -31,6 +31,7 @@ HttpCmdName.CheckTransferClub = "GameClub.checkMoveClub" --获取是否可以转
 HttpCmdName.TransferClub = "GameClub.moveClub" --转让俱乐部
 HttpCmdName.createExid = "ClubAgent.createExid" --转让俱乐部
 HttpCmdName.getUnuseExids = "ClubAgent.getUnuseExids" --转让俱乐部
+HttpCmdName.getFastEnterRoomRno = "GameClub.getFastEnterRoomRno" --转让俱乐部
 
 
 -- room

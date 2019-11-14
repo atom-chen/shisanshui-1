@@ -20,7 +20,7 @@ function ClubMemberItem:InitView()
 	self.sureBtnGo = self:GetGameObject("sureBtn")
 	self.refuseBtnGo = self:GetGameObject("refuseBtn")
 
-	self.iconSp = self:GetComponent("icon", typeof(UITexture))
+	self.iconSp = child(self.transform,"icon").gameObject
 
 	self.tickBtn = self:GetGameObject("tickBtn")
 

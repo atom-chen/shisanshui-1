@@ -542,9 +542,9 @@ function  this.HideReadyBtn()
 end
 
 function  this.SetRePlaceBtnState(state)
-	if App.versionType == Version.Release then
-		return
-	end
+	-- if App.versionType == Version.Release then
+	-- 	return
+	-- end
 	if widgetTbl ~= nil and widgetTbl.btn_rePlace ~= nil then
 		widgetTbl.btn_rePlace.gameObject:SetActive(state)
 	end
