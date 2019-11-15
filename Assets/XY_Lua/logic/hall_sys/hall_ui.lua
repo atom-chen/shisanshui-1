@@ -257,23 +257,23 @@ function this.Onbtn_goldClick()
    ui_sound_mgr.PlaySoundClip("common/audio_button_click")
  end
  function this.share()
-  if App.versionType == Version.Release then
+  -- if App.versionType == Version.Release then
 
-      ui_sound_mgr.PlaySoundClip("common/audio_button_click")
-      log("this.sharefriendQ")
-      local shareType = 1--0微信好友，1朋友圈，2微信收藏
-      local contentType = 5 --1文本，2图片，3声音，4视频，5网页
-      local title = global_define.hallShareTitle
-      local filePath = ""
-      local subUrl = string.format(global_define.hallShareSubUrl,data_center.GetLoginRetInfo().uid)
-      local url = data_center.shareUrl .. subUrl
-      log("sharefriend----" .. url)
+  --     ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+  --     log("this.sharefriendQ")
+  --     local shareType = 1--0微信好友，1朋友圈，2微信收藏
+  --     local contentType = 5 --1文本，2图片，3声音，4视频，5网页
+  --     local title = global_define.hallShareTitle
+  --     local filePath = ""
+  --     local subUrl = string.format(global_define.hallShareSubUrl,data_center.GetLoginRetInfo().uid)
+  --     local url = data_center.shareUrl .. subUrl
+  --     log("sharefriend----" .. url)
 
-      local description = global_define.hallShareFriendQContent
-      YX_APIManage.Instance:WeiXinShare(shareType,contentType,title,filePath,url,description)
+  --     local description = global_define.hallShareFriendQContent
+  --     YX_APIManage.Instance:WeiXinShare(shareType,contentType,title,filePath,url,description)
 
-      return
-  end 
+  --     return
+  -- end 
   share_ui.Show()
   ui_sound_mgr.PlaySoundClip("common/audio_button_click")
 end
