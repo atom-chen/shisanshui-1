@@ -6,7 +6,7 @@ local LanguageMgr = LanguageMgr
 
 
 function ClubCreateUI:OnInit()
-	self.destroyType = UIDestroyType.Immediately
+--	self.destroyType = UIDestroyType.Immediately
 	self.model = ClubModel
 	self.gameIds = nil
 	self.locationId = nil

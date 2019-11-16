@@ -43,6 +43,14 @@
   hall_data.register()
   hall_data.Init() 
   this.LoadWebPage()
+
+  coroutine.start(function()
+    coroutine.wait(0.4)
+    UIManager:ShowUiForms("ClubInputUI")
+    UIManager:CloseUiForms("ClubInputUI")
+    UIManager:ShowUiForms("ClubCreateUI")
+    UIManager:CloseUiForms("ClubCreateUI",false)
+  end)
 end
 
 function this.checkInviteroom()

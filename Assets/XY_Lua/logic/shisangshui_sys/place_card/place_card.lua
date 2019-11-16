@@ -205,7 +205,7 @@ function this.initinfor()
 		end
 		prepare = child(this.transform, "Panel_Bottom/prepare")
 		if prepare ~= nil then
-			prepare.gameObject:SetActive(false)
+			prepare.gameObject:SetActive(true)
 		end
 		timeLbl =  componentGet(child(this.transform, "Panel_TopLeft/Slider/timeLbl"), "UILabel")
 		timeSpt =  componentGet(child(this.transform, "Panel_TopLeft/Slider/Foreground"), "UISprite")
@@ -916,9 +916,9 @@ function this.BtnClick(obj)
 		if placeCard ~= nil then
 			placeCard.gameObject:SetActive(true)
 		end
-		if prepare ~= nil then
-			prepare.gameObject:SetActive(false)
-		end
+		-- if prepare ~= nil then
+		-- 	prepare.gameObject:SetActive(false)
+		-- end
 		this.DownCardClick(1)
 		this.DownCardClick(2)
 		this.DownCardClick(3)
@@ -1105,9 +1105,9 @@ function this.DownCardClick(dun)
 	if placeCard ~= nil then
 		placeCard.gameObject:SetActive(true)
 	end
-	if prepare ~= nil then
-		prepare.gameObject:SetActive(false)
-	end
+	-- if prepare ~= nil then
+	-- 	prepare.gameObject:SetActive(false)
+	-- end
 	local dun_cards = up_placed_cards[dun]
 	log("this.DownCardClick: "..#dun_cards)
 	for i, v in pairs(dun_cards) do
@@ -1198,9 +1198,9 @@ function this.PlaceCardFinish()
 	if placeCard ~= nil then
 		placeCard.gameObject:SetActive(false)
 	end
-	if prepare ~= nil then
-		prepare.gameObject:SetActive(true)
-	end
+	-- if prepare ~= nil then
+	-- 	prepare.gameObject:SetActive(true)
+	-- end
 	this.XiangGongTip()
 end
 

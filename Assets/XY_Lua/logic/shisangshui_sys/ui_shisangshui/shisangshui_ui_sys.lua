@@ -310,7 +310,7 @@ local function OnSyncTable( tbl )
 		--for i = 1, #playerList do
 			--playerList[i].playerObj:SetActive(false)
 		--end		--准备阶段
-		shisangshui_ui.ShowCard(nil, true)
+		shisangshui_ui.ShowCard(nil, false)
 		--显示准备提示准备
 		for i=1,#player_state do
 			--准备按扭
