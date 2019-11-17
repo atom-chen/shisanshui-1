@@ -244,7 +244,7 @@ function shisanshui_player_ui.New( transform )
 	
 	--设置准备按钮的坐标位置
 	function this.SetReadyLocalPosition(x,y)
-		this.readystate.gameObject.transform.localPosition = Vector3(x,y,0)
+		--this.readystate.gameObject.transform.localPosition = Vector3(x,y,0)
 	end
 
 	--设置庄家

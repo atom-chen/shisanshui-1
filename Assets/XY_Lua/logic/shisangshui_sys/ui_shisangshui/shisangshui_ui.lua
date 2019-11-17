@@ -300,6 +300,8 @@ local function InitWidgets()
 	if widgetTbl.label_roomId~=nil then
        widgetTbl.label_roomId.gameObject:SetActive(true)
     end
+    widgetTbl.tableInfo = child(widgetTbl.panel, "Anchor_TopLeft/phoneInfo")
+    widgetTbl.tableInfo.gameObject:SetActive(true)
 
 	--聊天面板
     widgetTbl.panel_chatPanel = child(widgetTbl.panel, "Anchor_Center/chatPanel")
@@ -696,6 +698,10 @@ function this.ShowInviteBtn(isShow)
 	if App.versionType ~= Version.Release then
 		widgetTbl.btn_invite.gameObject:SetActive(isShow)
 	end
+end
+
+function this.GameStart()
+	widgetTbl.tableInfo.gameObject:SetActive(false)
 end
 
 function this.ShowDissolveRoom(isShow)

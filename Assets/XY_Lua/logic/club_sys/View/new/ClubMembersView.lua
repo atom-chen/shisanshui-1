@@ -40,7 +40,7 @@ function ClubMembersView:OnApplyBtnClick()
 	ui_sound_mgr.PlayButtonClick()
 	if isClicked == true then
 		--UIManager:CloseUiForms("ClubApplyUI")
-		UI_Manager:Instance():FastTip("语言丢失")--LanguageMgr.GetWord(10100))
+--		UI_Manager:Instance():FastTip("语言丢失")--LanguageMgr.GetWord(10100))
 		return
     else
 		isClicked = true

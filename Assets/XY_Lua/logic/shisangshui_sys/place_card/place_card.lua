@@ -887,9 +887,10 @@ function this.BtnClick(obj)
 		shisangshui_play_sys.ChooseCardTypeReq(0)
 		isXiangGong = this.XiangGong()
 		if isXiangGong then
-			local box= message_box.ShowGoldBox("此牌为相公",nil,1,{function ()
-					message_box:Close()
-				end},{"fonts_01"})
+			-- local box= message_box.ShowGoldBox("此牌为相公",nil,1,{function ()
+			-- 		message_box:Close()
+			-- 	end},{"fonts_01"})
+			fast_tip.Show("此牌为相公")
 			return
 		end
 		local confirm_cards = this.GetConfirmCard()

@@ -131,6 +131,7 @@ local function OnGameStart( tbl )
 	ui_sound_mgr.PlaySoundClip("common/duijukaishi")
 
 	shisangshui_ui.ResetAll()
+	shisangshui_ui.GameStart()
 	
 	
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.F1_GAME_START)
@@ -311,6 +312,7 @@ local function OnSyncTable( tbl )
 			--playerList[i].playerObj:SetActive(false)
 		--end		--准备阶段
 		shisangshui_ui.ShowCard(nil, false)
+		shisangshui_ui.widgetTbl.tableInfo.gameObject:SetActive(true)
 		--显示准备提示准备
 		for i=1,#player_state do
 			--准备按扭
