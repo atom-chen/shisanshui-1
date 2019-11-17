@@ -192,20 +192,20 @@ function ClubCreateUI:OnCreateBtnClick()
 	end
 
 		log("-------------------2")
-	if self.locationId == nil or self.locationId == 0 then
-		--fast_tip.Show("请输入6~15位数字或者字母的密码")
-		--UIManager:FastTip(LanguageMgr.GetWord(10012))
-		--return
-		--self.nameInputLabel.value = "1111"
-	end
+	-- if self.locationId == nil or self.locationId == 0 then
+	-- 	--fast_tip.Show("请输入6~15位数字或者字母的密码")
+	-- 	--UIManager:FastTip(LanguageMgr.GetWord(10012))
+	-- 	--return
+	-- 	--self.nameInputLabel.value = "1111"
+	-- end
 
 		log("-------------------3")
-	if self.gameIds == nil or #self.gameIds == 0 then
-		--fast_tip.Show("请输入6~15位数字或者字母的密码")
-		--UIManager:FastTip(LanguageMgr.GetWord(10013))
-		--return
-		self.gameIds = 22
-	end
+	-- if self.gameIds == nil or #self.gameIds == 0 then
+	-- 	--fast_tip.Show("请输入6~15位数字或者字母的密码")
+	-- 	--UIManager:FastTip(LanguageMgr.GetWord(10013))
+	-- 	--return
+	-- 	self.gameIds = 22
+	-- end
 	self.selectIconId = data_center.GetLoginRetInfo().imageurl
 	if self.cost > 0 then
 		log("111111111111111")
