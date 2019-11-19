@@ -648,6 +648,7 @@ end
 
 --获得俱乐部成员列表 {"cid":俱乐部真实id}
 function ClubModel:ReqGetClubUser(cid)
+	log("获得俱乐部成员列表,cid="..tostring(cid))
 	local param = {}
 	param.cid = cid
 	--http_request_interface.SendHttpRequest(HttpProxy.HttpHttpMode.Club,HttpCmdName.ClubGetClubUser, param)
@@ -775,7 +776,12 @@ function ClubModel:ReqQuitClub(cid)
 	local param = {}
 	param.cid = cid
 	http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubQuitClub,param,function(msgTab)
-		self:OnResQuitClub(cid, msgTab)	end)
+		if msgTab.ret ~= 0 then
+			fast_tip.Show(msgTab.msg)
+			return
+		end
+		self:OnResQuitClub(cid, msgTab)	
+	end)
 	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubQuitClub, param, function(msgTab) self:OnResQuitClub(cid, msgTab)end, nil)
 	-- self:SendRequestWithCalback(HttpCmdName.ClubQuitClub, param, function(msgTab) 
 	-- 	self:OnResQuitClub(cid, msgTab)

@@ -60,7 +60,7 @@ function ClubListViewWithGrid:UpdateList(force)
 		index = count - 4 + 1
 	end
 
-	self.scroll:MoveRelative(Vector3(0, 95 * (index - 1), 0))
+	--self.scroll:MoveRelative(Vector3(0, 95 * (index - 1), 0))
 end
 
 
