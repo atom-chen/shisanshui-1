@@ -880,7 +880,7 @@ function this.BtnClick(obj)
 		local upCardNum = 0
 		for i, v in pairs(cardTranTbl) do
 			local oneCard = UIEventListener.Get(v.tran.gameObject).parameter
-			if oneCard.cardType == CardType[3] or v.tran.localPosition.y > 10 then
+			if oneCard.cardType == CardType[3] or v.tran.transform.localPosition.y > 10 then
 				upCardNum = upCardNum + 1
 			end
 		end

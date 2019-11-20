@@ -98,6 +98,7 @@ local function Onbtn_rePlaceClick()
 	App.RePlaceCard = true
 	log("App.RePlaceCard:"..tostring(App.RePlaceCard))
 	place_card.gameObject:SetActive(true)
+	this.bgBoxcollider(false)
     local param={}
     param.cost = 1
 	http_request_interface.costMoney(param,function (code,m,str) 
@@ -1155,6 +1156,7 @@ end
 
 function this.CompareStart(callback)
 	App.RePlaceCard = false
+	this.bgBoxcollider(true)
 	this.ShowCard(nil, true)
 	-- for i ,Player in pairs(this.PlayerList) do
 	-- 	Player:SetCardMesh() --设置牌的值
