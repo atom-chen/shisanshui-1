@@ -539,6 +539,9 @@ end
 
 -- 加入俱乐部
 function ClubModel:ReqApplyClub(shid, ctype)
+	if shid == nil or shid == "" then
+		fast_tip.Show("请输入正确的俱乐部ID")
+	end
 	local param = {}
 	param.shid = shid 
 	--http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubApply, param, 

@@ -53,6 +53,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 2a2f6fc2f9b0e424399eab44cdf50c67, type: 2}
   mSprites:
+  - name: blackSquare
+    x: 697
+    y: 897
+    width: 16
+    height: 16
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: btn
     x: 0
     y: 867

@@ -877,6 +877,17 @@ function this.BtnClick(obj)
 	--确定
 	elseif obj.name == "OkBtn" then
 		log("------OkBtn click--")
+		local upCardNum = 0
+		for i, v in pairs(cardTranTbl) do
+			local oneCard = UIEventListener.Get(v.tran.gameObject).parameter
+			if oneCard.cardType == CardType[3] or v.tran.localPosition.y > 10 then
+				upCardNum = upCardNum + 1
+			end
+		end
+		if upCardNum < 13 then
+			fast_tip.Show("请先按规则摆好牌")
+			return
+		end
 		if this.isSpecial then
 			shisangshui_play_sys.ChooseCardTypeReq(1)
 			this.Hide()
