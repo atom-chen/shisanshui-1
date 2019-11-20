@@ -154,7 +154,7 @@ function ClubModel:OnPushMsg(msgTab)
 		self:CheckClearFristState()
 
 	elseif msgTab.type == 10012 then		-- 自己被踢出
-		UIManager:FastTip("你已被【" .. msgTab.data.cname .. "】俱乐部踢出")
+		fast_tip.Show("你已被【" .. msgTab.data.cname .. "】俱乐部踢出")
 		self:RemoveClub(msgTab.data.cid)
 	elseif msgTab.type == 10013 then   -- 刷新俱乐部信息
 		self:ReqGetClubInfoByCid(msgTab.data.cid)
@@ -255,16 +255,16 @@ function ClubModel:DealClubAccept(cid ,ctype ,cname ,isEnter)
 		local isEnter = (isEnter == 1)		--为1默认进入新加俱乐部
 		if ctype ~= 1 then
 			if not isEnter then
-				MessageBox.ShowYesNoBox(LanguageMgr.GetWord(10081, cname), function() 
-					UIManager:CloseUiForms("joinRoom_ui")			
-					UIManager:CloseUiForms("openroom_ui")
-					UIManager:CloseUiForms("join_ui_new")
-					UIManager:CloseUiForms("ClubCreateUI")
-					UIManager:ShowUiForms("ClubUI")
-					func()
-				end)
+				fast_tip.Show("加入俱乐部成功")
+				UIManager:CloseUiForms("joinRoom_ui")			
+				UIManager:CloseUiForms("openroom_ui")
+				UIManager:CloseUiForms("join_ui_new")
+				UIManager:CloseUiForms("ClubCreateUI")
+				UIManager:ShowUiForms("ClubUI")
+				func()
 			else
-				UI_Manager:Instance():FastTip(LanguageMgr.GetWord(10051,clubInfo.nickname ,cname), 4)
+				--UI_Manager:Instance():FastTip(LanguageMgr.GetWord(10051,clubInfo.nickname ,cname), 4)
+				fast_tip.Show("成功加入俱乐部")
 				func()
 			end
 		else
@@ -1277,6 +1277,12 @@ function ClubModel:RemoveClub(cid)
 	self:SepClubList()
 	self.clubMap[cid] = nil
 
+	for i = 1, #self.unofficalClubList do
+		if self.unofficalClubList[i].cid == cid then
+			table.remove(self.unofficalClubList, i)
+			break
+		end
+	end
 	if self.currentClubInfo.cid == cid then
 --		UIManager:CloseUiForms("ClubInfoUI")
 		-- UIManager:CloseUiForms("ClubMemberUI")
