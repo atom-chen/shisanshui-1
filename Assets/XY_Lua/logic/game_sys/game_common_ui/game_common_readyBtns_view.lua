@@ -182,12 +182,12 @@ end
 function baseClass:Onbtn_inviteClick()
 	local name, des = ShareStrUtil.GetShareStr()
 	invite_sys.inviteToRoom(roomdata_center.roomnumber,name,des,roomdata_center.roomCid)
-	report_sys.EventUpload(29,player_data.GetGameId())
+--	report_sys.EventUpload(29,player_data.GetGameId())
 end
 
 -- 解散房间
 function baseClass:Onbtn_closeRoomClick()
-	report_sys.EventUpload(30,player_data.GetGameId())
+--	report_sys.EventUpload(30,player_data.GetGameId())
   	MessageBox.ShowYesNoBox(LanguageMgr.GetWord(6031),function()
 		if self.isMahjong then
 			mahjong_play_sys.DissolutionRoom()

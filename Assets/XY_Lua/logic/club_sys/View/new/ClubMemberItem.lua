@@ -90,14 +90,16 @@ function ClubMemberItem:UpdateView()
 		end
 	elseif self.model:IsClubManager(nil, self.info.uid) then
 --		self.iconSp.spriteName = "club_53"
-		self.iconSp.gameObject:SetActive(true)
+		self.iconSp.gameObject:SetActive(false)
 		if self.tickBtn then
 			self.tickBtn.gameObject:SetActive(false)
 		end
 	else
 		self.iconSp.gameObject:SetActive(false)
-		if self.tickBtn then
+		if self.tickBtn and self.model:CheckIsClubCreater(self.model.currentClubInfo.cid, self.model.selfPlayerId) then
 			self.tickBtn.gameObject:SetActive(true)
+		elseif self.tickBtn then
+			self.tickBtn.gameObject:SetActive(false)
 		end
 	end
 end

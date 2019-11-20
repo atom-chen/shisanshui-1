@@ -50,7 +50,7 @@ function ClubMembersView:OnApplyBtnClick()
 	--ui_sound_mgr.PlayButtonClick()
 	--ui_sound_mgr.PlaySoundClip(data_center.GetAppConfDataTble().appPath.."/sound/common/audio_button_click")
 	--数据上报
-	report_sys.EventUpload(1)
+--	report_sys.EventUpload(1)
 	self.applyView:SetActive(true)
 	self.applyView:OnOpen(self.cid)
 	--UI_Manager:Instance():ShowUiForms("ClubApplyUI",UiCloseType.UiCloseType_CloseNothing,nil,self.cid)
