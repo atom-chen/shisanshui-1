@@ -8190,7 +8190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000014137066564
 GameObject:
   m_ObjectHideFlags: 1
@@ -16861,7 +16861,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 60, z: 0}
+  m_Size: {x: 350, y: 90, z: 0}
   m_Center: {x: 100, y: 0, z: 0}
 --- !u!65 &65000010343257078
 BoxCollider:
@@ -17005,7 +17005,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 60, z: 0}
+  m_Size: {x: 350, y: 90, z: 0}
   m_Center: {x: 100, y: 0, z: 0}
 --- !u!65 &65000011161413186
 BoxCollider:
@@ -17017,7 +17017,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 60, z: 0}
+  m_Size: {x: 350, y: 90, z: 0}
   m_Center: {x: 100, y: 0, z: 0}
 --- !u!65 &65000011259409520
 BoxCollider:
@@ -17029,7 +17029,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 60, z: 0}
+  m_Size: {x: 350, y: 90, z: 0}
   m_Center: {x: 100, y: 0, z: 0}
 --- !u!65 &65000011263097540
 BoxCollider:
@@ -23029,7 +23029,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3020
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -25427,7 +25427,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3020
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -30286,7 +30286,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3014
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -30294,7 +30294,7 @@ MonoBehaviour:
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 3999
+  mDepth: 399
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &114000012277235024

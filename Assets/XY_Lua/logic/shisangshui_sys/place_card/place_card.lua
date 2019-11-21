@@ -112,6 +112,10 @@ function this.Hide()
 	if this.gameObject ~= nil then
 		this.gameObject:SetActive(false)
 	end
+	if this.callback ~= nil then
+		this.callback()
+		this.callback = nil
+	end
 end
 
 function this.DestoryAll()
@@ -157,6 +161,10 @@ end
  * @Description: 销毁  
  ]]
 function this.OnDestroy()
+end
+
+function this.SetCallBack(callback)
+	this.callback = callback
 end
 
 local hoverObj = nil

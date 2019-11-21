@@ -312,7 +312,9 @@ local function OnSyncTable( tbl )
 			--playerList[i].playerObj:SetActive(false)
 		--end		--准备阶段
 		shisangshui_ui.ShowCard(nil, false)
-		shisangshui_ui.widgetTbl.tableInfo.gameObject:SetActive(true)
+		if shisangshui_ui.widgetTbl and shisangshui_ui.widgetTbl.tableInfo then
+			shisangshui_ui.widgetTbl.tableInfo.gameObject:SetActive(true)
+		end
 		--显示准备提示准备
 		for i=1,#player_state do
 			--准备按扭
@@ -537,14 +539,21 @@ local function OnVoteStart(tbl)
 	local time = tbl._para.timeout
 	local name = room_usersdata_center.GetUserByViewSeat(viewSeat).name
 	if viewSeat ~= 1 then
-		vote_quit_ui.Show(name, function(value) 
-			if value == true then
-				large_result.Hide()
-				place_card.Hide()
-				small_result.Hide()
-			end
-			shisangshui_play_sys.VoteDrawReq(value, time)
-		 end, roomdata_center.MaxPlayer())
+		local func = function()
+			vote_quit_ui.Show(name, function(value) 
+				if value == true then
+					large_result.Hide()
+					place_card.Hide()
+					small_result.Hide()
+				end
+				shisangshui_play_sys.VoteDrawReq(value, time)
+			 end, roomdata_center.MaxPlayer())
+		end
+		if place_card and place_card.gameObject and place_card.gameObject.activeSelf then
+			place_card.SetCallBack(func)
+		else
+			func()
+		end
 	end
 	shisangshui_ui.voteView:Show(roomdata_center.MaxPlayer())
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.OnVoteStart)
@@ -553,7 +562,7 @@ end
 local function OnVoteEnd()
 	vote_quit_ui.Hide()
 	shisangshui_ui.voteView:Hide()
-	message_box.ShowGoldBox("打完本局自动解散",nil,1,{function ()message_box:Close()end},{"fonts_01"})
+	fast_tip.Show("打完本局自动解散")
 	Notifier.dispatchCmd(cmdName.MSG_HANDLE_DONE, cmdName.OnVoteEnd)
 end
 

@@ -133,7 +133,8 @@ function SocketManager:onGameStatusCallback( _status )
         {
         function ()
        		message_box.Close() 
-        	game_scene.gotoHall()
+			self.gameSocket:forceReconnect()
+--        	game_scene.gotoHall()
         end, 
         function ()
         	message_box.Close()
