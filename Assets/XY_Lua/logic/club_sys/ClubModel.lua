@@ -863,6 +863,7 @@ end
 
 ---获取用户所有俱乐部房间
 function ClubModel:ReqGetAllRoomList(force)
+	log("获取用户所有俱乐部房间")
 	if not self:HasClub() or game_scene.getCurSceneType() ~= scene_type.HALL then
 		return
 	end
@@ -1122,12 +1123,14 @@ function ClubModel:OnResGetUserAllClubList(msgTab)
 		end
 		self:CheckClearFristState()
 	end
-	if count ~= #self.clubList then
-		self:ReqGetAllRoomList(true)
-		Notifier.dispatchCmd(GameEvent.OnSelfClubNumUpdate)
-	else
-		Notifier.dispatchCmd(GameEvent.OnClubInfoUpdate)
-	end
+	self:ReqGetAllRoomList(true)
+	Notifier.dispatchCmd(GameEvent.OnSelfClubNumUpdate)
+	-- if count ~= #self.clubList then
+	-- 	self:ReqGetAllRoomList(true)
+	-- 	Notifier.dispatchCmd(GameEvent.OnSelfClubNumUpdate)
+	-- else
+	-- 	Notifier.dispatchCmd(GameEvent.OnClubInfoUpdate)
+	-- end
 
 	-- 刷新所有俱乐部列表
 	self.cidList = {}
