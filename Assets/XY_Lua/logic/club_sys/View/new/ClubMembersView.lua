@@ -92,7 +92,11 @@ end
 function ClubMembersView:OnOpen()
 	--if self.isNeedReq then
 	self:RegistEvent()
-	self.model:ReqGetClubUser(self.cid)
+	if self.cid ~= nil then
+		self.model:ReqGetClubUser(self.cid)
+	else
+		log("当前没有俱乐部")
+	end
 	--	self.isNeedReq = false
 	--end
 end

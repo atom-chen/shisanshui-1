@@ -91,8 +91,10 @@ local function OnPlayerEnter( tbl )
 	if viewSeat == 1 then
 		shisangshui_ui.SetGameInfo("房号", roomdata_center.roomnumber)
 		shisangshui_ui.SetLeftCard()--显示房间局数
-		shisangshui_ui.ShowDissolveRoom(true)--显有房主可以解散房间
-		shisangshui_ui.SetDisDiss(true)
+		if data_center and data_center.GetLoginUserInfo() and data_center.GetLoginUserInfo().uid == roomdata_center.ownerId then
+			shisangshui_ui.SetDisDiss(true)
+			shisangshui_ui.ShowDissolveRoom(true)--显有房主可以解散房间
+		end
 	end
 	
 	--是否选择加一色坐庄，如果是，显示庄的头像
@@ -306,11 +308,18 @@ local function OnSyncTable( tbl )
 	
 	local stCards = ePara.stCards
 	roomdata_center.isStart = true
+	shisangshui_ui.SetDisDiss(false)
 	if game_state == "prepare" then  
 		--牌隐藏
 		--for i = 1, #playerList do
 			--playerList[i].playerObj:SetActive(false)
 		--end		--准备阶段
+		if roomdata_center.nCurrJu <= 1 then
+			roomdata_center.isStart = false
+			if data_center and data_center.GetLoginUserInfo() and data_center.GetLoginUserInfo().uid == roomdata_center.ownerId then
+				shisangshui_ui.SetDisDiss(true)
+			end
+		end
 		shisangshui_ui.ShowCard(nil, false)
 		if shisangshui_ui.widgetTbl and shisangshui_ui.widgetTbl.tableInfo then
 			shisangshui_ui.widgetTbl.tableInfo.gameObject:SetActive(true)
@@ -332,9 +341,6 @@ local function OnSyncTable( tbl )
 					if viewSeat == 1 then
 						shisangshui_ui.ShowReadyBtn()
 						--标记不用投票可直接退出
-						if roomdata_center.nCurrJu <= 1 then
-							roomdata_center.isStart = false
-						end
 					end
 				end
 			end

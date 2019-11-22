@@ -18,7 +18,7 @@ function ClubRoomItem:InitView()
 		self.headList[i] = subComponentGet(self.transform, "head"..i, typeof(UITexture))
 	end
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
-	addClickCallbackSelf(self.enterBtn, self.OnEnterClick, self)
+	addClickCallbackSelf(self.enterBtn, self.OnClick, self)
 	addClickCallbackSelf(self.detailBtn, self.OnDetailClick, self)
 end
 

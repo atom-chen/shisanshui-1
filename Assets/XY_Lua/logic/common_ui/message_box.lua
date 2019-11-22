@@ -21,17 +21,16 @@ local this=message_box
 	 ]]
  
 function message_box.ShowGoldBox(content,goldNumber,btnNumber,btnCallback,btnname,btnbacksprite)
-    if this.gameObject == nil then
-        local obj = newNormalUI("Prefabs/UI/Common/message_box")
-        validPosition = obj.transform.position
-        validPosition.z = -1001
-        obj.transform.localPosition = validPosition
-        this.gameObject = obj
-        if obj ~= nil then  
-    		this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,btnbacksprite)
-    	end 
-    	return obj
-    end
+    message_box:Close()
+    local obj = newNormalUI("Prefabs/UI/Common/message_box")
+    validPosition = obj.transform.position
+    validPosition.z = -1001
+    obj.transform.localPosition = validPosition
+    this.gameObject = obj
+    if obj ~= nil then  
+		this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,btnbacksprite)
+	end 
+	return obj
 end
 
 

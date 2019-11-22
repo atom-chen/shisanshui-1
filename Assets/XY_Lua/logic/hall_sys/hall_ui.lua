@@ -256,7 +256,9 @@ function this.ui_Bottom()
 --------------------------------------按钮相关逻辑-----------------------------------------
 function hall_ui:OpenClubUI()
   --ClubUI:OnOpen()
-   UI_Manager:Instance():ShowUiForms("ClubUI")
+  ClubModel:ResGetUserAllClubList(nil, function()
+    UI_Manager:Instance():ShowUiForms("ClubUI")
+  end)
 end
 
 function this.Onbtn_goldClick()

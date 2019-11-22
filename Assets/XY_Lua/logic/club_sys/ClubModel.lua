@@ -319,7 +319,7 @@ function ClubModel:OnLoginSuccess()
 	self:LoadNewPlayerState()
 	self:LoadLastClubId()
 	self:ReqGetAgentInfo()
-	self:ResGetUserAllClubList()
+	--self:ResGetUserAllClubList()
 	self:ReqBacksiteFlag()
 end
 
@@ -1079,8 +1079,15 @@ end
 
 
 --获得用户所有俱乐部,加入的和创建的
-function ClubModel:ResGetUserAllClubList(dontShow)
-	http_request_interface.SendHttpRequest(HttpCmdName.ClubGetUserAllClubList)
+function ClubModel:ResGetUserAllClubList(dontShow, callback)
+	if callback == nil then
+		http_request_interface.SendHttpRequest(HttpCmdName.ClubGetUserAllClubList)
+	else
+		http_request_interface.SendHttpRequestWithCallback(HttpCmdName.ClubGetUserAllClubList, {} ,function(msgTab)
+			self:OnResGetUserAllClubList(msgTab)
+			callback(msgTab)
+		end,nil)
+	end
 	--self:SendRequest(HttpCmdName.ClubGetUserAllClubList)
 end
 

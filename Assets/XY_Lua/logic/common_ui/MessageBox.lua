@@ -135,7 +135,7 @@ function MessageBox:OnCloseBtnClick()
 end
 
 function MessageBox:Hide()
-	UI_Manager:CloseUiForms("MessageBox")
+	UI_Manager:CloseUiForms("MessageBox", true)
 end
 
 
