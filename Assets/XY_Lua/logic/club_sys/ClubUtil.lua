@@ -222,10 +222,10 @@ function ClubUtil.SearchClubSortFunc(clubA, clubB)
 	if clubA == nil or clubB == nil then
 		return false
 	end
-	if model_manager:GetModel("ClubModel"):IsClubMember(clubA.cid) then
+	if ClubModel:IsClubMember(clubA.cid) then
 		return false
 	end
-	if model_manager:GetModel("ClubModel"):IsClubMember(clubB.cid) then
+	if ClubModel:IsClubMember(clubB.cid) then
 		return true
 	end
 	return false
@@ -239,9 +239,9 @@ function ClubUtil.RoomListSortFunc(clubA, clubB)
 	if clubA.uid == clubB.uid  then
 		return false
 	end
-	if clubA.uid == model_manager:GetModel("ClubModel").selfPlayerId then
+	if clubA.uid == ClubModel.selfPlayerId then
 		return true
-	elseif clubB.uid == model_manager:GetModel("ClubModel").selfPlayerId then
+	elseif clubB.uid == ClubModel.selfPlayerId then
 		return false
 	end
 	return false

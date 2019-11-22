@@ -203,6 +203,7 @@ function this.SetShiSangShuiRoomCfgInfo(cfgData)
 	this.maxplayernum = param.nPlayerNum
 	this.nJuNum = param.nJuNum
 	this.nCurrJu = param.nCurrJu
+  this.ownerId = param.owner_uid
 	
 	room_data.GetSssRoomDataInfo().people_num = this.maxplayernum
 	room_data.GetSssRoomDataInfo().play_num = this.nJuNum

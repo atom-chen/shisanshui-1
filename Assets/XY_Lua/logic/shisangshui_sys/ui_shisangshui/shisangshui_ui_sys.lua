@@ -87,14 +87,14 @@ local function OnPlayerEnter( tbl )
 	shisangshui_ui.ShowDissolveRoom(false)
 	shisangshui_ui.SetDisDiss(false)
 	shisangshui_ui.ShowInviteBtn(true)
+	if data_center and data_center.GetLoginUserInfo() and data_center.GetLoginUserInfo().uid == roomdata_center.ownerId then
+		shisangshui_ui.SetDisDiss(true)
+		shisangshui_ui.ShowDissolveRoom(true)--显有房主可以解散房间
+	end
 	--金币场不显示，以后处理
 	if viewSeat == 1 then
 		shisangshui_ui.SetGameInfo("房号", roomdata_center.roomnumber)
 		shisangshui_ui.SetLeftCard()--显示房间局数
-		if data_center and data_center.GetLoginUserInfo() and data_center.GetLoginUserInfo().uid == roomdata_center.ownerId then
-			shisangshui_ui.SetDisDiss(true)
-			shisangshui_ui.ShowDissolveRoom(true)--显有房主可以解散房间
-		end
 	end
 	
 	--是否选择加一色坐庄，如果是，显示庄的头像
