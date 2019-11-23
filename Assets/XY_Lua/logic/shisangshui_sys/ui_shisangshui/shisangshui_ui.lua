@@ -116,7 +116,12 @@ local function Onbtn_inviteFriend()	--邀请好友
 end
 
 local function Onbtn_dimissRoom()	--解散房间
-	shisangshui_play_sys.DissolutionRoom()
+	  ui_sound_mgr.PlaySoundClip("common/audio_close_dialog")
+	  message_box.ShowGoldBox("您确定要解散房间吗",nil,1, {function ()  		
+	  		--shisangshui_play_sys.LeaveReq()
+			shisangshui_play_sys.DissolutionRoom()
+	  		message_box.Close()
+	  	end}, {"fonts_01"})
 end
 
 local function Onbtn_chatClick()

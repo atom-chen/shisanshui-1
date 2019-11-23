@@ -50,6 +50,8 @@
     UIManager:CloseUiForms("ClubInputUI")
     UIManager:ShowUiForms("ClubCreateUI")
     UIManager:CloseUiForms("ClubCreateUI",false)
+    UIManager:ShowUiForms("join_ui_new")
+    UIManager:CloseUiForms("join_ui_new")
   end)
 end
 

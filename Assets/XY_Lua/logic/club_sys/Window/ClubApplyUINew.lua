@@ -27,7 +27,7 @@ function ClubApplyUI:InitView()
 	self.clubIDLabel = self:GetComponent("panel/ID", typeof(UILabel))
 
 	self.wrap = ui_wrap:create(self:GetGameObject("panel/container"))
-	self.wrap:InitUI(106)
+	self.wrap:InitUI(160)
 	self.wrap.OnUpdateItemInfo = function(go, rindex, index)  self:OnItemUpdate(go, index, rindex)  end
 	self.wrap:InitWrap(0)
 	self:UpdateView(true)

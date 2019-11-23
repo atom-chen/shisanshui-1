@@ -8,6 +8,7 @@ function ClubSelfItemView:InitView()
 	self.model = ClubModel
 	self.nameLabel = subComponentGet(self.transform, "name", typeof(UILabel))
 	self.IdLabel = subComponentGet(self.transform, "id", typeof(UILabel))
+	self.clubusernum = subComponentGet(self.transform, "clubusernum", typeof(UILabel))
 	self.icon = subComponentGet(self.transform, "icon", typeof(UITexture))
 	self.newIconGo = child(self.transform,"newIcon").gameObject
 	self.selfIconGo = child(self.transform,"selfIcon").gameObject
@@ -18,9 +19,18 @@ function ClubSelfItemView:InitView()
 
 	self.bg = subComponentGet(self.transform,"", typeof(UISprite))
 
-	self:SetSelected(false)
 
 	addClickCallbackSelf(self.gameObject, self.OnClick, self)
+	self.exitBtn = child(self.transform,"exitBtn").gameObject
+	if self.exitBtn then 
+		addClickCallbackSelf(self.exitBtn, self.ExitClick, self) 
+	end
+	self:SetSelected(false)
+end
+
+function ClubSelfItemView:ExitClick()
+	self.transform.parent.parent.parent.parent.gameObject:SetActive(false)
+	self.model:ReqQuitClub(self.clubInfo.cid)
 end
 
 function ClubSelfItemView:SetCallback(callback, target)
@@ -37,12 +47,15 @@ end
 
 function ClubSelfItemView:SetInfo(clubInfo)
 	self.clubInfo = clubInfo
-	self.IdLabel.text = "ID:" .. self.clubInfo.shid
+	self.IdLabel.text = "亲友圈号:" .. self.clubInfo.shid
+	self.clubusernum.text = "人数："..self.clubInfo.clubusernum
 	self.nameLabel.text = self.clubInfo.cname
 	--self.icon.spriteName = ClubUtil.GetClubIconName(self.clubInfo.icon)
 	hall_data.getuserimage(self.icon, nil, self.clubInfo.icon)
-	self.newIconGo:SetActive(self.model:CheckClubIsNew(self.clubInfo.cid))
-	self.selfIconGo:SetActive(self.model:IsClubCreater(self.clubInfo.cid))
+	--self.newIconGo:SetActive(self.model:CheckClubIsNew(self.clubInfo.cid))
+	local isCreater = self.model:IsClubCreater(self.clubInfo.cid)
+	self.selfIconGo:SetActive(isCreater)
+	self.exitBtn:SetActive(not isCreater)
 	self.redIconGo:SetActive(self.model:CheckCanSeeApplyList(self.clubInfo.cid) and self.clubInfo.applyNum ~= nil 
 		and self.clubInfo.applyNum > 0 )
 end

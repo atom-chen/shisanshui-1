@@ -16,11 +16,21 @@ function ClubListViewWithGrid:InitView()
 	
 	local closeBtn = child(self.gameObject, "closeBtn")
 	addClickCallbackSelf(child(self.gameObject, "closeBtn"), self.OnCloseClick, self)
+	local chgClubBtn = child(self.gameObject,"chgClubBtn")
+	if chgClubBtn then
+	 	addClickCallbackSelf(chgClubBtn, self.ChgClubBtnClick, self)
+	end
 end
 
 function ClubListViewWithGrid:OnCloseClick(item)
 	log("ClubListView:OnCloseClick")
 	self.gameObject:SetActive(false)
+end
+
+function ClubListViewWithGrid:ChgClubBtnClick(obj)
+	self:OnCloseClick()
+	ui_sound_mgr.PlaySoundClip("common/audio_button_click")
+	UI_Manager:Instance():ShowUiForms("join_ui_new")
 end
 
 function ClubListViewWithGrid:UpdateList(force)
@@ -63,6 +73,11 @@ function ClubListViewWithGrid:UpdateList(force)
 	--self.scroll:MoveRelative(Vector3(0, 95 * (index - 1), 0))
 end
 
+function ClubListViewWithGrid:ResPosition()
+	if self and self.grid then
+		self.grid:Reposition()
+	end
+end
 
 function ClubListViewWithGrid:GetCurIndex()
 	if self.model.currentClubInfo == nil then

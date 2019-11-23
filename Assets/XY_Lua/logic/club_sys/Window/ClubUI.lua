@@ -156,6 +156,7 @@ function ClubUI:OnClubChgClick()
 	local activeSelf = self.clubListView.gameObject.activeSelf
 	log("ClubUI:OnClubChgClick:"..tostring(activeSelf))
 	self.clubListView.gameObject:SetActive(not activeSelf)
+	self.clubListView:ResPosition()
 end
 
 function ClubUI:OnShareClick()
@@ -311,9 +312,9 @@ function ClubUI:SetToggle(index, force)
 	-- 	return
 	-- end
 	log("ClubUI:SetToggle"..index)
-	if true then 
-		return
-	end
+	-- if true then 
+	-- 	return
+	-- end
 
 	self.curIndex = index
 --	if self.currentToggleSp ~= nil then
@@ -335,8 +336,8 @@ function ClubUI:SetToggle(index, force)
 			if i == index then
 				self.viewList[i]:SetActive(true)
 				self.viewList[i]:OnOpen()
-			else
-				self.viewList[i]:SetActive(false)
+			-- else
+			-- 	self.viewList[i]:SetActive(false)
 			end
 		end
 	end

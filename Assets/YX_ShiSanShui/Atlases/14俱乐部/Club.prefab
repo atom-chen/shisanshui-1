@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebd2e0fe8fa5534486602b7b88e97f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: cb8ed4c58a4d7184aa5ec62f1469e81a, type: 2}
+  material: {fileID: 2100000, guid: fe868828047bc20449488ba442b501c4, type: 2}
   mSprites:
   - name: "\u4E0D\u5728\u7EBF-\u6807\u7B7E"
     x: 769
@@ -94,7 +94,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: "\u5207\u6362\u4FF1\u4E50\u90E8-\u6807\u9898"
     x: 218
-    y: 532
+    y: 591
     width: 550
     height: 58
     borderLeft: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u521B\u5EFA\u4FF1\u4E50\u90E8-\u6807\u9898"
     x: 218
-    y: 473
+    y: 532
     width: 550
     height: 58
     borderLeft: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u52A0\u5165\u623F\u95F4-\u6807\u9898"
     x: 218
-    y: 591
+    y: 473
     width: 550
     height: 58
     borderLeft: 0
@@ -171,8 +171,8 @@ MonoBehaviour:
     paddingTop: 8
     paddingBottom: 4
   - name: "\u540C\u610F-\u6309\u94AE"
-    x: 218
-    y: 17
+    x: 516
+    y: 377
     width: 109
     height: 95
     borderLeft: 0
@@ -210,8 +210,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5934\u50CF\u8FB9\u6846"
-    x: 927
-    y: 694
+    x: 0
+    y: 11
     width: 96
     height: 96
     borderLeft: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u62D2\u7EDD-\u6309\u94AE"
-    x: 328
+    x: 368
     y: 17
     width: 109
     height: 95
@@ -340,8 +340,8 @@ MonoBehaviour:
     paddingTop: 9
     paddingBottom: 0
   - name: "\u6DFB\u52A0"
-    x: 0
-    y: 11
+    x: 927
+    y: 694
     width: 96
     height: 96
     borderLeft: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: "\u8BE6\u60C5\u6309\u94AE"
-    x: 516
+    x: 626
     y: 412
     width: 149
     height: 60
@@ -468,6 +468,19 @@ MonoBehaviour:
     paddingLeft: 1
     paddingRight: 2
     paddingTop: 2
+    paddingBottom: 0
+  - name: "\u9000\u51FA\u6309\u94AE"
+    x: 218
+    y: 36
+    width: 149
+    height: 76
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 5
+    paddingRight: 4
+    paddingTop: 4
     paddingBottom: 0
   mPixelSize: 1
   mReplacement: {fileID: 0}
