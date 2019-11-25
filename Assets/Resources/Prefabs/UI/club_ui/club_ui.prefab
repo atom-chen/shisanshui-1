@@ -10791,7 +10791,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012285233252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 721.9, y: 475.7, z: 0}
+  m_LocalPosition: {x: 722, y: 476, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -18090,22 +18090,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: -249
+    target: {fileID: 4000012363100734}
+    relative: 1
+    absolute: -293
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000012363100734}
     relative: 1
-    absolute: -139
+    absolute: -183
   bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: -137
-  topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 4000012363100734}
     relative: 1
-    absolute: -17
-  updateAnchors: 1
+    absolute: -124
+  topAnchor:
+    target: {fileID: 4000012363100734}
+    relative: 1
+    absolute: -4
+  updateAnchors: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -22305,7 +22305,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3006
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}
@@ -33647,7 +33647,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3007
   affectByParentShowHide: 1
   shouldShowHideAffectColliders: 1
   mClipTexture: {fileID: 0}

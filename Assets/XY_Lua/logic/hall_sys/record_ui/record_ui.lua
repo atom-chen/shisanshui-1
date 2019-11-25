@@ -128,12 +128,12 @@ function this.InitItem(data,i,code)
     local tmpItem
 	if code ==1 then
      	  tmpItem= NGUITools.AddChild(WrapContent_record.gameObject,sp_record.gameObject)
-		  tmpItem.transform.localPosition = Vector3.New(0,-i*126,0)
+		  tmpItem.transform.localPosition = Vector3.New(0,-i*280,0)
 		  tmpItem.gameObject:SetActive(true) 
           
 	else
 	      tmpItem = NGUITools.AddChild(WrapContent_openrecord.gameObject,sp_openrecord.gameObject)
-		  tmpItem.transform.localPosition = Vector3.New(0,-i*126,0)
+		  tmpItem.transform.localPosition = Vector3.New(0,-i*280,0)
 		  tmpItem.gameObject:SetActive(true) 
 	end 
     return tmpItem
@@ -149,7 +149,7 @@ function this.OnUpdateItem_record(go,index,realindex)
         local lab_type=child(go.transform, "lab_type")--类型
         local lab_reward=child(go.transform, "lab_reward")--盈利 
         if App.versionType ~= Version.Release then
-            addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)  
+            --addClickCallbackSelf(go.gameObject,this.opendetails,hall_ui)  
         end 
         -- if this.open_roomRecordSimpleData[rindext].gid~=nil then
         --    componentGet(lab_type,"UILabel").text="牌局类型:"..this.gid[tonumber(this.open_roomRecordSimpleData[rindext].gid)]
