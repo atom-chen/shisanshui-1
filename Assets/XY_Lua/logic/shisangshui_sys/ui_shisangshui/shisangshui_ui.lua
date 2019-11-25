@@ -302,11 +302,11 @@ local function InitWidgets()
        widgetTbl.label_gameinfo.gameObject:SetActive(false)
     end
 
-    widgetTbl.label_roomId = child(widgetTbl.panel, "Anchor_TopLeft/phoneInfo/gameInfo")
+    widgetTbl.label_roomId = child(widgetTbl.panel, "Anchor_Center/phoneInfo/gameInfo")
 	if widgetTbl.label_roomId~=nil then
        widgetTbl.label_roomId.gameObject:SetActive(true)
     end
-    widgetTbl.tableInfo = child(widgetTbl.panel, "Anchor_TopLeft/phoneInfo")
+    widgetTbl.tableInfo = child(widgetTbl.panel, "Anchor_Center/phoneInfo")
     widgetTbl.tableInfo.gameObject:SetActive(true)
 
 	--聊天面板
@@ -1137,7 +1137,7 @@ function this.DealCard(data, callback)
 	    	this.xipai.gameObject:SetActive(true)
 			this.xipai:Play()
 			App.xipai = -1
-			coroutine.wait(3.3)
+			coroutine.wait(3.5)
 		end
     	this.xipai.gameObject:SetActive(false)
 		for i , v in pairs(this.playerList) do
