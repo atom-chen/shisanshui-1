@@ -366,6 +366,7 @@ function this.LeaveEventHandler(msg)
     return
   end 
   vote_quit_ui.Hide()
+  place_card.DestoryAll()
   game_scene.DestroyCurSence()    
   game_scene.gotoHall()
 end

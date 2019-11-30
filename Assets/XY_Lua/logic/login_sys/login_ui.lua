@@ -39,7 +39,7 @@ end
  	App.versionType = Version.Release
  	App.xipai = -1
     local go = GameObject.Find("reporter");
-    if go ~= nil then--and App.versionType ~= Version.Release then 
+    if go ~= nil and App.versionType ~= Version.Release then 
     	go:SetActive(true) 
     	go:GetComponent("Reporter").enabled = true
     end
@@ -52,6 +52,61 @@ end
       	login_sys.share_uid = t.uid
       end
    	end
+
+   	local WWW = UnityEngine.WWW
+   	local url = "http://122.51.255.174:8080/zeng/newVersion.txt"
+   	local c = coroutine.create(function()
+        local www = WWW(url)
+        Yield(www)
+        log(www.error)
+        if www.error then
+            log(www.error)
+        else
+	    	log(www.text)
+	    	log(UnityEngine.Application.version)
+	    	local str = www.text
+			--local s=string.gsub(str,"\\/","/")  
+			log(str)
+	        local t=ParseJsonStr(str)
+			log(t)
+	        if t.vertision ~= nil and t.vertision ~= UnityEngine.Application.version then
+				local closeCallback = function() end
+				if t.closeCallback == 0 then
+					closeCallback = nil
+				end
+
+				message_box.ShowGoldBox(t,nil,1, {function ()  		
+				  		UnityEngine.Application.OpenURL(t.url)
+				  		message_box.Close()
+				  	end}, {"fonts_01"}, nil, closeCallback)
+			elseif t.error ~= nil and t.error ~= 0 then
+				--1,点一下通过，2点了没反应，3，点了关App，100，直接关App
+				if t.error == 100 then
+					UnityEngine.Application:Quit()
+				else
+					local chatTextTab = {"网络不行，请重试","网络不行，请重试","内存已满"}
+					local closeCallback = function() end
+					if t.error == 1 then 
+						closeCallback = nil  
+					elseif t.error == 2 then
+						closeCallback = function() end 
+					elseif t.error == 3 then 
+						closeCallback = function() 
+							UnityEngine.Application:Quit() 
+						end 
+					end 
+					message_box.ShowGoldBox(chatTextTab[t.error],nil,1, {function ()  		
+					  		UnityEngine.Application.OpenURL(t.url)
+					  		message_box.Close()
+					  	end}, {"fonts_01"}, nil, closeCallback)
+				end
+	        end
+        end
+        log("over")
+        www:Dispose()
+        www = nil
+    end)
+    coroutine.resume(c)
     -- local animations=child(this.transform,"tex_bg") 
     -- if animations~=nil then
     --     log()

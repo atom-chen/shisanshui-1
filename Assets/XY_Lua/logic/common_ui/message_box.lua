@@ -20,7 +20,7 @@ local this=message_box
 
 	 ]]
  
-function message_box.ShowGoldBox(content,goldNumber,btnNumber,btnCallback,btnname,btnbacksprite)
+function message_box.ShowGoldBox(content,goldNumber,btnNumber,btnCallback,btnname,btnbacksprite, closeCallback)
     message_box:Close()
     local obj = newNormalUI("Prefabs/UI/Common/message_box")
     validPosition = obj.transform.position
@@ -28,7 +28,7 @@ function message_box.ShowGoldBox(content,goldNumber,btnNumber,btnCallback,btnnam
     obj.transform.localPosition = validPosition
     this.gameObject = obj
     if obj ~= nil then  
-		this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,btnbacksprite)
+		this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname,btnbacksprite, closeCallback)
 	end 
 	return obj
 end
@@ -49,11 +49,15 @@ end
 				btnNumber: 按钮数量，不能超过 3
 				btnCallback: 事件回调，带两个参数(1：点击了第几个按钮，从1开始，-1表示关闭按钮。2：customData）可以为空
  ]]
-function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname, btnbacksprite) 
+function this.SetGoldBaseInfo(content,goldNumber,btnNumber, btnCallback,btnname, btnbacksprite, closeCallback) 
 	--content
     this.closebtn=child(this.transform,"bg/sv_gold/btn_close");
     if this.closebtn~=nil then
-        addClickCallbackSelf(this.closebtn.gameObject,this.Close)
+        if closeCallback ~= nil then
+            addClickCallbackSelf(this.closebtn.gameObject,closeCallback)
+        else
+            addClickCallbackSelf(this.closebtn.gameObject,this.Close)
+        end
     end
 
     local lb_content_gt = child(this.transform, "bg/sv_gold/lab_content")

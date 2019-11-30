@@ -371,17 +371,17 @@ function LibLaiziCardLogic:CompareCards_Laizi(cardsA, cardsB)
         elseif type1 == GStars_Normal_Type.PT_FLUSH then
             --水庄 比较对同花
             --if GGameCfg.GameSetting.bSupportWaterBanker then
-                local pa1, pb1 = LibLaiziCardLogic:GetPairValue_Laizi(tempA)
-                local pa2, pb2 = LibLaiziCardLogic:GetPairValue_Laizi(tempB)
-                --先比大对子  再比小对 最后比单张大小
-                local n = pb1 - pb2
-                if n == 0 then
-                    n = pa1 - pa2
-                end
-                -- LOG_DEBUG("flush compare,  n= %d", n)
-                if n ~= 0 then
-                    return n
-                end 
+                -- local pa1, pb1 = LibLaiziCardLogic:GetPairValue_Laizi(tempA)
+                -- local pa2, pb2 = LibLaiziCardLogic:GetPairValue_Laizi(tempB)
+                -- --先比大对子  再比小对 最后比单张大小
+                -- local n = pb1 - pb2
+                -- if n == 0 then
+                --     n = pa1 - pa2
+                -- end
+                -- -- LOG_DEBUG("flush compare,  n= %d", n)
+                -- if n ~= 0 then
+                --     return n
+                -- end 
             --end
         end
         --比单张

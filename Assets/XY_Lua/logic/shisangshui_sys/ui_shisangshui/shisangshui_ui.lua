@@ -200,6 +200,10 @@ local function InitWidgets()
 	widgetTbl.panel = child(this.transform, "Panel")
 	--返回大厅按钮
 	widgetTbl.btn_exit = child(widgetTbl.panel, "Anchor_TopLeft/bg/exit")
+	local lbl = child(widgetTbl.panel, "Anchor_TopLeft/bg/exit/Label (1)")
+	widgetTbl.exitLbl = componentGet(lbl,"UILabel")
+	widgetTbl.exitLbl.text = "退出房间"
+
 	if widgetTbl.btn_exit~=nil then
        addClickCallbackSelf(widgetTbl.btn_exit.gameObject,Onbtn_exitClick,this)
     end
@@ -708,6 +712,7 @@ end
 
 function this.GameStart()
 	widgetTbl.tableInfo.gameObject:SetActive(false)
+	widgetTbl.exitLbl.text = "解散房间"
 end
 
 function this.ShowDissolveRoom(isShow)

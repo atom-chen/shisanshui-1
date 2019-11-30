@@ -3224,19 +3224,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 4000010996802008}
+    target: {fileID: 0}
     relative: 0
     absolute: 63
   rightAnchor:
-    target: {fileID: 4000010996802008}
-    relative: 0.5
+    target: {fileID: 0}
+    relative: 1
     absolute: -423
   bottomAnchor:
-    target: {fileID: 4000010996802008}
-    relative: 1
+    target: {fileID: 0}
+    relative: 0
     absolute: -202
   topAnchor:
-    target: {fileID: 4000010996802008}
+    target: {fileID: 0}
     relative: 1
     absolute: -68
   updateAnchors: 0

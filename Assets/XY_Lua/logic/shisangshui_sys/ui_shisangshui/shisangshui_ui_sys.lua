@@ -348,6 +348,7 @@ local function OnSyncTable( tbl )
 	else
 		shisangshui_ui.HideReadyBtn()
 		shisangshui_ui.SetAllPlayerReady(false)
+		shisangshui_ui.GameStart()
 		--for i = 1, #playerList do
 			--playerList[i].playerObj:SetActive(true)
 		--end

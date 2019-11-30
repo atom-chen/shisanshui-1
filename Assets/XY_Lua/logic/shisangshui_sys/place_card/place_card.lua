@@ -81,6 +81,7 @@ function this.Awake()
 end
 
 function this.Show(cards, recommendCards, nSpecialType)
+	this.DestoryAll()
 	table.sort(cards, function(a, b) return GetCardValue(a) > GetCardValue(b)
 		end)
 	recommend_cards = recommendCards
